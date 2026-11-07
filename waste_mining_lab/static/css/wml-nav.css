@@ -1,149 +1,197 @@
 
-/* =========================================
-   WASTE MINING LAB — WEBSITE STYLING
-   ========================================= */
+/* ==========================================
+   WASTE MINING LAB — GLOBAL HEADER
+   ========================================== */
 
-
-/* =========================================
-   1. PAGE BACKGROUND COLORS
-   ========================================= */
+/* Page colors */
 
 body.wml-site {
     min-height: 100vh;
     color: #f3f5f3;
-    transition: background-color 250ms ease;
 }
 
 body.theme-home {
-    background-color: #121a17;
+    background: #121a17;
 }
 
 body.theme-research {
-    background-color: #13231d;
+    background: #13231d;
 }
 
 body.theme-publications {
-    background-color: #1e1c29;
-}
-
-body.theme-news {
-    background-color: #19242b;
-}
-
-body.theme-contact {
-    background-color: #25201e;
+    background: #1e1c29;
 }
 
 body.theme-team {
-    background-color: #192820;
+    background: #192820;
 }
 
 body.theme-activity {
-    background-color: #22271c;
+    background: #22271c;
 }
 
 body.theme-waste-monitoring {
-    background-color: #172a2a;
+    background: #172a2a;
+}
+
+body.theme-news {
+    background: #19242b;
+}
+
+body.theme-contact {
+    background: #25201e;
 }
 
 
-/* =========================================
-   2. PHOTOGRAPHIC SITE HEADER
-   ========================================= */
+/* ==========================================
+   EXPANDABLE HEADER CONTAINER
+   ========================================== */
 
-.site-header {
+.wml-global-header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+
     width: 100%;
+    padding: 18px 24px 20px;
 
-    background-color: #fcfcfc;
-    background-image:
-        linear-gradient(
-            rgba(255, 255, 255, 0.26),
-            rgba(243, 247, 245, 0.32)
-        ),
-        url("../images/lab-header5.webp");
+    background: #fcfcfc;
+    border-bottom: 1px solid #e8e8e8;
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    /* Extend photograph behind navbar */
-    padding-bottom: 100px;
-    margin-bottom: -100px;
+    transition: padding 400ms ease;
 }
 
 
-/* Header title container */
+/* ==========================================
+   LARGE CENTERED LOGO
+   ========================================== */
 
-.site-header__title {
+.wml-header-top {
     display: grid;
     place-items: center;
 
-    min-height: 140px;
-    padding: 20px 24px;
+    height: 145px;
+    overflow: hidden;
 
-    text-align: center;
+    transition: height 420ms ease;
 }
 
+.wml-logo-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-/* Waste Mining Lab title */
+    width: min(680px, 70%);
+    max-height: 135px;
 
-.site-header .site-brand,
-.site-header .site-brand:hover {
-    color: #fbfbfb;
-    text-decoration: none;
+    opacity: 1;
+
+    transition:
+        opacity 250ms ease,
+        transform 400ms ease;
 }
 
-.site-header .site-brand > span {
+.wml-logo-large img {
     display: block;
-
-    color: #06a754;
-    font-size: clamp(28px, 3.5vw, 48px);
-    font-weight: 700;
-
-    line-height: 1.1;
-    letter-spacing: -0.045em;
-
-    text-shadow: 0 3px 12px rgba(251, 251, 251, 0.3);
+    width: auto;
+    max-width: 100%;
+    max-height: 125px;
+    object-fit: contain;
 }
 
 
-/* =========================================
-   3. FLOATING NAVIGATION BAR
-   ========================================= */
+/* ==========================================
+   SMALL LEFT LOGO
+   ========================================== */
+
+.wml-logo-small {
+    position: absolute;
+    top: 50%;
+    left: clamp(20px, 2.5vw, 48px);
+    z-index: 5;
+
+    display: grid;
+    place-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translateY(-50%) scale(0.75);
+
+    transition:
+        opacity 280ms ease,
+        transform 350ms ease;
+}
+
+.wml-logo-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   RIGHT-SIDE INSTITUTIONAL LOGOS
+   ========================================== */
+
+.wml-partner-logos {
+    position: absolute;
+    top: 80px;
+    right: clamp(20px, 2.5vw, 48px);
+    z-index: 5;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    transform: translateY(-50%);
+    transition: top 420ms ease;
+}
+
+.wml-partner-logos img {
+    display: block;
+    width: auto;
+    height: 40px;
+    max-width: 60px;
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   CENTERED NAVIGATION BAR
+   ========================================== */
 
 .wml-navbar {
-    position: sticky;
-    top: 10px;
-    z-index: 100;
+    position: relative;
+    z-index: 6;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: calc(100% - 48px);
-    max-width: 1120px;
+    width: 100%;
+    max-width: 1356px;
+    min-height: 78px;
 
-    margin: 9px auto 20px;
-    padding: 9px 16px;
+    margin: 0 auto;
+    padding: 10px 20px;
 
     background: #f0f3f2;
+    border: 1px solid #444c48;
+    border-radius: 26px;
 
-    border: 1px solid #343a37;
-    border-radius: 20px;
-
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.13);
 
     transition:
-        width 280ms ease,
-        max-width 280ms ease,
-        padding 280ms ease,
-        border-radius 280ms ease;
+        max-width 420ms ease,
+        width 420ms ease,
+        min-height 420ms ease,
+        padding 420ms ease,
+        border-radius 420ms ease;
 }
-
-
-/* =========================================
-   4. CENTERED NAVIGATION LINKS
-   ========================================= */
 
 .wml-nav-links {
     display: flex;
@@ -151,36 +199,32 @@ body.theme-waste-monitoring {
     justify-content: center;
 
     width: 100%;
-    gap: 18px;
+    gap: clamp(12px, 1.6vw, 27px);
 
-    transition: gap 280ms ease;
+    transition: gap 350ms ease;
 }
 
-.wml-nav-links a {
-    color: #102018;
-
+.wml-nav-links > a:not(.wml-contact) {
+    color: #172820;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
 
     transition:
-        font-size 280ms ease,
-        color 200ms ease;
+        color 200ms ease,
+        font-size 350ms ease;
+}
+
+.wml-nav-links > a:hover,
+.wml-nav-links > a.active {
+    color: #329565;
 }
 
 
-/* Hover and active navigation state */
-
-.wml-nav-links a:hover,
-.wml-nav-links a.active {
-    color: #308f5f;
-}
-
-
-/* =========================================
-   5. GRADIENT CONTACT BUTTON
-   ========================================= */
+/* ==========================================
+   GRADIENT CONTACT BUTTON
+   ========================================== */
 
 .wml-nav-links .wml-contact {
     display: inline-flex;
@@ -197,85 +241,136 @@ body.theme-waste-monitoring {
         #eb4ca7,
         #ffbb64
     );
-
-    transition: transform 200ms ease;
 }
 
 .wml-contact span {
     display: block;
 
-    padding: 9px 16px;
+    padding: 11px 20px;
+
     border-radius: 48px;
-
     background: #171a1b;
-    color: #ffffff;
 
+    color: #ffffff;
     font-size: 14px;
-    font-weight: 400;
 
     transition:
-        padding 280ms ease,
-        font-size 280ms ease;
+        padding 350ms ease,
+        font-size 350ms ease;
 }
 
-.wml-contact:hover {
-    transform: translateY(-2px);
-}
-
-.wml-contact:hover span,
-.wml-contact.active span {
+.wml-contact:hover span {
+    background: #252a28;
     color: #ffffff;
 }
 
 
-/* =========================================
-   6. NAVBAR SHRINK ANIMATION
-   ========================================= */
+/* ==========================================
+   COLLAPSED HEADER — AFTER SCROLLING
+   ========================================== */
 
-/*
-   After scrolling:
-   - Navbar becomes narrower
-   - Padding decreases
-   - Navigation text becomes smaller
-
-   Hovering or keyboard focus restores
-   the expanded navbar dimensions.
-*/
-
-.wml-navbar.is-scrolled:not(:hover):not(:focus-within):not(.menu-open):not(.is-expanded) {
-    width: calc(100% - 100px);
-    max-width: 900px;
-
-    padding: 5px 12px;
-    border-radius: 16px;
+.wml-global-header.is-scrolled {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
+/* Collapse large logo region */
 
-/* Compact navigation spacing */
-
-.wml-navbar.is-scrolled:not(:hover):not(:focus-within):not(.menu-open):not(.is-expanded) .wml-nav-links {
-    gap: 12px;
+.wml-global-header.is-scrolled .wml-header-top {
+    height: 0;
 }
 
-
-/* Compact navigation text */
-
-.wml-navbar.is-scrolled:not(:hover):not(:focus-within):not(.menu-open):not(.is-expanded) .wml-nav-links a {
-    font-size: 12px;
+.wml-global-header.is-scrolled .wml-logo-large {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-18px) scale(0.92);
 }
 
+/* Reveal the small icon */
 
-/* Compact contact button */
+.wml-global-header.is-scrolled .wml-logo-small {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+}
 
-.wml-navbar.is-scrolled:not(:hover):not(:focus-within):not(.menu-open):not(.is-expanded) .wml-contact span {
+/* Move institutional logos to center height */
+
+.wml-global-header.is-scrolled .wml-partner-logos {
+    top: 50%;
+}
+
+/* Shrink and center navbar */
+
+.wml-global-header.is-scrolled .wml-navbar {
+    width: calc(100% - 250px);
+    max-width: 1080px;
+
+    min-height: 58px;
     padding: 6px 12px;
-    font-size: 12px;
+    border-radius: 20px;
+}
+
+.wml-global-header.is-scrolled .wml-nav-links {
+    gap: 14px;
+}
+
+.wml-global-header.is-scrolled
+.wml-nav-links > a:not(.wml-contact) {
+    font-size: 13px;
+}
+
+.wml-global-header.is-scrolled .wml-contact span {
+    padding: 7px 15px;
+    font-size: 13px;
 }
 
 
-/* =========================================
-   7. SECTION PAGE LAYOUT
-   ========================================= */
+/* ==========================================
+   EXPAND NAVBAR ON HOVER
+   ========================================== */
+
+@media (hover: hover) and (min-width: 1101px) {
+
+    .wml-global-header.is-scrolled
+    .wml-navbar:hover,
+    .wml-global-header.is-scrolled
+    .wml-navbar:focus-within {
+        width: calc(100% - 250px);
+        max-width: 1200px;
+        min-height: 70px;
+        padding: 9px 16px;
+    }
+
+    .wml-global-header.is-scrolled
+    .wml-navbar:hover .wml-nav-links,
+    .wml-global-header.is-scrolled
+    .wml-navbar:focus-within .wml-nav-links {
+        gap: 18px;
+    }
+
+    .wml-global-header.is-scrolled
+    .wml-navbar:hover
+    .wml-nav-links > a:not(.wml-contact),
+    .wml-global-header.is-scrolled
+    .wml-navbar:focus-within
+    .wml-nav-links > a:not(.wml-contact) {
+        font-size: 14px;
+    }
+
+    .wml-global-header.is-scrolled
+    .wml-navbar:hover .wml-contact span,
+    .wml-global-header.is-scrolled
+    .wml-navbar:focus-within .wml-contact span {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+}
+
+
+/* ==========================================
+   GENERAL SECTION PAGES
+   ========================================== */
 
 .wml-section-page {
     min-height: 65vh;
@@ -289,17 +384,14 @@ body.theme-waste-monitoring {
 
 .wml-section-content h1 {
     margin: 20px 0 30px;
-
     font-size: clamp(48px, 7vw, 96px);
     font-weight: 400;
-
     letter-spacing: -0.05em;
     line-height: 1.1;
 }
 
 .wml-section-content > p:not(.wml-eyebrow) {
     max-width: 670px;
-
     font-size: 20px;
     line-height: 1.7;
 }
@@ -311,125 +403,152 @@ body.theme-waste-monitoring {
 }
 
 
-/* =========================================
-   8. MOBILE NAVIGATION
-   ========================================= */
-
-/* Hidden on desktop */
+/* ==========================================
+   MOBILE NAVIGATION
+   ========================================== */
 
 .wml-mobile-menu {
     display: none;
 }
 
-
-/* Tablet and mobile */
-
 @media (max-width: 1100px) {
 
-    /* Hide desktop navigation */
+    .wml-global-header {
+        padding: 12px 16px;
+    }
+
+    .wml-header-top {
+        height: 115px;
+    }
+
+    .wml-logo-large {
+        width: min(560px, calc(100% - 190px));
+    }
+
+    .wml-logo-large img {
+        max-height: 95px;
+    }
+
+    .wml-partner-logos {
+        top: 55px;
+        right: 16px;
+        gap: 7px;
+    }
+
+    .wml-partner-logos img {
+        height: 30px;
+        max-width: 42px;
+    }
+
+    .wml-logo-small {
+        left: 18px;
+        width: 36px;
+        height: 36px;
+    }
 
     .wml-nav-links {
         display: none;
     }
 
-    /* Mobile navbar container */
-
     .wml-navbar {
-        width: calc(100% - 24px);
-        padding: 10px 16px;
+        width: 100%;
+        max-width: 100%;
+        min-height: 54px;
+        padding: 8px 16px;
         border-radius: 18px;
     }
-
-    /* Mobile menu */
 
     .wml-mobile-menu {
         display: block;
         position: relative;
-
-        color: #102018;
+        color: #172820;
     }
 
     .wml-mobile-menu summary {
         cursor: pointer;
         list-style: none;
-
         font-size: 14px;
         font-weight: 500;
-
-        white-space: nowrap;
     }
 
     .wml-mobile-menu summary::-webkit-details-marker {
         display: none;
     }
 
-    /* Dropdown */
-
     .wml-mobile-menu nav {
         position: absolute;
-
-        top: calc(100% + 18px);
+        top: calc(100% + 20px);
         left: 50%;
-        right: auto;
-
-        transform: translateX(-50%);
-
-        width: 230px;
-        padding: 18px;
 
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
+
+        width: 235px;
+        padding: 18px;
+
+        transform: translateX(-50%);
 
         background: #171a1b;
-
         border: 1px solid #343a37;
         border-radius: 16px;
 
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.33);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
 
     .wml-mobile-menu nav a {
         color: #ffffff;
-
         font-size: 14px;
         text-decoration: none;
     }
 
-    .wml-mobile-menu nav a:hover {
-        color: #c2efdb;
+    .wml-global-header.is-scrolled .wml-navbar {
+        width: min(48%, 260px);
+        min-height: 48px;
+        padding: 6px 12px;
     }
 
-    /* Compact mobile navbar */
-
-    .wml-navbar.is-scrolled:not(:hover):not(:focus-within):not(.menu-open):not(.is-expanded) {
-        width: calc(100% - 48px);
-        padding: 6px 12px;
+    .wml-global-header.menu-open .wml-navbar {
+        min-height: 54px;
     }
 }
 
 
-/* =========================================
-   9. SMALL MOBILE SCREENS
-   ========================================= */
+/* ==========================================
+   SMALL SCREENS
+   ========================================== */
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
 
-    /* Smaller photographic header */
-
-    .site-header__title {
-        min-height: 110px;
-        padding: 16px 18px;
+    .wml-global-header {
+        padding: 10px 12px;
     }
 
-    /* Smaller Waste Mining Lab heading */
-
-    .site-header .site-brand > span {
-        font-size: clamp(24px, 6vw, 36px);
-        line-height: 1.1;
+    .wml-header-top {
+        height: 96px;
     }
 
-    /* Smaller section headings */
+    .wml-logo-large {
+        width: 88%;
+    }
+
+    .wml-logo-large img {
+        max-height: 82px;
+    }
+
+    .wml-partner-logos {
+        display: none;
+    }
+
+    .wml-logo-small {
+        left: 12px;
+        width: 34px;
+        height: 34px;
+    }
+
+    .wml-global-header.is-scrolled .wml-navbar {
+        width: min(56%, 225px);
+    }
 
     .wml-section-page {
         padding: 65px 6% 100px;
@@ -441,17 +560,20 @@ body.theme-waste-monitoring {
 }
 
 
-/* =========================================
-   10. ACCESSIBILITY
-   ========================================= */
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-    body.wml-site,
+    .wml-global-header,
+    .wml-header-top,
+    .wml-logo-large,
+    .wml-logo-small,
+    .wml-partner-logos,
     .wml-navbar,
     .wml-nav-links,
-    .wml-nav-links a,
-    .wml-contact,
+    .wml-nav-links > a,
     .wml-contact span {
         transition: none;
     }

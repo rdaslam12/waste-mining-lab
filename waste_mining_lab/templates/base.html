@@ -49,56 +49,97 @@
         {% wagtailuserbar %}
 
     
-<header class="site-header">
-    <div class="site-header__title">
-        <a class="site-brand" href="/" aria-label="Waste Mining Lab homepage">
-            <span>Waste Mining Lab</span>
+
+<!-- Unified expandable site header -->
+<header class="wml-global-header">
+
+    <!-- Large logo at the top -->
+    <div class="wml-header-top">
+        <a href="/" class="wml-logo-large"
+           aria-label="Waste Mining Lab homepage">
+            <img
+                src="{% static 'images/wml-full-logo.png' %}"
+                alt="Waste Mining Lab — Turning waste into value"
+            >
         </a>
     </div>
-</header>
 
+    <!-- Small logo, visible after scrolling -->
+    <a href="/" class="wml-logo-small"
+       aria-label="Waste Mining Lab homepage">
+        <img
+            src="{% static 'images/wml-icon.png' %}"
+            alt=""
+        >
+    </a>
 
+    <!-- Institutional logos -->
+    <div class="wml-partner-logos">
+        <img
+            src="{% static 'images/partner-logo-1.png' %}"
+            alt="Associated organization logo"
+        >
+        <img
+            src="{% static 'images/partner-logo-2.png' %}"
+            alt="Associated organization logo"
+        >
+        <img
+            src="{% static 'images/nsu-logo.png' %}"
+            alt="North South University"
+        >
+    </div>
 
-        
-        
-    <header class="wml-navbar">
+    <!-- Centered navigation -->
+    <div class="wml-navbar">
 
         <nav class="wml-nav-links" aria-label="Main navigation">
-            <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+
+            <a href="/"
+               class="{% if request.path == '/' %}active{% endif %}">
                 Waste Mining Lab
             </a>
 
-            <a href="/publications/" class="{% if request.path == '/publications/' %}active{% endif %}">
+            <a href="/publications/"
+               class="{% if request.path == '/publications/' %}active{% endif %}">
                 Publications
             </a>
 
-            <a href="/research/" class="{% if request.path == '/research/' %}active{% endif %}">
+            <a href="/research/"
+               class="{% if request.path == '/research/' %}active{% endif %}">
                 Research
             </a>
 
-            <a href="/team/" class="{% if request.path == '/team/' %}active{% endif %}">
+            <a href="/team/"
+               class="{% if request.path == '/team/' %}active{% endif %}">
                 Team
             </a>
 
-            <a href="/activity/" class="{% if request.path == '/activity/' %}active{% endif %}">
+            <a href="/activity/"
+               class="{% if request.path == '/activity/' %}active{% endif %}">
                 Activity
             </a>
 
-            <a href="/waste-monitoring/" class="{% if request.path == '/waste-monitoring/' %}active{% endif %}">
+            <a href="/waste-monitoring/"
+               class="{% if request.path == '/waste-monitoring/' %}active{% endif %}">
                 Waste Monitoring
             </a>
 
-            <a href="/news/" class="{% if request.path == '/news/' %}active{% endif %}">
+            <a href="/news/"
+               class="{% if request.path == '/news/' %}active{% endif %}">
                 News
             </a>
 
-            <a href="/contact/" class="wml-contact {% if request.path == '/contact/' %}active{% endif %}">
+            <a href="/contact/"
+               class="wml-contact {% if request.path == '/contact/' %}active{% endif %}">
                 <span>Contact</span>
             </a>
+
         </nav>
 
+        <!-- Mobile navigation -->
         <details class="wml-mobile-menu">
             <summary>Menu ☰</summary>
+
             <nav aria-label="Mobile navigation">
                 <a href="/">Waste Mining Lab</a>
                 <a href="/publications/">Publications</a>
@@ -111,7 +152,10 @@
             </nav>
         </details>
 
-    </header>
+    </div>
+
+</header>
+
 
 
 
