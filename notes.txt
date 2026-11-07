@@ -1,1 +1,8 @@
 git add . && git commit -m "Update header and navbar fixes" && git push origin main
+git add . && git commit -m "Updated hero fixes" && git push origin main
+git add . && git commit -m "Updated abouts section" && git push origin main
+
+
+
+python manage.py check
+python manage.py runserver

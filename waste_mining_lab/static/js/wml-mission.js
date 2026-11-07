@@ -32,11 +32,34 @@
             const distance = (d.x - pointer.x) ** 2 + (d.y - pointer.y) ** 2;
             const hover = reduced.matches ? 0 : Math.exp(-distance / (step * step * 22)) * pointer.strength;
             const radius = step * 0.36 * Math.min(1.08, (0.42 + 0.58 * wave ** 1.3) * d.size + hover * 0.48);
-            ctx.globalAlpha = d.alpha;
+            
+            ctx.globalAlpha = d.alpha * 0.5;
             ctx.fillStyle = d.color;
+
+            const x = d.x;
+            const y = d.y;
+            const r = radius;
+
+            // Small pine-tree silhouette
             ctx.beginPath();
-            ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
+            ctx.moveTo(x, y - r * 1.5);
+            ctx.lineTo(x - r * 0.7, y - r * 0.1);
+            ctx.lineTo(x - r * 0.35, y - r * 0.1);
+            ctx.lineTo(x - r, y + r * 0.85);
+            ctx.lineTo(x + r, y + r * 0.85);
+            ctx.lineTo(x + r * 0.35, y - r * 0.1);
+            ctx.lineTo(x + r * 0.7, y - r * 0.1);
+            ctx.closePath();
             ctx.fill();
+
+            // Tree trunk
+            ctx.fillRect(
+                x - r * 0.14,
+                y + r * 0.8,
+                r * 0.28,
+                r * 0.45
+            );
+
         }
         ctx.globalAlpha = 1;
     }

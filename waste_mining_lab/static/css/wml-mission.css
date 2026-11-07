@@ -17,8 +17,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    min-height: 82svh;
-    padding: clamp(5rem, 7vw, 8rem) clamp(1.5rem, 8vw, 9rem);
+    min-height: 32svh;
+    padding: clamp(3rem, 4vw, 4.5rem) clamp(1.5rem, 8vw, 9rem);
     background: #071b14;
     color: #f7f8f2;
     text-align: left;
@@ -118,7 +118,7 @@
 }
 .mission--halftone ::selection { background: #e2f18c; color: #071b14; }
 @media (max-width: 42.5rem) {
-    .mission.mission--halftone { min-height: 0; padding: 4.5rem 1.5rem 7rem; }
+    .mission.mission--halftone { min-height: 0; padding: 3rem 1.5rem 3.5rem; }
     .mission--halftone .mission__title { font-size: clamp(2.5rem, 9.5vw, 4rem); max-width: 14ch; }
     .mission--halftone .mission__eyebrow { font-size: 0.625rem; letter-spacing: 0.07em; margin-bottom: 1.75rem; }
     .mission--halftone .mission__description { margin-top: 1.75rem; }
@@ -126,4 +126,10 @@
 @media (prefers-reduced-motion: reduce) {
     .mission--halftone .mission__link, .mission--halftone .mission__link svg { transition: none; }
     .mission--halftone .mission__link:hover svg { transform: none; }
+}
+/* Hide mission footer actions */
+
+.mission--halftone .mission__link,
+.mission--halftone .mission__motion {
+    display: none !important;
 }

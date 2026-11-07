@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load static wagtailimages_tags %}
 
 <section class="wml-pinned-hero" data-pinned-hero aria-label="Waste Mining Lab research highlights">
     <div class="wml-pinned-hero__media">
@@ -51,6 +51,29 @@
             </div>
         </div>
     </div>
+
+<!-- Faculty quote and portrait -->
+<aside class="wml-faculty-feature" aria-label="Message from the lab director">
+
+    <blockquote class="wml-faculty-feature__quote">
+        <p>
+            “From lab to the field, we reclaim the
+            minerals shaping tomorrow.”
+        </p>
+        <cite>— Dr. Asef M. Redwan</cite>
+    </blockquote>
+
+    <img
+        class="wml-faculty-feature__photo"
+        src="{% static 'images/asef-redwan.png' %}"
+        alt="Dr. Asef M. Redwan"
+        width="240"
+        height="240"
+        decoding="async"
+    >
+
+</aside>
+
 
     
 </section>
