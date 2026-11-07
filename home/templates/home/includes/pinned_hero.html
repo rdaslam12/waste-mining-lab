@@ -1,0 +1,67 @@
+{% load wagtailimages_tags %}
+
+<section class="wml-pinned-hero" data-pinned-hero aria-label="Waste Mining Lab research highlights">
+    <div class="wml-pinned-hero__media">
+        {% if page.hero_image %}
+            {% image page.hero_image fill-800x1000 as hero_mobile %}
+            {% image page.hero_image fill-1600x1000 as hero_desktop %}
+            {% image page.hero_image fill-2400x1400 as hero_large %}
+            <picture>
+                <source media="(max-width: 680px)" srcset="{{ hero_mobile.url }}">
+                <source media="(min-width: 1600px)" srcset="{{ hero_large.url }}">
+                <img
+                    src="{{ hero_desktop.url }}"
+                    width="{{ hero_desktop.width }}"
+                    height="{{ hero_desktop.height }}"
+                    alt="{{ page.hero_image.description|default:'Waste Mining Lab research' }}"
+                    fetchpriority="high"
+                    decoding="async"
+                >
+            </picture>
+        {% else %}
+            <div
+                class="wml-pinned-hero__fallback"
+                role="img"
+                aria-label="Waste Mining Lab hero image has not yet been selected"
+            >
+                <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+                    <path d="M-80 920C210 735 276 491 420 120M82 1040C312 768 536 594 804 358M1680 944C1405 737 1312 488 1174 86M1518 1040C1301 756 1085 582 824 340"/>
+                    <path d="M306 433C167 402 94 305 111 196C236 224 316 319 306 433ZM341 397C358 264 451 187 568 197C541 312 467 379 341 397ZM1267 407C1280 276 1372 199 1490 211C1461 327 1388 392 1267 407ZM1234 379C1101 350 1027 255 1041 147C1165 173 1245 266 1234 379ZM599 656C478 625 409 536 421 436C535 459 608 548 599 656ZM1005 637C1013 526 1088 457 1190 463C1168 563 1104 622 1005 637Z"/>
+                </svg>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="wml-pinned-hero__shade" aria-hidden="true"></div>
+
+    <div class="wml-pinned-hero__slides" aria-live="off">
+        <div class="wml-pinned-hero__slide is-active" data-hero-slide aria-hidden="false">
+            <div class="wml-pinned-hero__slide-inner">
+                <h1 class="wml-pinned-hero__headline">Turning waste into <em>value.</em></h1>
+            </div>
+        </div>
+        <div class="wml-pinned-hero__slide" data-hero-slide aria-hidden="true">
+            <div class="wml-pinned-hero__slide-inner">
+                <p class="wml-pinned-hero__headline">Recovering resources. <em>Restoring balance.</em></p>
+            </div>
+        </div>
+        <div class="wml-pinned-hero__slide" data-hero-slide aria-hidden="true">
+            <div class="wml-pinned-hero__slide-inner">
+                <p class="wml-pinned-hero__headline">Rethinking waste for a <em>sustainable future.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="wml-pinned-hero__footer">
+        <div class="wml-pinned-hero__controls" role="group" aria-label="Research message controls">
+            <button type="button" class="wml-pinned-hero__dot is-active" data-hero-dot="0" aria-label="Show message 1" aria-pressed="true"><span>1</span></button>
+            <button type="button" class="wml-pinned-hero__dot" data-hero-dot="1" aria-label="Show message 2" aria-pressed="false"><span>2</span></button>
+            <button type="button" class="wml-pinned-hero__dot" data-hero-dot="2" aria-label="Show message 3" aria-pressed="false"><span>3</span></button>
+            <button type="button" class="wml-pinned-hero__toggle" data-hero-toggle aria-label="Pause rotating messages" aria-pressed="false">Pause</button>
+        </div>
+        <a class="wml-pinned-hero__explore" href="#research">
+            <span>Explore our research</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 3v13m0 0 5-5m-5 5-5-5"/></svg>
+        </a>
+    </div>
+</section>

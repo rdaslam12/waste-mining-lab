@@ -51,8 +51,20 @@ class HomeTests(WagtailPageTestCase):
 
         self.assertContains(response, "Waste Mining Lab")
         self.assertContains(response, "explores environmental sustainability")
-        self.assertContains(response, "Image pending")
+        self.assertContains(response, "Turning waste into <em>value.</em>", html=True)
+        self.assertContains(response, "Recovering resources.")
+        self.assertContains(response, "Rethinking waste for a")
+        self.assertContains(response, "hero image has not yet been selected")
         self.assertContains(response, "Dr. Asef M. Redwan")
+
+    def test_homepage_uses_pinned_hero_assets_without_featured_grid(self):
+        response = self.client.get(self.homepage.url)
+
+        self.assertContains(response, "css/wml-pinned-hero.css")
+        self.assertContains(response, "js/wml-pinned-hero.js")
+        self.assertNotContains(response, "wml-featured.css")
+        self.assertNotContains(response, "wml-featured.js")
+        self.assertNotContains(response, 'class="wml-featured"')
 
     def test_homepage_renders_editable_content(self):
         self.homepage.hero_headline = "Recovering value from waste"
@@ -62,9 +74,10 @@ class HomeTests(WagtailPageTestCase):
 
         response = self.client.get(self.homepage.url)
 
-        self.assertContains(response, "Recovering value from waste")
         self.assertContains(response, "A custom research summary.")
         self.assertContains(response, "A custom lab introduction.")
+        self.homepage.refresh_from_db()
+        self.assertEqual(self.homepage.hero_headline, "Recovering value from waste")
 
     def test_wagtail_admin_can_open_homepage_editor(self):
         editor = get_user_model().objects.create_superuser(
@@ -117,3 +130,6 @@ class HomeTests(WagtailPageTestCase):
             response,
             'alt="Recovered material samples prepared for analysis."',
         )
+        self.assertContains(response, "fill-800x1000")
+        self.assertContains(response, "fill-1600x1000")
+        self.assertContains(response, "fill-2400x1400")

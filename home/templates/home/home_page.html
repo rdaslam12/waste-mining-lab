@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/wml-pinned-hero.css' %}">
+{% endblock %}
 
 {% block header_title %}
     <span class="title-sprig" aria-hidden="true">
@@ -24,36 +28,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="research-image" aria-label="Laboratory research image">
-    {% if page.hero_image %}
-        {% image page.hero_image fill-2200x420 as hero_image %}
-        <img src="{{ hero_image.url }}" width="{{ hero_image.width }}" height="{{ hero_image.height }}" alt="{{ page.hero_image.description }}">
-    {% else %}
-        <div class="research-image__placeholder" role="img" aria-label="Placeholder for an authentic Waste Mining Lab research photograph">
-            <svg class="research-image__botanical" viewBox="0 0 1600 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-                <g class="research-image__branch">
-                    <path class="research-image__stem" d="M0 302C120 280 179 215 288 91M35 315C137 264 207 185 214 26M105 320C188 289 253 240 365 170"/>
-                    <path class="research-image__leaf" d="M218 167C151 145 135 95 148 58C198 73 225 113 218 167ZM230 163C230 95 272 54 325 51C317 109 287 148 230 163ZM123 269C76 230 72 186 96 151C132 178 142 223 123 269ZM281 104C282 56 317 24 358 22C351 66 326 94 281 104ZM277 236C303 187 350 170 393 185C368 228 330 246 277 236Z"/>
-                </g>
-                <g class="research-image__branch" transform="translate(1600 0) scale(-1 1)">
-                    <path class="research-image__stem" d="M0 302C120 280 179 215 288 91M35 315C137 264 207 185 214 26M105 320C188 289 253 240 365 170"/>
-                    <path class="research-image__leaf" d="M218 167C151 145 135 95 148 58C198 73 225 113 218 167ZM230 163C230 95 272 54 325 51C317 109 287 148 230 163ZM123 269C76 230 72 186 96 151C132 178 142 223 123 269ZM281 104C282 56 317 24 358 22C351 66 326 94 281 104ZM277 236C303 187 350 170 393 185C368 228 330 246 277 236Z"/>
-                </g>
-            </svg>
-            <svg class="research-image__botanical research-image__botanical--mobile" viewBox="0 0 390 256" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-                <g class="research-image__branch">
-                    <path class="research-image__stem" d="M-17 265C44 224 74 169 101 67M4 269C68 228 111 186 124 113"/>
-                    <path class="research-image__leaf" d="M78 151C36 135 28 101 39 75C70 87 83 114 78 151ZM85 139C88 99 113 75 147 75C139 112 119 132 85 139ZM43 228C11 204 7 174 19 152C46 169 54 195 43 228ZM108 91C111 52 136 29 167 29C159 63 140 84 108 91Z"/>
-                </g>
-                <g class="research-image__branch" transform="translate(390 0) scale(-1 1)">
-                    <path class="research-image__stem" d="M-17 265C44 224 74 169 101 67M4 269C68 228 111 186 124 113"/>
-                    <path class="research-image__leaf" d="M78 151C36 135 28 101 39 75C70 87 83 114 78 151ZM85 139C88 99 113 75 147 75C139 112 119 132 85 139ZM43 228C11 204 7 174 19 152C46 169 54 195 43 228ZM108 91C111 52 136 29 167 29C159 63 140 84 108 91Z"/>
-                </g>
-            </svg>
-            <p>Waste Mining Lab research photograph<br><span>Image pending</span></p>
-        </div>
-    {% endif %}
-</section>
+{% include "home/includes/pinned_hero.html" %}
 
 <section class="mission" aria-label="Lab mission">
     <div class="mission__inner">
@@ -97,3 +72,7 @@
     </div>
 </section>
 {% endblock content %}
+{% block extra_js %}
+    {{ block.super }}
+    <script src="{% static 'js/wml-pinned-hero.js' %}" defer></script>
+{% endblock %}

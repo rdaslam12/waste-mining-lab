@@ -1,0 +1,75 @@
+{% load wagtailimages_tags %}
+
+<section class="wml-featured" data-wml-featured aria-label="Waste Mining Lab highlights">
+  <div class="wml-featured__grid">
+
+    <article class="wml-tile wml-tile--intro">
+      <p class="wml-tile__eyebrow">WASTE MINING LAB / NORTH SOUTH UNIVERSITY</p>
+      <h2>Turning waste into <span>value.</span></h2>
+      <p class="wml-tile__description">Exploring environmental sustainability, recovery, and the responsible use of resources.</p>
+      <div class="wml-intro-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </article>
+
+    <article class="wml-tile wml-tile--detail">
+      <div class="wml-detail-art" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p>Rethink.<br>Recover.<br>Reuse.</p>
+    </article>
+
+    <article class="wml-tile wml-tile--story" data-active-slide="0" aria-label="Featured research themes">
+      {% if page.hero_image %}
+        {% image page.hero_image fill-840x1050 as featured_photo %}
+        <img class="wml-story__image" src="{{ featured_photo.url }}" width="{{ featured_photo.width }}" height="{{ featured_photo.height }}" alt="{{ page.hero_image.description|default:'Research photograph from Waste Mining Lab' }}" loading="lazy">
+      {% endif %}
+      <div class="wml-story__shade" aria-hidden="true"></div>
+      <div class="wml-story__content">
+        <p class="wml-tile__eyebrow">FEATURED RESEARCH</p>
+        <div class="wml-story__slides">
+          <div class="wml-story__slide is-active" data-wml-slide aria-hidden="false">
+            <h3>Resource<br>recovery</h3>
+            <p>Exploring value in materials often treated as waste.</p>
+          </div>
+          <div class="wml-story__slide" data-wml-slide aria-hidden="true">
+            <h3>Waste<br>valorization</h3>
+            <p>Research into circular and more sustainable material pathways.</p>
+          </div>
+          <div class="wml-story__slide" data-wml-slide aria-hidden="true">
+            <h3>Environmental<br>monitoring</h3>
+            <p>Applying environmental science to understand our changing systems.</p>
+          </div>
+        </div>
+        <div class="wml-story__controls">
+          <div class="wml-story__dots" role="group" aria-label="Choose featured research topic">
+            <button type="button" class="is-active" data-wml-slide-to="0" aria-label="Show resource recovery" aria-pressed="true"></button>
+            <button type="button" data-wml-slide-to="1" aria-label="Show waste valorization" aria-pressed="false"></button>
+            <button type="button" data-wml-slide-to="2" aria-label="Show environmental monitoring" aria-pressed="false"></button>
+          </div>
+          <button type="button" class="wml-story__pause" data-wml-pause aria-pressed="false">Pause</button>
+        </div>
+      </div>
+    </article>
+
+    <a class="wml-tile wml-tile--side" href="/publications/">
+      <span class="wml-tile__eyebrow">EXPLORE</span>
+      <span class="wml-side-orbit" aria-hidden="true"></span>
+      <span class="wml-side-text">Research<br>publications <span aria-hidden="true">↗</span></span>
+    </a>
+
+    <a class="wml-tile wml-tile--quote" href="/activity/">
+      <span class="wml-tile__eyebrow">LAB ACTIVITIES</span>
+      <span class="wml-quote-copy">Research connects ideas with action.</span>
+      <span class="wml-tile__arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="wml-tile wml-tile--method" href="/waste-monitoring/">
+      <span class="wml-tile__eyebrow">FOCUS AREA</span>
+      <span class="wml-method-mark" aria-hidden="true">◎</span>
+      <span class="wml-method-copy">Waste<br>monitoring</span>
+      <span class="wml-tile__arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="wml-tile wml-tile--cta" href="/contact/">
+      <span class="wml-tile__arrow" aria-hidden="true">↗</span>
+      <span>GET<br>IN TOUCH</span>
+    </a>
+  </div>
+</section>

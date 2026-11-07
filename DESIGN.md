@@ -19,6 +19,8 @@ colors:
   footer-deep: "#10251d"
   footer-copy: "#d8e6d9"
   mission-link: "#d1e7d5"
+  hero-fallback: "#183f2d"
+  hero-highlight: "#9de6a6"
 typography:
   display:
     fontFamily: '"DM Sans", "Helvetica Neue", Arial, sans-serif'
@@ -80,6 +82,12 @@ typography:
     fontFamily: '"DM Sans", "Helvetica Neue", Arial, sans-serif'
     fontSize: "1.5rem"
     fontWeight: 600
+  hero-headline:
+    fontFamily: '"DM Sans", "Helvetica Neue", Arial, sans-serif'
+    fontSize: "clamp(3rem, 6.2vw, 6rem)"
+    fontWeight: 700
+    lineHeight: 1.02
+    letterSpacing: "-0.04em"
 spacing:
   content-gutter: "1.5rem"
   section-space: "clamp(3.5rem, 6vw, 6rem)"
@@ -94,6 +102,11 @@ components:
   institutional-footer:
     backgroundColor: "{colors.footer-deep}"
     textColor: "{colors.footer-copy}"
+  pinned-research-hero:
+    backgroundColor: "{colors.forest-deep}"
+    textColor: "{colors.white}"
+    typography: "{typography.hero-headline}"
+    height: "100svh"
 ---
 
 # Design System: Waste Mining Lab
@@ -102,11 +115,11 @@ components:
 
 **Creative North Star: "The Living Lab"**
 
-The supplied Stadler Lab screenshot still establishes the composition: a centered title, separate navigation, panoramic media, mission band, and narrow research column. Original botanical marks introduce the environmental focus while the photograph and portrait areas remain clearly labeled placeholders until authentic lab imagery is available.
+The supplied Stadler Lab screenshot still establishes the composition: a centered title, separate navigation, full-width research media, mission band, and narrow research column. Original botanical marks introduce the environmental focus; the homepage hero now lets an authentic Wagtail-managed photograph lead while retaining an honest forest botanical fallback, and the portrait remains clearly labeled until authentic team imagery is available.
 
 ## Colors
 
-Warm near-white is the dominant ground. Deep forest green holds the mission and footer; sage supports the labeled image placeholders. Blue remains a restrained current-navigation cue. Forest green carries headings and small accents. Thin pale green dividers separate sections.
+Warm near-white is the dominant ground. Deep forest green holds the mission, footer, and hero fallback; sage supports the remaining labeled image placeholder. Blue remains a restrained current-navigation cue. Forest green carries headings and small accents, while the pinned hero alone uses a brighter leaf green to emphasize key words and its active progress marker. Thin pale green dividers separate sections.
 
 ## Typography
 
@@ -114,15 +127,15 @@ Locally hosted DM Sans carries the title, navigation, research prose, and contac
 
 ## Layout
 
-The title area is centered and approximately 9–12.75rem tall. The navigation row follows under a full-width rule. The research image spans the viewport and uses a shallow panoramic crop. The mission band is centered and full width. Research and team content use a 60rem maximum width, with 1.5rem gutters. At widths below 42rem, navigation wraps if needed, a mobile botanical composition replaces the wide illustration, the portrait stacks above the director details, and the footer becomes one column.
+The title area is centered and approximately 9–12.75rem tall. The navigation row follows under a full-width rule. The research hero spans the viewport and pins for one viewport-height scene while the opaque mission surface scrolls over it; its photograph uses a full-bleed cover crop rather than a panoramic strip. Research and team content use a 60rem maximum width, with 1.5rem gutters. At compact widths, the hero shortens to 88svh, moves its shade toward the lower edge, scales the display copy, and hides the redundant research anchor; navigation wraps if needed, the portrait stacks above the director details, and the footer becomes one column. Short landscape viewports keep a full-height hero with a smaller headline and tighter footer offset.
 
 ## Elevation & Depth
 
-The page is flat. Paper, forest, and sage sections create hierarchy. There are no shadows, floating shapes, or layered cards.
+The page remains predominantly flat. Paper, forest, and sage sections create hierarchy, and there are no floating shapes or layered cards. The pinned hero is the sole depth exception: a dark directional image shade preserves copy contrast, text receives a restrained ambient shadow, and the mission surface uses a soft top shadow to clarify that it is passing over the pinned photograph.
 
 ## Shapes
 
-Images and placeholders are rectangular with square corners. Botanical sprigs and the banner's leaf forms are original vector geometry. Dividers are one pixel. The page does not use card containers.
+Images and placeholders are rectangular with square corners. Botanical sprigs and the hero fallback's leaf forms are original vector geometry. Dividers are one pixel. The page does not use card containers. Compact rounded forms are reserved for small hero controls; they do not establish a card or container radius.
 
 ## Components
 
@@ -130,9 +143,11 @@ Images and placeholders are rectangular with square corners. Botanical sprigs an
 
 The lab name occupies its own centered row, flanked by small leaf sprigs. Home, Research, Team, and Contact form a simple horizontal link row. Home is blue only when it is the current page. A short underline grows on hover and keyboard focus.
 
-### Research photograph
+### Pinned research hero
 
-Wagtail's existing hero image fills a full-width panoramic area. Without an image, the same area clearly says that a Waste Mining Lab research photograph is pending, over a botanical line drawing. Stems draw once on load and leaves become more visible; all imagery and text remain visible by default. The narrow viewport uses an independent composition so its plants stay in frame.
+Wagtail's existing hero image fills a full-width pinned cover scene, with responsive renditions for mobile, desktop, and large displays. Without an image, a deep forest botanical illustration fills the same space and exposes an accessible missing-image label. A dark directional shade protects large white DM Sans copy, while bright leaf green marks the emphasized phrase.
+
+The exact research messages rotate in this order: “Turning waste into value.”, “Recovering resources. Restoring balance.”, and “Rethinking waste for a sustainable future.” The active message changes every seven seconds only while the hero is visible and the page is active. Progress controls support direct selection, and a Play/Pause control exposes the state. Reduced-motion preference disables automatic rotation, slide transitions, and breathing motion, keeps the first message visible, and hides the unnecessary toggle. The research anchor remains visible on larger viewports and is omitted on compact layouts where vertical space is tighter.
 
 ### Mission and introduction
 
@@ -148,8 +163,10 @@ The footer uses deep green, with the lab name and university address to the left
 
 ## Do's and Don'ts
 
-- Do preserve the title → navigation → panoramic image → mission → research → team → footer sequence.
+- Do preserve the title → navigation → pinned research hero → mission → research → team → footer sequence.
 - Do use authentic photographs with meaningful Wagtail image descriptions when they become available.
+- Do keep hero motion optional, pausable, visibility-aware, and disabled for reduced-motion users.
 - Do keep content factual and aligned within the centered content column.
 - Don't copy Rice University assets, imagery, or institution-specific content.
-- Don't add unrelated decorative graphics, cards, gradients, or looping motion to this reference-led homepage.
+- Don't reuse the hero's image shade, ambient shadow, bright highlight, or looping motion as general decoration elsewhere.
+- Don't add unrelated decorative graphics, cards, gradients, or autonomous motion to this reference-led homepage.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-07T04:30:00+06:00",
+  "generatedAt": "2026-11-07T13:39:17+06:00",
   "title": "Design System: Waste Mining Lab",
   "extensions": {
     "colorMeta": {
@@ -20,7 +20,9 @@
       "portrait-sage": {"role": "neutral", "displayName": "Portrait sage", "canonical": "#dbe8da"},
       "footer-deep": {"role": "neutral", "displayName": "Footer deep", "canonical": "#10251d"},
       "footer-copy": {"role": "neutral", "displayName": "Footer copy", "canonical": "#d8e6d9"},
-      "mission-link": {"role": "primary", "displayName": "Mission link", "canonical": "#d1e7d5"}
+      "mission-link": {"role": "primary", "displayName": "Mission link", "canonical": "#d1e7d5"},
+      "hero-fallback": {"role": "primary", "displayName": "Hero fallback forest", "canonical": "#183f2d"},
+      "hero-highlight": {"role": "primary", "displayName": "Hero leaf highlight", "canonical": "#9de6a6"}
     },
     "typographyMeta": {
       "display": {"displayName": "Lab title", "purpose": "Centered site name"},
@@ -37,24 +39,35 @@
       "photo-caption": {"displayName": "Photo caption", "purpose": "Pending photograph label"},
       "action-label": {"displayName": "Action label", "purpose": "Mission link"},
       "action-arrow": {"displayName": "Action arrow", "purpose": "Mission link direction cue"},
-      "footer-name": {"displayName": "Footer name", "purpose": "Lab name in the footer"}
+      "footer-name": {"displayName": "Footer name", "purpose": "Lab name in the footer"},
+      "hero-headline": {"displayName": "Pinned hero headline", "purpose": "Large rotating research message over the homepage photograph"}
     },
-    "shadows": [],
+    "shadows": [
+      {"name": "hero-copy", "value": "0 0.125rem 1.5rem rgba(0, 0, 0, 0.3)", "purpose": "Maintain legibility for the pinned hero headline over variable photography"},
+      {"name": "hero-seam", "value": "0 -1rem 2.25rem rgba(0, 0, 0, 0.16)", "purpose": "Clarify the mission surface passing over the pinned photograph"}
+    ],
     "motion": [
       {"name": "botanical-growth", "value": "1600ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Draw placeholder stems once when the page loads"},
       {"name": "leaf-appearance", "value": "950ms after 240ms", "purpose": "Bring placeholder leaves into view after stems begin"},
       {"name": "navigation-feedback", "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Reveal an underline on hover or keyboard focus"},
+      {"name": "hero-message-transition", "value": "1250ms ease", "purpose": "Crossfade and lift between exact research messages"},
+      {"name": "hero-message-interval", "value": "7000ms", "purpose": "Rotate research messages only while the hero and page are visible"},
+      {"name": "hero-breathe", "value": "6800ms ease-in-out infinite", "purpose": "Apply restrained emphasis to the active research message when motion is allowed"},
       {"name": "reduced-motion", "value": "animation: none; scroll-behavior: auto", "purpose": "Keep essential content visible and anchor navigation immediate"}
     ],
-    "breakpoints": [{"name": "compact", "value": "42rem"}]
+    "breakpoints": [
+      {"name": "compact", "value": "42rem"},
+      {"name": "hero-compact", "value": "42.5rem"},
+      {"name": "hero-short-landscape", "value": "38rem viewport height"}
+    ]
   },
   "components": [],
   "narrative": {
     "northStar": "The Living Lab",
-    "overview": "The supplied Stadler Lab screenshot establishes the centered title, separate navigation, panoramic image, mission band, and narrow research column. DM Sans and Newsreader add a clear academic type hierarchy; original botanical linework introduces the environmental theme while labeled placeholders remain honest about missing photographs.",
-    "keyCharacteristics": ["Centered title with original sprig marks", "Panoramic research image or botanical placeholder", "Deep forest mission band", "Editorial mission and section headings", "Simple featured team and institutional footer"],
-    "rules": [{"name": "Reference composition", "body": "Preserve the title, navigation, image, mission, research, team, and footer order.", "section": "layout"}],
-    "dos": ["Use authentic photographs when available.", "Keep research and team facts verified."],
-    "donts": ["Do not copy Rice University assets.", "Do not add cards, gradients, or looping decorative motion."]
+    "overview": "The supplied Stadler Lab screenshot still establishes the centered title, separate navigation, full-width research media, mission band, and narrow research column. Original botanical marks introduce the environmental focus; the homepage hero lets an authentic Wagtail-managed photograph lead while retaining an honest forest botanical fallback.",
+    "keyCharacteristics": ["Centered title with original sprig marks", "Pinned full-width research photograph or botanical fallback", "Exact rotating research messages with accessible controls", "Deep forest mission band", "Editorial mission and section headings", "Simple featured team and institutional footer"],
+    "rules": [{"name": "Reference composition", "body": "Preserve the title, navigation, pinned research hero, mission, research, team, and footer order.", "section": "layout"}],
+    "dos": ["Use authentic photographs with meaningful descriptions when available.", "Keep hero motion optional, pausable, visibility-aware, and disabled for reduced-motion users.", "Keep research and team facts verified."],
+    "donts": ["Do not copy Rice University assets.", "Do not reuse the hero shade, ambient shadow, bright highlight, or looping motion as general decoration.", "Do not add unrelated cards, gradients, or autonomous motion."]
   }
 }

@@ -1,0 +1,63 @@
+{% load static wagtailimages_tags %}
+
+<section class="wml-pinned-hero" aria-label="Featured Waste Mining Lab research">
+    <div class="wml-pinned-hero__media" aria-hidden="true">
+        {% if page.hero_image %}
+            {% image page.hero_image width-2200 as featured_photo %}
+            <img
+                src="{{ featured_photo.url }}"
+                width="{{ featured_photo.width }}"
+                height="{{ featured_photo.height }}"
+                alt=""
+                fetchpriority="high"
+                decoding="async"
+            >
+        {% else %}
+            {# Uses the header image until you upload a dedicated hero image in Wagtail. #}
+            <img
+                src="{% static 'images/lab-header.webp' %}"
+                alt=""
+                fetchpriority="high"
+                decoding="async"
+            >
+        {% endif %}
+    </div>
+
+    <div class="wml-pinned-hero__shade" aria-hidden="true"></div>
+
+    <div class="wml-pinned-hero__slides">
+        <div class="wml-pinned-hero__slide is-active" data-hero-slide aria-hidden="false">
+            <div class="wml-pinned-hero__slide-inner">
+                <p class="wml-pinned-hero__eyebrow">WASTE MINING LAB · NORTH SOUTH UNIVERSITY</p>
+                <h1 class="wml-pinned-hero__headline">Turning waste<br>into <em>value.</em></h1>
+                <p class="wml-pinned-hero__description">Exploring sustainable pathways for recovering resources and protecting the environment.</p>
+            </div>
+        </div>
+
+        <div class="wml-pinned-hero__slide" data-hero-slide aria-hidden="true">
+            <div class="wml-pinned-hero__slide-inner">
+                <p class="wml-pinned-hero__eyebrow">RESOURCE RECOVERY</p>
+                <h2 class="wml-pinned-hero__headline">Recovering resources.<br><em>Restoring balance.</em></h2>
+                <p class="wml-pinned-hero__description">Rethinking materials, water, and waste through environmental research.</p>
+            </div>
+        </div>
+
+        <div class="wml-pinned-hero__slide" data-hero-slide aria-hidden="true">
+            <div class="wml-pinned-hero__slide-inner">
+                <p class="wml-pinned-hero__eyebrow">A SUSTAINABLE FUTURE</p>
+                <h2 class="wml-pinned-hero__headline">Rethinking waste for<br><em>a sustainable future.</em></h2>
+                <p class="wml-pinned-hero__description">Connecting environmental engineering with long-term resilience.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="wml-pinned-hero__footer">
+        <div class="wml-pinned-hero__controls" role="group" aria-label="Featured message controls">
+            <button type="button" class="wml-pinned-hero__dot is-active" data-hero-dot="0" aria-label="Show message 1" aria-pressed="true"></button>
+            <button type="button" class="wml-pinned-hero__dot" data-hero-dot="1" aria-label="Show message 2" aria-pressed="false"></button>
+            <button type="button" class="wml-pinned-hero__dot" data-hero-dot="2" aria-label="Show message 3" aria-pressed="false"></button>
+            <button type="button" class="wml-pinned-hero__pause" data-hero-toggle aria-label="Pause rotating messages">Pause</button>
+        </div>
+        <a class="wml-pinned-hero__explore" href="#research">Scroll to explore <span aria-hidden="true">↓</span></a>
+    </div>
+</section>

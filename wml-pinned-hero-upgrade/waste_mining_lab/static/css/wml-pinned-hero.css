@@ -1,0 +1,242 @@
+/* Waste Mining Lab: sticky photographic hero and breathing headlines.
+   Scoped to the homepage so the shared navbar and other pages are unchanged. */
+
+.wml-pinned-hero {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    isolation: isolate;
+    width: 100%;
+    height: 100svh;
+    min-height: 520px;
+    max-height: 980px;
+    overflow: hidden;
+    background: #14251c;
+    color: #fff;
+}
+
+.wml-pinned-hero__media,
+.wml-pinned-hero__shade,
+.wml-pinned-hero__slides {
+    position: absolute;
+    inset: 0;
+}
+
+.wml-pinned-hero__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.wml-pinned-hero__shade {
+    z-index: 1;
+    background: linear-gradient(90deg,
+        rgba(5, 15, 11, .74) 0%,
+        rgba(5, 15, 11, .46) 46%,
+        rgba(5, 15, 11, .12) 100%);
+}
+
+.wml-pinned-hero__slides {
+    z-index: 2;
+}
+
+.wml-pinned-hero__slide {
+    position: absolute;
+    left: clamp(24px, 5vw, 98px);
+    top: 50%;
+    width: min(850px, 87vw);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(calc(-50% + 20px));
+    transition:
+        opacity 1.25s ease,
+        transform 1.25s ease,
+        visibility 0s linear 1.25s;
+}
+
+.wml-pinned-hero__slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%);
+    transition:
+        opacity 1.25s ease,
+        transform 1.25s ease,
+        visibility 0s;
+}
+
+.wml-pinned-hero__slide.is-active .wml-pinned-hero__slide-inner {
+    animation: wml-breathe 6.8s ease-in-out infinite;
+    transform-origin: left center;
+}
+
+@keyframes wml-breathe {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-4px) scale(1.018); }
+}
+
+.wml-pinned-hero__eyebrow {
+    margin: 0 0 23px;
+    color: #d4ead9;
+    font-size: clamp(.65rem, .95vw, .88rem);
+    font-weight: 700;
+    letter-spacing: .18em;
+    line-height: 1.6;
+}
+
+.wml-pinned-hero__headline {
+    margin: 0;
+    color: #fff;
+    font-family: var(--sans, system-ui, sans-serif);
+    font-size: clamp(2.85rem, 6.4vw, 7.2rem);
+    font-weight: 700;
+    letter-spacing: -.055em;
+    line-height: 1.04;
+    text-wrap: balance;
+}
+
+.wml-pinned-hero__headline em {
+    color: #7de282;
+    font-style: normal;
+}
+
+.wml-pinned-hero__description {
+    max-width: 660px;
+    margin: 26px 0 0;
+    color: #f4f7f3;
+    font-size: clamp(1rem, 1.4vw, 1.38rem);
+    font-weight: 500;
+    line-height: 1.5;
+    text-shadow: 0 1px 12px rgba(0,0,0,.3);
+}
+
+.wml-pinned-hero__footer {
+    position: absolute;
+    z-index: 3;
+    bottom: clamp(24px, 4vw, 50px);
+    left: clamp(24px, 5vw, 98px);
+    right: clamp(24px, 5vw, 98px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.wml-pinned-hero__controls {
+    display: none; /* enabled by JavaScript */
+    align-items: center;
+    gap: 12px;
+}
+
+.wml-pinned-hero.has-rotation .wml-pinned-hero__controls {
+    display: flex;
+}
+
+.wml-pinned-hero__dot {
+    width: 27px;
+    height: 5px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: rgba(255,255,255,.44);
+    cursor: pointer;
+    transition: background 250ms ease, width 250ms ease;
+}
+
+.wml-pinned-hero__dot.is-active {
+    width: 40px;
+    background: #9df4ac;
+}
+
+.wml-pinned-hero__pause {
+    padding: 5px 9px;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 20px;
+    background: rgba(8,18,13,.25);
+    color: #fff;
+    font: inherit;
+    font-size: .78rem;
+    cursor: pointer;
+}
+
+.wml-pinned-hero__explore {
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-decoration: none;
+}
+
+.wml-pinned-hero__explore span {
+    margin-left: 7px;
+    font-size: 1.2rem;
+}
+
+/* Mission and later sections slide OVER the pinned photograph. */
+#main-content > .mission,
+#main-content > .lab-introduction,
+#main-content > .team {
+    position: relative;
+    z-index: 2;
+}
+
+#main-content > .mission {
+    box-shadow: 0 -16px 36px rgba(0, 0, 0, .13);
+}
+
+@media (max-width: 680px) {
+    .wml-pinned-hero {
+        height: 88svh;
+        min-height: 470px;
+        max-height: 820px;
+    }
+
+    .wml-pinned-hero__media img {
+        object-position: center;
+    }
+
+    .wml-pinned-hero__shade {
+        background: linear-gradient(180deg,
+            rgba(4,14,10,.36) 0%,
+            rgba(4,14,10,.72) 80%);
+    }
+
+    .wml-pinned-hero__slide {
+        left: 7vw;
+        width: 86vw;
+    }
+
+    .wml-pinned-hero__headline {
+        font-size: clamp(2.4rem, 10vw, 4.2rem);
+    }
+
+    .wml-pinned-hero__eyebrow {
+        letter-spacing: .11em;
+    }
+
+    .wml-pinned-hero__description {
+        font-size: 1rem;
+        margin-top: 18px;
+    }
+
+    .wml-pinned-hero__footer {
+        left: 7vw;
+        right: 7vw;
+    }
+
+    .wml-pinned-hero__explore {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wml-pinned-hero__slide,
+    .wml-pinned-hero__dot {
+        transition: none;
+    }
+    .wml-pinned-hero__slide.is-active .wml-pinned-hero__slide-inner {
+        animation: none;
+    }
+}
