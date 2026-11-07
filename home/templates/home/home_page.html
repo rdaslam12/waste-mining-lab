@@ -6,6 +6,8 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/wml-pinned-hero.css' %}">
     <link rel="stylesheet" href="{% static 'css/wml-mission.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wml-team.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wml-faculty.css' %}">
 {% endblock %}
 
 {% block header_title %}
@@ -34,13 +36,18 @@
 <section class="mission mission--halftone" aria-labelledby="mission-title">
     <canvas class="mission__canvas" aria-hidden="true"></canvas>
     <div class="mission__inner">
-        <p class="mission__eyebrow"><span aria-hidden="true"></span> ABOUT THE LAB / RESEARCH &amp; IMPACT</p>
+        <p class="mission__eyebrow"><span aria-hidden="true"></span> ABOUT THE LAB </p>
         <h2 class="mission__title" id="mission-title"><span>Waste is not</span><span>the end of the <em>story.</em></span></h2>
         <p class="mission__description">{{ page.hero_subtitle|default:"At Waste Mining Lab, we explore how discarded materials, environmental processes, and resource recovery can shape smarter ways to manage what we leave behind. Our research begins with a simple question: what can waste teach us about a more sustainable future?" }}</p>
         <a class="mission__link" href="/research/">Discover our research <svg viewBox="0 0 28 16" fill="none" aria-hidden="true"><path d="M1 8h24M18 1l7 7-7 7"/></svg></a>
     </div>
     <button class="mission__motion" type="button" aria-pressed="false" hidden>Pause dot animation</button>
 </section>
+
+<div class="wml-people-scene">
+    {% include "home/includes/team_showcase.html" %}
+    {% include "home/includes/faculty_about.html" %}
+</div>
 
 <section class="lab-introduction" id="research" aria-labelledby="research-title">
     <div class="content-column">
@@ -59,26 +66,14 @@
             <li>Resource recovery</li>
             <li>Environmental engineering</li>
         </ul>
+        <a class="lab-introduction__link" href="/research/">Explore our research</a>
     </div>
 </section>
 
-<section class="team" id="team" aria-labelledby="team-title">
-    <div class="content-column">
-        <h2 id="team-title">Meet the Team</h2>
-        <div class="team__feature">
-            <div class="team__portrait" role="img" aria-label="Placeholder for a photograph of Dr. Asef M. Redwan">
-                <span>Portrait<br>pending</span>
-            </div>
-            <div class="team__details">
-                <h3>Dr. Asef M. Redwan</h3>
-                <p>Lab Director<br>North South University, Bangladesh</p>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock content %}
 {% block extra_js %}
     {{ block.super }}
     <script src="{% static 'js/wml-pinned-hero.js' %}" defer></script>
     <script src="{% static 'js/wml-mission.js' %}" defer></script>
+    <script src="{% static 'js/wml-faculty.js' %}" defer></script>
 {% endblock %}

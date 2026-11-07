@@ -1,0 +1,28 @@
+{% load static %}
+<section class="wml-faculty" aria-labelledby="faculty-title" data-faculty>
+    <div class="wml-faculty__inner">
+        <div class="wml-faculty__copy">
+            <p class="wml-faculty__eyebrow">MEET THE LAB DIRECTOR</p>
+            <h2 id="faculty-title">Meet Dr. Asef<br><em>M. Redwan.</em></h2>
+            <div class="wml-faculty__affiliations">
+                <p>Assistant Professor of Civil &amp; Environmental Engineering<br><strong>North South University</strong></p>
+                <p>Joint Appointee &amp; Affiliate Faculty<br>Idaho State University, USA</p>
+            </div>
+            {# Verified against NSU faculty profile and ISU staff directory name-276627-en.html, November 2026. #}
+            <div class="wml-faculty__biography">
+                <p>At the intersection of environmental engineering, microbiology, and resource recovery, Dr. Asef M. Redwan explores how research can turn complex environmental challenges into practical solutions.</p>
+                <p>He earned his PhD in Environmental Engineering at Texas Tech University and brings research experience from Idaho National Laboratory. His work examines the biogeochemistry of interactions between metals and microorganisms, with applications in bioremediation and the recovery of valuable resources.</p>
+                <p>Through his academic roles in Bangladesh and the United States, he connects this scientific foundation to sustainable water systems and environmental technologies—working toward cleaner water and more thoughtful use of what we discard.</p>
+            </div>
+            <div class="wml-faculty__actions">
+                <a class="wml-faculty__primary" href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html">View Faculty Profile <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+                <a href="https://www.linkedin.com/in/asef-m-redwan-phd-282a0a64/">LinkedIn</a>
+                <a href="mailto:asef.redwan@northsouth.edu">Email</a>
+            </div>
+        </div>
+        <picture class="wml-faculty__portrait">
+            <source type="image/webp" srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w" sizes="(max-width: 800px) 100vw, 48vw">
+            <img src="{% static 'images/asef-redwan-transparent-bg.png' %}" width="1080" height="1080" alt="Dr. Asef M. Redwan speaking to students in a classroom." loading="lazy" decoding="async">
+        </picture>
+    </div>
+</section>

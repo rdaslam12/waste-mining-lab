@@ -50,7 +50,7 @@ class HomeTests(WagtailPageTestCase):
         response = self.client.get(self.homepage.url)
 
         self.assertContains(response, "Waste Mining Lab")
-        self.assertContains(response, "explores environmental sustainability")
+        self.assertContains(response, "At Waste Mining Lab, we explore")
         self.assertContains(response, "Turning waste into <em>value.</em>", html=True)
         self.assertContains(response, "Recovering resources.")
         self.assertContains(response, "Rethinking waste for a")

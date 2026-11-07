@@ -1,0 +1,30 @@
+{% load static %}
+<section class="wml-team" id="team" aria-labelledby="team-title">
+    <picture class="wml-team__photo">
+        <source type="image/webp" srcset="{% static 'images/team-photo-960.webp' %} 960w, {% static 'images/team-photo-1628.webp' %} 1628w" sizes="100vw">
+        <img src="{% static 'images/team-photo.png' %}" width="1628" height="1204" alt="The Waste Mining Lab team gathered outdoors during a site visit." loading="lazy" decoding="async">
+    </picture>
+    <div class="wml-team__inner">
+        <h2 id="team-title">Meet the<br><span>TEAM</span></h2>
+        {# Replace each dash and its status together only when lab-wide counts are verified. #}
+        <div class="wml-team__stats" aria-label="Lab statistics awaiting confirmation">
+            <div class="wml-team__tile wml-team__tile--members">
+                <span class="wml-team__value" aria-hidden="true">—</span>
+                <h3>Team Members</h3>
+                <p class="wml-team__status">Count to be confirmed</p>
+                <p>Meet the people behind the research, led by Dr. Asef M. Redwan.</p>
+                <a class="wml-team__button" href="/team/">Learn More <span class="wml-team__sr-only">about our team</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+            </div>
+            <div class="wml-team__tile" tabindex="0" role="group" aria-labelledby="team-publications">
+                <span class="wml-team__value" aria-hidden="true">—</span>
+                <h3 id="team-publications">Publications</h3>
+                <p class="wml-team__status">Count to be confirmed</p>
+            </div>
+            <div class="wml-team__tile" tabindex="0" role="group" aria-labelledby="team-grants">
+                <span class="wml-team__value" aria-hidden="true">—</span>
+                <h3 id="team-grants">Grants</h3>
+                <p class="wml-team__status">Count to be confirmed</p>
+            </div>
+        </div>
+    </div>
+</section>

@@ -17,8 +17,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    min-height: 32svh;
-    padding: clamp(3rem, 4vw, 4.5rem) clamp(1.5rem, 8vw, 9rem);
+    min-height: 0;
+    padding: clamp(1.75rem, 3vw, 2.75rem) clamp(1.5rem, 5vw, 6rem);
     background: #071b14;
     color: #f7f8f2;
     text-align: left;
@@ -34,14 +34,14 @@
 }
 .mission--halftone .mission__inner {
     width: 100%;
-    max-width: 82rem;
+    max-width: none;
     margin-inline: auto;
 }
 .mission--halftone .mission__eyebrow {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    margin: 0 0 2rem;
+    margin: 0 0 0.8rem;
     color: #d7e9d6;
     font: 500 0.6875rem/1.5 "Mission Geist", "DM Sans", sans-serif;
     letter-spacing: 0.12em;
@@ -58,7 +58,7 @@
     max-width: 15ch;
     margin: 0;
     color: #f7f8f2;
-    font: 700 clamp(2.75rem, 5.6vw, 5.75rem)/1.03 "DM Sans", sans-serif;
+    font: 700 clamp(2.2rem, 3.75vw, 4.1rem)/1.08 "DM Sans", sans-serif;
     letter-spacing: -0.04em;
 }
 .mission--halftone .mission__title > span { display: block; }
@@ -70,14 +70,16 @@
     letter-spacing: -0.035em;
     text-shadow: 0 0 1.5rem #e2f18c1a;
 }
+
 .mission--halftone .mission__description {
-    max-width: 36rem;
-    margin: 2rem 0 0;
+    width: 100%;
+    max-width: none;
+    margin: 1rem 0 0;
     color: #d7e9d6;
-    font: 400 clamp(1rem, 1.15vw, 1.125rem)/1.75 "DM Sans", sans-serif;
+    font: 400 clamp(1rem, 1.1vw, 1.2rem)/1.55 "DM Sans", sans-serif;
     letter-spacing: 0;
-    overflow-wrap: anywhere;
 }
+
 .mission--halftone .mission__link {
     min-height: 2.75rem;
     margin-top: 1.75rem;
