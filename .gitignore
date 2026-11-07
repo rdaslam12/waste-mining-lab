@@ -3,8 +3,7 @@
 __pycache__/
 *.py[cod]
 
-# Local database
-db.sqlite3
+# Local database journals
 db.sqlite3-journal
 
 # Environment and secrets
@@ -12,9 +11,6 @@ db.sqlite3-journal
 .env.*
 !.env.example
 waste_mining_lab/settings/local.py
-
-# Uploaded files
-/media/
 
 # Generated static output
 /static/

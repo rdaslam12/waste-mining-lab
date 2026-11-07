@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: waste-mining-lab
+    runtime: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn waste_mining_lab.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: DJANGO_SETTINGS_MODULE
+        value: waste_mining_lab.settings.production
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: WEB_CONCURRENCY
+        value: "2"

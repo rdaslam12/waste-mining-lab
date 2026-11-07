@@ -1,2 +1,5 @@
 Django>=6.1,<6.2
 wagtail>=8.1,<8.2
+django-filter>=26.2
+gunicorn>=23.0.0
+whitenoise>=6.8.0
