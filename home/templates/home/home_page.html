@@ -49,27 +49,6 @@
     {% include "home/includes/faculty_about.html" %}
 </div>
 
-<section class="lab-introduction" id="research" aria-labelledby="research-title">
-    <div class="content-column">
-        <h2 id="research-title">Our Research</h2>
-        <div class="lab-introduction__copy">
-            {% if page.lab_introduction %}
-                {{ page.lab_introduction|richtext }}
-            {% else %}
-                <p>Waste Mining Lab is a research laboratory at North South University led by Dr. Asef M. Redwan. The lab focuses on environmental sustainability, waste valorization, resource recovery, and environmental engineering.</p>
-            {% endif %}
-        </div>
-        <p class="research-lead">Our research interests include:</p>
-        <ul class="research-list">
-            <li>Environmental sustainability</li>
-            <li>Waste valorization</li>
-            <li>Resource recovery</li>
-            <li>Environmental engineering</li>
-        </ul>
-        <a class="lab-introduction__link" href="/research/">Explore our research</a>
-    </div>
-</section>
-
 {% endblock content %}
 {% block extra_js %}
     {{ block.super }}
