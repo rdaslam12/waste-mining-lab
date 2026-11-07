@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_class %}template-secondary{% endblock %}
+{% block extra_css %}{{ block.super }}
+{% if not page.search_description %}<meta name="description" content="{% if page.excerpt %}{{ page.excerpt }}{% elif page.intro %}{{ page.intro }}{% else %}{{ page.title }} — Waste Mining Lab at North South University, Bangladesh.{% endif %}">{% endif %}
+<link rel="stylesheet" href="{% static 'css/wml-sections.css' %}">{% endblock %}
+{% block content %}
+<div class="wml-editorial wml-editorial--{{ page.slug }}">
+    <div class="editorial-shell">{% block section_content %}{% endblock %}</div>
+</div>
+{% endblock %}

@@ -2,6 +2,7 @@ git add . && git commit -m "Update header and navbar fixes" && git push origin m
 git add . && git commit -m "Updated hero fixes" && git push origin main
 git add . && git commit -m "Updated abouts section" && git push origin main
 git add . && git commit -m "further additions" && git push origin main
+git add . && git commit -m "page additions and more" && git push origin main
 
 
 

@@ -1,0 +1,14 @@
+{% extends "home/pages/base_section.html" %}
+{% load static wagtailcore_tags %}
+{% block section_content %}
+<header class="editorial-intro team-intro"><div class="index-line"><span>People & perspectives</span><span>North South University</span></div><h1>{{ page.heading|default:"The people behind the questions." }}</h1><p class="lead">{{ page.intro|default:"Meet the people exploring the connections between waste, resources and a more sustainable environment." }}</p></header>
+<section class="director-section" aria-labelledby="director-title"><h2 class="small-label" id="director-title">Laboratory director</h2>
+{% if directors %}{% for member in directors %}{% include "home/includes/member_profile.html" %}{% endfor %}{% else %}
+<div class="director-profile"><figure class="director-portrait"><img src="{% static 'images/asef-redwan-1080.webp' %}" srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w" sizes="(max-width: 700px) 90vw, 40vw" width="1080" height="1080" alt="Dr. Asef M. Redwan speaking to students in a classroom." decoding="async"><figcaption>Dr. Asef M. Redwan · Lab director</figcaption></figure>
+<div class="director-copy"><h3>Dr. Asef<br>M. Redwan</h3><p class="director-role">Assistant Professor<br>Civil &amp; Environmental Engineering<br><strong>North South University</strong></p><p>Working at the intersection of environmental engineering, microbiology and resource recovery, Dr. Redwan explores how research can turn complex environmental challenges into practical solutions.</p><p>His research examines interactions between metals and microorganisms, with applications in bioremediation and the recovery of valuable resources.</p><div class="text-links"><a href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html">University profile{% include "home/includes/link_arrow.html" %}</a><a href="mailto:asef.redwan@northsouth.edu">Email Dr. Redwan</a></div></div></div>
+{% endif %}</section>
+{% if page.body %}<div class="reading-copy section-space">{{ page.body|richtext }}</div>{% endif %}
+{% for group in member_groups %}{% if group.members %}<section class="section-space" aria-labelledby="group-{{ forloop.counter }}"><div class="section-heading"><h2 id="group-{{ forloop.counter }}">{{ group.label }}</h2></div><div class="member-grid">{% for member in group.members %}{% include "home/includes/member_profile.html" %}{% endfor %}</div></section>{% endif %}{% endfor %}
+{% if not has_members %}<section class="team-directory-note"><h2>A growing directory.</h2><p>Researcher, student and collaborator profiles will be added as verified information becomes available.</p><a class="editorial-link" href="/research/">Get to know our research{% include "home/includes/link_arrow.html" %}</a></section>{% endif %}
+{% include "home/includes/editorial_cta.html" with cta_title="Connect with the lab." %}
+{% endblock %}

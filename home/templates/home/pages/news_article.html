@@ -1,0 +1,9 @@
+{% extends "home/pages/base_section.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block section_content %}
+<article class="news-article"><header class="article-header"><a class="editorial-link" href="{% pageurl page.get_parent %}">Back to news</a><p class="record-meta"><time datetime="{{ page.date|date:'Y-m-d' }}">{{ page.date|date:"d F Y" }}</time><span>{{ page.get_category_display }}</span></p><h1>{{ page.title }}</h1><p class="lead">{{ page.excerpt }}</p></header>
+{% if page.cover_image %}{% image page.cover_image width-1600 as cover %}<figure class="article-cover"><img src="{{ cover.url }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="{{ page.cover_image.description|default:page.cover_image.title }}"></figure>{% endif %}
+<div class="article-body reading-copy">{{ page.body|richtext }}</div>
+{% if page.related_project.is_published or page.related_publication.status == 'published' or page.related_activity.is_published %}<aside class="article-related"><h2>Explore the context</h2><div class="text-links">{% if page.related_project.is_published %}<a href="/research/#project-{{ page.related_project.pk }}">{{ page.related_project.title }}</a>{% endif %}{% if page.related_publication.status == 'published' %}<a href="/publications/?q={{ page.related_publication.title|urlencode }}#publication-{{ page.related_publication.pk }}">{{ page.related_publication.title }}</a>{% endif %}{% if page.related_activity.is_published %}<a href="{{ page.related_activity.archive_url }}">{{ page.related_activity.title }}</a>{% endif %}</div></aside>{% endif %}</article>
+{% if related_news %}<section class="section-space" aria-labelledby="more-news"><div class="section-heading"><h2 id="more-news">More from the lab</h2><a href="{% pageurl page.get_parent %}">All news</a></div><div class="news-grid">{% for article in related_news %}{% include "home/includes/news_card.html" %}{% endfor %}</div></section>{% endif %}
+{% endblock %}

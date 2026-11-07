@@ -3,8 +3,10 @@
 __pycache__/
 *.py[cod]
 
-# Local database journals
+# Local database journals and backups
 db.sqlite3-journal
+*.bak*
+*.bak
 
 # Environment and secrets
 .env

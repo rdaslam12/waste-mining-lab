@@ -1,47 +1,6 @@
-
-{% extends "base.html" %}
-{% load static %}
-
-{% block extra_css %}
-    {{ block.super }}
-    {% if page.slug == "publications" %}
-        <link rel="stylesheet" href="{% static 'css/wml-publications.css' %}">
-    {% endif %}
-{% endblock %}
-
-{% block content %}
-
-<section class="wml-section-page">
-    <div class="wml-section-content">
-        <p class="wml-eyebrow">WASTE MINING LAB</p>
-        <h1>{{ page.title }}</h1>
-
-        {% if page.intro %}<p>{{ page.intro }}</p>{% endif %}
-
-        {% if page.slug == "publications" %}
-            <div class="wml-publications" aria-live="polite">
-                {% for publication in publications %}
-                    <article class="wml-publication">
-                        <p class="wml-publication__year">{{ publication.year }}{% if publication.featured %} · Featured{% endif %}</p>
-                        <h2>{{ publication.title }}</h2>
-                        <p class="wml-publication__authors">{{ publication.authors }}</p>
-                        {% if publication.venue %}<p class="wml-publication__venue">{{ publication.venue }}</p>{% endif %}
-                        {% if publication.abstract %}<p class="wml-publication__abstract">{{ publication.abstract }}</p>{% endif %}
-                        {% if publication.doi or publication.publication_url %}
-                            <div class="wml-publication__links">
-                                {% if publication.doi %}<a href="https://doi.org/{{ publication.doi }}">DOI: {{ publication.doi }}</a>{% endif %}
-                                {% if publication.publication_url %}<a href="{{ publication.publication_url }}">View publication</a>{% endif %}
-                            </div>
-                        {% endif %}
-                    </article>
-                {% empty %}
-                    <p class="wml-publications__empty">No published records are available yet.</p>
-                {% endfor %}
-            </div>
-        {% elif not page.intro %}
-            <p>More information coming soon.</p>
-        {% endif %}
-    </div>
-</section>
-
+{% extends "home/pages/base_section.html" %}
+{% load wagtailcore_tags %}
+{% block section_content %}
+<header class="editorial-intro"><h1>{{ page.heading|default:page.title }}</h1>{% if page.intro %}<p class="lead">{{ page.intro }}</p>{% endif %}</header>
+{% if page.body %}<div class="reading-copy">{{ page.body|richtext }}</div>{% endif %}
 {% endblock %}

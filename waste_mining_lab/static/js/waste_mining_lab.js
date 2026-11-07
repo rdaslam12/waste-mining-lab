@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const missionBottom =
                     mission.getBoundingClientRect().bottom;
 
-                const pastMission = missionBottom <= 0;
+                const pastMission = missionBottom <= 400;
 
                 header.classList.toggle(
                     "nav-hidden",
