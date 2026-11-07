@@ -101,7 +101,12 @@ body.theme-contact { background-color: #25201e; }
     border: 1px solid #444c48;
     border-radius: 21px;
     box-shadow: 0 8px 23px rgba(0,0,0,0.12);
-    transition: width 320ms ease, min-height 320ms ease, padding 320ms ease, border-radius 320ms ease;
+    transition:
+    width 320ms ease,
+    min-height 320ms ease,
+    padding 320ms ease,
+    border-radius 320ms ease,
+    opacity 350ms ease;
 }
 .wml-nav-links {
     display: flex;
@@ -271,4 +276,48 @@ body.theme-contact { background-color: #25201e; }
 }
 @media (prefers-reduced-motion: reduce) {
     .wml-navbar, .wml-nav-links, .wml-nav-links > a, .wml-contact span, .wml-logo-small { transition: none; }
+}
+
+/* Hide compact navigation after Mission */
+
+.wml-global-header.is-scrolled.nav-hidden .wml-navbar {
+    transform: translate(-50%, calc(-100% - 20px));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wml-global-header.is-scrolled.nav-hidden .wml-logo-small,
+.wml-global-header.is-scrolled.nav-hidden .wml-partner-logos {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.wml-logo-small,
+.wml-partner-logos {
+    transition: opacity 350ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wml-global-header.is-scrolled .wml-navbar,
+    .wml-logo-small,
+    .wml-partner-logos {
+        transition: none;
+    }
+}
+
+/* Only animate vertical movement after navbar is compact */
+.wml-global-header.is-scrolled .wml-navbar {
+    transition:
+        width 320ms ease,
+        min-height 320ms ease,
+        padding 320ms ease,
+        border-radius 320ms ease,
+        opacity 350ms ease,
+        top 450ms ease;
+}
+
+.wml-global-header.is-scrolled.nav-hidden .wml-navbar {
+    top: -80px;
+    transform: translateX(-50%);
 }

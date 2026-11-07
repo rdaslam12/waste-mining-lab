@@ -1,8 +1,12 @@
 {% load static wagtailcore_tags %}
 <section class="wml-team" id="team" aria-labelledby="team-title">
     <picture class="wml-team__photo">
-        <source type="image/webp" srcset="{% static 'images/team-photo-960.webp' %} 960w, {% static 'images/team-photo-1628.webp' %} 1628w" sizes="100vw">
-        <img src="{% static 'images/team-photo.png' %}" width="1628" height="1204" alt="The Waste Mining Lab team gathered outdoors during a site visit." loading="lazy" decoding="async">
+        <img
+            src="{% static 'images/team-photo.png' %}"
+            alt="The Waste Mining Lab team gathered outdoors during a site visit."
+            loading="lazy"
+            decoding="async"
+        >
     </picture>
     <div class="wml-team__inner">
         <div class="wml-team__heading">

@@ -17,7 +17,7 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    min-height: 0;
+    min-height: 20px;
     padding: clamp(1.75rem, 3vw, 2.75rem) clamp(1.5rem, 5vw, 6rem);
     background: #071b14;
     color: #f7f8f2;
@@ -134,4 +134,8 @@
 .mission--halftone .mission__link,
 .mission--halftone .mission__motion {
     display: none !important;
+}
+/* Temporarily hide animated tree background */
+.mission--halftone .mission__canvas {
+    display: none;
 }
