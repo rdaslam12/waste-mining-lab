@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T04:30:00+06:00",
+  "title": "Design System: Waste Mining Lab",
+  "extensions": {
+    "colorMeta": {
+      "ink": {"role": "neutral", "displayName": "Ink", "canonical": "#202c27"},
+      "muted": {"role": "neutral", "displayName": "Muted text", "canonical": "#52635a"},
+      "accent-blue": {"role": "primary", "displayName": "Navigation blue", "canonical": "#2874b8"},
+      "forest": {"role": "primary", "displayName": "Forest", "canonical": "#1c5038"},
+      "forest-deep": {"role": "primary", "displayName": "Deep forest", "canonical": "#102c22"},
+      "sage": {"role": "neutral", "displayName": "Sage", "canonical": "#e2ece1"},
+      "divider": {"role": "neutral", "displayName": "Divider", "canonical": "#cddbd0"},
+      "white": {"role": "neutral", "displayName": "White", "canonical": "#ffffff"},
+      "page-paper": {"role": "neutral", "displayName": "Page paper", "canonical": "#fbfcf9"},
+      "mission-white": {"role": "neutral", "displayName": "Mission white", "canonical": "#f2f6ed"},
+      "photo-stem": {"role": "primary", "displayName": "Botanical stem", "canonical": "#3d7658"},
+      "photo-leaf": {"role": "primary", "displayName": "Botanical leaf", "canonical": "#5c8a64"},
+      "team-paper": {"role": "neutral", "displayName": "Team paper", "canonical": "#f2f6ee"},
+      "portrait-sage": {"role": "neutral", "displayName": "Portrait sage", "canonical": "#dbe8da"},
+      "footer-deep": {"role": "neutral", "displayName": "Footer deep", "canonical": "#10251d"},
+      "footer-copy": {"role": "neutral", "displayName": "Footer copy", "canonical": "#d8e6d9"},
+      "mission-link": {"role": "primary", "displayName": "Mission link", "canonical": "#d1e7d5"}
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Lab title", "purpose": "Centered site name"},
+      "mission": {"displayName": "Mission", "purpose": "Centered statement in the black band"},
+      "body": {"displayName": "Body", "purpose": "General text"},
+      "navigation": {"displayName": "Navigation", "purpose": "Desktop navigation links"},
+      "section-heading": {"displayName": "Section heading", "purpose": "Research and team headings"},
+      "research-copy": {"displayName": "Research copy", "purpose": "Introduction and interest list"},
+      "team-heading": {"displayName": "Team heading", "purpose": "Director name"},
+      "compact-display": {"displayName": "Compact title", "purpose": "Mobile lab title"},
+      "compact-navigation": {"displayName": "Compact navigation", "purpose": "Mobile navigation links"},
+      "small-copy": {"displayName": "Small copy", "purpose": "Portrait and director detail"},
+      "footer-detail": {"displayName": "Footer detail", "purpose": "Address and copyright"},
+      "photo-caption": {"displayName": "Photo caption", "purpose": "Pending photograph label"},
+      "action-label": {"displayName": "Action label", "purpose": "Mission link"},
+      "action-arrow": {"displayName": "Action arrow", "purpose": "Mission link direction cue"},
+      "footer-name": {"displayName": "Footer name", "purpose": "Lab name in the footer"}
+    },
+    "shadows": [],
+    "motion": [
+      {"name": "botanical-growth", "value": "1600ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Draw placeholder stems once when the page loads"},
+      {"name": "leaf-appearance", "value": "950ms after 240ms", "purpose": "Bring placeholder leaves into view after stems begin"},
+      {"name": "navigation-feedback", "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Reveal an underline on hover or keyboard focus"},
+      {"name": "reduced-motion", "value": "animation: none; scroll-behavior: auto", "purpose": "Keep essential content visible and anchor navigation immediate"}
+    ],
+    "breakpoints": [{"name": "compact", "value": "42rem"}]
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "The Living Lab",
+    "overview": "The supplied Stadler Lab screenshot establishes the centered title, separate navigation, panoramic image, mission band, and narrow research column. DM Sans and Newsreader add a clear academic type hierarchy; original botanical linework introduces the environmental theme while labeled placeholders remain honest about missing photographs.",
+    "keyCharacteristics": ["Centered title with original sprig marks", "Panoramic research image or botanical placeholder", "Deep forest mission band", "Editorial mission and section headings", "Simple featured team and institutional footer"],
+    "rules": [{"name": "Reference composition", "body": "Preserve the title, navigation, image, mission, research, team, and footer order.", "section": "layout"}],
+    "dos": ["Use authentic photographs when available.", "Keep research and team facts verified."],
+    "donts": ["Do not copy Rice University assets.", "Do not add cards, gradients, or looping decorative motion."]
+  }
+}

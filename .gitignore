@@ -1,0 +1,26 @@
+# Python environment
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local database
+db.sqlite3
+db.sqlite3-journal
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+waste_mining_lab/settings/local.py
+
+# Uploaded files
+/media/
+
+# Generated static output
+/static/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
