@@ -1,0 +1,7 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<article class="news-card">
+    {% if article.cover_image %}{% image article.cover_image fill-800x520 as cover %}<a href="{% pageurl article %}" tabindex="-1" aria-hidden="true"><img src="{{ cover.url }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="lazy"></a>{% endif %}
+    <p class="record-meta"><time datetime="{{ article.date|date:'Y-m-d' }}">{{ article.date|date:"d M Y" }}</time><span>{{ article.get_category_display }}</span></p>
+    <h3><a href="{% pageurl article %}">{{ article.title }}</a></h3><p>{{ article.excerpt }}</p>
+    <a class="editorial-link" href="{% pageurl article %}" aria-label="Read story: {{ article.title }}">Read story{% include "home/includes/link_arrow.html" %}</a>
+</article>

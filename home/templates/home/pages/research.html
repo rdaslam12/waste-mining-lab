@@ -1,0 +1,19 @@
+{% extends "home/pages/base_section.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block section_content %}
+<header class="editorial-intro research-intro">
+    <div><p class="small-label">Research · Waste Mining Lab</p><h1>{{ page.heading|default:"New perspectives on what we leave behind." }}</h1></div>
+    <div class="research-intro-aside"><p class="lead">{{ page.intro|default:"Waste is a starting point for questions about materials, resources and the systems that connect them." }}</p><a class="editorial-link" href="#research-areas">Explore our research areas{% include "home/includes/link_arrow.html" %}</a></div>
+</header>
+{% if page.feature_image %}{% include "home/includes/editorial_image.html" %}{% else %}<figure class="research-art"><img src="{% static 'images/lab-header2.webp' %}" width="1920" height="600" alt="" decoding="async"><figcaption>Waste, resources and the environment — a connected landscape.</figcaption></figure>{% endif %}
+<section class="section-space" id="research-areas" aria-labelledby="areas-title">
+    <div class="section-heading"><h2 id="areas-title">Lines of inquiry</h2><span class="small-label">Our research areas</span></div>
+    <div class="research-areas">{% for area in areas %}<article class="research-area"><span class="area-index">{{ forloop.counter|stringformat:"02d" }}</span><div><h3>{{ area.title }}</h3>{% if area.description %}<p>{{ area.description }}</p>{% endif %}</div>{% if area.image %}{% image area.image fill-640x420 as area_image %}<img src="{{ area_image.url }}" width="{{ area_image.width }}" height="{{ area_image.height }}" alt="{{ area.image.description|default:area.image.title }}" loading="lazy">{% endif %}</article>{% empty %}<p>Research areas will be listed as they are published.</p>{% endfor %}</div>
+</section>
+<section class="section-space" aria-labelledby="projects-title"><div class="section-heading"><h2 id="projects-title">Research in focus</h2><span class="small-label">Project portfolio</span></div>
+{% for project in projects %}{% include "home/includes/project_feature.html" %}{% empty %}<div class="empty-state"><h3>A closer look at the work, coming soon.</h3><p>Project profiles will bring together research questions, photographs and related publications as verified details become available.</p></div>{% endfor %}
+</section>
+<section class="research-approach section-space" aria-labelledby="approach-title"><div><p class="small-label">Perspective</p><h2 id="approach-title">From questions<br>to understanding.</h2></div><div class="reading-copy">{% if page.body %}{{ page.body|richtext }}{% else %}<p>Environmental research connects questions about waste with the wider systems in which materials move, change and acquire value.</p><p>Our research direction brings environmental sustainability, resource recovery and engineering into the same conversation. Detailed methods and findings are documented with individual projects and publications when available.</p>{% endif %}<a class="editorial-link" href="/waste-monitoring/">Explore waste monitoring{% include "home/includes/link_arrow.html" %}</a></div></section>
+<section class="section-space" aria-labelledby="research-reading"><div class="section-heading"><h2 id="research-reading">Further reading</h2><a class="editorial-link" href="/publications/">Publication archive{% include "home/includes/link_arrow.html" %}</a></div>{% for publication in related_publications %}{% include "home/includes/publication_record.html" %}{% empty %}<p class="muted">Related publications will appear alongside the projects they inform.</p>{% endfor %}</section>
+{% include "home/includes/editorial_cta.html" %}
+{% endblock %}

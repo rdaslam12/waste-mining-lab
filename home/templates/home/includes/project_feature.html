@@ -1,0 +1,9 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<article class="project-feature {% if not project.image %}project-feature--text{% endif %}" id="project-{{ project.pk }}">
+    {% if project.image %}{% image project.image fill-1000x750 as project_image %}<img src="{{ project_image.url }}" width="{{ project_image.width }}" height="{{ project_image.height }}" alt="{{ project.image.description|default:project.image.title }}" loading="lazy" decoding="async">{% endif %}
+    <div>{% if project.area.is_published %}<p class="small-label">{{ project.area.title }}</p>{% endif %}<h3>{{ project.title }}</h3><p>{{ project.summary }}</p>
+        {% if project.description %}<details class="abstract"><summary>About this project</summary><div class="reading-copy">{{ project.description|richtext }}</div></details>{% endif %}
+        {% with related=project.public_publications %}{% if related %}<div class="project-publications"><h4>Related publications</h4>{% for publication in related %}<a href="/publications/?q={{ publication.title|urlencode }}#publication-{{ publication.pk }}">{{ publication.title }}</a>{% endfor %}</div>{% endif %}{% endwith %}
+        <div class="text-links">{% if project.external_url %}<a href="{{ project.external_url }}">Project website{% include "home/includes/link_arrow.html" %}</a>{% endif %}{% if project.monitoring_related %}<a href="/waste-monitoring/">Waste monitoring{% include "home/includes/link_arrow.html" %}</a>{% endif %}</div>
+    </div>
+</article>

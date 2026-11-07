@@ -145,14 +145,31 @@ class HomePage(Page):
 
 class SectionPage(Page):
     intro = models.TextField(blank=True)
+    heading = models.CharField(max_length=160, blank=True, help_text="Optional display heading; the navigation title stays unchanged.")
+    body = RichTextField(blank=True, help_text="Supporting introduction, research approach, or collaboration information.")
+    feature_image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
+    image_caption = models.CharField(max_length=250, blank=True)
+    methodology = RichTextField(blank=True, help_text="Monitoring methods, equipment, collection and analysis. Enter only verified details.")
 
     parent_page_types = ["home.HomePage"]
-    subpage_types = []
+    subpage_types = ["home.NewsArticlePage"]
 
-    content_panels = Page.content_panels + [FieldPanel("intro")]
+    content_panels = Page.content_panels + [
+        FieldPanel("heading"), FieldPanel("intro"), FieldPanel("body"),
+        MultiFieldPanel([FieldPanel("feature_image"), FieldPanel("image_caption")], heading="Editorial image"),
+        FieldPanel("methodology"),
+    ]
+
+    def get_template(self, request, *args, **kwargs):
+        from .page_context import SECTION_TEMPLATES
+        return SECTION_TEMPLATES.get(self.slug, "home/section_page.html")
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        if self.slug == "publications":
-            context["publications"] = Publication.objects.published()
+        from .page_context import section_context
+        context.update(section_context(self, request))
         return context
+
+
+# Split editorial records from the established homepage and publication models.
+from .content_models import Activity, ActivityImage, NewsArticlePage, ResearchArea, ResearchProject, TeamMember  # noqa: E402,F401

@@ -1,6 +1,6 @@
 # Waste Mining Lab website
 
-The official website foundation for Waste Mining Lab at North South University, Bangladesh. The site uses Django and Wagtail so lab administrators can manage public content through Wagtail's built-in admin.
+The official website for Waste Mining Lab at North South University, Bangladesh. Django and Wagtail provide the public site and editorial admin. Alongside the established homepage, the site includes Publications, Research, Team, Activity, News, Waste Monitoring, and Contact.
 
 ## Technology
 
@@ -11,7 +11,7 @@ The official website foundation for Waste Mining Lab at North South University, 
 
 ## Local setup
 
-Create and activate a Python 3.12 virtual environment, then install the pinned dependency ranges:
+Activate the existing virtual environment with `source .venv/bin/activate`. For a fresh checkout, create a Python 3.12 environment and install the dependency ranges in `requirements.txt`:
 
 ```bash
 python -m venv .venv
@@ -37,18 +37,30 @@ In Wagtail, edit the Home page to manage:
 - Hero subtitle
 - Hero image
 - Lab introduction
+- Optional verified team member count
+- Research areas, one per line
 
-The headline appears in the centered title area, the subtitle in the dark mission band, the image as a panoramic banner, and the introduction in the research section. When uploading a hero image, add contextual alt text in Wagtail's image description field; leave it empty only when the image is decorative. Until authentic lab photographs are available, the homepage displays clearly labeled research and portrait placeholders. The team section features only the verified lab director.
+The homepage retains its established hero rotation, mission animation, research showcase, and director portrait. Add meaningful descriptions to editorial images in Wagtail. The optional team count must be verified; it is not calculated from the new Team directory.
 
-The layout follows the provided academic lab reference, while the content and any future photographs must belong to Waste Mining Lab.
+The secondary pages reuse the existing forest, sage, and paper palette with DM Sans and Newsreader. Their CSS is scoped separately; the homepage, header, and footer remain the shared visual reference.
 
-The locally hosted DM Sans and Newsreader fonts are distributed under the SIL Open Font License, with license files beside the fonts in `waste_mining_lab/static/fonts/`. The botanical placeholder is original vector artwork and stops animating when reduced motion is requested.
+The locally hosted fonts are distributed under the SIL Open Font License, with license files beside the fonts in `waste_mining_lab/static/fonts/`.
+
+## Secondary pages and editing
+
+See [the secondary-page maintainer guide](docs/secondary-pages.md) for CMS editing routes, publication visibility, project and people relationships, activity galleries, news publishing, and implementation details.
+
+Run `python manage.py migrate` to add the editorial models and any missing section pages. Existing pages, content, slugs, and IDs are preserved. No sample publications, projects, people, activities, or news are inserted. Waste Monitoring intentionally shows that no data source is connected; an ingestion backend is not included.
 
 ## Checks
 
 ```bash
 python manage.py check
+python manage.py makemigrations --check --dry-run
 python manage.py test
+git diff --check
 ```
+
+The secondary-page implementation passed these checks, including 38 Django tests, plus responsive browser checks for empty and populated content. [Validation details](docs/secondary-pages.md#validation) distinguish local fixture captures from real editorial content.
 
 Production settings live in `waste_mining_lab/settings/production.py`. Configure a production secret key, allowed hosts, database, media storage, and `WAGTAILADMIN_BASE_URL` before deployment.

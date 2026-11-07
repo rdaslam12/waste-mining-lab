@@ -1,0 +1,7 @@
+{% load wagtailimages_tags %}
+<article class="member-profile">
+    {% if member.image %}{% image member.image fill-640x720 as portrait %}<img src="{{ portrait.url }}" width="{{ portrait.width }}" height="{{ portrait.height }}" alt="{{ member.image.description|default:member.name }}" loading="lazy">{% endif %}
+    <div><h3>{{ member.name }}</h3><p class="member-role">{{ member.role }}</p>{% if member.affiliation %}<p>{{ member.affiliation }}</p>{% endif %}{% if member.biography %}<p>{{ member.biography|linebreaksbr }}</p>{% endif %}{% if member.research_interests %}<p><strong>Research interests</strong><br>{{ member.research_interests }}</p>{% endif %}
+    <div class="text-links">{% if member.email %}<a href="mailto:{{ member.email }}">Email {{ member.name }}</a>{% endif %}{% if member.profile_url %}<a href="{{ member.profile_url }}">View profile{% include "home/includes/link_arrow.html" %}</a>{% endif %}</div>
+    {% with projects=member.public_projects %}{% if projects %}<div class="project-publications"><h4>Research</h4>{% for project in projects %}<a href="/research/#project-{{ project.pk }}">{{ project.title }}</a>{% endfor %}</div>{% endif %}{% endwith %}</div>
+</article>

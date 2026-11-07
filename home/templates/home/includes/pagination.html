@@ -1,0 +1,7 @@
+{% if paginator_page.has_other_pages %}
+<nav class="archive-pagination" aria-label="Archive pages">
+    {% if paginator_page.has_previous %}<a href="?{% if filter_query %}{{ filter_query }}&amp;{% endif %}page={{ paginator_page.previous_page_number }}">Previous page</a>{% endif %}
+    <span>Page {{ paginator_page.number }} of {{ paginator_page.paginator.num_pages }}</span>
+    {% if paginator_page.has_next %}<a href="?{% if filter_query %}{{ filter_query }}&amp;{% endif %}page={{ paginator_page.next_page_number }}">Next page</a>{% endif %}
+</nav>
+{% endif %}

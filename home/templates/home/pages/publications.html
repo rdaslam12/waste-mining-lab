@@ -1,0 +1,34 @@
+{% extends "home/pages/base_section.html" %}
+{% load wagtailcore_tags %}
+{% block section_content %}
+<header class="editorial-intro publication-intro">
+    <div class="index-line"><span>Research output</span><span>Publication archive</span></div>
+    <h1>{{ page.heading|default:"Publications" }}</h1>
+    <div class="intro-bottom"><p class="lead">{{ page.intro|default:"An evolving record of research, ideas and evidence. Explore the work that informs our understanding of waste and its possibilities." }}</p><a class="editorial-link" href="/research/">Our research{% include "home/includes/link_arrow.html" %}</a></div>
+</header>
+{% if page.body %}<div class="reading-copy">{{ page.body|richtext }}</div>{% endif %}
+{% if featured_publications %}
+<section class="section-space" aria-labelledby="featured-title"><div class="section-heading"><h2 id="featured-title">Selected work</h2><span class="small-label">From the archive</span></div>
+<div class="featured-publications">{% for publication in featured_publications %}{% include "home/includes/publication_record.html" with featured=True %}{% endfor %}</div></section>
+{% endif %}
+<section class="archive-section" aria-labelledby="archive-title">
+    <div class="section-heading"><h2 id="archive-title">Publication index</h2>{% if has_publications %}<span class="small-label">{{ paginator_page.paginator.count }} record{{ paginator_page.paginator.count|pluralize }}</span>{% endif %}</div>
+    <form class="archive-filters" method="get" action="{{ page.url }}#archive-title" role="search" aria-label="Search publications">
+        <div class="filter-field filter-field--search"><label for="publication-search">Search the archive</label><input id="publication-search" name="q" type="search" value="{{ query }}" placeholder="Title, author, journal or keyword" maxlength="200"></div>
+        <div class="filter-field"><label for="publication-year">Year</label><select id="publication-year" name="year"><option value="">All years</option>{% for year in years %}<option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>{% endfor %}</select></div>
+        <button class="editorial-button" type="submit">Search</button>
+        {% if query or selected_year %}<a class="reset-link" href="{{ page.url }}#archive-title">Clear filters</a>{% endif %}
+    </form>
+    {% if publications %}
+        {% regroup publications by year as year_groups %}
+        {% for group in year_groups %}<section class="publication-year" aria-labelledby="year-{{ group.grouper }}"><h2 id="year-{{ group.grouper }}">{{ group.grouper }}</h2><div>{% for publication in group.list %}{% include "home/includes/publication_record.html" %}{% endfor %}</div></section>{% endfor %}
+    {% else %}
+        <div class="empty-state empty-state--archive"><span class="empty-mark" aria-hidden="true">[ — ]</span><div>
+        {% if query or selected_year %}<h3>No matching publications</h3><p>Try another keyword or year, or clear the filters to browse the full archive.</p><a class="editorial-link" href="{{ page.url }}#archive-title">Clear filters{% include "home/includes/link_arrow.html" %}</a>
+        {% else %}<h3>The archive is taking shape.</h3><p>No published records are available yet. Verified publications, abstracts and links will appear here as they are added.</p><a class="editorial-link" href="/research/">Explore our research direction{% include "home/includes/link_arrow.html" %}</a>{% endif %}
+        </div></div>
+    {% endif %}
+    {% include "home/includes/pagination.html" %}
+</section>
+{% include "home/includes/editorial_cta.html" with cta_title="Research starts with a conversation." %}
+{% endblock %}

@@ -1,0 +1,104 @@
+{
+  "results": [
+    {
+      "route": "publications",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "research",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "team",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "activity",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "news",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "news/qa-fixture-1",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "waste-monitoring",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "publications",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "research",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "team",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "activity",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "news",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "news/qa-fixture-1",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    },
+    {
+      "route": "waste-monitoring",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "brokenImages": []
+    }
+  ],
+  "errors": [],
+  "interactions": "Passed: keyboard abstract, search/year, pagination, news filter/detail, contact layout, homepage rotation, header scrolling, mission canvas, faculty portrait"
+}

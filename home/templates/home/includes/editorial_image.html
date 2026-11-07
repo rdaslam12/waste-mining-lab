@@ -1,0 +1,8 @@
+{% load wagtailimages_tags %}
+{% if page.feature_image %}
+<figure class="editorial-image">
+    {% image page.feature_image width-1600 as editorial_image %}
+    <img src="{{ editorial_image.url }}" width="{{ editorial_image.width }}" height="{{ editorial_image.height }}" alt="{{ page.feature_image.description|default:page.feature_image.title }}" decoding="async">
+    {% if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}
+</figure>
+{% endif %}
