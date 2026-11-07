@@ -40,49 +40,79 @@
 {% elif request.path == '/publications/' %}theme-publications
 {% elif request.path == '/news/' %}theme-news
 {% elif request.path == '/contact/' %}theme-contact
+{% elif request.path == '/team/' %}theme-team
+{% elif request.path == '/activity/' %}theme-activity
+{% elif request.path == '/waste-monitoring/' %}theme-waste-monitoring
 {% endif %}">
 
         <a class="skip-link" href="#main-content">Skip to main content</a>
         {% wagtailuserbar %}
 
-    <header class="site-header">
-        <div class="site-header__title">
-            <a class="site-brand" href="/" aria-label="Waste Mining Lab Research homepage">
-                <span>Waste Mining Lab Research</span>
-            </a>
-        </div>
-    </header>
+    
+<header class="site-header">
+    <div class="site-header__title">
+        <a class="site-brand" href="/" aria-label="Waste Mining Lab homepage">
+            <span>Waste Mining Lab</span>
+        </a>
+    </div>
+</header>
+
 
 
         
+        
     <header class="wml-navbar">
-        <a class="wml-brand" href="/" aria-label="Waste Mining Lab home">
-            <span class="wml-brand-icon">W</span>
-            <span>Waste Mining Lab</span>
-        </a>
 
         <nav class="wml-nav-links" aria-label="Main navigation">
-            <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
-            <a href="/research/" class="{% if request.path == '/research/' %}active{% endif %}">Research</a>
-            <a href="/publications/" class="{% if request.path == '/publications/' %}active{% endif %}">Publications</a>
-            <a href="/news/" class="{% if request.path == '/news/' %}active{% endif %}">News</a>
+            <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+                Waste Mining Lab
+            </a>
+
+            <a href="/publications/" class="{% if request.path == '/publications/' %}active{% endif %}">
+                Publications
+            </a>
+
+            <a href="/research/" class="{% if request.path == '/research/' %}active{% endif %}">
+                Research
+            </a>
+
+            <a href="/team/" class="{% if request.path == '/team/' %}active{% endif %}">
+                Team
+            </a>
+
+            <a href="/activity/" class="{% if request.path == '/activity/' %}active{% endif %}">
+                Activity
+            </a>
+
+            <a href="/waste-monitoring/" class="{% if request.path == '/waste-monitoring/' %}active{% endif %}">
+                Waste Monitoring
+            </a>
+
+            <a href="/news/" class="{% if request.path == '/news/' %}active{% endif %}">
+                News
+            </a>
+
+            <a href="/contact/" class="wml-contact {% if request.path == '/contact/' %}active{% endif %}">
+                <span>Contact</span>
+            </a>
         </nav>
 
-        <a href="/contact/" class="wml-contact">
-            <span>Contact</span>
-        </a>
-
         <details class="wml-mobile-menu">
-            <summary aria-label="Toggle navigation">Menu ☰</summary>
+            <summary>Menu ☰</summary>
             <nav aria-label="Mobile navigation">
-                <a href="/">Home</a>
-                <a href="/research/">Research</a>
+                <a href="/">Waste Mining Lab</a>
                 <a href="/publications/">Publications</a>
+                <a href="/research/">Research</a>
+                <a href="/team/">Team</a>
+                <a href="/activity/">Activity</a>
+                <a href="/waste-monitoring/">Waste Monitoring</a>
                 <a href="/news/">News</a>
                 <a href="/contact/">Contact</a>
             </nav>
         </details>
+
     </header>
+
 
 
         <main id="main-content">
