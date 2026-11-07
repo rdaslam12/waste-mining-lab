@@ -1,0 +1,109 @@
+/* Homepage mission only: the opaque surface must cover the sticky hero. */
+.mission.mission--video {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: max(36rem, 70svh);
+    padding: clamp(4rem, 7vw, 7rem) 1.5rem;
+    background: var(--forest-deep, #102c22);
+    color: #fff;
+}
+
+.mission__video {
+    position: absolute;
+    top: 0;
+    left: -7.5%;
+    z-index: 0;
+    width: 115%;
+    height: 115%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mission__shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(6, 27, 19, 0.65);
+    pointer-events: none;
+}
+
+.mission--video .mission__inner {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 900px);
+}
+
+.mission--video .mission__eyebrow {
+    margin: 0 0 1.75rem;
+    font: 500 0.75rem/1.5 var(--sans);
+    letter-spacing: 0.16em;
+    color: #d1e7d5;
+}
+
+.mission--video h2 {
+    margin: 0 auto 1.75rem;
+    max-width: 19ch;
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+
+.mission--video .mission__description {
+    max-width: 65ch;
+    margin-inline: auto;
+    font-family: var(--sans);
+    font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+    line-height: 1.65;
+    letter-spacing: 0;
+    color: #e2ece1;
+}
+
+.mission--video .mission__link {
+    min-height: 2.75rem;
+    margin-top: 1.75rem;
+    border-bottom: 1px solid rgba(209, 231, 213, 0.55);
+}
+
+.mission__motion {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1rem;
+    z-index: 2;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(209, 231, 213, 0.55);
+    background: #102c22;
+    color: #e2ece1;
+    font: 400 0.75rem/1.4 var(--sans);
+    cursor: pointer;
+}
+
+.mission__motion:hover { background: #1c5038; }
+.mission--video :focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+.mission--video ::selection { color: #102c22; background: #d1e7d5; }
+
+.mission--video.is-visible .mission__inner {
+    animation: mission-arrive 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes mission-arrive {
+    from { opacity: 0.65; transform: translateY(1rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 42.5rem) {
+    .mission.mission--video { min-height: max(36rem, 70svh); padding: 4rem 1.5rem 5rem; }
+    .mission--video h2 { max-width: 17ch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mission__video, .mission__motion { display: none; }
+    .mission--video.is-visible .mission__inner { animation: none; }
+}
