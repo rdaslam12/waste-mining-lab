@@ -9,3 +9,7 @@
     <div class="editorial-shell">{% block section_content %}{% endblock %}</div>
 </div>
 {% endblock %}
+{% block extra_js %}
+{{ block.super }}
+<script src="{% static 'js/wml-sections.js' %}" defer></script>
+{% endblock %}
