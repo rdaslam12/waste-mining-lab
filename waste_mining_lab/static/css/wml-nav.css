@@ -213,3 +213,23 @@ body.theme-news {
 body.theme-contact {
     background-color: #25201e;
 }
+/* Shared heading above navigation */
+.site-header {
+    background: #fbfcf9;
+}
+
+.site-header__title {
+    min-height: clamp(120px, 12vw, 190px);
+    padding: 28px 20px;
+}
+
+.site-header .site-brand > span {
+    font-size: clamp(28px, 4vw, 60px);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+}
+
+/* Navigation beneath the title */
+.wml-navbar {
+    margin-top: 18px;
+}
