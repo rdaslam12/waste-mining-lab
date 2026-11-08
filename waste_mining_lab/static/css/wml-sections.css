@@ -34,7 +34,7 @@
 /* Base Editorial Container */
 .wml-editorial {
     --paper: var(--wml-c-paper);
-    --section-gap: clamp(4rem, 8vw, 7.5rem);
+    --section-gap: clamp(2.5rem, 4vw, 4rem);
     color: var(--wml-c-ink);
     background-color: var(--paper);
     padding-block: clamp(2.5rem, 5vw, 4.5rem) var(--section-gap);
@@ -75,10 +75,10 @@
 }
 
 .wml-editorial h1 {
-    font-size: clamp(2.2rem, 4.2vw, 3.8rem);
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
+    font-size: clamp(2rem, 3.8vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.25rem;
     text-wrap: balance;
 }
 
@@ -92,16 +92,16 @@
 }
 
 .wml-editorial h2 {
-    font-size: clamp(2rem, 3.5vw, 3.2rem);
-    line-height: 1.15;
-    letter-spacing: -0.025em;
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .wml-editorial h3 {
-    font-size: clamp(1.4rem, 2.2vw, 2.1rem);
-    line-height: 1.25;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    line-height: 1.3;
     letter-spacing: -0.015em;
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.75rem;
 }
 
 .wml-editorial h4 {
@@ -116,6 +116,7 @@
 }
 
 .wml-editorial p {
+    font-size: clamp(0.96rem, 1.05vw, 1.05rem);
     max-width: 68ch;
     line-height: 1.7;
     margin-bottom: 1.25rem;
@@ -126,9 +127,9 @@
 }
 
 .wml-editorial .lead {
-    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+    font-size: clamp(1.08rem, 1.3vw, 1.25rem);
     line-height: 1.6;
-    max-width: 52ch;
+    max-width: 60ch;
     color: var(--wml-c-muted);
 }
 
@@ -136,10 +137,10 @@
 .wml-editorial .small-label,
 .wml-editorial .index-line {
     font-family: var(--wml-font-mono);
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     color: var(--wml-c-muted);
 }
 
@@ -224,7 +225,7 @@
 
 /* Section Structural Rules */
 .wml-editorial .editorial-intro {
-    margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+    margin-bottom: clamp(2.5rem, 4vw, 3.8rem);
     position: relative;
 }
 
@@ -547,7 +548,7 @@
 
 .wml-editorial .publication-year > h2 {
     font-family: var(--wml-font-serif);
-    font-size: 3.2rem;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
     line-height: 1;
     font-variant-numeric: tabular-nums;
     color: var(--wml-c-forest);
@@ -588,7 +589,7 @@
 }
 
 .wml-editorial .publication-record h3 {
-    font-size: clamp(1.35rem, 2vw, 1.85rem);
+    font-size: clamp(1.2rem, 1.8vw, 1.55rem);
     line-height: 1.25;
     margin-bottom: 0.75rem;
     color: var(--wml-c-forest-deep);
@@ -677,12 +678,13 @@
 }
 
 .wml-editorial .research-intro h1 {
-    max-width: 14ch;
+    max-width: 24ch;
+    text-wrap: balance;
     margin: 0;
 }
 
 .wml-editorial .research-art {
-    margin-block: 2.5rem 4rem;
+    margin-block: 2.5rem 3.5rem;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--wml-c-line);
@@ -690,7 +692,7 @@
 
 .wml-editorial .research-art img {
     width: 100%;
-    height: clamp(16rem, 30vw, 28rem);
+    height: clamp(16rem, 28vw, 24rem);
     object-fit: cover;
     transition: transform 600ms var(--wml-ease-out);
 }
@@ -822,8 +824,8 @@
 }
 
 .wml-editorial .project-title {
-    font-size: clamp(1.6rem, 2.4vw, 2.3rem);
-    line-height: 1.2;
+    font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+    line-height: 1.25;
     margin-bottom: 0.85rem;
 }
 
@@ -866,6 +868,7 @@
 
 .wml-editorial .project-detail-hero img {
     width: 100%;
+    max-height: 26rem;
     height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
@@ -895,6 +898,7 @@
 
 .wml-editorial .editorial-image img {
     width: 100%;
+    max-height: 26rem;
     height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
@@ -979,7 +983,8 @@
    Visual References: Stadler Lab Directory + Interactive Portrait Accordion
    ========================================================================== */
 .wml-editorial .team-intro h1 {
-    max-width: 16ch;
+    max-width: 24ch;
+    text-wrap: balance;
 }
 
 .wml-editorial .section-sub-copy {
@@ -1742,6 +1747,11 @@
     margin-bottom: 1rem;
 }
 
+.wml-editorial .directory-note-box p {
+    max-width: 52ch;
+    text-wrap: pretty;
+}
+
 .wml-editorial .directory-note-actions {
     display: flex;
     flex-wrap: wrap;
@@ -2011,7 +2021,8 @@
 }
 
 .wml-editorial .activity-intro h1 {
-    max-width: 14ch;
+    max-width: 24ch;
+    text-wrap: balance;
     margin-bottom: 0;
 }
 
@@ -2153,64 +2164,33 @@
 }
 
 /* ==========================================================================
-   PAGE 5 — WASTE MONITORING (HYBRID EDITORIAL + DASHBOARD)
+   PAGE 5 — WASTE MONITORING (COMPACT RESEARCH DASHBOARD)
    ========================================================================== */
-.wml-editorial .monitoring-intro {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: 5rem;
-    align-items: flex-end;
+.wml-editorial .monitoring-compact-intro {
+    margin-bottom: 2rem;
 }
 
-.wml-editorial .monitoring-intro h1 {
-    max-width: 14ch;
+.wml-editorial .monitoring-compact-intro h1 {
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    color: var(--wml-c-forest-deep);
 }
 
-.wml-editorial .monitoring-thesis {
-    background: var(--wml-c-paper-warm);
-    border: 1px solid var(--wml-c-forest);
-    border-radius: 12px;
-    padding: 2rem 2.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.wml-editorial .monitoring-thesis > p {
-    font-family: var(--wml-font-serif);
-    font-size: clamp(1.6rem, 2.4vw, 2.3rem);
-    line-height: 1.4;
-    color: var(--wml-c-forest);
-    margin-block: 1.2rem;
-}
-
-.wml-editorial .monitoring-thesis > span:last-child {
-    font-family: var(--wml-font-mono);
+.wml-editorial .monitoring-compact-intro .lead {
+    max-width: 64ch;
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    line-height: 1.6;
     color: var(--wml-c-muted);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
 }
 
-.wml-editorial .monitoring-overview,
-.wml-editorial .monitoring-methods {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 4.5rem;
-}
-
-.wml-editorial .monitoring-overview {
-    margin-block: 4.5rem;
-}
-
-.wml-editorial .monitoring-overview h2 {
-    max-width: 18ch;
-}
-
-/* Hybrid Scientific Dashboard Section */
+/* Scientific Dashboard Container */
 .wml-editorial .monitoring-platform {
     background: var(--wml-c-forest-darkest);
     border: 1px solid #1c3629;
-    box-shadow: var(--wml-shadow-dark);
-    margin-top: 4rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(8, 24, 18, 0.12);
+    margin-top: 1.5rem;
     position: relative;
     overflow: hidden;
 }
@@ -2221,34 +2201,40 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding: 2.2rem 2.5rem;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding: 1.4rem 1.8rem;
     border-bottom: 1px solid #234837;
 }
 
 .wml-editorial .platform-header h2 {
     color: #ffffff;
-    font-size: 2.2rem;
-    margin-bottom: 0.25rem;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    margin: 0;
+    line-height: 1.2;
+    text-wrap: balance;
 }
 
-.wml-editorial .platform-header .small-label {
-    color: var(--wml-c-accent-bright);
-    margin-bottom: 0.4rem;
+.wml-editorial .platform-subtitle {
+    font-family: var(--wml-font-sans);
+    font-size: 0.82rem;
+    color: #9eb8a9;
+    margin: 0.25rem 0 0;
 }
 
 .wml-editorial .data-status {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.55rem;
     border: 1px solid #37644e;
     background: rgba(16, 44, 34, 0.85);
     color: var(--wml-c-accent-bright);
-    padding: 0.6rem 1.1rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 4px;
     font-family: var(--wml-font-mono);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 
@@ -2258,15 +2244,17 @@
     height: 8px;
     border-radius: 50%;
     background: var(--wml-c-amber);
+    flex-shrink: 0;
 }
 
 .wml-editorial .platform-notice {
     max-width: none;
-    padding: 1.2rem 2.5rem;
-    background: rgba(28, 80, 56, 0.25);
+    padding: 0.85rem 1.8rem;
+    background: rgba(28, 80, 56, 0.22);
     border-bottom: 1px solid #1c3629;
     font-family: var(--wml-font-sans);
-    font-size: 0.92rem;
+    font-size: 0.86rem;
+    line-height: 1.5;
     color: #b8d2c2;
     margin: 0;
 }
@@ -2279,7 +2267,7 @@
 }
 
 .wml-editorial .monitor-panel {
-    padding: 2rem;
+    padding: 1.35rem 1.6rem;
     background: #0d1e16;
     color: #d8e8dd;
     min-width: 0;
@@ -2288,18 +2276,25 @@
 
 .wml-editorial .monitor-panel h3 {
     font-family: var(--wml-font-mono);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     color: #ffffff;
-    margin-bottom: 1.2rem;
+    margin: 0;
 }
 
 .wml-editorial .monitor-panel p {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: #a4beae;
-    line-height: 1.6;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+}
+
+.wml-editorial .monitor-panel p.muted {
+    font-size: 0.8rem;
+    color: #729683;
+    margin-bottom: 0;
 }
 
 .wml-editorial .location-panel {
@@ -2323,65 +2318,57 @@
     justify-content: space-between;
     gap: 0.5rem;
     border-bottom: 1px solid #1c3629;
-    padding-bottom: 0.8rem;
-    margin-bottom: 1.2rem;
+    padding-bottom: 0.65rem;
+    margin-bottom: 0.9rem;
 }
 
 .wml-editorial .panel-heading .small-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: var(--wml-c-accent-leaf);
 }
 
 .wml-editorial .panel-empty {
-    min-height: 17rem;
+    min-height: 7rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: rgba(10, 24, 18, 0.6);
-    border: 1px dashed #244b38;
-    padding: 2rem;
-    margin-block: 1rem;
+    background: transparent;
+    border: none;
+    padding: 0.85rem 0.5rem;
+    margin-block: 0.5rem;
     position: relative;
 }
 
 .wml-editorial .panel-empty svg {
     color: var(--wml-c-accent-leaf);
-    margin-bottom: 1.5rem;
-    opacity: 0.75;
+    margin-bottom: 0.65rem;
+    opacity: 0.8;
 }
 
 .wml-editorial .panel-empty h4 {
     font-family: var(--wml-font-sans);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .wml-editorial .panel-empty p {
     max-width: 32ch;
     margin: 0;
     color: #8faea0;
-    font-size: 0.88rem;
-}
-
-.wml-editorial .data-dash {
-    font-family: var(--wml-font-serif);
-    font-size: 4rem;
-    line-height: 1;
-    color: var(--wml-c-accent-leaf);
-    margin-bottom: 0.8rem;
-    opacity: 0.8;
+    font-size: 0.82rem;
+    line-height: 1.45;
 }
 
 .wml-editorial .panel-footnote {
     font-family: var(--wml-font-sans);
-    font-size: 0.8rem;
-    line-height: 1.5;
-    color: #8daea0;
-    padding-top: 0.8rem;
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: #7a9c8b;
+    padding-top: 0.5rem;
     margin: 0;
     text-transform: none;
     letter-spacing: normal;
@@ -2390,15 +2377,15 @@
 .wml-editorial .dataset-details {
     margin: 0;
     font-family: var(--wml-font-mono);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
 }
 
 .wml-editorial .dataset-details > div {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem 1rem;
+    gap: 0.35rem 0.75rem;
     justify-content: space-between;
-    padding-block: 0.75rem;
+    padding-block: 0.55rem;
     border-bottom: 1px solid #1c3629;
 }
 
@@ -2412,31 +2399,99 @@
     font-weight: 600;
 }
 
-/* Methods Section */
-.wml-editorial .method-list > div {
-    padding-block: 1.2rem;
-    border-bottom: 1px solid var(--wml-c-line);
+.wml-editorial .monitoring-methodology-note {
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--wml-c-accent-leaf);
+    background: #11231a;
+    color: #cde0d5;
+    font-size: 0.92rem;
+    line-height: 1.6;
 }
 
-.wml-editorial .method-list dt {
-    font-family: var(--wml-font-sans);
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--wml-c-forest);
-    margin-bottom: 0.4rem;
+.wml-editorial .monitoring-connected-records {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1c3629;
 }
 
-.wml-editorial .method-list dd {
+.wml-editorial .connected-records-block .small-label {
+    display: block;
+    margin-bottom: 0.65rem;
+    color: var(--wml-c-accent-leaf);
+}
+
+.wml-editorial .connected-records-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
-    color: var(--wml-c-muted);
-    font-size: 0.96rem;
-    line-height: 1.65;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
 }
 
-.wml-editorial .monitoring-related-links {
-    margin-top: 3.5rem;
-    padding-top: 1.8rem;
+.wml-editorial .connected-record-link {
+    color: #d1e5d9;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-size: 0.92rem;
+    transition: color 150ms ease;
+}
+
+.wml-editorial .connected-record-link:hover {
+    color: #ffffff;
+}
+
+.wml-editorial .monitoring-supporting-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--wml-c-line);
+}
+
+@media (max-width: 960px) {
+    .wml-editorial .monitoring-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .wml-editorial .location-panel {
+        grid-column: span 1;
+    }
+    .wml-editorial .timeseries-panel {
+        grid-column: span 2;
+    }
+    .wml-editorial .dataset-panel,
+    .wml-editorial .summary-panel {
+        grid-column: span 1;
+    }
+    .wml-editorial .category-panel {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .wml-editorial .monitoring-grid {
+        grid-template-columns: 1fr;
+    }
+    .wml-editorial .location-panel,
+    .wml-editorial .timeseries-panel,
+    .wml-editorial .dataset-panel,
+    .wml-editorial .summary-panel,
+    .wml-editorial .category-panel {
+        grid-column: span 1;
+    }
+    .wml-editorial .platform-header {
+        padding: 1.15rem 1.25rem;
+    }
+    .wml-editorial .monitor-panel {
+        padding: 1.15rem 1.25rem;
+    }
 }
 
 /* ==========================================================================
@@ -2461,7 +2516,7 @@
 }
 
 .wml-editorial .news-masthead h1 {
-    font-size: clamp(3rem, 7vw, 6.2rem);
+    font-size: clamp(2rem, 3.8vw, 3.5rem);
 }
 
 /* Featured Lead Story */
@@ -2618,14 +2673,14 @@
 }
 
 .wml-editorial .article-header h1 {
-    font-size: clamp(2.6rem, 5.2vw, 4.8rem);
-    line-height: 1.08;
+    font-size: clamp(2rem, 3.8vw, 3.4rem);
+    line-height: 1.15;
     margin-bottom: 1.5rem;
 }
 
 .wml-editorial .article-header .lead {
-    max-width: 58ch;
-    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+    max-width: 60ch;
+    font-size: clamp(1.08rem, 1.3vw, 1.25rem);
 }
 
 .wml-editorial .article-cover {
@@ -2670,7 +2725,8 @@
    PAGE 7 — CONTACT
    ========================================================================== */
 .wml-editorial .contact-intro h1 {
-    max-width: 15ch;
+    max-width: 24ch;
+    text-wrap: balance;
 }
 
 .wml-editorial .contact-layout {
@@ -2884,7 +2940,7 @@
 }
 
 .wml-editorial .grant-category-header h3 {
-    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
     color: var(--wml-c-forest-deep);
     margin-bottom: 0.4rem;
 }

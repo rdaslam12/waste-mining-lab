@@ -1,88 +1,135 @@
 {% extends "home/pages/base_section.html" %}
 {% load static wagtailcore_tags %}
+
 {% block section_content %}
-<header class="editorial-intro monitoring-intro">
-    <div>
-        <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Waste Mining Lab</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span class="current">Data &amp; Environmental Monitoring</span>
-        </nav>
-        <h1>{{ page.heading|default:"Understanding waste through data." }}</h1>
-        <p class="lead">{{ page.intro|default:"A clearer view of waste begins with careful observation. Explore the role of environmental monitoring in understanding materials, places and change over time." }}</p>
-        <a class="editorial-link" href="#monitoring-platform">Explore the monitoring portal{% include "home/includes/link_arrow.html" %}</a>
-    </div>
-    <aside class="monitoring-thesis">
-        <span class="small-label">The research perspective</span>
-        <p>Observe carefully.<br>Understand context.<br>Build evidence.</p>
-        <span>Environmental research<br>Waste Mining Lab</span>
-    </aside>
+{# SECTION 1 — COMPACT PAGE HEADER #}
+<header class="editorial-intro monitoring-compact-intro">
+    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Waste Mining Lab</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">Waste Monitoring</span>
+    </nav>
+    <h1>Waste Monitoring</h1>
+    <p class="lead">{{ page.intro|default:"Observational environmental datasets and monitoring infrastructure supporting waste dynamics and resource recovery research." }}</p>
 </header>
 
-{% if page.feature_image %}
-    {% include "home/includes/editorial_image.html" %}
-{% else %}
-    <figure class="editorial-image">
-        <img src="{% static 'images/photography/environmental-water-sampling.webp' %}"
-             width="1600"
-             height="1067"
-             alt="Environmental surface water sampling and ecological monitoring"
-             class="sample-photo"
-             loading="lazy"
-             decoding="async">
-        <figcaption>Environmental surface water sampling and ecological monitoring · Illustrative field methodology</figcaption>
-    </figure>
-{% endif %}
-<section class="monitoring-overview" aria-labelledby="monitoring-overview-title"><h2 id="monitoring-overview-title">Making observations meaningful.</h2><div class="reading-copy">{% if page.body %}{{ page.body|richtext }}{% else %}<p>Monitoring can help connect what is observed in the environment with questions about how waste is managed and resources are used.</p><p>This portal is a place for verified datasets, their context and the methods behind them. Sources and limitations belong alongside the observations, so that evidence can be interpreted with care.</p>{% endif %}</div></section>
+{# SECTION 2 — MONITORING DASHBOARD #}
 <section class="monitoring-platform" id="monitoring-platform" aria-labelledby="platform-title">
-    <header class="platform-header"><div><h2 id="platform-title">Monitoring portal</h2></div><span class="data-status">Data source not connected</span></header>
-    <p class="platform-notice">No verified dataset is connected. Measurements, locations and visualizations will appear when data is available.</p>
+    <header class="platform-header">
+        <div>
+            <h2 id="platform-title">Environmental Monitoring Portal</h2>
+            <p class="platform-subtitle">Observational Data &amp; Field Station Measurements</p>
+        </div>
+        <span class="data-status">Data source not connected</span>
+    </header>
+
+    <p class="platform-notice">No verified dataset is currently connected. Measurements, sampling coordinates, and time-series visualizations will appear here as field station data streams are validated.</p>
+
     <div class="monitoring-grid">
         <section class="monitor-panel location-panel" aria-labelledby="locations-title">
             <div class="panel-heading">
-                <h3 id="locations-title">Monitoring locations</h3>
-                <span class="small-label">Sampling Sites</span>
+                <h3 id="locations-title">Monitoring Locations</h3>
+                <span class="small-label">Field Stations</span>
             </div>
             <div class="panel-empty">
-                <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true" style="margin-bottom: 1rem;">
-                    <circle cx="36" cy="36" r="32" stroke="#244b38" stroke-width="1" stroke-dasharray="3 3"/>
-                    <circle cx="36" cy="36" r="20" stroke="#34d399" stroke-width="1" stroke-opacity="0.4"/>
-                    <circle cx="36" cy="36" r="8" stroke="#34d399" stroke-width="1.5"/>
-                    <line x1="36" y1="2" x2="36" y2="70" stroke="#244b38" stroke-width="0.75"/>
-                    <line x1="2" y1="36" x2="70" y2="36" stroke="#244b38" stroke-width="0.75"/>
-                    <circle cx="36" cy="36" r="3" fill="#34d399"/>
+                <svg width="44" height="44" viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                    <circle cx="36" cy="36" r="32" stroke="#244b38" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <circle cx="36" cy="36" r="18" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.5"/>
+                    <circle cx="36" cy="36" r="6" stroke="#34d399" stroke-width="1.5"/>
+                    <line x1="36" y1="4" x2="36" y2="68" stroke="#244b38" stroke-width="1"/>
+                    <line x1="4" y1="36" x2="68" y2="36" stroke="#244b38" stroke-width="1"/>
                 </svg>
                 <h4>No locations published</h4>
-                <p>Geographic locations and sampling coordinates will be published alongside verified monitoring studies.</p>
+                <p>Geographic sampling coordinates and station markers will appear upon dataset connection.</p>
             </div>
-            <p class="panel-footnote">Spatial coordinate mapping will be enabled upon validation of field monitoring stations.</p>
+            <p class="panel-footnote">Spatial coordinates require institutional validation prior to public release.</p>
         </section>
+
         <section class="monitor-panel timeseries-panel" aria-labelledby="series-title">
             <div class="panel-heading">
-                <h3 id="series-title">Observations over time</h3>
-                <span class="small-label">Time-Series Observation</span>
+                <h3 id="series-title">Observations Over Time</h3>
+                <span class="small-label">Temporal Trends</span>
             </div>
             <div class="panel-empty">
-                <svg width="100%" height="80" viewBox="0 0 400 80" fill="none" aria-hidden="true" style="max-width: 22rem; margin-bottom: 0.8rem; opacity: 0.5;">
-                    <line x1="0" y1="40" x2="400" y2="40" stroke="#244b38" stroke-width="1"/>
-                    <line x1="0" y1="15" x2="400" y2="15" stroke="#1c3629" stroke-dasharray="2 4"/>
-                    <line x1="0" y1="65" x2="400" y2="65" stroke="#1c3629" stroke-dasharray="2 4"/>
-                    <path d="M0 40 H120 Q140 10 160 40 T200 40 H400" stroke="#34d399" stroke-width="1.2" fill="none" opacity="0.6"/>
+                <svg width="100%" height="44" viewBox="0 0 400 48" fill="none" aria-hidden="true" style="max-width: 18rem; opacity: 0.6;">
+                    <line x1="0" y1="24" x2="400" y2="24" stroke="#244b38" stroke-width="1"/>
+                    <line x1="0" y1="8" x2="400" y2="8" stroke="#1c3629" stroke-dasharray="2 4"/>
+                    <line x1="0" y1="40" x2="400" y2="40" stroke="#1c3629" stroke-dasharray="2 4"/>
+                    <path d="M0 24 H120 Q140 6 160 24 T200 24 H400" stroke="#34d399" stroke-width="1.2" fill="none" opacity="0.6"/>
                 </svg>
-                <span class="data-dash" aria-hidden="true" style="display:none;">—</span>
                 <h4>Visualization awaiting verified dataset</h4>
-                <p>No measurements or trends are displayed until laboratory assays and automated streams are validated.</p>
+                <p>Time-series observations and parameter trends will render when laboratory feeds are connected.</p>
             </div>
-            <p class="panel-footnote">Temporal observation protocols: quality assurance and peer validation required prior to public release.</p>
+            <p class="panel-footnote">Temporal protocols: QA/QC procedures applied before stream publishing.</p>
         </section>
-        <section class="monitor-panel dataset-panel" aria-labelledby="dataset-title"><h3 id="dataset-title">Dataset information</h3><dl class="dataset-details"><div><dt>Source</dt><dd>Not connected</dd></div><div><dt>Last updated</dt><dd>Not available</dd></div><div><dt>Collection status</dt><dd>Not configured</dd></div><div><dt>Data access</dt><dd>No dataset published</dd></div></dl></section>
-        <section class="monitor-panel summary-panel" aria-labelledby="summary-title"><h3 id="summary-title">Data summary</h3><p>Monitoring data will appear here.</p><p class="muted">Summary measures will include their units, coverage and source once verified observations are available.</p></section>
-        <section class="monitor-panel category-panel" aria-labelledby="category-title"><h3 id="category-title">Monitoring categories</h3><p>Categories will be defined by the connected dataset.</p><p class="muted">No monitoring categories are configured.</p></section>
+
+        <section class="monitor-panel dataset-panel" aria-labelledby="dataset-title">
+            <div class="panel-heading">
+                <h3 id="dataset-title">Dataset Information</h3>
+                <span class="small-label">Metadata</span>
+            </div>
+            <dl class="dataset-details">
+                <div><dt>Source</dt><dd>Not connected</dd></div>
+                <div><dt>Last updated</dt><dd>Not available</dd></div>
+                <div><dt>Collection status</dt><dd>Inactive</dd></div>
+                <div><dt>Access level</dt><dd>Public (upon release)</dd></div>
+            </dl>
+        </section>
+
+        <section class="monitor-panel summary-panel" aria-labelledby="summary-title">
+            <div class="panel-heading">
+                <h3 id="summary-title">Data Summary</h3>
+                <span class="small-label">Metrics</span>
+            </div>
+            <p>Summary statistics and aggregate parameter values will populate once observation datasets are published.</p>
+            <p class="muted">Units, parameters, and measurement intervals will be documented per study.</p>
+        </section>
+
+        <section class="monitor-panel category-panel" aria-labelledby="category-title">
+            <div class="panel-heading">
+                <h3 id="category-title">Monitoring Categories</h3>
+                <span class="small-label">Parameters</span>
+            </div>
+            <p>Monitored parameters (e.g. heavy metals, water quality, effluent COD/BOD) will be defined by the connected study.</p>
+            <p class="muted">No categories currently configured.</p>
+        </section>
     </div>
+
+    {% if page.methodology %}
+    <div class="monitoring-methodology-note">
+        {{ page.methodology|richtext }}
+    </div>
+    {% endif %}
+
+    {% if projects or related_publications %}
+    <div class="monitoring-connected-records">
+        {% if projects %}
+        <div class="connected-records-block">
+            <span class="small-label">Connected Research Projects</span>
+            <ul class="connected-records-list">
+                {% for project in projects %}
+                <li><a href="/research/#project-{{ project.pk }}" class="connected-record-link">{{ project.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if related_publications %}
+        <div class="connected-records-block">
+            <span class="small-label">Related Publications</span>
+            <ul class="connected-records-list">
+                {% for pub in related_publications %}
+                <li><a href="/publications/?q={{ pub.title|urlencode }}#publication-{{ pub.pk }}" class="connected-record-link">{{ pub.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
 </section>
-<section class="monitoring-methods section-space" aria-labelledby="methods-title"><div><h2 id="methods-title">Methods &amp; context</h2></div><div class="reading-copy">{% if page.methodology %}{{ page.methodology|richtext }}{% else %}<p>Measurement methods, equipment and collection procedures will be documented alongside the datasets they support.</p><dl class="method-list"><div><dt>Collection</dt><dd>Sampling locations, timing and procedures to be documented.</dd></div><div><dt>Measurement</dt><dd>Instruments, units and quality checks to be documented.</dd></div><div><dt>Interpretation</dt><dd>Analysis methods, coverage and limitations to be documented.</dd></div></dl>{% endif %}</div></section>
-{% if projects %}<section class="section-space" aria-labelledby="monitoring-research"><h2 id="monitoring-research">Connected research</h2>{% for project in projects %}{% include "home/includes/project_feature.html" %}{% endfor %}</section>{% endif %}
-{% if related_publications %}<section class="section-space" aria-labelledby="monitoring-publications"><h2 id="monitoring-publications">Related publications</h2>{% for publication in related_publications %}{% include "home/includes/publication_record.html" %}{% endfor %}</section>{% endif %}
-<div class="text-links monitoring-related-links"><a href="/research/">Explore our research{% include "home/includes/link_arrow.html" %}</a><a href="/publications/">Browse publications{% include "home/includes/link_arrow.html" %}</a></div>
-{% include "home/includes/editorial_cta.html" with cta_title="A conversation about environmental data." %}
+
+{# SECTION 3 — MINIMAL SUPPORTING NAVIGATION #}
+<nav class="monitoring-supporting-nav" aria-label="Related exploration">
+    <a class="editorial-link" href="/research/">Explore Research Projects{% include "home/includes/link_arrow.html" %}</a>
+    <a class="editorial-link" href="/publications/">Browse Publications{% include "home/includes/link_arrow.html" %}</a>
+</nav>
 {% endblock %}
