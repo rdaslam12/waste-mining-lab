@@ -386,7 +386,7 @@ class SecondaryPageTests(TestCase):
             with self.subTest(path=path):
                 response = self.client.get(path)
                 self.assertEqual(response.status_code, 200)
-                self.assertContains(response, 'href="/contact/" class="site-footer__btn">Connect the lab</a>')
+                self.assertContains(response, 'href="/contact/" class="site-footer__btn">Contact the Lab</a>')
                 self.assertNotContains(response, "Research starts with a conversation.")
                 self.assertNotContains(response, "Ideas travel further together.")
                 self.assertNotContains(response, "Partner with our research.")

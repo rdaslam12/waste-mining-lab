@@ -31,6 +31,20 @@
     --wml-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+/* Accessible Utility */
+.visually-hidden,
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
 /* Base Editorial Container */
 .wml-editorial {
     --paper: var(--wml-c-paper);
@@ -538,22 +552,22 @@
 
 /* Publication Index & Records */
 .wml-editorial .publication-year {
-    display: grid;
-    grid-template-columns: 8.5rem minmax(0, 1fr);
-    gap: 3rem;
-    border-top: 1px solid var(--wml-c-forest);
-    padding-top: 2.5rem;
-    margin-top: 3.5rem;
+    display: block;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 2rem;
 }
 
 .wml-editorial .publication-year > h2 {
     font-family: var(--wml-font-serif);
-    font-size: clamp(2rem, 3.5vw, 2.75rem);
-    line-height: 1;
+    font-size: 1.65rem;
+    line-height: 1.25;
     font-variant-numeric: tabular-nums;
-    color: var(--wml-c-forest);
-    position: sticky;
-    top: 7rem;
+    color: var(--wml-c-forest-deep);
+    margin: 0 0 1rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--wml-c-line);
+    position: static;
 }
 
 .wml-editorial .publication-record {
@@ -2402,7 +2416,8 @@
 .wml-editorial .monitoring-methodology-note {
     margin-top: 2rem;
     padding: 1.25rem 1.5rem;
-    border-left: 3px solid var(--wml-c-accent-leaf);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    border-radius: 4px;
     background: #11231a;
     color: #cde0d5;
     font-size: 0.92rem;
@@ -3554,65 +3569,88 @@
 .wml-editorial .publication-list {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0;
 }
 .wml-editorial .publication-record {
-    padding: 0.95rem 1.2rem;
-    margin-bottom: 0.65rem;
-    border: 1px solid rgba(28, 80, 56, 0.08);
+    padding: 1.2rem 1.25rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--wml-c-line-subtle);
     border-radius: 6px;
-    background: #ffffff;
-    transition: background-color 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    background: transparent;
+    transition: background-color 220ms var(--wml-ease-out);
 }
 .wml-editorial .publication-record:hover {
-    background: #fbfdfb;
-    border-color: rgba(28, 80, 56, 0.25);
-    box-shadow: 0 4px 14px rgba(16, 44, 34, 0.05);
+    background: rgba(226, 236, 225, 0.35);
 }
 .wml-editorial .publication-record .record-venue {
-    font-size: 0.8rem;
+    font-family: var(--wml-font-sans);
+    font-size: 0.76rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--wml-c-forest, #1c5038);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.35rem;
 }
 .wml-editorial .publication-record .publication-title {
-    font-size: clamp(1.02rem, 1.3vw, 1.18rem);
-    font-weight: 600;
+    font-family: var(--wml-font-serif);
+    font-size: clamp(1.12rem, 1.4vw, 1.28rem);
+    font-weight: 500;
     line-height: 1.35;
+    letter-spacing: -0.01em;
     margin: 0 0 0.35rem;
     color: var(--wml-c-forest-deep, #102c22);
 }
 .wml-editorial .publication-record .publication-title a {
     color: inherit;
     text-decoration: none;
-    transition: color 180ms ease;
+    transition: color 180ms ease, text-decoration-color 180ms ease;
 }
 .wml-editorial .publication-record .publication-title a:hover {
     color: var(--wml-c-forest, #1c5038);
     text-decoration: underline;
     text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
 }
 .wml-editorial .publication-record .publication-authors {
-    font-size: 0.88rem;
-    line-height: 1.5;
+    font-family: var(--wml-font-sans);
+    font-size: 0.9rem;
+    line-height: 1.55;
     color: var(--wml-c-muted, #4a5c53);
-    margin: 0 0 0.45rem;
+    margin: 0 0 0.5rem;
 }
 .wml-editorial .publication-actions-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.65rem;
-    margin-top: 0.4rem;
+    gap: 0.55rem;
+    margin-top: 0.5rem;
     font-size: 0.82rem;
+    line-height: 1.5;
+}
+.wml-editorial .publication-actions-row .abstract-disclosure,
+.wml-editorial .publication-actions-row .bibtex-disclosure {
+    display: inline-block !important;
+    width: auto !important;
+    vertical-align: middle !important;
+    margin: 0;
+}
+.wml-editorial .publication-actions-row .abstract-disclosure[open],
+.wml-editorial .publication-actions-row .bibtex-disclosure[open] {
+    display: block !important;
+    width: 100% !important;
+    flex-basis: 100%;
+    margin-top: 0.5rem;
 }
 .wml-editorial .publication-actions-row .actions-sep {
-    color: #9cb1a5;
+    display: inline-block;
+    color: var(--wml-c-line);
+    font-weight: 300;
     user-select: none;
+    margin: 0 0.15rem;
 }
 .wml-editorial .publication-actions-row details summary {
+    display: inline-block !important;
+    width: auto !important;
     cursor: pointer;
     list-style: none;
     font-family: var(--wml-font-sans);
@@ -3621,33 +3659,34 @@
     color: var(--wml-c-forest, #1c5038);
     text-decoration: underline;
     text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
     transition: color 180ms ease;
+    user-select: none;
 }
 .wml-editorial .publication-actions-row details summary::-webkit-details-marker {
     display: none;
 }
 .wml-editorial .publication-actions-row details summary:hover {
-    color: #0d281a;
-}
-.wml-editorial .publication-actions-row details[open] {
-    width: 100%;
+    color: var(--wml-c-forest-deep, #102c22);
 }
 .wml-editorial .publication-actions-row .abstract-content {
     width: 100%;
     margin-top: 0.6rem;
-    padding: 0.85rem 1.15rem;
-    background: #f6f8f6;
-    border-left: 3px solid var(--wml-c-forest, #1c5038);
+    padding: 1rem 1.35rem;
+    background: var(--wml-c-sage-light, #edf4ec);
+    border: 1px solid var(--wml-c-line, #cddbd0);
     border-radius: 4px;
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: #22322a;
+    font-size: 0.9rem;
+    line-height: 1.68;
+    color: var(--wml-c-ink, #202c27);
+    max-width: 82ch;
 }
 .wml-editorial .publication-actions-row .bibtex-container {
     width: 100%;
     margin-top: 0.6rem;
-    padding: 0.85rem 1.15rem;
+    padding: 1rem 1.25rem;
     background: #17241e;
+    border: 1px solid rgba(205, 219, 208, 0.2);
     border-radius: 6px;
     color: #e2ece1;
 }
@@ -3666,62 +3705,67 @@
 
 /* Research Page: Hero image, Areas list & Horizontal slider */
 .wml-editorial .research-hero-image {
-    margin: 0 0 2rem;
-    border-radius: 8px;
+    margin: 0 0 2.2rem;
+    border-radius: 6px;
     overflow: hidden;
 }
 .wml-editorial .research-hero-image img {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 440px;
+    max-height: 460px;
     object-fit: cover;
 }
 .wml-editorial .research-hero-image figcaption {
+    font-family: var(--wml-font-sans);
     font-size: 0.82rem;
     color: var(--wml-c-muted, #55665e);
-    margin-top: 0.4rem;
-    font-style: italic;
+    margin-top: 0.5rem;
+    font-style: normal;
 }
 .wml-editorial .research-areas-list {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-    margin-bottom: 3rem;
+    gap: 0;
+    margin-bottom: 3.25rem;
 }
 .wml-editorial .research-area-item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1.75rem;
-    align-items: center;
-    padding: 1.15rem 1.4rem;
-    background: #ffffff;
-    border: 1px solid var(--wml-c-line, #e2ece1);
-    border-radius: 8px;
+    gap: 2.25rem;
+    align-items: start;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--wml-c-line-subtle);
+    background: transparent;
+    border-radius: 0;
 }
 .wml-editorial .research-area-body h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 0 0.35rem;
+    font-family: var(--wml-font-serif);
+    font-size: clamp(1.25rem, 1.6vw, 1.45rem);
+    font-weight: 500;
+    line-height: 1.28;
+    margin: 0 0 0.5rem;
     color: var(--wml-c-forest-deep, #102c22);
 }
 .wml-editorial .research-area-body p {
-    font-size: 0.92rem;
-    line-height: 1.55;
+    font-family: var(--wml-font-sans);
+    font-size: 0.94rem;
+    line-height: 1.65;
     color: var(--wml-c-muted, #4a5c53);
+    max-width: 65ch;
     margin: 0;
 }
 .wml-editorial .research-area-media img {
     display: block;
-    width: 160px;
-    height: 110px;
+    width: 190px;
+    height: 125px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 @media (max-width: 640px) {
     .wml-editorial .research-area-item {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.15rem;
     }
     .wml-editorial .research-area-media img {
         width: 100%;
@@ -3734,25 +3778,27 @@
 }
 .wml-editorial .projects-slider {
     display: flex;
-    gap: 1.2rem;
+    gap: 1.25rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 0.85rem;
+    padding-bottom: 1rem;
     scrollbar-width: thin;
+    scrollbar-color: var(--wml-c-line) transparent;
 }
 .wml-editorial .project-slide-card {
-    flex: 0 0 300px;
+    flex: 0 0 320px;
     scroll-snap-align: start;
     background: #ffffff;
-    border: 1px solid var(--wml-c-line, #e2ece1);
-    border-radius: 8px;
+    border: 1px solid var(--wml-c-line-subtle);
+    border-radius: 6px;
     overflow: hidden;
-    transition: transform 220ms ease, box-shadow 220ms ease;
+    transition: transform 220ms var(--wml-ease-out), box-shadow 220ms var(--wml-ease-out), border-color 220ms var(--wml-ease-out);
 }
 .wml-editorial .project-slide-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(16, 44, 34, 0.08);
+    border-color: var(--wml-c-line);
+    box-shadow: 0 6px 20px rgba(16, 44, 34, 0.06);
 }
 .wml-editorial .project-slide-card__link {
     display: flex;
@@ -3764,33 +3810,36 @@
 .wml-editorial .project-slide-card__thumb img {
     display: block;
     width: 100%;
-    height: 150px;
+    height: 160px;
     object-fit: cover;
 }
 .wml-editorial .project-slide-card__body {
-    padding: 0.95rem 1.1rem;
+    padding: 1.1rem 1.15rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 .wml-editorial .project-slide-card__area {
+    font-family: var(--wml-font-sans);
     font-size: 0.72rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.07em;
     color: var(--wml-c-forest, #1c5038);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.35rem;
 }
 .wml-editorial .project-slide-card__title {
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: var(--wml-font-serif);
+    font-size: 1.08rem;
+    font-weight: 500;
     line-height: 1.35;
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.45rem;
     color: var(--wml-c-forest-deep, #102c22);
 }
 .wml-editorial .project-slide-card__summary {
-    font-size: 0.85rem;
-    line-height: 1.5;
+    font-family: var(--wml-font-sans);
+    font-size: 0.86rem;
+    line-height: 1.55;
     color: var(--wml-c-muted, #55665e);
     margin: 0;
 }
@@ -3799,27 +3848,30 @@
 .wml-editorial .grants-overview {
     display: flex;
     flex-direction: column;
-    gap: 2.2rem;
+    gap: 2.5rem;
     margin-top: 0.5rem;
 }
 .wml-editorial .grants-compact-list {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
 }
 .wml-editorial .grant-compact-item {
-    padding: 0.95rem 1.2rem;
+    padding: 1.1rem 1.35rem;
     background: #ffffff;
-    border: 1px solid var(--wml-c-line, #e2ece1);
+    border: 1px solid var(--wml-c-line-subtle);
     border-radius: 6px;
-    transition: background-color 200ms ease, border-color 200ms ease;
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 .wml-editorial .grant-compact-item:hover {
-    border-color: rgba(28, 80, 56, 0.3);
+    background: var(--wml-c-paper);
+    border-color: var(--wml-c-line);
+    box-shadow: 0 4px 16px rgba(16, 44, 34, 0.04);
 }
 .wml-editorial .grant-compact-title {
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: var(--wml-font-serif);
+    font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+    font-weight: 500;
     line-height: 1.35;
     margin: 0 0 0.35rem;
     color: var(--wml-c-forest-deep, #102c22);
@@ -3828,22 +3880,33 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
+    font-family: var(--wml-font-sans);
     font-size: 0.84rem;
+    line-height: 1.5;
     color: var(--wml-c-muted, #55665e);
 }
+.wml-editorial .grant-compact-amount {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--wml-c-forest, #1c5038);
+}
 .wml-editorial .grant-compact-meta .meta-dot {
-    color: #9cb1a5;
+    color: var(--wml-c-line);
+}
+.wml-editorial .grant-compact-item--past {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: var(--wml-c-line-subtle);
 }
 .wml-editorial .grant-compact-associated {
-    margin-top: 0.45rem;
-    padding-top: 0.4rem;
-    border-top: 1px dashed var(--wml-c-line, #e2ece1);
+    margin-top: 0.5rem;
+    padding-top: 0.45rem;
+    border-top: 1px dashed var(--wml-c-line);
     font-size: 0.82rem;
 }
 .wml-editorial .grant-compact-associated .associated-label {
     color: var(--wml-c-muted, #55665e);
-    margin-right: 0.3rem;
+    margin-right: 0.35rem;
 }
 .wml-editorial .grant-compact-associated .associated-link {
     color: var(--wml-c-forest, #1c5038);
@@ -3854,8 +3917,8 @@
 
 /* Team Page: Photo, RA section, Other Contributors, Alumni */
 .wml-editorial .team-hero-photo {
-    margin: 0 0 2.2rem;
-    border-radius: 8px;
+    margin: 0 0 2.4rem;
+    border-radius: 6px;
     overflow: hidden;
 }
 .wml-editorial .team-hero-photo img {
@@ -3866,24 +3929,31 @@
     object-fit: cover;
 }
 .wml-editorial .team-hero-caption {
+    font-family: var(--wml-font-sans);
     font-size: 0.82rem;
     color: var(--wml-c-muted, #55665e);
-    margin-top: 0.4rem;
-    font-style: italic;
+    margin-top: 0.5rem;
+    font-style: normal;
 }
 .wml-editorial .ra-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.15rem;
 }
 .wml-editorial .ra-card {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
-    padding: 0.8rem 1rem;
+    gap: 0.9rem;
+    padding: 0.85rem 1.1rem;
     background: #ffffff;
-    border: 1px solid var(--wml-c-line, #e2ece1);
+    border: 1px solid var(--wml-c-line-subtle);
     border-radius: 6px;
+    transition: transform 200ms var(--wml-ease-out), box-shadow 200ms var(--wml-ease-out), border-color 200ms var(--wml-ease-out);
+}
+.wml-editorial .ra-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--wml-c-line);
+    box-shadow: 0 4px 16px rgba(16, 44, 34, 0.05);
 }
 .wml-editorial .ra-avatar {
     width: 48px;
@@ -3891,7 +3961,7 @@
     flex-shrink: 0;
     border-radius: 50%;
     overflow: hidden;
-    background: var(--wml-c-sage-light, #eaf1eb);
+    background: var(--wml-c-sage-light, #edf4ec);
 }
 .wml-editorial .ra-avatar img {
     width: 100%;
@@ -3911,12 +3981,14 @@
     background: var(--wml-c-sage, #e2ece1);
 }
 .wml-editorial .ra-info .ra-name {
+    font-family: var(--wml-font-sans);
     font-size: 0.92rem;
     font-weight: 600;
-    margin: 0 0 0.15rem;
+    margin: 0 0 0.2rem;
     color: var(--wml-c-forest-deep, #102c22);
 }
 .wml-editorial .ra-scholar-link {
+    font-family: var(--wml-font-sans);
     font-size: 0.78rem;
     color: var(--wml-c-forest, #1c5038);
     text-decoration: underline;
@@ -3934,24 +4006,25 @@
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.85rem;
     scrollbar-width: thin;
+    scrollbar-color: var(--wml-c-line) transparent;
 }
 .wml-editorial .contributor-card {
-    flex: 0 0 230px;
+    flex: 0 0 220px;
     scroll-snap-align: start;
     background: #ffffff;
-    border: 1px solid var(--wml-c-line, #e2ece1);
-    border-radius: 8px;
+    border: 1px solid var(--wml-c-line-subtle);
+    border-radius: 6px;
     overflow: hidden;
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition: transform 200ms var(--wml-ease-out), box-shadow 200ms var(--wml-ease-out);
 }
 .wml-editorial .contributor-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(16, 44, 34, 0.08);
+    box-shadow: 0 4px 16px rgba(16, 44, 34, 0.06);
 }
 .wml-editorial .contributor-media {
     width: 100%;
-    height: 190px;
-    background: var(--wml-c-sage-light, #eaf1eb);
+    height: 180px;
+    background: var(--wml-c-sage-light, #edf4ec);
     overflow: hidden;
 }
 .wml-editorial .contributor-media img {
@@ -3960,23 +4033,26 @@
     object-fit: cover;
 }
 .wml-editorial .contributor-media .ra-initials-placeholder {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 .wml-editorial .contributor-body {
-    padding: 0.8rem 0.95rem;
+    padding: 0.85rem 1rem;
 }
 .wml-editorial .contributor-name {
+    font-family: var(--wml-font-sans);
     font-size: 0.92rem;
     font-weight: 600;
     margin: 0 0 0.2rem;
     color: var(--wml-c-forest-deep, #102c22);
 }
 .wml-editorial .contributor-role {
+    font-family: var(--wml-font-sans);
     font-size: 0.8rem;
     color: var(--wml-c-muted, #55665e);
     margin: 0 0 0.3rem;
 }
 .wml-editorial .contributor-bg {
+    font-family: var(--wml-font-sans);
     font-size: 0.75rem;
     color: var(--wml-c-muted, #55665e);
     margin: 0 0 0.5rem;
@@ -3984,12 +4060,25 @@
 .wml-editorial .alumni-toggle-wrap {
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    margin: 2.25rem 0 1.5rem;
 }
 .wml-editorial .alumni-toggle-btn {
-    min-height: 2.5rem;
-    padding: 0.5rem 1.6rem;
+    min-height: 2.6rem;
+    padding: 0.55rem 1.8rem;
+    font-family: var(--wml-font-sans);
     font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--wml-c-forest-deep, #102c22);
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 200ms ease, border-color 200ms ease, transform 180ms ease;
+}
+.wml-editorial .alumni-toggle-btn:hover {
+    background: var(--wml-c-sage-light, #edf4ec);
+    border-color: var(--wml-c-forest);
+    transform: translateY(-1px);
 }
 .wml-editorial .team-alumni-section {
     opacity: 0;
@@ -4010,10 +4099,15 @@
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 0.8rem 1rem;
+    padding: 0.85rem 1rem;
     background: #ffffff;
-    border: 1px solid var(--wml-c-line, #e2ece1);
+    border: 1px solid var(--wml-c-line-subtle);
     border-radius: 6px;
+    transition: transform 180ms ease;
+}
+.wml-editorial .alumni-card:hover {
+    transform: translateY(-1px);
+    border-color: var(--wml-c-line);
 }
 .wml-editorial .alumni-media {
     width: 46px;
@@ -4028,29 +4122,34 @@
     object-fit: cover;
 }
 .wml-editorial .alumni-info h3 {
+    font-family: var(--wml-font-sans);
     font-size: 0.9rem;
     font-weight: 600;
     margin: 0 0 0.15rem;
+    color: var(--wml-c-forest-deep);
 }
 .wml-editorial .alumni-role {
+    font-family: var(--wml-font-sans);
     font-size: 0.78rem;
     color: var(--wml-c-muted, #55665e);
     margin: 0;
 }
 .wml-editorial .alumni-dest {
+    font-family: var(--wml-font-sans);
     font-size: 0.75rem;
     color: var(--wml-c-forest, #1c5038);
     margin: 0.15rem 0 0;
 }
 .wml-editorial .alumni-links {
     display: flex;
-    gap: 0.45rem;
-    margin-top: 0.3rem;
+    gap: 0.5rem;
+    margin-top: 0.35rem;
     font-size: 0.75rem;
 }
 .wml-editorial .alumni-links a {
     color: var(--wml-c-forest, #1c5038);
     text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 /* Reduced Motion Support */
