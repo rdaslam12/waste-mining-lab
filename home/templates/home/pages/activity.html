@@ -1,9 +1,37 @@
 {% extends "home/pages/base_section.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 {% block section_content %}
-<header class="editorial-intro activity-intro"><div><p class="small-label">Activity · The field journal</p><h1>{{ page.heading|default:"Research beyond the page." }}</h1></div><div><p class="lead">{{ page.intro|default:"A journal of the lab’s work: observations from the field, exchanges of ideas and moments of discovery." }}</p><a class="editorial-link" href="#journal-title">Browse the journal{% include "home/includes/link_arrow.html" %}</a></div></header>
-{% include "home/includes/editorial_image.html" %}
-{% if page.body %}<div class="reading-copy">{{ page.body|richtext }}</div>{% endif %}
+<header class="editorial-intro activity-intro">
+    <div>
+        <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Waste Mining Lab</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <span class="current">Field Journal &amp; Observational Notes</span>
+        </nav>
+        <h1>{{ page.heading|default:"Research beyond the page." }}</h1>
+    </div>
+    <div>
+        <p class="lead">{{ page.intro|default:"A journal of the lab’s work: observations from the field, exchanges of ideas and moments of discovery across environmental and recovery sites." }}</p>
+        <a class="editorial-link" href="#journal-title">Browse the journal{% include "home/includes/link_arrow.html" %}</a>
+    </div>
+</header>
+
+{% if page.feature_image %}
+    {% include "home/includes/editorial_image.html" %}
+{% else %}
+    <figure class="editorial-image">
+        <img src="{% static 'images/photography/field-monitoring-sensor.webp' %}"
+             width="1600"
+             height="1067"
+             alt="Environmental field testing and data sampling instrumentation"
+             class="sample-photo"
+             loading="lazy"
+             decoding="async">
+        <figcaption>Environmental sensor instrumentation and field sampling methodology · Field Journal Reference</figcaption>
+    </figure>
+{% endif %}
+
+{% if page.body %}<div class="reading-copy section-space">{{ page.body|richtext }}</div>{% endif %}
 {% if featured_activity and paginator_page.number == 1 %}<section class="section-space" aria-labelledby="activity-featured"><h2 class="small-label" id="activity-featured">From the journal</h2>{% include "home/includes/activity_entry.html" with activity=featured_activity featured=True %}</section>{% endif %}
 <section class="journal-section" aria-labelledby="journal-title"><div class="section-heading"><h2 id="journal-title">Field notes & shared moments</h2><span class="small-label">Most recent first</span></div>
 {% for activity in activities %}{% include "home/includes/activity_entry.html" %}{% empty %}<div class="journal-empty"><div class="journal-margin"><span class="small-label">Field journal</span><span class="journal-dash" aria-hidden="true">—</span><span class="small-label">Awaiting entries</span></div><div><h3>The next chapter<br>is still unwritten.</h3><p>Verified activities and photographs will be collected here, with dates, context and connections to the research.</p><p class="muted">Explore the themes of our work while the journal takes shape.</p><a class="editorial-link" href="/research/">Explore our research{% include "home/includes/link_arrow.html" %}</a></div></div>{% endfor %}

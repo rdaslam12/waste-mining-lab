@@ -1,9 +1,52 @@
 {% extends "home/pages/base_section.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 {% block section_content %}
-<header class="editorial-intro contact-intro"><p class="small-label">Contact · Waste Mining Lab</p><h1>{{ page.heading|default:"Good questions deserve a conversation." }}</h1><p class="lead">{{ page.intro|default:"For academic correspondence, research discussions and general inquiries, get in touch with the lab." }}</p></header>
-<div class="contact-layout"><section class="contact-email" aria-labelledby="email-title"><h2 class="small-label" id="email-title">Write to us</h2><a class="contact-email-link" href="mailto:asef.redwan@northsouth.edu"><span>asef.redwan@<wbr>northsouth.edu</span>{% include "home/includes/link_arrow.html" %}</a><p>Dr. Asef M. Redwan<br>Laboratory director</p></section>
-<section class="contact-location" aria-labelledby="location-title"><h2 class="small-label" id="location-title">Find the lab</h2><address><strong>Waste Mining Lab</strong><br>North South University<br>Bashundhara, Dhaka-1229<br>Bangladesh</address><a class="editorial-link" href="https://www.google.com/maps/search/?api=1&amp;query=North+South+University+Bashundhara+Dhaka+Bangladesh">View university location{% include "home/includes/link_arrow.html" %}</a></section></div>
-<section class="contact-conversation" aria-labelledby="conversation-title"><h2 id="conversation-title">Across disciplines.<br>Across perspectives.</h2><div class="reading-copy">{% if page.body %}{{ page.body|richtext }}{% else %}<p>Have a question about our research or an idea you would like to discuss? Please include a brief introduction and the context of your inquiry when you write.</p><p>For project-specific correspondence, a relevant project title or publication helps us understand your area of interest.</p>{% endif %}<a class="editorial-link" href="/research/">Explore our research first{% include "home/includes/link_arrow.html" %}</a></div></section>
-{% include "home/includes/editorial_image.html" %}
+<header class="editorial-intro contact-intro">
+    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Waste Mining Lab</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">Contact &amp; Academic Correspondence</span>
+    </nav>
+    <h1>{{ page.heading|default:"Good questions deserve a conversation." }}</h1>
+    <p class="lead">{{ page.intro|default:"For academic correspondence, research discussions, prospective graduate research inquiries, and collaborations, get in touch with the lab." }}</p>
+</header>
+<div class="contact-layout">
+    <section class="contact-email" aria-labelledby="email-title">
+        <h2 class="small-label" id="email-title">Write to us</h2>
+        <a class="contact-email-link" href="mailto:asef.redwan@northsouth.edu">
+            <span>asef.redwan@<wbr>northsouth.edu</span>{% include "home/includes/link_arrow.html" %}
+        </a>
+        <p>Dr. Asef Mohammad Redwan<br>Laboratory Director &amp; Assistant Professor</p>
+    </section>
+    <section class="contact-location" aria-labelledby="location-title">
+        <h2 class="small-label" id="location-title">Find the lab</h2>
+        <address><strong>Waste Mining Lab</strong><br>Department of Civil &amp; Environmental Engineering<br>North South University<br>Plot 15, Block B, Bashundhara, Dhaka-1229<br>Bangladesh</address>
+        <a class="editorial-link" href="https://www.google.com/maps/search/?api=1&amp;query=North+South+University+Bashundhara+Dhaka+Bangladesh" target="_blank" rel="noopener noreferrer">View university campus map{% include "home/includes/link_arrow.html" %}</a>
+    </section>
+</div>
+<section class="contact-conversation section-space" aria-labelledby="conversation-title">
+    <h2 id="conversation-title">Across disciplines.<br>Across perspectives.</h2>
+    <div class="reading-copy">
+        {% if page.body %}{{ page.body|richtext }}{% else %}
+        <p>Have a question about our research or an idea you would like to discuss? Please include a brief introduction and the context of your inquiry when you write.</p>
+        <p>For project-specific correspondence or student research inquiries, referencing a relevant project title or publication helps us understand your specific background and area of interest.</p>
+        {% endif %}
+        <a class="editorial-link" href="/research/">Explore our research areas first{% include "home/includes/link_arrow.html" %}</a>
+    </div>
+</section>
+
+{% if page.feature_image %}
+    {% include "home/includes/editorial_image.html" %}
+{% else %}
+    <figure class="editorial-image">
+        <img src="{% static 'images/photography/campus-academic-environment.webp' %}"
+             width="1600"
+             height="1048"
+             alt="North South University academic campus architecture in Dhaka"
+             class="sample-photo"
+             loading="lazy"
+             decoding="async">
+        <figcaption>North South University academic campus · Bashundhara, Dhaka, Bangladesh</figcaption>
+    </figure>
+{% endif %}
 {% endblock %}

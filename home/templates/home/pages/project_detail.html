@@ -63,6 +63,31 @@
             <figcaption>{{ project.image.description }}</figcaption>
         {% endif %}
     </figure>
+    {% elif "Packed Bed Reactor" in project.title or "Textile" in project.title %}
+    <figure class="project-detail-hero">
+        <img src="{% static 'images/photography/wastewater-pilot-reactor.webp' %}" width="1600" height="900" alt="Packed bed bio-reactor for industrial wastewater" class="sample-photo" decoding="async">
+        <figcaption>Pilot packed bed bio-reactor configuration · Illustrative reference</figcaption>
+    </figure>
+    {% elif "AI-Powered" in project.title or "Waste Segregation" in project.title %}
+    <figure class="project-detail-hero">
+        <img src="{% static 'images/photography/waste-sorting-recycling.webp' %}" width="1600" height="900" alt="Automated waste characterization and recycling" class="sample-photo" decoding="async">
+        <figcaption>Automated waste characterization and circular bioeconomy streams · Illustrative reference</figcaption>
+    </figure>
+    {% elif "Water-Sanitation" in project.title or "Coastal" in project.title %}
+    <figure class="project-detail-hero">
+        <img src="{% static 'images/photography/environmental-water-sampling.webp' %}" width="1600" height="900" alt="Environmental surface water sampling" class="sample-photo" decoding="async">
+        <figcaption>Coastal water quality monitoring and safety assessment · Illustrative reference</figcaption>
+    </figure>
+    {% elif "Critical Materials" in project.title or "Rare Earth" in project.title or "Proteomic" in project.title %}
+    <figure class="project-detail-hero">
+        <img src="{% static 'images/photography/microbial-biorecovery.webp' %}" width="1600" height="900" alt="Microbial assay and proteomic recovery" class="sample-photo" decoding="async">
+        <figcaption>Microbial proteomic assay for critical materials biorecovery · Illustrative reference</figcaption>
+    </figure>
+    {% elif "Buriganga" in project.title or "Heavy Metal" in project.title %}
+    <figure class="project-detail-hero">
+        <img src="{% static 'images/photography/analytical-chemistry-lab.webp' %}" width="1600" height="900" alt="Analytical chemistry laboratory testing" class="sample-photo" decoding="async">
+        <figcaption>Heavy metal analytical chemistry instrumentation · Illustrative reference</figcaption>
+    </figure>
     {% endif %}
 
     <div class="project-detail-body section-space">

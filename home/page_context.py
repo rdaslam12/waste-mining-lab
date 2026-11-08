@@ -63,9 +63,62 @@ def section_context(page, request):
         context["grants"] = records
     elif page.slug == "team":
         members = list(TeamMember.objects.filter(is_published=True).select_related("image"))
-        context["directors"] = [member for member in members if member.category == "director"]
+        directors = [m for m in members if m.category == "director"]
+        context["directors"] = directors
+        context["director"] = directors[0] if directors else None
+
+        # Featured members for interactive portrait accordion
+        featured = [m for m in members if getattr(m, "is_featured", False)]
+        if not featured and len(members) >= 3:
+            featured = members[:5]
+
+        # Enable preview mode for interactive accordion inspection if requested
+        if (not featured or len(featured) < 3) and request.GET.get("preview") in ("accordion", "team", "1"):
+            class SampleMember:
+                def __init__(self, pk, name, role, cat, affil, bg, deg, email=""):
+                    self.pk = pk
+                    self.name = name
+                    self.role = role
+                    self.category = cat
+                    self.affiliation = affil
+                    self.research_interests = bg
+                    self.academic_background = deg
+                    self.biography = f"{name} conducts research at Waste Mining Lab, exploring sustainable recovery pathways and environmental bioengineering."
+                    self.image = None
+                    self.email = email
+                    self.profile_url = ""
+                    self.scholar_url = ""
+                    self.linkedin_url = ""
+                    self.alumni_current_position = ""
+                    self.public_projects = []
+                    self.is_director_fallback = (cat == "director")
+
+                def get_category_display(self):
+                    return {"director": "Lab Director", "scientist": "Research Scientist", "assistant": "Research Assistant"}.get(self.category, "Researcher")
+
+                @property
+                def initials(self):
+                    parts = [p for p in self.name.replace("Dr.", "").strip().split() if p]
+                    return f"{parts[0][0]}{parts[-1][0]}".upper() if len(parts) > 1 else "WML"
+
+            sample_1 = SampleMember(101, "Dr. Asef Mohammad Redwan", "Principal Investigator & Assistant Professor", "director", "North South University", "Microbial bioremediation, rare earth elements recovery, immobilized packed bed bio-reactors.", "Ph.D. Environmental Engineering", "asef.redwan@northsouth.edu")
+            sample_2 = SampleMember(102, "Tanvir Ahmed Chowdhury", "Senior Research Associate", "scientist", "Waste Mining Lab · NSU", "Bio-electrochemical systems, industrial wastewater treatment, and zero liquid discharge modeling.", "M.Sc. Environmental Science & Tech", "t.chowdhury@example.com")
+            sample_3 = SampleMember(103, "Farzana Yeasmin", "Graduate Research Assistant", "assistant", "Department of CEE · NSU", "AI-powered vision models for municipal solid waste characterization and circular bioeconomy streams.", "B.Sc. Civil & Environmental Eng.", "f.yeasmin@example.com")
+            featured = [sample_1, sample_2, sample_3]
+
+        context["featured_members"] = featured
+
+        # Categorized members for structured academic directory
+        context["scientists"] = [m for m in members if m.category in ("scientist", "researcher")]
+        context["assistants"] = [m for m in members if m.category == "assistant"]
+        context["staff"] = [m for m in members if m.category == "staff"]
+        context["students"] = [m for m in members if m.category == "student"]
+        context["collaborators"] = [m for m in members if m.category == "collaborator"]
+        context["alumni"] = [m for m in members if m.category == "alumni"]
+
         context["member_groups"] = [{"label": label, "members": [member for member in members if member.category == key]} for key, label in TeamMember.Category.choices if key != "director"]
         context["has_members"] = any(member.category != "director" for member in members)
+        context["all_members"] = members
     elif page.slug == "activity":
         records = Activity.objects.filter(is_published=True).select_related("cover_image", "project").prefetch_related("gallery_images__image")
         context["featured_activity"] = records.filter(featured=True).first()

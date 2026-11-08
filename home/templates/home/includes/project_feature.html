@@ -1,18 +1,49 @@
-{% load wagtailcore_tags wagtailimages_tags %}
-<article class="project-feature {% if not project.image %}project-feature--text{% endif %}" id="project-{{ project.pk }}">
-    {% if project.image %}{% image project.image fill-1000x750 as project_image %}<img src="{{ project_image.url }}" width="{{ project_image.width }}" height="{{ project_image.height }}" alt="{{ project.image.description|default:project.image.title }}" loading="lazy" decoding="async">{% endif %}
-    <div>
+{% load static wagtailcore_tags wagtailimages_tags %}
+<article class="project-feature" id="project-{{ project.pk }}">
+    <div class="project-media-slot">
+        {% if project.image %}
+            {% image project.image fill-1000x750 as project_image %}
+            <img src="{{ project_image.url }}" width="{{ project_image.width }}" height="{{ project_image.height }}" alt="{{ project.image.description|default:project.image.title }}" loading="lazy" decoding="async" class="project-img">
+        {% elif "AI-Powered" in project.title or "Waste Segregation" in project.title %}
+            <figure class="project-sample-figure">
+                <img src="{% static 'images/photography/waste-sorting-recycling.webp' %}" width="1000" height="750" alt="Illustrative sample: waste segregation and circular recovery" loading="lazy" decoding="async" class="project-img">
+                <figcaption class="sample-photo-caption">Illustrative reference · Automated waste characterization</figcaption>
+            </figure>
+        {% elif "Packed Bed Reactor" in project.title or "Textile" in project.title %}
+            <figure class="project-sample-figure">
+                <img src="{% static 'images/photography/wastewater-pilot-reactor.webp' %}" width="1000" height="750" alt="Illustrative sample: packed bed bio-reactor for industrial wastewater" loading="lazy" decoding="async" class="project-img">
+                <figcaption class="sample-photo-caption">Illustrative reference · Pilot bio-reactor configuration</figcaption>
+            </figure>
+        {% elif "Water-Sanitation" in project.title or "Coastal" in project.title %}
+            <figure class="project-sample-figure">
+                <img src="{% static 'images/photography/environmental-water-sampling.webp' %}" width="1000" height="750" alt="Illustrative sample: coastal water monitoring and environmental testing" loading="lazy" decoding="async" class="project-img">
+                <figcaption class="sample-photo-caption">Illustrative reference · Environmental field sampling</figcaption>
+            </figure>
+        {% elif "Critical Materials" in project.title or "Rare Earth" in project.title or "Proteomic" in project.title %}
+            <figure class="project-sample-figure">
+                <img src="{% static 'images/photography/microbial-biorecovery.webp' %}" width="1000" height="750" alt="Illustrative sample: microbial assay for metal recovery" loading="lazy" decoding="async" class="project-img">
+                <figcaption class="sample-photo-caption">Illustrative reference · Proteomic assay &amp; bacterial cultures</figcaption>
+            </figure>
+        {% elif "Buriganga" in project.title or "Heavy Metal" in project.title %}
+            <figure class="project-sample-figure">
+                <img src="{% static 'images/photography/analytical-chemistry-lab.webp' %}" width="1000" height="750" alt="Illustrative sample: environmental heavy metal analytical testing" loading="lazy" decoding="async" class="project-img">
+                <figcaption class="sample-photo-caption">Illustrative reference · Analytical instrumentation</figcaption>
+            </figure>
+        {% endif %}
+    </div>
+
+    <div class="project-feature-body">
         <div class="project-meta-badges">
             {% if project.area.is_published %}<span class="small-label">{{ project.area.title }}</span>{% endif %}
             <span class="project-status-tag project-status-tag--{{ project.status }}">{{ project.get_status_display }}</span>
         </div>
-        <h3><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
-        <p>{{ project.summary }}</p>
+        <h3 class="project-title"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+        <p class="project-summary">{{ project.summary }}</p>
         {% if project.funding_notes %}
-            <p class="project-funding-highlight"><strong>Support:</strong> {{ project.funding_notes }}</p>
+            <p class="project-funding-highlight"><strong>Grant Support:</strong> {{ project.funding_notes }}</p>
         {% endif %}
         {% if project.description %}
-            <details class="abstract"><summary>About this project</summary><div class="reading-copy">{{ project.description|richtext }}</div></details>
+            <details class="abstract"><summary>Research scope &amp; methodology</summary><div class="reading-copy">{{ project.description|richtext }}</div></details>
         {% endif %}
         {% with related=project.public_publications %}
             {% if related %}
@@ -25,7 +56,7 @@
             {% endif %}
         {% endwith %}
         <div class="text-links">
-            <a href="{{ project.get_absolute_url }}">View project details{% include "home/includes/link_arrow.html" %}</a>
+            <a href="{{ project.get_absolute_url }}" class="editorial-link">View case study details{% include "home/includes/link_arrow.html" %}</a>
             {% if project.external_url %}<a href="{{ project.external_url }}" target="_blank" rel="noopener">External reference{% include "home/includes/link_arrow.html" %}</a>{% endif %}
             {% if project.monitoring_related %}<a href="/waste-monitoring/">Waste monitoring{% include "home/includes/link_arrow.html" %}</a>{% endif %}
         </div>

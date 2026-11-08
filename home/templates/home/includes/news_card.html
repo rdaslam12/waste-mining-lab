@@ -1,7 +1,26 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 <article class="news-card">
-    {% if article.cover_image %}{% image article.cover_image fill-800x520 as cover %}<a href="{% pageurl article %}" tabindex="-1" aria-hidden="true"><img src="{{ cover.url }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="lazy"></a>{% endif %}
-    <p class="record-meta"><time datetime="{{ article.date|date:'Y-m-d' }}">{{ article.date|date:"d M Y" }}</time><span>{{ article.get_category_display }}</span></p>
-    <h3><a href="{% pageurl article %}">{{ article.title }}</a></h3><p>{{ article.excerpt }}</p>
-    <a class="editorial-link" href="{% pageurl article %}" aria-label="Read story: {{ article.title }}">Read story{% include "home/includes/link_arrow.html" %}</a>
+    <div class="news-card-media">
+        {% if article.cover_image %}
+            {% image article.cover_image fill-800x520 as cover %}
+            <a href="{% pageurl article %}" tabindex="-1" aria-hidden="true">
+                <img src="{{ cover.url }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="" loading="lazy">
+            </a>
+        {% else %}
+            <a href="{% pageurl article %}" tabindex="-1" aria-hidden="true" class="news-card-placeholder-link">
+                <img src="{% static 'images/photography/analytical-chemistry-lab.webp' %}" width="800" height="520" alt="Laboratory research update" loading="lazy" class="sample-news-photo">
+            </a>
+        {% endif %}
+    </div>
+    <div class="news-card-body">
+        <p class="record-meta">
+            <time datetime="{{ article.date|date:'Y-m-d' }}">{{ article.date|date:"d M Y" }}</time>
+            <span class="news-cat-badge">{{ article.get_category_display }}</span>
+        </p>
+        <h3><a href="{% pageurl article %}">{{ article.title }}</a></h3>
+        <p class="news-excerpt">{{ article.excerpt }}</p>
+        <a class="editorial-link" href="{% pageurl article %}" aria-label="Read story: {{ article.title }}">
+            Read story{% include "home/includes/link_arrow.html" %}
+        </a>
+    </div>
 </article>

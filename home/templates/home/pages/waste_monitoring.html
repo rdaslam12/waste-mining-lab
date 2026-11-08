@@ -1,11 +1,41 @@
 {% extends "home/pages/base_section.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 {% block section_content %}
-<header class="editorial-intro monitoring-intro"><div><p class="small-label">Waste monitoring</p><h1>{{ page.heading|default:"Understanding waste through data." }}</h1><p class="lead">{{ page.intro|default:"A clearer view of waste begins with careful observation. Explore the role of environmental monitoring in understanding materials, places and change over time." }}</p><a class="editorial-link" href="#monitoring-platform">Explore the monitoring portal{% include "home/includes/link_arrow.html" %}</a></div><aside class="monitoring-thesis"><span class="small-label">The research perspective</span><p>Observe carefully.<br>Understand context.<br>Build evidence.</p><span>Environmental research<br>Waste Mining Lab</span></aside></header>
-{% include "home/includes/editorial_image.html" %}
+<header class="editorial-intro monitoring-intro">
+    <div>
+        <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Waste Mining Lab</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <span class="current">Data &amp; Environmental Monitoring</span>
+        </nav>
+        <h1>{{ page.heading|default:"Understanding waste through data." }}</h1>
+        <p class="lead">{{ page.intro|default:"A clearer view of waste begins with careful observation. Explore the role of environmental monitoring in understanding materials, places and change over time." }}</p>
+        <a class="editorial-link" href="#monitoring-platform">Explore the monitoring portal{% include "home/includes/link_arrow.html" %}</a>
+    </div>
+    <aside class="monitoring-thesis">
+        <span class="small-label">The research perspective</span>
+        <p>Observe carefully.<br>Understand context.<br>Build evidence.</p>
+        <span>Environmental research<br>Waste Mining Lab</span>
+    </aside>
+</header>
+
+{% if page.feature_image %}
+    {% include "home/includes/editorial_image.html" %}
+{% else %}
+    <figure class="editorial-image">
+        <img src="{% static 'images/photography/environmental-water-sampling.webp' %}"
+             width="1600"
+             height="1067"
+             alt="Environmental surface water sampling and ecological monitoring"
+             class="sample-photo"
+             loading="lazy"
+             decoding="async">
+        <figcaption>Environmental surface water sampling and ecological monitoring · Illustrative field methodology</figcaption>
+    </figure>
+{% endif %}
 <section class="monitoring-overview" aria-labelledby="monitoring-overview-title"><h2 id="monitoring-overview-title">Making observations meaningful.</h2><div class="reading-copy">{% if page.body %}{{ page.body|richtext }}{% else %}<p>Monitoring can help connect what is observed in the environment with questions about how waste is managed and resources are used.</p><p>This portal is a place for verified datasets, their context and the methods behind them. Sources and limitations belong alongside the observations, so that evidence can be interpreted with care.</p>{% endif %}</div></section>
 <section class="monitoring-platform" id="monitoring-platform" aria-labelledby="platform-title">
-    <header class="platform-header"><div><p class="small-label">Environmental observations</p><h2 id="platform-title">Monitoring portal</h2></div><span class="data-status">Data source not connected</span></header>
+    <header class="platform-header"><div><h2 id="platform-title">Monitoring portal</h2></div><span class="data-status">Data source not connected</span></header>
     <p class="platform-notice">No verified dataset is connected. Measurements, locations and visualizations will appear when data is available.</p>
     <div class="monitoring-grid">
         <section class="monitor-panel location-panel" aria-labelledby="locations-title">
@@ -50,7 +80,7 @@
         <section class="monitor-panel category-panel" aria-labelledby="category-title"><h3 id="category-title">Monitoring categories</h3><p>Categories will be defined by the connected dataset.</p><p class="muted">No monitoring categories are configured.</p></section>
     </div>
 </section>
-<section class="monitoring-methods section-space" aria-labelledby="methods-title"><div><p class="small-label">Behind the observations</p><h2 id="methods-title">Methods & context</h2></div><div class="reading-copy">{% if page.methodology %}{{ page.methodology|richtext }}{% else %}<p>Measurement methods, equipment and collection procedures will be documented alongside the datasets they support.</p><dl class="method-list"><div><dt>Collection</dt><dd>Sampling locations, timing and procedures to be documented.</dd></div><div><dt>Measurement</dt><dd>Instruments, units and quality checks to be documented.</dd></div><div><dt>Interpretation</dt><dd>Analysis methods, coverage and limitations to be documented.</dd></div></dl>{% endif %}</div></section>
+<section class="monitoring-methods section-space" aria-labelledby="methods-title"><div><h2 id="methods-title">Methods &amp; context</h2></div><div class="reading-copy">{% if page.methodology %}{{ page.methodology|richtext }}{% else %}<p>Measurement methods, equipment and collection procedures will be documented alongside the datasets they support.</p><dl class="method-list"><div><dt>Collection</dt><dd>Sampling locations, timing and procedures to be documented.</dd></div><div><dt>Measurement</dt><dd>Instruments, units and quality checks to be documented.</dd></div><div><dt>Interpretation</dt><dd>Analysis methods, coverage and limitations to be documented.</dd></div></dl>{% endif %}</div></section>
 {% if projects %}<section class="section-space" aria-labelledby="monitoring-research"><h2 id="monitoring-research">Connected research</h2>{% for project in projects %}{% include "home/includes/project_feature.html" %}{% endfor %}</section>{% endif %}
 {% if related_publications %}<section class="section-space" aria-labelledby="monitoring-publications"><h2 id="monitoring-publications">Related publications</h2>{% for publication in related_publications %}{% include "home/includes/publication_record.html" %}{% endfor %}</section>{% endif %}
 <div class="text-links monitoring-related-links"><a href="/research/">Explore our research{% include "home/includes/link_arrow.html" %}</a><a href="/publications/">Browse publications{% include "home/includes/link_arrow.html" %}</a></div>

@@ -67,7 +67,80 @@
 <!-- Unified expandable site header -->
 <header class="wml-global-header">
 
-    <!-- Large logo at the top -->
+    <!-- Dedicated mobile header bar (visible at mobile/tablet breakpoints <= 1024px) -->
+    <div class="wml-mobile-bar" aria-label="Mobile site header">
+        <a href="/" class="wml-mobile-brand" aria-label="Waste Mining Lab homepage">
+            <img src="{% static 'images/wml-icon.png' %}" alt="" class="wml-mobile-brand-icon" width="34" height="34">
+            <span class="wml-mobile-brand-text">
+                <span class="wml-mobile-title">Waste Mining Lab</span>
+                <span class="wml-mobile-sub">North South University</span>
+            </span>
+        </a>
+        <button type="button"
+                class="wml-hamburger-btn"
+                aria-expanded="false"
+                aria-controls="wml-mobile-drawer"
+                aria-label="Toggle navigation menu">
+            <span class="wml-hamburger-icon" aria-hidden="true">
+                <span class="wml-hamburger-bar bar-top"></span>
+                <span class="wml-hamburger-bar bar-mid"></span>
+                <span class="wml-hamburger-bar bar-bot"></span>
+            </span>
+        </button>
+    </div>
+
+    <!-- Slide-down mobile navigation panel with backdrop -->
+    <div id="wml-mobile-drawer" class="wml-mobile-drawer" aria-hidden="true">
+        <div class="wml-mobile-drawer-backdrop" tabindex="-1"></div>
+        <div class="wml-mobile-drawer-panel">
+            <nav class="wml-mobile-nav-links" aria-label="Mobile navigation">
+                <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Home</span>
+                    <span class="wml-nav-item-sub">Waste Mining Lab overview</span>
+                </a>
+                <a href="/publications/" class="{% if request.path == '/publications/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Publications</span>
+                    <span class="wml-nav-item-sub">Peer-reviewed papers &amp; citations</span>
+                </a>
+                <a href="/research/" class="{% if request.path == '/research/' or '/research/' in request.path %}active{% endif %}">
+                    <span class="wml-nav-item-label">Research</span>
+                    <span class="wml-nav-item-sub">Projects &amp; lines of inquiry</span>
+                </a>
+                <a href="/grants/" class="{% if request.path == '/grants/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Grants</span>
+                    <span class="wml-nav-item-sub">Sponsored research portfolio</span>
+                </a>
+                <a href="/team/" class="{% if request.path == '/team/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Team</span>
+                    <span class="wml-nav-item-sub">People &amp; researchers</span>
+                </a>
+                <a href="/activity/" class="{% if request.path == '/activity/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Activity</span>
+                    <span class="wml-nav-item-sub">Field journal &amp; events</span>
+                </a>
+                <a href="/waste-monitoring/" class="{% if request.path == '/waste-monitoring/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Waste Monitoring</span>
+                    <span class="wml-nav-item-sub">Environmental data portal</span>
+                </a>
+                <a href="/news/" class="{% if request.path == '/news/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">News</span>
+                    <span class="wml-nav-item-sub">Announcements &amp; updates</span>
+                </a>
+                <a href="/contact/" class="wml-mobile-contact-link {% if request.path == '/contact/' %}active{% endif %}">
+                    <span class="wml-nav-item-label">Contact</span>
+                    <span class="wml-nav-item-sub">asef.redwan@northsouth.edu</span>
+                </a>
+            </nav>
+            <div class="wml-mobile-drawer-footer">
+                <div class="wml-drawer-partner-logos">
+                    <img src="{% static 'images/nsu-logo.png' %}" alt="North South University" width="28" height="28">
+                    <span>Department of Civil &amp; Environmental Engineering</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Large logo at the top -->
     <div class="wml-header-top">
         <a href="/" class="wml-logo-large"
            aria-label="Waste Mining Lab homepage">
@@ -103,7 +176,7 @@
         >
     </div>
 
-    <!-- Centered navigation -->
+    <!-- Desktop Centered navigation -->
 <div class="wml-nav-slot">
     <div class="wml-navbar">
 
@@ -155,24 +228,6 @@
             </a>
 
         </nav>
-
-        <!-- Mobile navigation -->
-        <details class="wml-mobile-menu">
-            <summary>Menu ☰</summary>
-
-            <nav aria-label="Mobile navigation">
-                <a href="/">Waste Mining Lab</a>
-                <a href="/publications/">Publications</a>
-                <a href="/research/">Research</a>
-                <a href="/grants/">Grants</a>
-                <a href="/team/">Team</a>
-                <a href="/activity/">Activity</a>
-                <a href="/waste-monitoring/">Waste Monitoring</a>
-                <a href="/news/">News</a>
-                <a href="/contact/">Contact</a>
-            </nav>
-        </details>
-
 
     </div>
 </div>

@@ -1,7 +1,17 @@
 {% extends "home/pages/base_section.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block section_content %}
-<header class="editorial-intro news-intro"><div class="index-line"><span>The newsroom</span><span>Waste Mining Lab · NSU</span></div><div class="news-masthead"><h1>{{ page.heading|default:"News & notes" }}</h1><p class="lead">{{ page.intro|default:"Announcements, research updates and news from Waste Mining Lab." }}</p></div></header>
+<header class="editorial-intro news-intro">
+    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Waste Mining Lab</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">News &amp; Research Updates</span>
+    </nav>
+    <div class="news-masthead">
+        <h1>{{ page.heading|default:"News & notes" }}</h1>
+        <p class="lead">{{ page.intro|default:"Announcements, research updates and news from Waste Mining Lab." }}</p>
+    </div>
+</header>
 {% if page.body %}<div class="reading-copy">{{ page.body|richtext }}</div>{% endif %}
 {% if featured_story and paginator_page.number == 1 %}<section class="news-feature {% if not featured_story.cover_image %}news-feature--text{% endif %}" aria-labelledby="featured-story-title">
 {% if featured_story.cover_image %}{% image featured_story.cover_image fill-1200x800 as cover %}<img src="{{ cover.url }}" width="{{ cover.width }}" height="{{ cover.height }}" alt="{{ featured_story.cover_image.description|default:featured_story.cover_image.title }}">{% endif %}

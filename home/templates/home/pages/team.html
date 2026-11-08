@@ -1,14 +1,280 @@
 {% extends "home/pages/base_section.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
 {% block section_content %}
-<header class="editorial-intro team-intro"><div class="index-line"><span>People & perspectives</span><span>North South University</span></div><h1>{{ page.heading|default:"The people behind the questions." }}</h1><p class="lead">{{ page.intro|default:"Meet the people exploring the connections between waste, resources and a more sustainable environment." }}</p></header>
-<section class="director-section" aria-labelledby="director-title"><h2 class="small-label" id="director-title">Laboratory director</h2>
-{% if directors %}{% for member in directors %}{% include "home/includes/member_profile.html" %}{% endfor %}{% else %}
-<div class="director-profile"><figure class="director-portrait"><img src="{% static 'images/asef-redwan-1080.webp' %}" srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w" sizes="(max-width: 700px) 90vw, 40vw" width="1080" height="1080" alt="Dr. Asef M. Redwan speaking to students in a classroom." decoding="async"><figcaption>Dr. Asef M. Redwan · Lab director</figcaption></figure>
-<div class="director-copy"><h3>Dr. Asef<br>M. Redwan</h3><p class="director-role">Assistant Professor<br>Civil &amp; Environmental Engineering<br><strong>North South University</strong></p><p>Working at the intersection of environmental engineering, microbiology and resource recovery, Dr. Redwan explores how research can turn complex environmental challenges into practical solutions.</p><p>His research examines interactions between metals and microorganisms, with applications in bioremediation and the recovery of valuable resources.</p><div class="text-links"><a href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html">University profile{% include "home/includes/link_arrow.html" %}</a><a href="mailto:asef.redwan@northsouth.edu">Email Dr. Redwan</a></div></div></div>
-{% endif %}</section>
-{% if page.body %}<div class="reading-copy section-space">{{ page.body|richtext }}</div>{% endif %}
-{% for group in member_groups %}{% if group.members %}<section class="section-space" aria-labelledby="group-{{ forloop.counter }}"><div class="section-heading"><h2 id="group-{{ forloop.counter }}">{{ group.label }}</h2></div><div class="member-grid">{% for member in group.members %}{% include "home/includes/member_profile.html" %}{% endfor %}</div></section>{% endif %}{% endfor %}
-{% if not has_members %}<section class="team-directory-note"><h2>A growing directory.</h2><p>Researcher, student and collaborator profiles will be added as verified information becomes available.</p><a class="editorial-link" href="/research/">Get to know our research{% include "home/includes/link_arrow.html" %}</a></section>{% endif %}
-{% include "home/includes/editorial_cta.html" with cta_title="Connect with the lab." %}
+{# SECTION 1 — TEAM INTRODUCTION #}
+<header class="editorial-intro team-intro">
+    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Waste Mining Lab</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">People &amp; Perspectives</span>
+        <span class="breadcrumb-affiliation" aria-hidden="true">· North South University, Dhaka</span>
+    </nav>
+    <h1>{{ page.heading|default:"The people behind the questions." }}</h1>
+    <div class="intro-bottom">
+        <p class="lead">{{ page.intro|default:"Meet the researchers, students, and engineers exploring how waste can become an asset for sustainable ecological and resource recovery." }}</p>
+        <a class="editorial-link" href="#team-directory">Explore the directory{% include "home/includes/link_arrow.html" %}</a>
+    </div>
+</header>
+
+{% if page.body %}
+<div class="reading-copy section-space">{{ page.body|richtext }}</div>
+{% endif %}
+
+{# SECTION 2 — PRINCIPAL INVESTIGATOR & LAB DIRECTOR #}
+<section class="director-spotlight-section section-space" aria-labelledby="director-heading">
+    <div class="section-heading">
+        <h2 id="director-heading">Laboratory Leadership</h2>
+        <span class="small-label">Principal Investigator</span>
+    </div>
+
+    {% if director %}
+        <div class="director-spotlight-card">
+            <figure class="director-frame">
+                {% if director.image %}
+                    {% image director.image fill-900x1100 as d_img %}
+                    <img src="{{ d_img.url }}"
+                         width="{{ d_img.width }}"
+                         height="{{ d_img.height }}"
+                         alt="{{ director.name }}"
+                         class="director-img"
+                         decoding="async">
+                {% else %}
+                    <img src="{% static 'images/asef-redwan-1080.webp' %}"
+                         srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w"
+                         sizes="(max-width: 768px) 90vw, 420px"
+                         width="1080"
+                         height="1080"
+                         alt="Dr. Asef M. Redwan speaking to students in a classroom."
+                         class="director-img"
+                         decoding="async">
+                {% endif %}
+                <figcaption class="director-caption">Dr. Asef Mohammad Redwan · Laboratory Director</figcaption>
+            </figure>
+
+            <div class="director-content">
+                <span class="director-title-badge">Principal Investigator &amp; Lab Director</span>
+                <h3 class="director-name">{{ director.name }}</h3>
+                <p class="director-credentials">
+                    Assistant Professor<br>
+                    Department of Civil &amp; Environmental Engineering<br>
+                    <strong>North South University, Bangladesh</strong>
+                </p>
+
+                <div class="director-bio">
+                    {% if director.biography %}
+                        {{ director.biography|linebreaks }}
+                    {% else %}
+                        <p>Working at the intersection of environmental engineering, biotechnology, and resource recovery, Dr. Redwan leads inquiry into how waste streams can be valorized into critical resources.</p>
+                        <p>His research investigates microbial interactions with rare earth elements and heavy metals, immobilized biomass packed-bed reactors for textile wastewater treatment, and machine-learning-driven environmental monitoring systems.</p>
+                    {% endif %}
+                </div>
+
+                {% if director.research_interests %}
+                <div class="director-focus">
+                    <span class="small-label">Research Focus</span>
+                    <p>{{ director.research_interests }}</p>
+                </div>
+                {% endif %}
+
+                <div class="director-actions">
+                    {% if director.profile_url %}
+                        <a href="{{ director.profile_url }}" class="editorial-button" target="_blank" rel="noopener noreferrer">
+                            University Profile{% include "home/includes/link_arrow.html" %}
+                        </a>
+                    {% else %}
+                        <a href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html" class="editorial-button" target="_blank" rel="noopener noreferrer">
+                            University Profile{% include "home/includes/link_arrow.html" %}
+                        </a>
+                    {% endif %}
+                    {% if director.email %}
+                        <a href="mailto:{{ director.email }}" class="editorial-link">Email Dr. Redwan</a>
+                    {% else %}
+                        <a href="mailto:asef.redwan@northsouth.edu" class="editorial-link">Email Dr. Redwan</a>
+                    {% endif %}
+                    {% if director.scholar_url %}
+                        <a href="{{ director.scholar_url }}" class="editorial-link" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {# Fallback verified director layout #}
+        <div class="director-spotlight-card">
+            <figure class="director-portrait-frame">
+                <img src="{% static 'images/asef-redwan-1080.webp' %}"
+                     srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w"
+                     sizes="(max-width: 768px) 90vw, 420px"
+                     width="1080"
+                     height="1080"
+                     alt="Dr. Asef M. Redwan speaking to students in a classroom."
+                     class="director-img"
+                     decoding="async">
+                <figcaption class="director-caption">Dr. Asef M. Redwan · Laboratory Director</figcaption>
+            </figure>
+
+            <div class="director-content">
+                <span class="director-title-badge">Principal Investigator &amp; Lab Director</span>
+                <h3 class="director-name">Dr. Asef Mohammad Redwan</h3>
+                <p class="director-credentials">
+                    Assistant Professor<br>
+                    Department of Civil &amp; Environmental Engineering<br>
+                    <strong>North South University</strong>
+                </p>
+                <div class="director-bio">
+                    <p>Working at the intersection of environmental engineering, biotechnology, and resource recovery, Dr. Redwan investigates how engineering principles can transform complex environmental challenges into sustainable solutions.</p>
+                    <p>His research explores microbial-metal partitioning, proteomic recovery of rare earth elements, and decentralized waste valorization technologies.</p>
+                </div>
+                <div class="director-actions">
+                    <a href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html" class="editorial-button" target="_blank" rel="noopener noreferrer">
+                        University Profile{% include "home/includes/link_arrow.html" %}
+                    </a>
+                    <a href="mailto:asef.redwan@northsouth.edu" class="editorial-link">Email Dr. Redwan</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+{# SECTION 3 — FEATURED RESEARCHERS ACCORDION (Reference B) #}
+{% if featured_members %}
+<section class="section-space team-featured-accordion-section" aria-labelledby="featured-researchers-heading">
+    <div class="section-heading">
+        <h2 id="featured-researchers-heading">Featured Researchers</h2>
+        <span class="small-label">Interactive Laboratory Showcase</span>
+    </div>
+    <p class="section-sub-copy">Explore our active researchers, their scientific inquiries, and ongoing contributions to circular bioeconomy and environmental recovery.</p>
+
+    {% if featured_members|length >= 3 %}
+        {% include "home/includes/team_accordion.html" %}
+    {% else %}
+        <div class="featured-researchers-grid">
+            {% for member in featured_members %}
+                {% include "home/includes/member_card.html" %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+{% endif %}
+
+<div id="team-directory"></div>
+
+{# SECTION 4 — RESEARCH SCIENTISTS & POSTDOCTORAL RESEARCHERS #}
+{% if scientists %}
+<section class="section-space" aria-labelledby="scientists-heading">
+    <div class="section-heading">
+        <h2 id="scientists-heading">Research Scientists &amp; Postdocs</h2>
+        <span class="small-label">{{ scientists|length }} Researcher{{ scientists|length|pluralize }}</span>
+    </div>
+    <div class="team-directory-grid">
+        {% for member in scientists %}
+            {% include "home/includes/member_card.html" %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# SECTION 5 — RESEARCH ASSISTANTS #}
+{% if assistants %}
+<section class="section-space" aria-labelledby="assistants-heading">
+    <div class="section-heading">
+        <h2 id="assistants-heading">Research Assistants</h2>
+        <span class="small-label">{{ assistants|length }} Appointment{{ assistants|length|pluralize }}</span>
+    </div>
+    <p class="section-sub-copy">Undergraduate and graduate research assistants supporting laboratory assays, bioreactor operations, and environmental data analysis.</p>
+    <div class="team-directory-grid">
+        {% for member in assistants %}
+            {% include "home/includes/member_card.html" %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# SECTION 6 — RESEARCH OFFICERS & LABORATORY STAFF #}
+{% if staff %}
+<section class="section-space" aria-labelledby="staff-heading">
+    <div class="section-heading">
+        <h2 id="staff-heading">Research Officers &amp; Staff</h2>
+        <span class="small-label">Scientific &amp; Technical Support</span>
+    </div>
+    <div class="team-directory-grid">
+        {% for member in staff %}
+            {% include "home/includes/member_card.html" %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# SECTION 7 — GRADUATE & UNDERGRADUATE RESEARCHERS #}
+{% if students %}
+<section class="section-space" aria-labelledby="students-heading">
+    <div class="section-heading">
+        <h2 id="students-heading">Student Researchers</h2>
+        <span class="small-label">Thesis &amp; Project Inquiries</span>
+    </div>
+    <div class="team-directory-grid">
+        {% for member in students %}
+            {% include "home/includes/member_card.html" %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# SECTION 8 — COLLABORATORS & CO-RESEARCHERS #}
+{% if collaborators %}
+<section class="section-space" aria-labelledby="collaborators-heading">
+    <div class="section-heading">
+        <h2 id="collaborators-heading">Collaborators &amp; Partners</h2>
+        <span class="small-label">Inter-Institutional Research</span>
+    </div>
+    <div class="team-directory-grid">
+        {% for member in collaborators %}
+            {% include "home/includes/member_card.html" %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# SECTION 9 — ALUMNI #}
+{% if alumni %}
+<section class="section-space" aria-labelledby="alumni-heading">
+    <div class="section-heading">
+        <h2 id="alumni-heading">Alumni &amp; Former Members</h2>
+        <span class="small-label">Where they are now</span>
+    </div>
+    <div class="alumni-directory-grid">
+        {% for member in alumni %}
+            {% include "home/includes/member_card.html" %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# NOTE WHEN DIRECTORY HAS NO ADDITIONAL MEMBERS YET #}
+{% if not has_members and not featured_members %}
+<section class="team-directory-note section-space">
+    <div class="directory-note-box">
+        <span class="small-label">Academic Opportunities</span>
+        <h2>Join Our Research Group</h2>
+        <p>Waste Mining Lab regularly recruits motivated undergraduate research assistants, graduate thesis students, and postdoctoral researchers interested in environmental engineering, biotechnology, and resource valorization.</p>
+        <p class="muted">Researcher and student appointments will appear in this verified directory as projects commence.</p>
+        <div class="directory-note-actions">
+            <a class="editorial-button" href="mailto:asef.redwan@northsouth.edu?subject=Waste%20Mining%20Lab%20Research%20Inquiry">
+                Inquire About Open Positions{% include "home/includes/link_arrow.html" %}
+            </a>
+            <a class="editorial-link" href="/research/">Explore Active Research Projects</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# SECTION MODALS — For individual member modal views #}
+{% for member in all_members %}
+    {% include "home/includes/member_modal.html" %}
+{% endfor %}
+{% if not all_members and director %}
+    {% include "home/includes/member_modal.html" with member=director %}
+{% endif %}
+
+{% include "home/includes/editorial_cta.html" with cta_title="Research starts with a conversation." %}
 {% endblock %}

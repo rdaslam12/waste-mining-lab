@@ -3,10 +3,11 @@
 
 {% block section_content %}
 <header class="editorial-intro grants-intro">
-    <div class="index-line">
-        <span>Research funding</span>
-        <span>Sponsored projects</span>
-    </div>
+    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Waste Mining Lab</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">Grants &amp; Sponsored Research</span>
+    </nav>
     <h1>{{ page.heading|default:"Grants & Sponsored Research" }}</h1>
     <div class="intro-bottom">
         <p class="lead">{{ page.intro|default:"Sponsored research, competitive grants, and institutional funding supporting environmental engineering, resource recovery, and sustainable technologies at Waste Mining Lab." }}</p>

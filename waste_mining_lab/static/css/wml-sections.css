@@ -75,10 +75,11 @@
 }
 
 .wml-editorial h1 {
-    font-size: clamp(2.8rem, 6.5vw, 5.6rem);
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+    font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
+    text-wrap: balance;
 }
 
 .wml-editorial h1 em,
@@ -157,6 +158,48 @@
     border-bottom: 1px solid var(--wml-c-line);
     padding-bottom: 0.9rem;
     margin-bottom: 2.8rem;
+}
+
+.wml-editorial .editorial-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    border-bottom: 1px solid var(--wml-c-line-subtle);
+    padding-bottom: 0.85rem;
+    margin-bottom: 2.2rem;
+    font-size: 0.85rem;
+    font-family: var(--wml-font-sans);
+    font-weight: 500;
+    color: var(--wml-c-muted);
+}
+
+.wml-editorial .editorial-breadcrumb a {
+    color: var(--wml-c-forest);
+    text-decoration: none;
+    transition: color 140ms ease;
+}
+
+.wml-editorial .editorial-breadcrumb a:hover {
+    color: var(--wml-c-forest-deep);
+    text-decoration: underline;
+}
+
+.wml-editorial .editorial-breadcrumb .sep {
+    color: var(--wml-c-line-heavy);
+    font-weight: 400;
+}
+
+.wml-editorial .editorial-breadcrumb .current {
+    color: var(--wml-c-charcoal);
+    font-weight: 600;
+}
+
+.wml-editorial .editorial-breadcrumb .breadcrumb-affiliation {
+    margin-left: auto;
+    color: var(--wml-c-muted);
+    font-size: 0.8rem;
+    font-weight: 400;
 }
 
 .wml-editorial .index-badge {
@@ -250,7 +293,6 @@
     gap: 2rem;
     background: var(--wml-c-sage-light);
     border: 1px solid var(--wml-c-line);
-    border-left: 4px solid var(--wml-c-forest);
     margin-top: var(--section-gap);
     padding: clamp(2rem, 4vw, 3.2rem) clamp(1.8rem, 3.5vw, 3rem);
     position: relative;
@@ -294,19 +336,10 @@
 .wml-editorial .empty-state {
     background: var(--wml-c-paper-warm);
     border: 1px solid var(--wml-c-line);
+    border-radius: 14px;
     padding: clamp(2rem, 5vw, 4rem);
     position: relative;
     overflow: hidden;
-}
-
-.wml-editorial .empty-state::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--wml-c-forest) 0%, var(--wml-c-sage) 100%);
 }
 
 .wml-editorial .empty-state h3 {
@@ -488,12 +521,12 @@
 }
 
 .wml-editorial .featured-publications .publication-record {
-    border: none;
+    border: 1px solid var(--wml-c-line);
+    border-radius: 12px;
     padding: 1.8rem;
     margin: 0;
     background: #ffffff;
     box-shadow: var(--wml-shadow-subtle);
-    border-left: 3px solid var(--wml-c-forest);
     transition: transform 250ms var(--wml-ease-out), box-shadow 250ms var(--wml-ease-out);
 }
 
@@ -615,7 +648,8 @@
     color: var(--wml-c-muted);
     background: var(--wml-c-paper-warm);
     padding: 1.2rem 1.5rem;
-    border-left: 2px solid var(--wml-c-line);
+    border-left: 1px solid var(--wml-c-line);
+    border-radius: 4px;
     margin-top: 0.8rem;
 }
 
@@ -720,35 +754,163 @@
     border: 1px solid var(--wml-c-line);
 }
 
-/* Project Feature Showcase */
+/* Project Feature Showcase — Alternating Editorial Layouts (Phase 5) */
 .wml-editorial .project-feature {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3.5rem;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
     align-items: center;
-    padding-block: 3.5rem;
+    padding-block: clamp(2.5rem, 4.5vw, 4rem);
     border-bottom: 1px solid var(--wml-c-line);
 }
 
-.wml-editorial .project-feature > img {
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border: 1px solid var(--wml-c-line);
-    box-shadow: var(--wml-shadow-subtle);
-    transition: transform 350ms var(--wml-ease-out);
-}
-
-.wml-editorial .project-feature:hover > img {
-    transform: scale(1.02);
-}
-
-.wml-editorial .project-feature:nth-of-type(even) > img {
+.wml-editorial .project-feature:nth-of-type(even) .project-media-slot {
     order: 2;
 }
 
-.wml-editorial .project-feature--text {
+.wml-editorial .project-media-slot {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--wml-c-line);
+    background: var(--wml-c-sage-light);
+    box-shadow: 0 6px 24px -4px rgba(16, 44, 34, 0.08);
+}
+
+.wml-editorial .project-sample-figure {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.wml-editorial .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    max-width: 65rem;
+    transition: transform 550ms var(--wml-ease-out);
+}
+
+.wml-editorial .project-feature:hover .project-img {
+    transform: scale(1.03);
+}
+
+.wml-editorial .sample-photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 28, 21, 0.88) 100%);
+    color: #e2ece1;
+    font-family: var(--wml-font-sans);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    text-transform: none;
+    letter-spacing: normal;
+    padding: 1.75rem 1rem 0.65rem;
+    pointer-events: none;
+}
+
+.wml-editorial .project-meta-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.85rem;
+}
+
+.wml-editorial .project-title {
+    font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+    line-height: 1.2;
+    margin-bottom: 0.85rem;
+}
+
+.wml-editorial .project-title a {
+    color: var(--wml-c-forest-deep);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.wml-editorial .project-title a:hover {
+    color: var(--wml-c-forest);
+}
+
+.wml-editorial .project-summary {
+    font-size: 1rem;
+    line-height: 1.68;
+    color: var(--wml-c-ink);
+    margin-bottom: 1.25rem;
+}
+
+.wml-editorial .project-funding-highlight {
+    font-size: 0.88rem;
+    background: var(--wml-c-sage-light);
+    border: 1px solid var(--wml-c-line-subtle);
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    color: var(--wml-c-forest-deep);
+}
+
+.wml-editorial .project-detail-hero {
+    margin: 2rem 0;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--wml-c-line);
+    position: relative;
+    box-shadow: 0 10px 32px -6px rgba(16, 44, 34, 0.12);
+}
+
+.wml-editorial .project-detail-hero img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.wml-editorial .project-detail-hero figcaption {
+    padding: 0.85rem 1.25rem;
+    background: var(--wml-c-paper-warm);
+    font-family: var(--wml-font-sans);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--wml-c-muted);
+    border-top: 1px solid var(--wml-c-line);
+}
+
+.wml-editorial .editorial-image {
+    margin: 2.5rem 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--wml-c-line);
+    position: relative;
+    box-shadow: 0 8px 30px -4px rgba(16, 44, 34, 0.08);
+}
+
+.wml-editorial .editorial-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.wml-editorial .editorial-image figcaption {
+    padding: 0.85rem 1.25rem;
+    background: var(--wml-c-paper-warm);
+    font-family: var(--wml-font-sans);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--wml-c-muted);
+    border-top: 1px solid var(--wml-c-line);
 }
 
 .wml-editorial .project-publications {
@@ -813,140 +975,1029 @@
 }
 
 /* ==========================================================================
-   PAGE 3 — TEAM
+   PAGE 3 — TEAM & ACADEMIC PEOPLE DIRECTORY (PHASE 4 REDESIGN)
+   Visual References: Stadler Lab Directory + Interactive Portrait Accordion
    ========================================================================== */
 .wml-editorial .team-intro h1 {
     max-width: 16ch;
 }
 
-.wml-editorial .director-section {
+.wml-editorial .section-sub-copy {
+    font-size: 1.05rem;
+    color: var(--wml-c-muted);
+    max-width: 64ch;
+    margin: -1.25rem 0 2rem;
+    line-height: 1.6;
+}
+
+/* --- Section 2: Laboratory Leadership / Director Spotlight --- */
+.wml-editorial .director-spotlight-section {
     border-top: 2px solid var(--wml-c-forest);
-    padding-top: 2rem;
+    padding-top: 2.25rem;
     margin-top: 2rem;
 }
 
-.wml-editorial .director-profile {
+.wml-editorial .director-spotlight-card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr);
+    gap: clamp(2.5rem, 5.5vw, 5.5rem);
     align-items: center;
-    background: var(--wml-c-sage-light);
+    background: var(--wml-c-paper-warm);
     border: 1px solid var(--wml-c-line);
+    border-radius: 18px;
     padding: clamp(2rem, 4vw, 3.5rem);
-    box-shadow: var(--wml-shadow-subtle);
+    box-shadow: 0 8px 30px -4px rgba(16, 44, 34, 0.08);
+    position: relative;
+    overflow: hidden;
 }
 
+.wml-editorial .director-frame,
 .wml-editorial .director-portrait {
+    margin: 0;
     background: #ffffff;
     border: 1px solid var(--wml-c-line);
-    padding: 1rem;
+    border-radius: 14px;
+    padding: 0.85rem;
+    box-shadow: var(--wml-shadow-subtle);
     position: relative;
 }
 
+.wml-editorial .director-img,
 .wml-editorial .director-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    object-position: center 20%;
-    filter: contrast(1.03);
-    transition: transform 400ms var(--wml-ease-out);
+    object-position: center 22%;
+    border-radius: 8px;
+    filter: contrast(1.02);
+    transition: transform 450ms var(--wml-ease-out);
 }
 
+.wml-editorial .director-frame:hover .director-img,
 .wml-editorial .director-portrait:hover img {
     transform: scale(1.02);
 }
 
+.wml-editorial .director-caption,
 .wml-editorial .director-portrait figcaption {
     font-family: var(--wml-font-mono);
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--wml-c-muted);
-    padding: 0.8rem 0 0;
-    border-top: 1px solid var(--wml-c-line);
+    padding: 0.75rem 0 0.15rem;
+    border-top: 1px solid var(--wml-c-line-subtle);
     text-align: center;
 }
 
-.wml-editorial .director-copy h3 {
-    font-size: clamp(2.6rem, 4.5vw, 4.2rem);
-    line-height: 1.05;
-    margin-bottom: 0.75rem;
-    color: var(--wml-c-forest-deep);
-}
-
-.wml-editorial .director-role {
-    font-family: var(--wml-font-sans);
-    font-size: 1.05rem;
-    line-height: 1.6;
+.wml-editorial .director-title-badge {
+    display: inline-block;
+    font-family: var(--wml-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
     color: var(--wml-c-forest);
-    margin-bottom: 1.8rem;
-    font-weight: 500;
+    background: var(--wml-c-sage);
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 0.85rem;
+    font-weight: 600;
 }
 
-.wml-editorial .director-role strong {
-    font-weight: 700;
+.wml-editorial .director-name {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.1;
     color: var(--wml-c-forest-deep);
+    margin-bottom: 0.65rem;
+    letter-spacing: -0.03em;
 }
 
-.wml-editorial .director-copy > p:not(.director-role) {
-    color: var(--wml-c-ink);
+.wml-editorial .director-credentials {
+    font-family: var(--wml-font-sans);
     font-size: 1.02rem;
-    line-height: 1.75;
+    line-height: 1.55;
+    color: var(--wml-c-muted);
+    margin-bottom: 1.5rem;
 }
 
-/* Team Directory Grid */
-.wml-editorial .member-grid {
+.wml-editorial .director-credentials strong {
+    color: var(--wml-c-forest-deep);
+    font-weight: 600;
+}
+
+.wml-editorial .director-bio {
+    color: var(--wml-c-ink);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.wml-editorial .director-bio p {
+    margin-bottom: 0.85rem;
+}
+
+.wml-editorial .director-focus {
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--wml-c-line-subtle);
+    padding: 1.1rem 0 0;
+    border-radius: 0;
+    margin-bottom: 1.75rem;
+}
+
+.wml-editorial .director-focus p {
+    font-size: 0.92rem;
+    margin: 0.35rem 0 0;
+    color: var(--wml-c-forest-deep);
+    line-height: 1.55;
+}
+
+.wml-editorial .director-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+/* --- Section 3: Interactive Portrait Accordion (Reference B) --- */
+.wml-editorial .team-featured-accordion-section {
+    position: relative;
+}
+
+.wml-editorial .team-accordion-wrap {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.wml-editorial .team-accordion {
+    display: flex;
+    gap: 18px;
+    height: clamp(520px, 62vh, 660px);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wml-editorial .team-accordion-card {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: var(--wml-c-forest-deep);
+    box-shadow: 0 10px 28px -6px rgba(16, 44, 34, 0.16);
+    border: 1px solid rgba(205, 219, 208, 0.5);
+    transition: flex 540ms cubic-bezier(0.2, 0.85, 0.25, 1),
+                box-shadow 400ms ease,
+                border-color 400ms ease;
+    will-change: flex;
+    outline: none;
+}
+
+.wml-editorial .team-accordion-card:focus-visible {
+    outline: 3px solid var(--wml-c-accent-bright);
+    outline-offset: 4px;
+}
+
+/* Expanded Card State */
+.wml-editorial .team-accordion-card.is-active {
+    flex: 3.25;
+    cursor: default;
+    border-color: rgba(157, 230, 166, 0.55);
+    box-shadow: 0 22px 50px -10px rgba(10, 28, 21, 0.35);
+}
+
+.wml-editorial .team-accordion-card .card-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.wml-editorial .team-accordion-card .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    transform: scale(1);
+    transition: transform 600ms cubic-bezier(0.2, 0.85, 0.25, 1), filter 400ms ease;
+}
+
+.wml-editorial .team-accordion-card:hover .card-img {
+    filter: brightness(1.03);
+}
+
+.wml-editorial .team-accordion-card.is-active .card-img {
+    transform: scale(1.035);
+}
+
+/* Elegant Neutral Monogram Placeholder */
+.wml-editorial .card-placeholder-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(150deg, #184230 0%, #0e281d 60%, #081811 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    user-select: none;
+}
+
+.wml-editorial .card-placeholder-art .placeholder-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+
+.wml-editorial .card-placeholder-art .placeholder-monogram {
+    font-family: var(--wml-font-serif);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 400;
+    color: var(--wml-c-accent-bright);
+    letter-spacing: -0.02em;
+    z-index: 2;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.wml-editorial .card-placeholder-art .placeholder-label {
+    font-family: var(--wml-font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(226, 236, 225, 0.75);
+    margin-top: 0.5rem;
+    z-index: 2;
+}
+
+/* Photographic Dark Bottom Gradient Overlay (Reference B) */
+.wml-editorial .card-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 28, 21, 0) 30%,
+        rgba(10, 28, 21, 0.45) 55%,
+        rgba(10, 28, 21, 0.85) 75%,
+        rgba(8, 22, 16, 0.97) 100%
+    );
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* Collapsed Vertical Label (Reference B style) */
+.wml-editorial .card-collapsed-label {
+    position: absolute;
+    bottom: 24px;
+    left: 20px;
+    z-index: 8;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 12px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 300ms ease, transform 350ms ease;
+}
+
+.wml-editorial .team-accordion-card.is-active .card-collapsed-label {
+    opacity: 0;
+    pointer-events: none;
+    transform: rotate(180deg) translateY(10px);
+}
+
+.wml-editorial .card-collapsed-label .vertical-name {
+    font-family: var(--wml-font-sans);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    white-space: nowrap;
+}
+
+.wml-editorial .card-collapsed-label .vertical-tag {
+    font-family: var(--wml-font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--wml-c-accent-bright);
+    white-space: nowrap;
+}
+
+/* Expanded Horizontal Content */
+.wml-editorial .card-expanded-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(16px);
+    transition: opacity 380ms ease 120ms,
+                transform 420ms cubic-bezier(0.2, 0.85, 0.25, 1) 120ms;
+}
+
+.wml-editorial .team-accordion-card.is-active .card-expanded-content {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.wml-editorial .expanded-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.75rem;
+}
+
+.wml-editorial .expanded-category-badge {
+    font-family: var(--wml-font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    background: rgba(157, 230, 166, 0.22);
+    color: var(--wml-c-accent-bright);
+    border: 1px solid rgba(157, 230, 166, 0.35);
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.wml-editorial .expanded-degree-badge {
+    font-family: var(--wml-font-sans);
+    font-size: 0.78rem;
+    color: rgba(226, 236, 225, 0.85);
+}
+
+.wml-editorial .expanded-name {
+    font-family: var(--wml-font-serif);
+    font-size: clamp(1.75rem, 3.2vw, 2.45rem);
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.025em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.wml-editorial .expanded-role {
+    font-family: var(--wml-font-sans);
+    font-size: 0.98rem;
+    color: var(--wml-c-accent-bright);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+}
+
+.wml-editorial .expanded-affiliation {
+    font-size: 0.85rem;
+    color: rgba(226, 236, 225, 0.8);
+    margin-bottom: 0.85rem;
+}
+
+.wml-editorial .expanded-interests {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(245, 247, 242, 0.92);
+    max-width: 48ch;
+    margin-bottom: 1.35rem;
+}
+
+.wml-editorial .expanded-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wml-editorial .accordion-profile-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: #ffffff;
+    color: var(--wml-c-forest-deep);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--wml-font-sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.wml-editorial .accordion-profile-trigger:hover {
+    background: var(--wml-c-accent-bright);
+    color: var(--wml-c-forest-darkest);
+    transform: translateY(-2px);
+}
+
+.wml-editorial .accordion-quick-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.wml-editorial .accordion-quick-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Responsive Accordion Breakpoints */
+@media (max-width: 1024px) {
+    .wml-editorial .team-accordion {
+        height: 500px;
+        gap: 12px;
+    }
+    .wml-editorial .team-accordion-card.is-active {
+        flex: 2.5;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mobile Touch Carousel: Horizontal swipe with snap scrolling */
+    .wml-editorial .team-accordion {
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding: 0 0 16px;
+    }
+
+    .wml-editorial .team-accordion-card {
+        flex: 0 0 84vw;
+        max-width: 340px;
+        height: 480px;
+        scroll-snap-align: center;
+        border-radius: 16px;
+    }
+
+    .wml-editorial .team-accordion-card.is-active,
+    .wml-editorial .team-accordion-card {
+        flex: 0 0 84vw;
+    }
+
+    .wml-editorial .card-collapsed-label {
+        display: none;
+    }
+
+    .wml-editorial .card-expanded-content {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        padding: 1.5rem;
+    }
+
+    .wml-editorial .expanded-name {
+        font-size: 1.65rem;
+    }
+}
+
+/* --- Section 4-8: Academic Directory Grids & Cards (Stadler Lab Style) --- */
+.wml-editorial .team-directory-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 3rem 2.2rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
 }
 
-.wml-editorial .member-profile {
-    background: var(--wml-c-paper-warm);
+.wml-editorial .academic-member-card {
+    background: #ffffff;
     border: 1px solid var(--wml-c-line);
-    padding: 1.8rem;
-    transition: transform 250ms var(--wml-ease-out), box-shadow 250ms var(--wml-ease-out), border-color 250ms ease;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 18px -3px rgba(16, 44, 34, 0.05);
+    transition: transform 250ms var(--wml-ease-out),
+                box-shadow 250ms var(--wml-ease-out),
+                border-color 250ms ease;
 }
 
-.wml-editorial .member-profile:hover {
+.wml-editorial .academic-member-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--wml-shadow-lift);
     border-color: var(--wml-c-forest);
 }
 
-.wml-editorial .member-profile img {
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    margin-bottom: 1.25rem;
-    border: 1px solid var(--wml-c-line);
+.wml-editorial .card-portrait-slot {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--wml-c-sage-light);
+    position: relative;
 }
 
-.wml-editorial .member-profile h3 {
-    font-size: 1.5rem;
+.wml-editorial .member-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    transition: transform 400ms var(--wml-ease-out);
+}
+
+.wml-editorial .academic-member-card:hover .member-portrait-img {
+    transform: scale(1.03);
+}
+
+.wml-editorial .card-portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #184230 0%, #0d251a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.wml-editorial .card-portrait-placeholder .placeholder-rings {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wml-editorial .card-portrait-placeholder .monogram {
+    font-family: var(--wml-font-serif);
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--wml-c-accent-bright);
+    z-index: 2;
+}
+
+.wml-editorial .member-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.wml-editorial .member-card-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--wml-c-line-subtle);
+}
+
+.wml-editorial .member-name {
+    font-size: 1.4rem;
+    line-height: 1.2;
+    color: var(--wml-c-forest-deep);
+    margin-bottom: 0.35rem;
+}
+
+.wml-editorial .member-card-body .member-role {
+    font-family: var(--wml-font-sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--wml-c-forest);
+    margin-bottom: 0.25rem;
+}
+
+.wml-editorial .member-affiliation {
+    font-size: 0.85rem;
+    color: var(--wml-c-muted);
+    margin-bottom: 0.25rem;
+}
+
+.wml-editorial .member-academic-bg {
+    font-size: 0.82rem;
+    color: var(--wml-c-muted);
+    font-style: italic;
+}
+
+.wml-editorial .member-interests {
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.wml-editorial .member-interests .small-label {
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.wml-editorial .member-interests p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--wml-c-ink);
+    margin: 0;
+}
+
+.wml-editorial .alumni-position-badge {
+    background: var(--wml-c-sage-light);
+    border: 1px solid var(--wml-c-line-subtle);
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.wml-editorial .alumni-position-badge p {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--wml-c-forest-deep);
+    margin: 0;
+}
+
+.wml-editorial .member-related-projects {
+    margin-bottom: 1.25rem;
+}
+
+.wml-editorial .member-related-projects .small-label {
+    display: block;
     margin-bottom: 0.4rem;
 }
 
-.wml-editorial .member-role {
-    font-family: var(--wml-font-mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+.wml-editorial .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.wml-editorial .project-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--wml-c-forest);
+    background: var(--wml-c-sage);
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.wml-editorial .project-tag:hover {
+    background: #d4e4d2;
+}
+
+.wml-editorial .member-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--wml-c-line-subtle);
+    margin-top: auto;
+}
+
+.wml-editorial .member-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--wml-font-sans);
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--wml-c-forest);
-    margin-bottom: 0.8rem;
+    background: transparent;
+    border: 1px solid var(--wml-c-line);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.wml-editorial .director-section > .member-profile {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 3rem;
+.wml-editorial .member-profile-btn:hover {
+    background: var(--wml-c-forest);
+    color: #ffffff;
+    border-color: var(--wml-c-forest);
+}
+
+.wml-editorial .member-quick-links {
+    display: flex;
     align-items: center;
+    gap: 8px;
 }
 
+.wml-editorial .icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: var(--wml-c-muted);
+    border: 1px solid var(--wml-c-line);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.wml-editorial .icon-link:hover {
+    color: var(--wml-c-forest);
+    border-color: var(--wml-c-forest);
+    background: var(--wml-c-sage-light);
+}
+
+/* Alumni Directory Grid */
+.wml-editorial .alumni-directory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Directory recruitment note when empty */
 .wml-editorial .team-directory-note {
     border-top: 1px solid var(--wml-c-line);
     margin-top: var(--section-gap);
-    padding-top: 3rem;
-    max-width: 50rem;
+    padding-top: 3.5rem;
+}
+
+.wml-editorial .directory-note-box {
+    background: var(--wml-c-paper-warm);
+    border: 1px solid var(--wml-c-line);
+    border-radius: 16px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    max-width: 54rem;
+}
+
+.wml-editorial .directory-note-box h2 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    margin-bottom: 1rem;
+}
+
+.wml-editorial .directory-note-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+}
+
+/* --- Section Modal: Accessible Individual Member Profiles (Phase 4.4) --- */
+.wml-profile-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 3vw, 2rem);
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 250ms ease, visibility 250ms ease;
+}
+
+.wml-profile-modal.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wml-profile-modal[hidden] {
+    display: none;
+}
+
+.wml-profile-modal .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 28, 21, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.wml-profile-modal .modal-card {
+    position: relative;
+    z-index: 2;
+    background: #fbfcf9;
+    border: 1px solid var(--wml-c-line);
+    border-radius: 20px;
+    width: min(100%, 860px);
+    max-height: min(92vh, 850px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-shadow: 0 25px 60px -15px rgba(10, 28, 21, 0.35);
+    padding: clamp(1.75rem, 3.5vw, 3rem);
+    box-sizing: border-box;
+    transform: translateY(12px) scale(0.98);
+    transition: transform 300ms cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+
+.wml-profile-modal.is-visible .modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.wml-profile-modal .modal-close-btn {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--wml-c-paper-warm);
+    border: 1px solid var(--wml-c-line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wml-c-forest-deep);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.wml-profile-modal .modal-close-btn:hover {
+    background: var(--wml-c-sage);
+    transform: rotate(90deg);
+}
+
+.wml-profile-modal .modal-close-btn:focus-visible {
+    outline: 2px solid var(--wml-c-forest);
+    outline-offset: 3px;
+}
+
+.wml-profile-modal .modal-content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: flex-start;
+}
+
+.wml-profile-modal .modal-portrait-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.wml-profile-modal .modal-portrait-img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: 12px;
+    border: 1px solid var(--wml-c-line);
+}
+
+.wml-profile-modal .modal-portrait-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #184230 0%, #0d251a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+
+.wml-profile-modal .monogram-large {
+    font-family: var(--wml-font-serif);
+    font-size: 4rem;
+    color: var(--wml-c-accent-bright);
+}
+
+.wml-profile-modal .monogram-subtitle {
+    font-family: var(--wml-font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--wml-c-sage);
+    margin-top: 0.5rem;
+}
+
+.wml-profile-modal .modal-quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wml-profile-modal .modal-link-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--wml-c-forest);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--wml-c-sage-light);
+    border: 1px solid var(--wml-c-line-subtle);
+    transition: background 0.18s, border-color 0.18s;
+}
+
+.wml-profile-modal .modal-link-item:hover {
+    background: var(--wml-c-sage);
+    border-color: var(--wml-c-forest);
+}
+
+.wml-profile-modal .modal-category-tag {
+    display: inline-block;
+    font-family: var(--wml-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--wml-c-forest);
+    background: var(--wml-c-sage);
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.wml-profile-modal .modal-name {
+    font-size: clamp(2rem, 3.2vw, 2.75rem);
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+    color: var(--wml-c-forest-deep);
+}
+
+.wml-profile-modal .modal-role {
+    font-family: var(--wml-font-sans);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--wml-c-forest);
+    margin-bottom: 0.35rem;
+}
+
+.wml-profile-modal .modal-affiliation {
+    font-size: 0.95rem;
+    color: var(--wml-c-muted);
+    margin-bottom: 1.5rem;
+}
+
+.wml-profile-modal .modal-section {
+    margin-bottom: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--wml-c-line-subtle);
+}
+
+.wml-profile-modal .modal-section .small-label {
+    display: block;
+    margin-bottom: 0.45rem;
+}
+
+.wml-profile-modal .modal-text {
+    font-size: 0.96rem;
+    line-height: 1.65;
+    color: var(--wml-c-ink);
+}
+
+.wml-profile-modal .modal-text.highlight-box {
+    background: var(--wml-c-sage-light);
+    border: 1px solid var(--wml-c-line-subtle);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+}
+
+.wml-profile-modal .modal-project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wml-profile-modal .modal-project-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line);
+    text-decoration: none;
+    color: var(--wml-c-forest-deep);
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.wml-profile-modal .modal-project-card:hover {
+    border-color: var(--wml-c-forest);
+    background: var(--wml-c-sage-light);
+    color: var(--wml-c-forest);
+}
+
+@media (max-width: 680px) {
+    .wml-profile-modal .modal-content-grid {
+        grid-template-columns: 1fr;
+    }
+    .wml-profile-modal .modal-portrait-col {
+        max-width: 280px;
+        margin: 0 auto;
+    }
 }
 
 /* ==========================================================================
@@ -1022,8 +2073,8 @@
     background: var(--wml-c-sage-light);
     border: 1px solid var(--wml-c-line);
     padding: clamp(2rem, 4vw, 3rem);
-    border-left: 4px solid var(--wml-c-forest);
     box-shadow: var(--wml-shadow-subtle);
+    border-radius: 12px;
 }
 
 .wml-editorial .activity-gallery {
@@ -1118,7 +2169,7 @@
 .wml-editorial .monitoring-thesis {
     background: var(--wml-c-paper-warm);
     border: 1px solid var(--wml-c-forest);
-    border-left: 4px solid var(--wml-c-forest);
+    border-radius: 12px;
     padding: 2rem 2.2rem;
     margin-bottom: 0.5rem;
 }
@@ -1207,13 +2258,6 @@
     height: 8px;
     border-radius: 50%;
     background: var(--wml-c-amber);
-    box-shadow: 0 0 8px var(--wml-c-amber);
-    animation: wml-status-pulse 2s infinite ease-in-out;
-}
-
-@keyframes wml-status-pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
 }
 
 .wml-editorial .platform-notice {
@@ -1333,13 +2377,14 @@
 }
 
 .wml-editorial .panel-footnote {
-    font-family: var(--wml-font-mono);
-    font-size: 0.72rem;
-    color: #729683;
+    font-family: var(--wml-font-sans);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #8daea0;
     padding-top: 0.8rem;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 .wml-editorial .dataset-details {
@@ -1471,6 +2516,13 @@
 
 .wml-editorial .news-feature--text h2 {
     max-width: 28ch;
+}
+
+.wml-editorial .news-feature p,
+.wml-editorial .news-feature--text p {
+    max-width: 50ch;
+    line-height: 1.65;
+    text-wrap: pretty;
 }
 
 /* News Grid */
@@ -1666,8 +2718,8 @@
     color: var(--wml-c-ink);
     background: var(--wml-c-paper-warm);
     border: 1px solid var(--wml-c-line);
+    border-radius: 12px;
     padding: 1.8rem 2rem;
-    border-left: 3px solid var(--wml-c-forest);
 }
 
 .wml-editorial .contact-conversation {
@@ -1840,7 +2892,9 @@
 .wml-editorial .grant-category-header p {
     font-size: 0.95rem;
     color: var(--wml-c-muted);
-    max-width: 65ch;
+    max-width: 56ch;
+    line-height: 1.6;
+    text-wrap: pretty;
 }
 
 .wml-editorial .grants-grid {
@@ -1852,14 +2906,13 @@
 .wml-editorial .grant-card {
     background: #ffffff;
     border: 1px solid var(--wml-c-line);
-    border-left: 4px solid var(--wml-c-forest);
     padding: 1.5rem;
-    border-radius: 6px;
+    border-radius: 12px;
     box-shadow: var(--wml-shadow-subtle);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 300ms var(--wml-ease-out), box-shadow 300ms var(--wml-ease-out);
+    transition: transform 300ms var(--wml-ease-out), box-shadow 300ms var(--wml-ease-out), border-color 300ms ease;
 }
 
 .wml-editorial .grant-card:hover {
@@ -1908,7 +2961,8 @@
     font-size: 1.18rem;
     line-height: 1.35;
     color: var(--wml-c-ink);
-    margin-bottom: 0.75rem;
+    margin-top: 1.1rem;
+    margin-bottom: 0.65rem;
     font-family: var(--wml-font-serif);
     font-weight: 600;
 }
@@ -2017,7 +3071,8 @@
     color: var(--wml-c-forest-deep);
     background: var(--wml-c-sage-light);
     padding: 0.4rem 0.75rem;
-    border-left: 3px solid var(--wml-c-forest);
+    border: 1px solid var(--wml-c-line-subtle);
+    border-radius: 6px;
     margin: 0.6rem 0;
 }
 
@@ -2191,9 +3246,8 @@
 .wml-editorial .home-contact-card {
     background: #ffffff;
     border: 1px solid var(--wml-c-line);
-    border-left: 4px solid var(--wml-c-forest);
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: var(--wml-shadow-subtle);
     margin-top: 1.5rem;
 }
@@ -2241,6 +3295,7 @@
     .wml-editorial .monitoring-intro,
     .wml-editorial .news-masthead,
     .wml-editorial .director-profile,
+    .wml-editorial .director-spotlight-card,
     .wml-editorial .director-section > .member-profile,
     .wml-editorial .research-approach,
     .wml-editorial .project-feature,
@@ -2250,7 +3305,17 @@
     .wml-editorial .contact-layout,
     .wml-editorial .contact-conversation {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2.2rem;
+    }
+    .wml-editorial .director-spotlight-card {
+        padding: 1.75rem;
+    }
+    .wml-editorial .director-frame {
+        max-width: 300px;
+        margin-inline: auto;
+    }
+    .wml-editorial .project-media-slot {
+        order: -1 !important;
     }
     .wml-editorial .intro-bottom,
     .wml-editorial .editorial-cta,
@@ -2266,9 +3331,6 @@
     }
     .wml-editorial .research-areas {
         grid-template-columns: 1fr;
-    }
-    .wml-editorial .project-feature:nth-of-type(even) > img {
-        order: 0;
     }
     .wml-editorial .empty-state--archive {
         grid-template-columns: 1fr;
@@ -2349,9 +3411,11 @@
 
 @media (max-width: 430px) {
     .wml-editorial .editorial-shell {
-        width: calc(100% - 2rem);
+        width: calc(100% - 1.8rem);
     }
     .wml-editorial .member-grid,
+    .wml-editorial .team-directory-grid,
+    .wml-editorial .alumni-directory-grid,
     .wml-editorial .news-grid,
     .wml-editorial .activity-gallery {
         grid-template-columns: 1fr;
@@ -2361,7 +3425,8 @@
         gap: 0.4rem 1rem;
     }
     .wml-editorial .contact-email-link {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        word-break: break-all;
     }
     .wml-editorial .journal-topics ul {
         grid-template-columns: 1fr;
@@ -2370,25 +3435,28 @@
 
 @media (max-width: 375px) {
     .wml-editorial h1 {
-        font-size: 2.4rem;
+        font-size: 2.35rem;
     }
     .wml-editorial .contact-email-link {
-        font-size: 1.45rem;
+        font-size: 1.35rem;
+    }
+    .wml-editorial .director-name {
+        font-size: 2rem;
     }
     .wml-editorial .director-copy h3 {
-        font-size: 2.2rem;
+        font-size: 2.1rem;
     }
 }
 
 @media (max-width: 320px) {
     .wml-editorial .editorial-shell {
-        width: calc(100% - 1.5rem);
+        width: calc(100% - 1.25rem);
     }
     .wml-editorial h1 {
-        font-size: 2.1rem;
+        font-size: 2rem;
     }
     .wml-editorial .contact-email-link {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 }
 

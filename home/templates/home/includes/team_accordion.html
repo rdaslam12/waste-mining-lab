@@ -1,0 +1,97 @@
+{% load static wagtailimages_tags %}
+{# Waste Mining Lab — Interactive Portrait Accordion (Reference B) #}
+<div class="team-accordion-wrap">
+    <div class="team-accordion"
+         role="region"
+         aria-label="Featured Researchers Directory"
+         data-accordion="team">
+        {% for member in featured_members %}
+        <article class="team-accordion-card {% if forloop.first %}is-active{% endif %}"
+                 tabindex="0"
+                 role="group"
+                 aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                 aria-label="{{ member.name }} — {{ member.role }}"
+                 data-index="{{ forloop.counter0 }}">
+            <div class="card-media">
+                {% if member.image %}
+                    {% image member.image fill-800x1200 as portrait %}
+                    <img src="{{ portrait.url }}"
+                         width="{{ portrait.width }}"
+                         height="{{ portrait.height }}"
+                         alt="{{ member.name }}"
+                         class="card-img"
+                         loading="lazy">
+                {% elif member.is_director_fallback or member.category == "director" %}
+                    <img src="{% static 'images/asef-redwan-1080.webp' %}"
+                         srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w"
+                         sizes="(max-width: 768px) 100vw, 400px"
+                         width="1080"
+                         height="1080"
+                         alt="Dr. Asef M. Redwan"
+                         class="card-img"
+                         loading="lazy">
+                {% else %}
+                    <div class="card-placeholder-art" aria-hidden="true">
+                        <svg class="placeholder-pattern" viewBox="0 0 120 120" preserveAspectRatio="none">
+                            <circle cx="60" cy="60" r="48" stroke="rgba(157, 230, 166, 0.16)" stroke-width="1" fill="none"/>
+                            <circle cx="60" cy="60" r="32" stroke="rgba(157, 230, 166, 0.22)" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
+                            <circle cx="60" cy="60" r="16" stroke="rgba(157, 230, 166, 0.35)" stroke-width="1.5" fill="none"/>
+                            <path d="M60 0v120M0 60h120" stroke="rgba(157, 230, 166, 0.08)" stroke-width="1"/>
+                        </svg>
+                        <span class="placeholder-monogram">{{ member.initials }}</span>
+                        <span class="placeholder-label">Academic Profile</span>
+                    </div>
+                {% endif %}
+                <div class="card-gradient-overlay" aria-hidden="true"></div>
+            </div>
+
+            {# Collapsed vertical state: Reference B rotated text along bottom edge #}
+            <div class="card-collapsed-label" aria-hidden="true">
+                <span class="vertical-tag">{{ member.get_category_display|default:"Researcher" }}</span>
+                <span class="vertical-name">{{ member.name }}</span>
+            </div>
+
+            {# Expanded horizontal state #}
+            <div class="card-expanded-content">
+                <div class="expanded-badge-row">
+                    <span class="expanded-category-badge">{{ member.get_category_display|default:"Research Team" }}</span>
+                    {% if member.academic_background %}
+                        <span class="expanded-degree-badge">{{ member.academic_background }}</span>
+                    {% endif %}
+                </div>
+                <h3 class="expanded-name">{{ member.name }}</h3>
+                <p class="expanded-role">{{ member.role }}</p>
+                {% if member.affiliation %}
+                    <p class="expanded-affiliation">{{ member.affiliation }}</p>
+                {% endif %}
+                {% if member.research_interests %}
+                    <p class="expanded-interests">{{ member.research_interests|truncatewords:18 }}</p>
+                {% elif member.biography %}
+                    <p class="expanded-interests">{{ member.biography|truncatewords:18 }}</p>
+                {% endif %}
+
+                <div class="expanded-actions">
+                    <button type="button"
+                            class="accordion-profile-trigger"
+                            data-open-modal="modal-member-{{ member.pk|default:forloop.counter }}"
+                            aria-haspopup="dialog"
+                            aria-controls="modal-member-{{ member.pk|default:forloop.counter }}">
+                        <span>View Profile</span>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    {% if member.email %}
+                        <a href="mailto:{{ member.email }}" class="accordion-quick-link" aria-label="Email {{ member.name }}">
+                            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M2.5 5.5A1.5 1.5 0 014 4h12a1.5 1.5 0 011.5 1.5v9a1.5 1.5 0 01-1.5 1.5H4A1.5 1.5 0 012.5 14.5v-9z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M3 5l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>

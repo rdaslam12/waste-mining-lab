@@ -2,7 +2,11 @@
 {% load wagtailcore_tags %}
 {% block section_content %}
 <header class="editorial-intro publication-intro">
-    <div class="index-line"><span>Research output</span><span>Publication archive</span></div>
+    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Waste Mining Lab</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span class="current">Publications &amp; Research Output</span>
+    </nav>
     <h1>{{ page.heading|default:"Publications" }}</h1>
     <div class="intro-bottom"><p class="lead">{{ page.intro|default:"An evolving record of research, ideas and evidence. Explore the work that informs our understanding of waste and its possibilities." }}</p><a class="editorial-link" href="/research/">Our research{% include "home/includes/link_arrow.html" %}</a></div>
 </header>

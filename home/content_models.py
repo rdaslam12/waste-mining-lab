@@ -216,27 +216,83 @@ class Grant(PublicRecord, ClusterableModel):
 @register_snippet
 class TeamMember(PublicRecord, ClusterableModel):
     class Category(models.TextChoices):
-        DIRECTOR = "director", "Laboratory director"
+        DIRECTOR = "director", "Principal Investigator / Lab Director"
+        SCIENTIST = "scientist", "Research Scientists & Postdoctoral Researchers"
+        ASSISTANT = "assistant", "Research Assistants"
+        STUDENT = "student", "Graduate & Undergraduate Researchers"
+        STAFF = "staff", "Research Officers & Laboratory Staff"
+        COLLABORATOR = "collaborator", "Collaborators & Co-Researchers"
+        ALUMNI = "alumni", "Alumni / Former Members"
+        # Backward compatibility with existing records
         RESEARCHER = "researcher", "Researchers"
-        STUDENT = "student", "Students"
-        COLLABORATOR = "collaborator", "Collaborators"
-        ALUMNI = "alumni", "Alumni"
 
     name = models.CharField(max_length=150)
-    role = models.CharField(max_length=200)
-    category = models.CharField(max_length=20, choices=Category.choices, default=Category.RESEARCHER)
-    affiliation = models.CharField(max_length=200, blank=True)
-    biography = models.TextField(blank=True)
-    research_interests = models.TextField(blank=True)
+    slug = models.SlugField(max_length=150, blank=True, help_text="Slug for profile modal/anchor (e.g., 'asef-redwan').")
+    role = models.CharField(max_length=200, help_text="Academic or research designation.")
+    category = models.CharField(max_length=20, choices=Category.choices, default=Category.ASSISTANT)
+    affiliation = models.CharField(max_length=200, blank=True, help_text="Department, center, or university affiliation.")
+    academic_background = models.CharField(max_length=255, blank=True, help_text="Degrees / academic qualifications (e.g., B.Sc. in Civil & Environmental Eng., NSU).")
+    biography = models.TextField(blank=True, help_text="Short biography / background summary.")
+    research_interests = models.TextField(blank=True, help_text="Comma-separated or narrative research focus.")
     image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
+    is_featured = models.BooleanField(default=False, help_text="Feature in the interactive portrait accordion on the Team page.")
     email = models.EmailField(blank=True)
-    profile_url = models.URLField(blank=True)
+    profile_url = models.URLField(blank=True, help_text="Faculty or institutional profile link.")
+    linkedin_url = models.URLField(blank=True, help_text="LinkedIn profile URL.")
+    scholar_url = models.URLField(blank=True, help_text="Google Scholar profile URL.")
+    alumni_current_position = models.CharField(max_length=255, blank=True, help_text="For alumni: current position and affiliation (e.g., Graduate Researcher, Stanford).")
     projects = ParentalManyToManyField(ResearchProject, blank=True, related_name="members")
-    panels = [FieldPanel(name) for name in ["name", "role", "category", "affiliation", "biography", "research_interests", "image", "email", "profile_url", "projects", "sort_order", "is_published"]]
+
+    panels = [
+        FieldPanel("name"),
+        FieldPanel("slug"),
+        FieldPanel("role"),
+        FieldPanel("category"),
+        FieldPanel("affiliation"),
+        FieldPanel("academic_background"),
+        FieldPanel("biography"),
+        FieldPanel("research_interests"),
+        FieldPanel("image"),
+        FieldPanel("is_featured"),
+        MultiFieldPanel(
+            [
+                FieldPanel("email"),
+                FieldPanel("profile_url"),
+                FieldPanel("linkedin_url"),
+                FieldPanel("scholar_url"),
+            ],
+            heading="Contact & Academic Links",
+        ),
+        FieldPanel("alumni_current_position"),
+        FieldPanel("projects"),
+        FieldPanel("sort_order"),
+        FieldPanel("is_published"),
+    ]
 
     @property
     def public_projects(self):
         return self.projects.filter(is_published=True)
+
+    @property
+    def initials(self):
+        parts = [p for p in self.name.replace("Dr.", "").replace("Prof.", "").strip().split() if p]
+        if not parts:
+            return "WML"
+        if len(parts) == 1:
+            return parts[0][:2].upper()
+        return f"{parts[0][0]}{parts[-1][0]}".upper()
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.name:
+            from django.utils.text import slugify
+            base_slug = slugify(self.name)[:140]
+            candidate = base_slug
+            idx = 1
+            while TeamMember.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
+                candidate = f"{base_slug}-{idx}"
+                idx += 1
+            self.slug = candidate
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
