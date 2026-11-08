@@ -31,22 +31,186 @@ class ResearchArea(PublicRecord):
 
 @register_snippet
 class ResearchProject(PublicRecord, ClusterableModel):
+    class Status(models.TextChoices):
+        ACTIVE = "active", "Active research"
+        COMPLETED = "completed", "Completed"
+        PLANNED = "planned", "Planned inquiry"
+
     title = models.CharField(max_length=250)
+    slug = models.SlugField(
+        max_length=250,
+        blank=True,
+        null=True,
+        unique=True,
+        help_text="Slug for project detail page (e.g., 'textile-wastewater-treatment').",
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.ACTIVE,
+        db_index=True,
+    )
     summary = models.TextField()
     area = models.ForeignKey(ResearchArea, null=True, blank=True, on_delete=models.SET_NULL, related_name="projects")
     image = models.ForeignKey("wagtailimages.Image", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
     description = RichTextField(blank=True)
+    methodology = RichTextField(blank=True, help_text="Detailed scientific methodology, experimental design, and equipment.")
+    collaborations = models.TextField(blank=True, help_text="Partner institutions, agencies, or industry partners.")
+    funding_notes = models.TextField(blank=True, help_text="Associated grant support and funding information.")
     external_url = models.URLField(blank=True)
     publications = ParentalManyToManyField("home.Publication", blank=True, related_name="projects")
     monitoring_related = models.BooleanField(default=False, help_text="Also feature this project on Waste Monitoring.")
-    panels = [FieldPanel("title"), FieldPanel("summary"), FieldPanel("area"), FieldPanel("image"), FieldPanel("description"), FieldPanel("external_url"), FieldPanel("publications"), FieldPanel("monitoring_related"), FieldPanel("sort_order"), FieldPanel("is_published")]
+
+    panels = [
+        FieldPanel("title"),
+        FieldPanel("slug"),
+        FieldPanel("status"),
+        FieldPanel("summary"),
+        FieldPanel("area"),
+        FieldPanel("image"),
+        MultiFieldPanel(
+            [
+                FieldPanel("start_date"),
+                FieldPanel("end_date"),
+                FieldPanel("collaborations"),
+                FieldPanel("funding_notes"),
+            ],
+            heading="Project timeline & Collaboration",
+        ),
+        FieldPanel("description"),
+        FieldPanel("methodology"),
+        FieldPanel("external_url"),
+        FieldPanel("publications"),
+        FieldPanel("monitoring_related"),
+        FieldPanel("sort_order"),
+        FieldPanel("is_published"),
+    ]
 
     @property
     def public_publications(self):
         return self.publications.published()
 
+    def get_absolute_url(self):
+        if self.slug:
+            return f"/research/{self.slug}/"
+        return f"/research/#project-{self.pk}"
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.title:
+            from django.utils.text import slugify
+            base_slug = slugify(self.title)[:200]
+            candidate = base_slug
+            idx = 1
+            while ResearchProject.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
+                candidate = f"{base_slug}-{idx}"
+                idx += 1
+            self.slug = candidate
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
+
+
+@register_snippet
+class Grant(PublicRecord, ClusterableModel):
+    class Category(models.TextChoices):
+        LAB = "lab", "Laboratory funding"
+        DIRECTOR = "director_affiliated", "Director-associated grants"
+        PREVIOUS = "previous_institutional", "Previous institutional funding"
+        COLLABORATION = "collaboration", "Research collaborations"
+
+    title = models.CharField(max_length=300)
+    funding_organization = models.CharField(max_length=255)
+    amount_display = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Formatted funding amount (e.g., 'BDT 14 Lakh', 'USD 898,265').",
+    )
+    amount = models.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Numeric amount if available.",
+    )
+    currency = models.CharField(max_length=10, blank=True, default="BDT")
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    role = models.CharField(
+        max_length=120,
+        default="Principal Investigator (PI)",
+        help_text="Role such as Principal Investigator (PI) or Co-PI.",
+    )
+    awarded_institution = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Awarded or administering institution (e.g., North South University, ITN-BUET, Idaho National Laboratory).",
+    )
+    category = models.CharField(
+        max_length=30,
+        choices=Category.choices,
+        default=Category.LAB,
+        db_index=True,
+        help_text="Distinguish lab-direct, director-associated, or prior institutional funding.",
+    )
+    related_project = models.ForeignKey(
+        ResearchProject,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="grants",
+    )
+    summary = models.TextField(blank=True, help_text="Summary of grant objectives and scope.")
+    public_source_url = models.URLField(blank=True, help_text="Public verification URL.")
+    is_verified = models.BooleanField(
+        default=True,
+        help_text="Verified against public university or agency records.",
+    )
+
+    panels = [
+        FieldPanel("title"),
+        FieldPanel("funding_organization"),
+        MultiFieldPanel(
+            [FieldPanel("amount_display"), FieldPanel("amount"), FieldPanel("currency")],
+            heading="Funding amount",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel("start_date"),
+                FieldPanel("end_date"),
+                FieldPanel("role"),
+                FieldPanel("awarded_institution"),
+                FieldPanel("category"),
+            ],
+            heading="Award details & Classification",
+        ),
+        FieldPanel("related_project"),
+        FieldPanel("summary"),
+        FieldPanel("public_source_url"),
+        MultiFieldPanel(
+            [FieldPanel("is_verified"), FieldPanel("is_published"), FieldPanel("sort_order")],
+            heading="Verification & Visibility",
+        ),
+    ]
+
+    class Meta:
+        ordering = ["sort_order", "-start_date", "-pk"]
+        verbose_name_plural = "Grants & Funding"
+
+    def __str__(self):
+        return f"{self.title} ({self.funding_organization})"
+
+    @property
+    def period_display(self):
+        if self.start_date and self.end_date:
+            return f"{self.start_date.strftime('%B %Y')} – {self.end_date.strftime('%B %Y')}"
+        elif self.start_date:
+            return f"From {self.start_date.strftime('%B %Y')}"
+        elif self.end_date:
+            return f"Until {self.end_date.strftime('%B %Y')}"
+        return ""
 
 
 @register_snippet

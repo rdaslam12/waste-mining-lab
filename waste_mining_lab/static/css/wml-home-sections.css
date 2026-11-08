@@ -1,0 +1,366 @@
+/* ==========================================================================
+   HOMEPAGE RICH SECTIONS (EDITORIAL INTEGRATION)
+   Visual identity: Matches WML academic editorial look without leaking
+   full wml-sections.css onto the pinned hero / mission animation.
+   ========================================================================== */
+
+.wml-home-editorial {
+    background: #fbfcf9;
+    color: #202c27;
+    padding-top: 4.5rem;
+    padding-bottom: 5.5rem;
+    border-top: 1px solid #cddbd0;
+    font-family: "DM Sans", "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.wml-home-editorial .editorial-shell {
+    width: min(calc(100% - 3.5rem), 1140px);
+    margin: 0 auto;
+}
+
+.wml-home-editorial .section-space {
+    margin-bottom: 4rem;
+}
+
+.wml-home-editorial .section-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 2px solid #1c5038;
+    padding-bottom: 0.85rem;
+    margin-bottom: 2rem;
+}
+
+.wml-home-editorial .section-heading h2 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: #102c22;
+    margin: 0;
+}
+
+.wml-home-editorial .small-label {
+    font-family: ui-monospace, "SF Mono", "Menlo", monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #52635a;
+}
+
+.wml-home-editorial .editorial-link {
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #1c5038;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.wml-home-editorial .editorial-link:hover {
+    color: #102c22;
+    text-decoration: underline;
+}
+
+.wml-home-editorial .home-section-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+}
+
+.wml-home-editorial .home-project-card {
+    background: #ffffff;
+    border: 1px solid #cddbd0;
+    padding: 1.75rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px -2px rgba(16, 44, 34, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wml-home-editorial .home-project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -4px rgba(16, 44, 34, 0.09);
+}
+
+.wml-home-editorial .home-project-card h3 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 0.6rem 0;
+    color: #102c22;
+}
+
+.wml-home-editorial .home-project-card h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wml-home-editorial .home-project-card h3 a:hover {
+    color: #1c5038;
+}
+
+.wml-home-editorial .home-project-card p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: #52635a;
+    margin: 0;
+}
+
+.wml-home-editorial .project-meta-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.wml-home-editorial .project-status-tag {
+    font-family: ui-monospace, "SF Mono", "Menlo", monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.wml-home-editorial .project-status-tag--active {
+    background: #e6f4ea;
+    color: #137333;
+    border: 1px solid #ceead6;
+}
+
+.wml-home-editorial .project-status-tag--completed {
+    background: #f1f3f4;
+    color: #5f6368;
+    border: 1px solid #dadce0;
+}
+
+.wml-home-editorial .project-status-tag--planned {
+    background: #fef7e0;
+    color: #b06000;
+    border: 1px solid #feefc3;
+}
+
+.wml-home-editorial .home-partners-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.2rem, 3vw, 2.5rem);
+    padding: 2rem 1.5rem;
+    background: #edf4ec;
+    border: 1px solid #cddbd0;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.wml-home-editorial .home-partner-item {
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #102c22;
+}
+
+.wml-home-editorial .home-contact-card {
+    background: #ffffff;
+    border: 1px solid #cddbd0;
+    border-left: 4px solid #1c5038;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px -2px rgba(16, 44, 34, 0.05);
+    margin-top: 1.5rem;
+}
+
+.wml-home-editorial .home-contact-card h3 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.45rem;
+    color: #102c22;
+    margin: 0 0 0.5rem;
+}
+
+.wml-home-editorial .home-contact-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #52635a;
+    margin: 0;
+}
+
+.wml-home-editorial .text-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.wml-home-editorial .text-links a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #1c5038;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.wml-home-editorial .text-links a:hover {
+    color: #102c22;
+    text-decoration: underline;
+}
+
+/* Publication records on homepage */
+.wml-home-editorial .publication-record {
+    padding: 1.4rem 0;
+    border-bottom: 1px solid #cddbd0;
+}
+
+.wml-home-editorial .record-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 0.78rem;
+    color: #52635a;
+}
+
+.wml-home-editorial .record-year {
+    font-weight: 700;
+    color: #1c5038;
+}
+
+.wml-home-editorial .record-venue {
+    font-style: italic;
+}
+
+.wml-home-editorial .pub-type-badge {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.45rem;
+    background: #e2ece1;
+    color: #102c22;
+    border-radius: 4px;
+}
+
+.wml-home-editorial .publication-record h3 {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.28rem;
+    line-height: 1.35;
+    color: #202c27;
+    margin: 0.25rem 0 0.4rem;
+}
+
+.wml-home-editorial .publication-authors {
+    font-size: 0.88rem;
+    color: #52635a;
+    margin: 0 0 0.5rem;
+}
+
+.wml-home-editorial .abstract summary {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 0.78rem;
+    color: #1c5038;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.wml-home-editorial .abstract p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #202c27;
+    background: #edf4ec;
+    padding: 0.85rem 1rem;
+    border-radius: 4px;
+    margin: 0.35rem 0 0.65rem;
+}
+
+.wml-home-editorial .grants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+}
+
+.wml-home-editorial .grant-card {
+    background: #ffffff;
+    border: 1px solid #cddbd0;
+    border-left: 4px solid #1c5038;
+    padding: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px -2px rgba(16, 44, 34, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wml-home-editorial .grant-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.wml-home-editorial .grant-sponsor {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    background: #e2ece1;
+    color: #102c22;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.wml-home-editorial .grant-amount {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1c5038;
+    background: #edf4ec;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    border: 1px solid #cddbd0;
+}
+
+.wml-home-editorial .grant-role {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 0.7rem;
+    color: #52635a;
+}
+
+.wml-home-editorial .grant-title {
+    font-family: "Newsreader", Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.35;
+    color: #202c27;
+    margin: 0 0 0.75rem;
+}
+
+.wml-home-editorial .grant-card__details p {
+    font-size: 0.85rem;
+    color: #52635a;
+    line-height: 1.5;
+    margin: 0 0 0.4rem;
+}
+
+.wml-home-editorial .grant-card__footer {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #cddbd0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wml-home-editorial .verification-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #1c5038;
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 0.72rem;
+}

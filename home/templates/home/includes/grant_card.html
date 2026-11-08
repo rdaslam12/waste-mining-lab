@@ -1,0 +1,53 @@
+<article class="grant-card" id="grant-{{ grant.pk }}">
+    <div class="grant-card__header">
+        <div class="grant-card__meta">
+            <span class="grant-sponsor">{{ grant.funding_organization }}</span>
+            {% if grant.amount_display %}
+                <span class="grant-amount">{{ grant.amount_display }}</span>
+            {% endif %}
+            <span class="grant-role">{{ grant.role }}</span>
+        </div>
+        <h4 class="grant-title">{{ grant.title }}</h4>
+    </div>
+
+    <div class="grant-card__details">
+        {% if grant.awarded_institution %}
+            <p class="grant-institution">
+                <strong>Institution:</strong> {{ grant.awarded_institution }}
+            </p>
+        {% endif %}
+        {% if grant.period_display %}
+            <p class="grant-period">
+                <strong>Duration:</strong> {{ grant.period_display }}
+            </p>
+        {% endif %}
+        {% if grant.summary %}
+            <p class="grant-summary">{{ grant.summary }}</p>
+        {% endif %}
+    </div>
+
+    <div class="grant-card__footer">
+        {% if grant.related_project and grant.related_project.is_published %}
+            <div class="grant-related-project">
+                <span class="small-label">Supported Project:</span>
+                <a href="{{ grant.related_project.get_absolute_url }}">{{ grant.related_project.title }}{% include "home/includes/link_arrow.html" %}</a>
+            </div>
+        {% endif %}
+
+        <div class="grant-verification">
+            {% if grant.is_verified %}
+                <span class="verification-badge" title="Verified from official academic / institutional records">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true">
+                        <path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.707 6.707l-4.5 4.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L7 9.586l3.793-3.793a1 1 0 111.414 1.414z"/>
+                    </svg>
+                    Verified Record
+                </span>
+            {% endif %}
+            {% if grant.public_source_url %}
+                <a href="{{ grant.public_source_url }}" class="grant-source-link" target="_blank" rel="noopener noreferrer">
+                    Official Reference{% include "home/includes/link_arrow.html" %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</article>

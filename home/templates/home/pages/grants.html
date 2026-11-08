@@ -1,0 +1,97 @@
+{% extends "home/pages/base_section.html" %}
+{% load wagtailcore_tags %}
+
+{% block section_content %}
+<header class="editorial-intro grants-intro">
+    <div class="index-line">
+        <span>Research funding</span>
+        <span>Sponsored projects</span>
+    </div>
+    <h1>{{ page.heading|default:"Grants & Sponsored Research" }}</h1>
+    <div class="intro-bottom">
+        <p class="lead">{{ page.intro|default:"Sponsored research, competitive grants, and institutional funding supporting environmental engineering, resource recovery, and sustainable technologies at Waste Mining Lab." }}</p>
+        <a class="editorial-link" href="/research/">Explore our research{% include "home/includes/link_arrow.html" %}</a>
+    </div>
+</header>
+
+{% if page.body %}
+<div class="reading-copy section-space">{{ page.body|richtext }}</div>
+{% endif %}
+
+<section class="grants-portfolio section-space" aria-labelledby="grants-overview-title">
+    <div class="section-heading">
+        <h2 id="grants-overview-title">Funding Overview</h2>
+        <span class="small-label">Academic & Institutional Support</span>
+    </div>
+
+    {% if has_grants %}
+        {% if lab_grants %}
+        <div class="grant-category-group">
+            <div class="grant-category-header">
+                <h3>Laboratory Funding</h3>
+                <p>Grants awarded directly to Waste Mining Lab and North South University for ongoing environmental research and campus sustainability initiatives.</p>
+            </div>
+            <div class="grants-grid">
+                {% for grant in lab_grants %}
+                    {% include "home/includes/grant_card.html" %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if director_grants %}
+        <div class="grant-category-group">
+            <div class="grant-category-header">
+                <h3>Director-Associated Research Grants</h3>
+                <p>Active and recent research projects led or co-led by the lab director in collaboration with academic and development partners.</p>
+            </div>
+            <div class="grants-grid">
+                {% for grant in director_grants %}
+                    {% include "home/includes/grant_card.html" %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if previous_grants %}
+        <div class="grant-category-group">
+            <div class="grant-category-header">
+                <h3>Previous Institutional Funding</h3>
+                <p>Foundational research projects directed at prior national laboratories and research institutions (e.g., U.S. Department of Energy / Idaho National Laboratory) providing scientific heritage for current work.</p>
+            </div>
+            <div class="grants-grid">
+                {% for grant in previous_grants %}
+                    {% include "home/includes/grant_card.html" %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if collab_grants %}
+        <div class="grant-category-group">
+            <div class="grant-category-header">
+                <h3>Collaborative Research</h3>
+                <p>Joint initiatives and interdisciplinary consortia advancing environmental solutions.</p>
+            </div>
+            <div class="grants-grid">
+                {% for grant in collab_grants %}
+                    {% include "home/includes/grant_card.html" %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    {% else %}
+        <div class="empty-state empty-state--archive">
+            <span class="empty-mark" aria-hidden="true">[ — ]</span>
+            <div>
+                <h3>Funding records in preparation.</h3>
+                <p>Sponsored research, institutional grants, and external funding details will appear here as verified records are published.</p>
+                <a class="editorial-link" href="/research/">Explore our research direction{% include "home/includes/link_arrow.html" %}</a>
+            </div>
+        </div>
+    {% endif %}
+</section>
+
+{% include "home/includes/editorial_cta.html" with cta_title="Partner with our research." %}
+{% endblock %}

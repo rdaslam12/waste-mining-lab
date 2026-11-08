@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 
 SECTION_TEMPLATES = {slug: f"home/pages/{slug.replace('-', '_')}.html" for slug in (
-    "publications", "research", "team", "activity", "news", "waste-monitoring", "contact"
+    "publications", "research", "team", "activity", "news", "waste-monitoring", "contact", "grants"
 )}
 
 AREA_DESCRIPTIONS = {
@@ -23,7 +23,7 @@ def paginate(records, request, context, per_page=12):
 
 
 def section_context(page, request):
-    from .models import Activity, HomePage, NewsArticlePage, Publication, ResearchArea, ResearchProject, TeamMember
+    from .models import Activity, Grant, HomePage, NewsArticlePage, Publication, ResearchArea, ResearchProject, TeamMember
 
     context = {}
     if page.slug == "publications":
@@ -32,12 +32,16 @@ def section_context(page, request):
         context["has_publications"] = records.exists()
         query = request.GET.get("q", "").strip()[:200]
         year = request.GET.get("year", "").strip()[:10]
-        context.update(query=query, selected_year=year)
+        pub_type = request.GET.get("type", "").strip()[:30]
+        context.update(query=query, selected_year=year, selected_type=pub_type)
+        context["publication_types"] = Publication.PublicationType.choices
         if query:
             records = records.filter(Q(title__icontains=query) | Q(authors__icontains=query) | Q(venue__icontains=query) | Q(abstract__icontains=query) | Q(doi__icontains=query))
         if year:
             records = records.filter(year=int(year)) if year.isascii() and year.isdigit() and 0 < int(year) <= 32767 else records.none()
-        context["featured_publications"] = records.filter(featured=True)[:2] if not query and not year else []
+        if pub_type:
+            records = records.filter(publication_type=pub_type)
+        context["featured_publications"] = records.filter(featured=True)[:2] if not query and not year and not pub_type else []
         context["publications"] = paginate(records, request, context)
     elif page.slug == "research":
         areas = ResearchArea.objects.filter(is_published=True).select_related("image")
@@ -48,6 +52,15 @@ def section_context(page, request):
         context["areas"] = areas
         context["projects"] = ResearchProject.objects.filter(is_published=True).select_related("area", "image")
         context["related_publications"] = Publication.objects.published().filter(projects__is_published=True).distinct()[:3]
+        context["research_grants"] = Grant.objects.filter(is_published=True).select_related("related_project").order_by("sort_order", "-start_date")[:4]
+    elif page.slug == "grants":
+        records = Grant.objects.filter(is_published=True).select_related("related_project")
+        context["has_grants"] = records.exists()
+        context["lab_grants"] = [g for g in records if g.category == Grant.Category.LAB]
+        context["director_grants"] = [g for g in records if g.category == Grant.Category.DIRECTOR]
+        context["previous_grants"] = [g for g in records if g.category == Grant.Category.PREVIOUS]
+        context["collab_grants"] = [g for g in records if g.category == Grant.Category.COLLABORATION]
+        context["grants"] = records
     elif page.slug == "team":
         members = list(TeamMember.objects.filter(is_published=True).select_related("image"))
         context["directors"] = [member for member in members if member.category == "director"]

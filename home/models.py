@@ -23,6 +23,13 @@ class Publication(models.Model):
         DRAFT = "draft", "Draft"
         PUBLISHED = "published", "Published"
 
+    class PublicationType(models.TextChoices):
+        JOURNAL = "journal", "Journal Article"
+        CONFERENCE = "conference", "Conference Paper"
+        BOOK_CHAPTER = "book_chapter", "Book Chapter"
+        PREPRINT = "preprint", "Preprint / Working Paper"
+        REPORT = "report", "Technical Report"
+
     title = models.CharField(max_length=300)
     authors = models.TextField(help_text="List authors in publication order.")
     year = models.PositiveSmallIntegerField(db_index=True)
@@ -38,6 +45,12 @@ class Publication(models.Model):
         null=True,
         unique=True,
         help_text="Optional. Enter the DOI only; each DOI must be unique.",
+    )
+    publication_type = models.CharField(
+        max_length=20,
+        choices=PublicationType.choices,
+        default=PublicationType.JOURNAL,
+        db_index=True,
     )
     publication_url = models.URLField("Publication URL", blank=True)
     abstract = models.TextField(blank=True)
@@ -55,6 +68,7 @@ class Publication(models.Model):
         FieldPanel("title"),
         FieldPanel("authors"),
         FieldPanel("year"),
+        FieldPanel("publication_type"),
         FieldPanel("venue"),
         FieldPanel("doi"),
         FieldPanel("publication_url"),
@@ -70,6 +84,44 @@ class Publication(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.year})"
+
+    @property
+    def bibtex(self):
+        first_author = "author"
+        if self.authors:
+            cleaned = self.authors.replace("et al.", "").replace("et al", "")
+            first_person = cleaned.split(",")[0].strip()
+            parts = first_person.split()
+            if parts:
+                first_author = parts[-1].lower()
+        first_word = "work"
+        if self.title:
+            words = [w.lower() for w in self.title.split() if w.isalnum()]
+            if words:
+                first_word = words[0]
+        cite_key = f"{first_author}{self.year}{first_word}"
+
+        entry_type = {
+            self.PublicationType.JOURNAL: "article",
+            self.PublicationType.CONFERENCE: "inproceedings",
+            self.PublicationType.BOOK_CHAPTER: "incollection",
+            self.PublicationType.PREPRINT: "misc",
+            self.PublicationType.REPORT: "techreport",
+        }.get(self.publication_type, "article")
+
+        lines = [f"@{entry_type}{{{cite_key},"]
+        lines.append(f"  title = {{{self.title}}},")
+        lines.append(f"  author = {{{self.authors}}},")
+        lines.append(f"  year = {{{self.year}}},")
+        if self.venue:
+            field_name = "journal" if entry_type == "article" else "booktitle"
+            lines.append(f"  {field_name} = {{{self.venue}}},")
+        if self.doi:
+            lines.append(f"  doi = {{{self.doi}}},")
+        if self.publication_url:
+            lines.append(f"  url = {{{self.publication_url}}},")
+        lines.append("}")
+        return "\n".join(lines)
 
     def clean(self):
         super().clean()
@@ -138,8 +190,15 @@ class HomePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        from .content_models import Grant, NewsArticlePage, ResearchProject
         context["publication_count"] = Publication.objects.published().count()
         context["research_areas"] = self.configured_research_areas
+        context["project_count"] = ResearchProject.objects.filter(is_published=True).count()
+        context["grant_count"] = Grant.objects.filter(is_published=True).count()
+        context["featured_projects"] = ResearchProject.objects.filter(is_published=True).select_related("area", "image")[:3]
+        context["recent_publications"] = Publication.objects.published().order_by("-year", "-pk")[:4]
+        context["featured_grants"] = Grant.objects.filter(is_published=True).select_related("related_project").order_by("sort_order", "-start_date")[:4]
+        context["latest_news"] = NewsArticlePage.objects.live().public().select_related("cover_image").order_by("-date", "-pk")[:3]
         return context
 
 
@@ -172,4 +231,4 @@ class SectionPage(Page):
 
 
 # Split editorial records from the established homepage and publication models.
-from .content_models import Activity, ActivityImage, NewsArticlePage, ResearchArea, ResearchProject, TeamMember  # noqa: E402,F401
+from .content_models import Activity, ActivityImage, Grant, NewsArticlePage, ResearchArea, ResearchProject, TeamMember  # noqa: E402,F401

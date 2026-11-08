@@ -16,8 +16,9 @@
     <form class="archive-filters" method="get" action="{{ page.url }}#archive-title" role="search" aria-label="Search publications">
         <div class="filter-field filter-field--search"><label for="publication-search">Search the archive</label><input id="publication-search" name="q" type="search" value="{{ query }}" placeholder="Title, author, journal or keyword" maxlength="200"></div>
         <div class="filter-field"><label for="publication-year">Year</label><select id="publication-year" name="year"><option value="">All years</option>{% for year in years %}<option value="{{ year }}" {% if selected_year == year|stringformat:"s" %}selected{% endif %}>{{ year }}</option>{% endfor %}</select></div>
-        <button class="editorial-button" type="submit">Search</button>
-        {% if query or selected_year %}<a class="reset-link" href="{{ page.url }}#archive-title">Clear filters</a>{% endif %}
+        <div class="filter-field"><label for="publication-type">Type</label><select id="publication-type" name="type"><option value="">All types</option>{% for val, lbl in publication_types %}<option value="{{ val }}" {% if selected_type == val %}selected{% endif %}>{{ lbl }}</option>{% endfor %}</select></div>
+        <button class="editorial-button" type="submit">Filter</button>
+        {% if query or selected_year or selected_type %}<a class="reset-link" href="{{ page.url }}#archive-title">Clear filters</a>{% endif %}
     </form>
     {% if publications %}
         {% regroup publications by year as year_groups %}

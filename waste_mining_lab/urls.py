@@ -8,12 +8,15 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search import views as search_views
+from home import views as home_views
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+    path("research/<slug:slug>/", home_views.project_detail, name="project_detail"),
+    path("publications/<int:pk>/bibtex/", home_views.publication_bibtex, name="publication_bibtex"),
     # Serve media files (e.g. uploaded hero images, publication documents)
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
 ]

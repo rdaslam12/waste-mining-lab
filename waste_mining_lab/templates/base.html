@@ -13,11 +13,24 @@
             {% if current_site and current_site.site_name %} — {{ current_site.site_name }}{% elif page.title != "Waste Mining Lab" %} — Waste Mining Lab{% endif %}
             {% endblock %}
         </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
-        {% endif %}
+        <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}Official research website of Waste Mining Lab at North South University, exploring environmental engineering, waste valorization, resource recovery, and sustainability.{% endif %}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#121a17" />
+
+        {# Favicon and application icons #}
+        <link rel="icon" type="image/png" href="{% static 'images/wml-icon.png' %}" />
+        <link rel="apple-touch-icon" href="{% static 'images/wml-icon.png' %}" />
+
+        {# Open Graph & Twitter metadata #}
+        <meta property="og:site_name" content="Waste Mining Lab — North South University" />
+        <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if page.title != 'Waste Mining Lab' %} — Waste Mining Lab{% endif %}" />
+        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}Official research website of Waste Mining Lab at North South University, exploring environmental engineering, waste valorization, resource recovery, and sustainability.{% endif %}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="{% static 'images/wml-full-logo.png' %}" />
+        <meta name="twitter:card" content="summary_large_image" />
+        {% if page and page.full_url %}
+        <link rel="canonical" href="{{ page.full_url }}" />
+        {% endif %}
 
         {# Force all links in the live preview panel to be opened in a new tab #}
         {% if request.in_preview_panel %}
@@ -38,6 +51,7 @@
 {% if request.path == '/' %}theme-home
 {% elif request.path == '/research/' %}theme-research
 {% elif request.path == '/publications/' %}theme-publications
+{% elif request.path == '/grants/' %}theme-grants
 {% elif request.path == '/news/' %}theme-news
 {% elif request.path == '/contact/' %}theme-contact
 {% elif request.path == '/team/' %}theme-team
@@ -106,8 +120,13 @@
             </a>
 
             <a href="/research/"
-               class="{% if request.path == '/research/' %}active{% endif %}">
+               class="{% if request.path == '/research/' or '/research/' in request.path %}active{% endif %}">
                 Research
+            </a>
+
+            <a href="/grants/"
+               class="{% if request.path == '/grants/' %}active{% endif %}">
+                Grants
             </a>
 
             <a href="/team/"
@@ -145,6 +164,7 @@
                 <a href="/">Waste Mining Lab</a>
                 <a href="/publications/">Publications</a>
                 <a href="/research/">Research</a>
+                <a href="/grants/">Grants</a>
                 <a href="/team/">Team</a>
                 <a href="/activity/">Activity</a>
                 <a href="/waste-monitoring/">Waste Monitoring</a>

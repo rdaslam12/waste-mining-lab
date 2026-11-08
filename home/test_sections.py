@@ -16,7 +16,7 @@ from wagtail.images import get_image_model
 from wagtail.models import Page, PageViewRestriction, Site
 
 from home.models import (
-    Activity, ActivityImage, HomePage, NewsArticlePage, Publication,
+    Activity, ActivityImage, Grant, HomePage, NewsArticlePage, Publication,
     ResearchArea, ResearchProject, SectionPage, TeamMember,
 )
 from home.page_context import SECTION_TEMPLATES
@@ -88,7 +88,7 @@ class SecondaryPageTests(TestCase):
         self.sections["team"].delete()
         bootstrap = importlib.import_module("home.migrations.0008_ensure_section_pages")
         bootstrap.ensure_sections(apps, SimpleNamespace(connection=connection))
-        self.assertEqual(SectionPage.objects.child_of(self.home).count(), 7)
+        self.assertEqual(SectionPage.objects.child_of(self.home).count(), len(self.sections))
         self.assertEqual(self.client.get("/team/").status_code, 200)
         self.assertEqual(Page.find_problems(), ([], [], [], [], []))
 
@@ -291,3 +291,83 @@ class SecondaryPageTests(TestCase):
         response = self.client.get(page.url)
         for value in ("An editable heading", "Editor-managed approach", "Editor-managed caption", "A synthetic test image."):
             self.assertContains(response, value)
+
+    def test_grants_section_and_classification_categories(self):
+        lab_grant = Grant.objects.create(
+            title="Synthetic Lab Grant",
+            funding_organization="NSU Research Fund",
+            amount_display="BDT 14 Lakh",
+            category=Grant.Category.LAB,
+            is_published=True,
+            is_verified=True,
+        )
+        prev_grant = Grant.objects.create(
+            title="Synthetic Previous Grant",
+            funding_organization="US DOE",
+            amount_display="USD 898,265",
+            category=Grant.Category.PREVIOUS,
+            is_published=True,
+            is_verified=True,
+        )
+        Grant.objects.create(
+            title="Secret Draft Grant",
+            funding_organization="Draft Corp",
+            is_published=False,
+        )
+
+        response = self.client.get("/grants/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Synthetic Lab Grant")
+        self.assertContains(response, "Laboratory Funding")
+        self.assertContains(response, "Synthetic Previous Grant")
+        self.assertContains(response, "Previous Institutional Funding")
+        self.assertNotContains(response, "Secret Draft Grant")
+
+    def test_project_detail_view_and_absolute_url(self):
+        project = self.project(
+            "Detailed Waste Study",
+            slug="detailed-waste-study",
+            is_published=True,
+            description="<p>Full project description text.</p>",
+            methodology="<p>Detailed experimental protocol.</p>",
+            funding_notes="Funded by Test Council",
+        )
+        pub = self.publication("Linked Project Publication")
+        project.publications.add(pub)
+        project.save()
+
+        response = self.client.get("/research/detailed-waste-study/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Detailed Waste Study")
+        self.assertContains(response, "Full project description text.")
+        self.assertContains(response, "Detailed experimental protocol.")
+        self.assertContains(response, "Linked Project Publication")
+
+        # Unknown slug returns 404
+        response_404 = self.client.get("/research/non-existent-project-slug/")
+        self.assertEqual(response_404.status_code, 404)
+
+    def test_publication_type_filtering_and_bibtex_export(self):
+        journal_pub = self.publication("Journal Paper A", publication_type=Publication.PublicationType.JOURNAL)
+        chapter_pub = self.publication("Book Chapter B", publication_type=Publication.PublicationType.BOOK_CHAPTER)
+
+        # Filter by book chapter
+        response = self.client.get("/publications/", {"type": "book_chapter"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Book Chapter B")
+        self.assertNotContains(response, "Journal Paper A")
+
+        # BibTeX export
+        response_bib = self.client.get(f"/publications/{journal_pub.pk}/bibtex/")
+        self.assertEqual(response_bib.status_code, 200)
+        self.assertEqual(response_bib["Content-Type"], "text/plain; charset=utf-8")
+        self.assertIn("Journal Paper A", response_bib.content.decode("utf-8"))
+        self.assertIn("@article{", response_bib.content.decode("utf-8"))
+
+    def test_import_verified_academic_data_command(self):
+        from django.core.management import call_command
+        # Running command idempotently
+        call_command("import_verified_academic_data", dry_run=True)
+        call_command("import_verified_academic_data")
+        self.assertTrue(Publication.objects.filter(doi="10.1021/acsomega.5c09729").exists())
+        self.assertTrue(Grant.objects.filter(category=Grant.Category.LAB).exists())

@@ -22,3 +22,6 @@ waste_mining_lab/settings/local.py
 
 # Logs
 *.log
+
+# Agent skills local engine binaries
+.agent/**/bin/

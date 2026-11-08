@@ -1737,6 +1737,468 @@
 }
 
 /* ==========================================================================
+   PUBLICATIONS ENHANCEMENTS: BADGES & BIBTEX CITATIONS
+   ========================================================================== */
+.wml-editorial .pub-type-badge {
+    display: inline-block;
+    font-family: var(--wml-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.55rem;
+    background: var(--wml-c-sage);
+    color: var(--wml-c-forest-deep);
+    border-radius: 4px;
+    margin-left: 0.5rem;
+}
+
+.wml-editorial .publication-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.wml-editorial .bibtex-disclosure {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.wml-editorial .bibtex-toggle {
+    font-family: var(--wml-font-mono);
+    font-size: 0.78rem;
+    color: var(--wml-c-forest);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    user-select: none;
+    padding: 0.3rem 0;
+}
+
+.wml-editorial .bibtex-toggle:hover {
+    color: var(--wml-c-forest-deep);
+    text-decoration: underline;
+}
+
+.wml-editorial .bibtex-container {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: var(--wml-c-sage-light);
+    border: 1px solid var(--wml-c-line);
+    border-radius: 6px;
+    box-shadow: var(--wml-shadow-subtle);
+}
+
+.wml-editorial .bibtex-code {
+    font-family: var(--wml-font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--wml-c-ink);
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin: 0;
+}
+
+.wml-editorial .bibtex-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--wml-c-line);
+}
+
+.wml-editorial .editorial-button--compact {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.78rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   GRANTS & FUNDING SECTION
+   ========================================================================== */
+.wml-editorial .grant-category-group {
+    margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.wml-editorial .grant-category-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--wml-c-line);
+    padding-bottom: 0.75rem;
+}
+
+.wml-editorial .grant-category-header h3 {
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    color: var(--wml-c-forest-deep);
+    margin-bottom: 0.4rem;
+}
+
+.wml-editorial .grant-category-header p {
+    font-size: 0.95rem;
+    color: var(--wml-c-muted);
+    max-width: 65ch;
+}
+
+.wml-editorial .grants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.5rem;
+}
+
+.wml-editorial .grant-card {
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line);
+    border-left: 4px solid var(--wml-c-forest);
+    padding: 1.5rem;
+    border-radius: 6px;
+    box-shadow: var(--wml-shadow-subtle);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 300ms var(--wml-ease-out), box-shadow 300ms var(--wml-ease-out);
+}
+
+.wml-editorial .grant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--wml-shadow-lift);
+}
+
+.wml-editorial .grant-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.wml-editorial .grant-sponsor {
+    font-family: var(--wml-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--wml-c-sage);
+    color: var(--wml-c-forest-deep);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.wml-editorial .grant-amount {
+    font-family: var(--wml-font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--wml-c-forest);
+    background: var(--wml-c-sage-light);
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    border: 1px solid var(--wml-c-line);
+}
+
+.wml-editorial .grant-role {
+    font-family: var(--wml-font-mono);
+    font-size: 0.7rem;
+    color: var(--wml-c-muted);
+}
+
+.wml-editorial .grant-title {
+    font-size: 1.18rem;
+    line-height: 1.35;
+    color: var(--wml-c-ink);
+    margin-bottom: 0.75rem;
+    font-family: var(--wml-font-serif);
+    font-weight: 600;
+}
+
+.wml-editorial .grant-card__details p {
+    font-size: 0.88rem;
+    color: var(--wml-c-muted);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.wml-editorial .grant-card__details strong {
+    color: var(--wml-c-forest-deep);
+}
+
+.wml-editorial .grant-card__footer {
+    margin-top: 1.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--wml-c-line-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.wml-editorial .grant-related-project {
+    font-size: 0.82rem;
+}
+
+.wml-editorial .grant-related-project a {
+    color: var(--wml-c-forest);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.wml-editorial .grant-related-project a:hover {
+    text-decoration: underline;
+}
+
+.wml-editorial .grant-verification {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+}
+
+.wml-editorial .verification-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--wml-c-forest);
+    font-family: var(--wml-font-mono);
+    font-weight: 500;
+}
+
+.wml-editorial .grant-source-link {
+    font-family: var(--wml-font-mono);
+    color: var(--wml-c-muted);
+    text-decoration: none;
+}
+
+.wml-editorial .grant-source-link:hover {
+    color: var(--wml-c-forest);
+}
+
+/* ==========================================================================
+   RESEARCH PROJECT DETAIL & EXTENDED CARDS
+   ========================================================================== */
+.wml-editorial .project-meta-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.wml-editorial .project-status-tag {
+    font-family: var(--wml-font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.wml-editorial .project-status-tag--active {
+    background: #e6f4ea;
+    color: #137333;
+    border: 1px solid #ceead6;
+}
+
+.wml-editorial .project-status-tag--completed {
+    background: #f1f3f4;
+    color: #5f6368;
+    border: 1px solid #dadce0;
+}
+
+.wml-editorial .project-status-tag--planned {
+    background: #fef7e0;
+    color: #b06000;
+    border: 1px solid #feefc3;
+}
+
+.wml-editorial .project-funding-highlight {
+    font-size: 0.88rem;
+    color: var(--wml-c-forest-deep);
+    background: var(--wml-c-sage-light);
+    padding: 0.4rem 0.75rem;
+    border-left: 3px solid var(--wml-c-forest);
+    margin: 0.6rem 0;
+}
+
+.wml-editorial .project-breadcrumbs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--wml-font-mono);
+    font-size: 0.8rem;
+    color: var(--wml-c-muted);
+}
+
+.wml-editorial .project-breadcrumbs a {
+    color: var(--wml-c-forest);
+    text-decoration: none;
+}
+
+.wml-editorial .project-metadata-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--wml-c-line);
+}
+
+.wml-editorial .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.wml-editorial .meta-label {
+    font-family: var(--wml-font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--wml-c-muted);
+    letter-spacing: 0.05em;
+}
+
+.wml-editorial .meta-value {
+    font-size: 0.92rem;
+    color: var(--wml-c-ink);
+    font-weight: 500;
+}
+
+.wml-editorial .project-detail-hero {
+    margin: 2rem 0;
+}
+
+.wml-editorial .project-detail-hero img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    border: 1px solid var(--wml-c-line);
+    border-radius: 6px;
+}
+
+.wml-editorial .project-detail-hero figcaption {
+    font-family: var(--wml-font-mono);
+    font-size: 0.8rem;
+    color: var(--wml-c-muted);
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.wml-editorial .other-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.wml-editorial .other-project-card {
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line);
+    padding: 1.25rem;
+    border-radius: 6px;
+    box-shadow: var(--wml-shadow-subtle);
+}
+
+.wml-editorial .other-project-card h3 {
+    font-size: 1.15rem;
+    margin: 0.4rem 0;
+    color: var(--wml-c-forest-deep);
+}
+
+.wml-editorial .other-project-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.wml-editorial .project-back-strip {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--wml-c-line);
+}
+
+/* ==========================================================================
+   HOMEPAGE RICH SECTIONS (EDITORIAL INTEGRATION)
+   ========================================================================== */
+.wml-home-editorial {
+    background: var(--wml-c-paper);
+    padding-top: 4rem;
+    border-top: 1px solid var(--wml-c-line);
+}
+
+.wml-editorial .home-section-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.wml-editorial .home-project-card {
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line);
+    padding: 1.75rem;
+    border-radius: 8px;
+    box-shadow: var(--wml-shadow-subtle);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 300ms var(--wml-ease-out), box-shadow 300ms var(--wml-ease-out);
+}
+
+.wml-editorial .home-project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--wml-shadow-lift);
+}
+
+.wml-editorial .home-project-card h3 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    margin: 0.6rem 0;
+    color: var(--wml-c-forest-deep);
+}
+
+.wml-editorial .home-project-card h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wml-editorial .home-project-card h3 a:hover {
+    color: var(--wml-c-forest);
+}
+
+.wml-editorial .home-partners-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    padding: 2rem 1.5rem;
+    background: var(--wml-c-sage-light);
+    border: 1px solid var(--wml-c-line);
+    border-radius: 8px;
+    margin-top: 1.5rem;
+}
+
+.wml-editorial .home-partner-item {
+    font-family: var(--wml-font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--wml-c-forest-deep);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.wml-editorial .home-contact-card {
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line);
+    border-left: 4px solid var(--wml-c-forest);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--wml-shadow-subtle);
+    margin-top: 1.5rem;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN (PHASE 8: 1024px, 768px, 430px, 375px, 320px)
    ========================================================================== */
 @media (max-width: 1024px) {

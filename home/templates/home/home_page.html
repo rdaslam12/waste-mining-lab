@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/wml-mission.css' %}">
     <link rel="stylesheet" href="{% static 'css/wml-team.css' %}">
     <link rel="stylesheet" href="{% static 'css/wml-faculty.css' %}">
+    <link rel="stylesheet" href="{% static 'css/wml-home-sections.css' %}">
 {% endblock %}
 
 {% block header_title %}
@@ -47,6 +48,102 @@
 <div class="wml-people-scene">
     {% include "home/includes/team_showcase.html" %}
     {% include "home/includes/faculty_about.html" %}
+</div>
+
+<!-- Refined Editorial Sections -->
+<div class="wml-editorial wml-home-editorial">
+    <div class="editorial-shell">
+        {% if featured_projects %}
+        <section class="section-space" aria-labelledby="home-projects-title">
+            <div class="section-heading">
+                <h2 id="home-projects-title">Selected Research Projects</h2>
+                <a class="editorial-link" href="/research/">Explore all research{% include "home/includes/link_arrow.html" %}</a>
+            </div>
+            <div class="home-section-cards">
+                {% for project in featured_projects %}
+                <article class="home-project-card">
+                    <div>
+                        <div class="project-meta-badges">
+                            {% if project.area %}<span class="small-label">{{ project.area.title }}</span>{% endif %}
+                            <span class="project-status-tag project-status-tag--{{ project.status }}">{{ project.get_status_display }}</span>
+                        </div>
+                        <h3><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+                        <p>{{ project.summary|truncatewords:24 }}</p>
+                    </div>
+                    <div class="text-links" style="margin-top: 1rem;">
+                        <a href="{{ project.get_absolute_url }}">Project details{% include "home/includes/link_arrow.html" %}</a>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if recent_publications %}
+        <section class="section-space" aria-labelledby="home-pubs-title">
+            <div class="section-heading">
+                <h2 id="home-pubs-title">Recent Publications</h2>
+                <a class="editorial-link" href="/publications/">Publication archive{% include "home/includes/link_arrow.html" %}</a>
+            </div>
+            <div>
+                {% for publication in recent_publications %}
+                    {% include "home/includes/publication_record.html" %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if featured_grants %}
+        <section class="section-space" aria-labelledby="home-grants-title">
+            <div class="section-heading">
+                <h2 id="home-grants-title">Research Grants & Funding Highlights</h2>
+                <a class="editorial-link" href="/grants/">All grants & funding{% include "home/includes/link_arrow.html" %}</a>
+            </div>
+            <div class="grants-grid">
+                {% for grant in featured_grants %}
+                    {% include "home/includes/grant_card.html" %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        {% if latest_news %}
+        <section class="section-space" aria-labelledby="home-news-title">
+            <div class="section-heading">
+                <h2 id="home-news-title">Latest Updates & Announcements</h2>
+                <a class="editorial-link" href="/news/">Lab news archive{% include "home/includes/link_arrow.html" %}</a>
+            </div>
+            <div class="home-section-cards">
+                {% for article in latest_news %}
+                    {% include "home/includes/news_card.html" with story=article %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="section-space" aria-labelledby="home-collab-title">
+            <div class="section-heading">
+                <h2 id="home-collab-title">Institutional Collaborations</h2>
+                <span class="small-label">Academic & Research Partners</span>
+            </div>
+            <div class="home-partners-row">
+                <div class="home-partner-item">North South University (NSU)</div>
+                <div class="home-partner-item">Idaho State University (ISU)</div>
+                <div class="home-partner-item">ITN-BUET (Bangladesh)</div>
+                <div class="home-partner-item">United International University (UIU)</div>
+                <div class="home-partner-item">Idaho National Laboratory (INL)</div>
+            </div>
+
+            <div class="home-contact-card">
+                <h3>Collaborate with Waste Mining Lab</h3>
+                <p>We welcome academic collaborations, joint grant applications, and inquiries from motivated graduate and undergraduate students passionate about environmental sustainability, waste valorization, and biotechnology.</p>
+                <div class="text-links" style="margin-top: 1rem;">
+                    <a href="/contact/">Get in touch{% include "home/includes/link_arrow.html" %}</a>
+                    <a href="mailto:asef.redwan@northsouth.edu">Email Dr. Asef M. Redwan{% include "home/includes/link_arrow.html" %}</a>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
 
 {% endblock content %}
