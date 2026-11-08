@@ -96,39 +96,30 @@
             <nav class="wml-mobile-nav-links" aria-label="Mobile navigation">
                 <a href="/" class="{% if request.path == '/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Home</span>
-                    <span class="wml-nav-item-sub">Waste Mining Lab overview</span>
                 </a>
                 <a href="/publications/" class="{% if request.path == '/publications/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Publications</span>
-                    <span class="wml-nav-item-sub">Peer-reviewed papers &amp; citations</span>
                 </a>
                 <a href="/research/" class="{% if request.path == '/research/' or '/research/' in request.path %}active{% endif %}">
                     <span class="wml-nav-item-label">Research</span>
-                    <span class="wml-nav-item-sub">Projects &amp; lines of inquiry</span>
                 </a>
                 <a href="/grants/" class="{% if request.path == '/grants/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Grants</span>
-                    <span class="wml-nav-item-sub">Sponsored research portfolio</span>
                 </a>
                 <a href="/team/" class="{% if request.path == '/team/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Team</span>
-                    <span class="wml-nav-item-sub">People &amp; researchers</span>
                 </a>
                 <a href="/activity/" class="{% if request.path == '/activity/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Activity</span>
-                    <span class="wml-nav-item-sub">Field journal &amp; events</span>
                 </a>
                 <a href="/waste-monitoring/" class="{% if request.path == '/waste-monitoring/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Waste Monitoring</span>
-                    <span class="wml-nav-item-sub">Environmental data portal</span>
                 </a>
                 <a href="/news/" class="{% if request.path == '/news/' %}active{% endif %}">
                     <span class="wml-nav-item-label">News</span>
-                    <span class="wml-nav-item-sub">Announcements &amp; updates</span>
                 </a>
                 <a href="/contact/" class="wml-mobile-contact-link {% if request.path == '/contact/' %}active{% endif %}">
                     <span class="wml-nav-item-label">Contact</span>
-                    <span class="wml-nav-item-sub">asef.redwan@northsouth.edu</span>
                 </a>
             </nav>
             <div class="wml-mobile-drawer-footer">
