@@ -2,27 +2,25 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block section_content %}
-{# SECTION 1 — TEAM INTRODUCTION #}
-<header class="editorial-intro team-intro">
-    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Waste Mining Lab</a>
-        <span class="sep" aria-hidden="true">/</span>
-        <span class="current">People &amp; Perspectives</span>
-        <span class="breadcrumb-affiliation" aria-hidden="true">· North South University, Dhaka</span>
-    </nav>
-    <h1>{{ page.heading|default:"The people behind the questions." }}</h1>
-    <div class="intro-bottom">
-        <p class="lead">{{ page.intro|default:"Meet the researchers, students, and engineers exploring how waste can become an asset for sustainable ecological and resource recovery." }}</p>
-        <a class="editorial-link" href="#team-directory">Explore the directory{% include "home/includes/link_arrow.html" %}</a>
-    </div>
+<header class="visually-hidden">
+    <h1>Team &amp; People</h1>
 </header>
 
-{% if page.body %}
-<div class="reading-copy section-space">{{ page.body|richtext }}</div>
-{% endif %}
+{# 1. TEAM PHOTOGRAPH #}
+<figure class="team-hero-photo">
+    <picture>
+        <source srcset="{% static 'images/team-photo-1628.webp' %} 1628w, {% static 'images/team-photo-960.webp' %} 960w" type="image/webp">
+        <img src="{% static 'images/team-photo.png' %}"
+             alt="Waste Mining Lab research team gathered outdoors during a site visit."
+             width="1628"
+             height="916"
+             decoding="async">
+    </picture>
+    <figcaption class="team-hero-caption">Waste Mining Lab research team gathered during a field campaign.</figcaption>
+</figure>
 
-{# SECTION 2 — PRINCIPAL INVESTIGATOR & LAB DIRECTOR #}
-<section class="director-spotlight-section section-space" aria-labelledby="director-heading">
+{# 2. LABORATORY LEADERSHIP #}
+<section class="director-spotlight-section" aria-labelledby="director-heading">
     <div class="section-heading">
         <h2 id="director-heading">Laboratory Leadership</h2>
         <span class="small-label">Principal Investigator</span>
@@ -80,11 +78,11 @@
                 <div class="director-actions">
                     {% if director.profile_url %}
                         <a href="{{ director.profile_url }}" class="editorial-button" target="_blank" rel="noopener noreferrer">
-                            University Profile{% include "home/includes/link_arrow.html" %}
+                            University Profile
                         </a>
                     {% else %}
                         <a href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html" class="editorial-button" target="_blank" rel="noopener noreferrer">
-                            University Profile{% include "home/includes/link_arrow.html" %}
+                            University Profile
                         </a>
                     {% endif %}
                     {% if director.email %}
@@ -99,9 +97,8 @@
             </div>
         </div>
     {% else %}
-        {# Fallback verified director layout #}
         <div class="director-spotlight-card">
-            <figure class="director-portrait-frame">
+            <figure class="director-frame">
                 <img src="{% static 'images/asef-redwan-1080.webp' %}"
                      srcset="{% static 'images/asef-redwan-640.webp' %} 640w, {% static 'images/asef-redwan-1080.webp' %} 1080w"
                      sizes="(max-width: 768px) 90vw, 420px"
@@ -127,7 +124,7 @@
                 </div>
                 <div class="director-actions">
                     <a href="https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html" class="editorial-button" target="_blank" rel="noopener noreferrer">
-                        University Profile{% include "home/includes/link_arrow.html" %}
+                        University Profile
                     </a>
                     <a href="mailto:asef.redwan@northsouth.edu" class="editorial-link">Email Dr. Redwan</a>
                 </div>
@@ -136,138 +133,119 @@
     {% endif %}
 </section>
 
-{# SECTION 3 — FEATURED RESEARCHERS ACCORDION (Reference B) #}
-{% if featured_members %}
-<section class="section-space team-featured-accordion-section" aria-labelledby="featured-researchers-heading">
-    <div class="section-heading">
-        <h2 id="featured-researchers-heading">Featured Researchers</h2>
-        <span class="small-label">Interactive Laboratory Showcase</span>
-    </div>
-    <p class="section-sub-copy">Explore our active researchers, their scientific inquiries, and ongoing contributions to circular bioeconomy and environmental recovery.</p>
-
-    {% if featured_members|length >= 3 %}
-        {% include "home/includes/team_accordion.html" %}
-    {% else %}
-        <div class="featured-researchers-grid">
-            {% for member in featured_members %}
-                {% include "home/includes/member_card.html" %}
-            {% endfor %}
-        </div>
-    {% endif %}
-</section>
-{% endif %}
-
-<div id="team-directory"></div>
-
-{# SECTION 4 — RESEARCH SCIENTISTS & POSTDOCTORAL RESEARCHERS #}
-{% if scientists %}
-<section class="section-space" aria-labelledby="scientists-heading">
-    <div class="section-heading">
-        <h2 id="scientists-heading">Research Scientists &amp; Postdocs</h2>
-        <span class="small-label">{{ scientists|length }} Researcher{{ scientists|length|pluralize }}</span>
-    </div>
-    <div class="team-directory-grid">
-        {% for member in scientists %}
-            {% include "home/includes/member_card.html" %}
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
-
-{# SECTION 5 — RESEARCH ASSISTANTS #}
+{# 3. CURRENT RESEARCH ASSISTANTS #}
 {% if assistants %}
-<section class="section-space" aria-labelledby="assistants-heading">
+<section class="section-space team-ra-section" aria-labelledby="ra-heading">
     <div class="section-heading">
-        <h2 id="assistants-heading">Research Assistants</h2>
+        <h2 id="ra-heading">Research Assistants</h2>
         <span class="small-label">{{ assistants|length }} Appointment{{ assistants|length|pluralize }}</span>
     </div>
-    <p class="section-sub-copy">Undergraduate and graduate research assistants supporting laboratory assays, bioreactor operations, and environmental data analysis.</p>
-    <div class="team-directory-grid">
-        {% for member in assistants %}
-            {% include "home/includes/member_card.html" %}
+    <div class="ra-grid">
+        {% for ra in assistants %}
+            <article class="ra-card">
+                <div class="ra-avatar">
+                    {% if ra.image %}
+                        {% image ra.image fill-280x280 as ra_img %}
+                        <img src="{{ ra_img.url }}" width="{{ ra_img.width }}" height="{{ ra_img.height }}" alt="{{ ra.name }}" loading="lazy">
+                    {% else %}
+                        <div class="ra-initials-placeholder" aria-hidden="true">{{ ra.initials }}</div>
+                    {% endif %}
+                </div>
+                <div class="ra-info">
+                    <h3 class="ra-name">{{ ra.name }}</h3>
+                    {% if ra.scholar_url %}
+                        <a href="{{ ra.scholar_url }}" class="ra-scholar-link" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+                    {% endif %}
+                </div>
+            </article>
         {% endfor %}
     </div>
 </section>
 {% endif %}
 
-{# SECTION 6 — RESEARCH OFFICERS & LABORATORY STAFF #}
-{% if staff %}
-<section class="section-space" aria-labelledby="staff-heading">
+{# 4. OTHER CONTRIBUTORS (HORIZONTALLY SCROLLABLE ROW) #}
+{% if other_contributors %}
+<section class="section-space team-contributors-section" aria-labelledby="contributors-heading">
     <div class="section-heading">
-        <h2 id="staff-heading">Research Officers &amp; Staff</h2>
-        <span class="small-label">Scientific &amp; Technical Support</span>
+        <h2 id="contributors-heading">Other Contributors</h2>
+        <span class="small-label">{{ other_contributors|length }} Contributor{{ other_contributors|length|pluralize }}</span>
     </div>
-    <div class="team-directory-grid">
-        {% for member in staff %}
-            {% include "home/includes/member_card.html" %}
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
 
-{# SECTION 7 — GRADUATE & UNDERGRADUATE RESEARCHERS #}
-{% if students %}
-<section class="section-space" aria-labelledby="students-heading">
-    <div class="section-heading">
-        <h2 id="students-heading">Student Researchers</h2>
-        <span class="small-label">Thesis &amp; Project Inquiries</span>
-    </div>
-    <div class="team-directory-grid">
-        {% for member in students %}
-            {% include "home/includes/member_card.html" %}
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
-
-{# SECTION 8 — COLLABORATORS & CO-RESEARCHERS #}
-{% if collaborators %}
-<section class="section-space" aria-labelledby="collaborators-heading">
-    <div class="section-heading">
-        <h2 id="collaborators-heading">Collaborators &amp; Partners</h2>
-        <span class="small-label">Inter-Institutional Research</span>
-    </div>
-    <div class="team-directory-grid">
-        {% for member in collaborators %}
-            {% include "home/includes/member_card.html" %}
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
-
-{# SECTION 9 — ALUMNI #}
-{% if alumni %}
-<section class="section-space" aria-labelledby="alumni-heading">
-    <div class="section-heading">
-        <h2 id="alumni-heading">Alumni &amp; Former Members</h2>
-        <span class="small-label">Where they are now</span>
-    </div>
-    <div class="alumni-directory-grid">
-        {% for member in alumni %}
-            {% include "home/includes/member_card.html" %}
-        {% endfor %}
-    </div>
-</section>
-{% endif %}
-
-{# NOTE WHEN DIRECTORY HAS NO ADDITIONAL MEMBERS YET #}
-{% if not has_members and not featured_members %}
-<section class="team-directory-note section-space">
-    <div class="directory-note-box">
-        <h2>Join Our Research Group</h2>
-        <p>Waste Mining Lab regularly recruits motivated undergraduate research assistants, graduate thesis students, and postdoctoral researchers interested in environmental engineering, biotechnology, and resource valorization.</p>
-        <p class="muted">Researcher and student appointments will appear in this verified directory as projects commence.</p>
-        <div class="directory-note-actions">
-            <a class="editorial-button" href="mailto:asef.redwan@northsouth.edu?subject=Waste%20Mining%20Lab%20Research%20Inquiry">
-                Inquire About Open Positions{% include "home/includes/link_arrow.html" %}
-            </a>
-            <a class="editorial-link" href="/research/">Explore Active Research Projects</a>
+    <div class="contributors-slider-wrap">
+        <div class="contributors-slider" tabindex="0" role="region" aria-label="Other laboratory contributors">
+            {% for member in other_contributors %}
+                <article class="contributor-card" id="contributor-{{ member.pk }}">
+                    <div class="contributor-media">
+                        {% if member.image %}
+                            {% image member.image fill-320x360 as c_img %}
+                            <img src="{{ c_img.url }}" width="{{ c_img.width }}" height="{{ c_img.height }}" alt="{{ member.name }}" loading="lazy">
+                        {% else %}
+                            <div class="ra-initials-placeholder" aria-hidden="true">{{ member.initials }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="contributor-body">
+                        <h3 class="contributor-name">{{ member.name }}</h3>
+                        <p class="contributor-role">{{ member.role }}</p>
+                        {% if member.academic_background %}
+                            <p class="contributor-bg">{{ member.academic_background }}</p>
+                        {% endif %}
+                        <button type="button" class="member-profile-btn" data-open-modal="modal-member-{{ member.pk }}" aria-haspopup="dialog">
+                            Profile Details
+                        </button>
+                    </div>
+                </article>
+            {% endfor %}
         </div>
     </div>
 </section>
 {% endif %}
 
-{# SECTION MODALS — For individual member modal views #}
+{# 5. ALUMNI TOGGLE #}
+{% if alumni %}
+<section class="team-alumni-toggle-container section-space">
+    <div class="alumni-toggle-wrap">
+        <button type="button" class="editorial-button alumni-toggle-btn" id="alumni-toggle-btn" aria-expanded="false" aria-controls="team-alumni-section">
+            Show Alumni
+        </button>
+    </div>
+
+    <div id="team-alumni-section" class="team-alumni-section" hidden aria-labelledby="alumni-heading">
+        <div class="section-heading">
+            <h2 id="alumni-heading">Alumni &amp; Former Members</h2>
+        </div>
+        <div class="alumni-grid">
+            {% for member in alumni %}
+                <article class="alumni-card">
+                    <div class="alumni-media">
+                        {% if member.image %}
+                            {% image member.image fill-200x200 as al_img %}
+                            <img src="{{ al_img.url }}" width="{{ al_img.width }}" height="{{ al_img.height }}" alt="{{ member.name }}" loading="lazy">
+                        {% else %}
+                            <div class="ra-initials-placeholder" aria-hidden="true">{{ member.initials }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="alumni-info">
+                        <h3>{{ member.name }}</h3>
+                        <p class="alumni-role">{{ member.role }}</p>
+                        {% if member.alumni_current_position %}
+                            <p class="alumni-dest">Current: {{ member.alumni_current_position }}</p>
+                        {% endif %}
+                        {% if member.profile_url or member.scholar_url or member.linkedin_url %}
+                            <div class="alumni-links">
+                                {% if member.profile_url %}<a href="{{ member.profile_url }}" target="_blank" rel="noopener">Profile</a>{% endif %}
+                                {% if member.scholar_url %}<a href="{{ member.scholar_url }}" target="_blank" rel="noopener">Scholar</a>{% endif %}
+                                {% if member.linkedin_url %}<a href="{{ member.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# Profile modals #}
 {% for member in all_members %}
     {% include "home/includes/member_modal.html" %}
 {% endfor %}
@@ -275,5 +253,4 @@
     {% include "home/includes/member_modal.html" with member=director %}
 {% endif %}
 
-{% include "home/includes/editorial_cta.html" with cta_title="Research starts with a conversation." %}
 {% endblock %}

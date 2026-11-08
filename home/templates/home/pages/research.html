@@ -1,39 +1,79 @@
 {% extends "home/pages/base_section.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
+
 {% block section_content %}
-<header class="editorial-intro research-intro">
-    <div>
-        <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Waste Mining Lab</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span class="current">Research &amp; Lines of Inquiry</span>
-        </nav>
-        <h1>{{ page.heading|default:"New perspectives on what we leave behind." }}</h1>
-    </div>
-    <div class="research-intro-aside"><p class="lead">{{ page.intro|default:"Waste is a starting point for questions about materials, resources and the systems that connect them." }}</p><a class="editorial-link" href="#research-areas">Explore our research areas{% include "home/includes/link_arrow.html" %}</a></div>
+<header class="visually-hidden">
+    <h1>{{ page.heading|default:"Research &amp; Lines of Inquiry" }}</h1>
+    {% if page.body %}{{ page.body|richtext }}{% endif %}
 </header>
-{% if page.feature_image %}{% include "home/includes/editorial_image.html" %}{% else %}<figure class="research-art"><img src="{% static 'images/lab-header2.webp' %}" width="1920" height="600" alt="" decoding="async"><figcaption>Waste, resources and the environment — a connected landscape.</figcaption></figure>{% endif %}
-<section class="section-space" id="research-areas" aria-labelledby="areas-title">
-    <div class="section-heading"><h2 id="areas-title">Lines of inquiry</h2><span class="small-label">Our research areas</span></div>
-    <div class="research-areas">{% for area in areas %}<article class="research-area"><span class="area-index">{{ forloop.counter|stringformat:"02d" }}</span><div><h3>{{ area.title }}</h3>{% if area.description %}<p>{{ area.description }}</p>{% endif %}</div>{% if area.image %}{% image area.image fill-640x420 as area_image %}<img src="{{ area_image.url }}" width="{{ area_image.width }}" height="{{ area_image.height }}" alt="{{ area.image.description|default:area.image.title }}" loading="lazy">{% endif %}</article>{% empty %}<p>Research areas will be listed as they are published.</p>{% endfor %}</div>
-</section>
-<section class="section-space" aria-labelledby="projects-title"><div class="section-heading"><h2 id="projects-title">Research in focus</h2><span class="small-label">Project portfolio</span></div>
-{% for project in projects %}{% include "home/includes/project_feature.html" %}{% empty %}<div class="empty-state"><h3>A closer look at the work, coming soon.</h3><p>Project profiles will bring together research questions, photographs and related publications as verified details become available.</p></div>{% endfor %}
-</section>
-{% if research_grants %}
-<section class="section-space" aria-labelledby="research-funding-title">
+
+{# 1. RESEARCH IMAGE #}
+{% if page.feature_image %}
+    {% include "home/includes/editorial_image.html" %}
+{% else %}
+    <figure class="research-hero-image">
+        <img src="{% static 'images/lab-header2.webp' %}" width="1920" height="600" alt="Environmental engineering and waste valorization landscape" decoding="async">
+        <figcaption>Waste, resources and the environment — a connected landscape.</figcaption>
+    </figure>
+{% endif %}
+
+{# 2. OUR RESEARCH AREAS #}
+<section class="research-areas-section" aria-labelledby="areas-title">
     <div class="section-heading">
-        <h2 id="research-funding-title">Sponsored Research & Grants</h2>
-        <a class="editorial-link" href="/grants/">View all grants & funding{% include "home/includes/link_arrow.html" %}</a>
+        <h2 id="areas-title">Our Research Areas</h2>
     </div>
-    <div class="grants-grid">
-        {% for grant in research_grants %}
-            {% include "home/includes/grant_card.html" %}
+    <div class="research-areas-list">
+        {% for area in areas %}
+            <article class="research-area-item">
+                <div class="research-area-body">
+                    <h3>{{ area.title }}</h3>
+                    {% if area.description %}
+                        <p>{{ area.description }}</p>
+                    {% endif %}
+                </div>
+                {% if area.image %}
+                    <div class="research-area-media">
+                        {% image area.image fill-480x320 as area_img %}
+                        <img src="{{ area_img.url }}" width="{{ area_img.width }}" height="{{ area_img.height }}" alt="{{ area.image.description|default:area.title }}" loading="lazy">
+                    </div>
+                {% endif %}
+            </article>
+        {% empty %}
+            <p class="muted">Research areas will be listed as they are published.</p>
         {% endfor %}
     </div>
 </section>
-{% endif %}
-<section class="research-approach section-space" aria-labelledby="approach-title"><div><h2 id="approach-title">From questions<br>to understanding.</h2></div><div class="reading-copy">{% if page.body %}{{ page.body|richtext }}{% else %}<p>Environmental research connects questions about waste with the wider systems in which materials move, change and acquire value.</p><p>Our research direction brings environmental sustainability, resource recovery and engineering into the same conversation. Detailed methods and findings are documented with individual projects and publications when available.</p>{% endif %}<a class="editorial-link" href="/waste-monitoring/">Explore waste monitoring{% include "home/includes/link_arrow.html" %}</a></div></section>
-<section class="section-space" aria-labelledby="research-reading"><div class="section-heading"><h2 id="research-reading">Further reading</h2><a class="editorial-link" href="/publications/">Publication archive{% include "home/includes/link_arrow.html" %}</a></div>{% for publication in related_publications %}{% include "home/includes/publication_record.html" %}{% empty %}<p class="muted">Related publications will appear alongside the projects they inform.</p>{% endfor %}</section>
-{% include "home/includes/editorial_cta.html" %}
+
+{# 3. RESEARCH IN FOCUS (COMPACT HORIZONTAL SLIDER) #}
+<section class="research-focus-section" aria-labelledby="projects-title">
+    <div class="section-heading">
+        <h2 id="projects-title">Research in Focus</h2>
+    </div>
+
+    <div class="projects-slider-container">
+        <div class="projects-slider" tabindex="0" role="region" aria-label="Active research projects slider">
+            {% for project in active_projects %}
+                <article class="project-slide-card">
+                    <a href="{{ project.get_absolute_url }}" class="project-slide-card__link">
+                        {% if project.image %}
+                            <div class="project-slide-card__thumb">
+                                {% image project.image fill-400x240 as p_thumb %}
+                                <img src="{{ p_thumb.url }}" width="{{ p_thumb.width }}" height="{{ p_thumb.height }}" alt="" loading="lazy">
+                            </div>
+                        {% endif %}
+                        <div class="project-slide-card__body">
+                            {% if project.area %}
+                                <span class="project-slide-card__area">{{ project.area.title }}</span>
+                            {% endif %}
+                            <h3 class="project-slide-card__title">{{ project.title }}</h3>
+                            <p class="project-slide-card__summary">{{ project.summary|truncatewords:22 }}</p>
+                        </div>
+                    </a>
+                </article>
+            {% empty %}
+                <p class="muted">Active research projects will appear here as they are published.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock %}

@@ -93,10 +93,10 @@ body.theme-contact { background-color: #25201e; }
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: min(100%, 1100px);
+    width: min(100%, 1180px);
     min-height: 60px;
     margin: 0 auto;
-    padding: 7px 16px;
+    padding: 7px 20px;
     background: #f0f3f2;
     border: 1px solid #444c48;
     border-radius: 21px;
@@ -113,7 +113,7 @@ body.theme-contact { background-color: #25201e; }
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 15px;
+    gap: 22px;
     transition: gap 320ms ease;
 }
 .wml-nav-links > a:not(.wml-contact) {
@@ -155,12 +155,12 @@ body.theme-contact { background-color: #25201e; }
     top: 8px;
     left: 50%;
     transform: translateX(-50%);
-    width: min(calc(100vw - 250px), 890px);
+    width: min(calc(100vw - 220px), 950px);
     min-height: 52px;
-    padding: 6px 12px;
+    padding: 6px 14px;
     border-radius: 18px;
 }
-.wml-global-header.is-scrolled .wml-nav-links { gap: 12px; }
+.wml-global-header.is-scrolled .wml-nav-links { gap: 17px; }
 .wml-global-header.is-scrolled .wml-nav-links > a:not(.wml-contact) { font-size: 12.5px; }
 .wml-global-header.is-scrolled .wml-contact span { padding: 6px 12px; font-size: 12.5px; }
 .wml-global-header.is-scrolled .wml-logo-small {
@@ -209,12 +209,12 @@ body.theme-contact { background-color: #25201e; }
 @media (hover:hover) and (min-width:1121px) {
     .wml-global-header.is-scrolled .wml-navbar:hover,
     .wml-global-header.is-scrolled .wml-navbar:focus-within {
-        width: min(calc(100vw - 250px), 1020px);
+        width: min(calc(100vw - 220px), 1080px);
         min-height: 60px;
-        padding: 8px 15px;
+        padding: 8px 18px;
     }
     .wml-global-header.is-scrolled .wml-navbar:hover .wml-nav-links,
-    .wml-global-header.is-scrolled .wml-navbar:focus-within .wml-nav-links { gap: 15px; }
+    .wml-global-header.is-scrolled .wml-navbar:focus-within .wml-nav-links { gap: 22px; }
     .wml-global-header.is-scrolled .wml-navbar:hover .wml-nav-links > a:not(.wml-contact),
     .wml-global-header.is-scrolled .wml-navbar:focus-within .wml-nav-links > a:not(.wml-contact) { font-size: 13.5px; }
     .wml-global-header.is-scrolled .wml-navbar:hover .wml-contact span,

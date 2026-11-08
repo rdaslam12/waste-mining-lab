@@ -68,7 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             header.classList.toggle("is-scrolled", currentY > 90);
 
-            if (mission && !isMenuOpen) {
+            if (isMenuOpen) {
+                header.classList.remove("nav-hidden");
+            } else if (mission) {
+                // Homepage: preserve existing Mission-related scroll behavior
                 const missionBottom = mission.getBoundingClientRect().bottom;
                 const pastMission = missionBottom <= 400;
 
@@ -76,8 +79,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     "nav-hidden",
                     pastMission && !scrollingUp
                 );
-            } else if (isMenuOpen) {
-                header.classList.remove("nav-hidden");
+            } else {
+                // Secondary and detail pages: hide on scroll down past ~180px, reveal on scroll up
+                if (currentY <= 90) {
+                    header.classList.remove("nav-hidden");
+                } else if (currentY > 180) {
+                    if (scrollingUp) {
+                        header.classList.remove("nav-hidden");
+                    } else if (currentY > lastScrollY + 2) {
+                        header.classList.add("nav-hidden");
+                    }
+                }
             }
 
             lastScrollY = currentY;

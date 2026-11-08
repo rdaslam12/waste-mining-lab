@@ -212,6 +212,20 @@ class Grant(PublicRecord, ClusterableModel):
             return f"Until {self.end_date.strftime('%B %Y')}"
         return ""
 
+    @property
+    def is_active_grant(self):
+        if self.related_project:
+            if self.related_project.status == ResearchProject.Status.ACTIVE:
+                return True
+            if self.related_project.status == ResearchProject.Status.COMPLETED:
+                return False
+        if self.end_date:
+            from datetime import date
+            return self.end_date >= date.today()
+        if self.category == self.Category.PREVIOUS:
+            return False
+        return False
+
 
 @register_snippet
 class TeamMember(PublicRecord, ClusterableModel):

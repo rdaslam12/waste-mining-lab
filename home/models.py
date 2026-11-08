@@ -229,6 +229,16 @@ class SectionPage(Page):
         context.update(section_context(self, request))
         return context
 
+    def serve(self, request, *args, **kwargs):
+        if self.slug == "publications" and (
+            request.headers.get("x-requested-with") == "XMLHttpRequest"
+            or request.GET.get("partial") == "1"
+        ):
+            from django.template.response import TemplateResponse
+            context = self.get_context(request, *args, **kwargs)
+            return TemplateResponse(request, "home/includes/publications_results.html", context)
+        return super().serve(request, *args, **kwargs)
+
 
 # Split editorial records from the established homepage and publication models.
 from .content_models import Activity, ActivityImage, Grant, NewsArticlePage, ResearchArea, ResearchProject, TeamMember  # noqa: E402,F401

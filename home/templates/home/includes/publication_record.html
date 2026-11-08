@@ -1,37 +1,45 @@
-<article class="publication-record" {% if not featured %}id="publication-{{ publication.pk }}"{% endif %}>
-    <div class="record-meta">
-        <span class="record-year">{{ publication.year }}</span>
-        {% if publication.venue %}
-            <span class="record-venue">{{ publication.venue }}</span>
-        {% endif %}
-        <span class="pub-type-badge">{{ publication.get_publication_type_display }}</span>
-    </div>
-    <h3>{{ publication.title }}</h3>
-    <p class="publication-authors">{{ publication.authors }}</p>
-    {% if publication.abstract %}
-        <details class="abstract">
-            <summary>Read abstract</summary>
-            <p>{{ publication.abstract|linebreaksbr }}</p>
-        </details>
+<article class="publication-record" id="publication-{{ publication.pk }}">
+    {% if publication.venue %}
+        <div class="record-venue">{{ publication.venue }}</div>
     {% endif %}
-    <div class="publication-actions">
-        <div class="text-links">
-            {% if publication.doi %}
-                <a href="https://doi.org/{{ publication.doi|iriencode }}" target="_blank" rel="noopener noreferrer">DOI: {{ publication.doi }}{% include "home/includes/link_arrow.html" %}</a>
-            {% endif %}
-            {% if publication.publication_url %}
-                <a href="{{ publication.publication_url }}" target="_blank" rel="noopener noreferrer">View publication{% include "home/includes/link_arrow.html" %}</a>
-            {% endif %}
-        </div>
-        <details class="bibtex-disclosure">
-            <summary class="bibtex-toggle">Cite / BibTeX</summary>
-            <div class="bibtex-container">
-                <pre class="bibtex-code"><code>{{ publication.bibtex }}</code></pre>
-                <div class="bibtex-actions">
-                    <button type="button" class="editorial-button editorial-button--compact bibtex-copy-btn" data-bibtex="{{ publication.bibtex|escapejs }}" onclick="navigator.clipboard.writeText(this.dataset.bibtex); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy BibTeX', 2000);">Copy BibTeX</button>
-                    <a href="/publications/{{ publication.pk }}/bibtex/" class="editorial-link" download>Download .bib{% include "home/includes/link_arrow.html" %}</a>
+
+    <h3 class="publication-title">
+        {% if publication.publication_url %}
+            <a href="{{ publication.publication_url }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a>
+        {% elif publication.doi %}
+            <a href="https://doi.org/{{ publication.doi|iriencode }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a>
+        {% else %}
+            <span>{{ publication.title }}</span>
+        {% endif %}
+    </h3>
+
+    <p class="publication-authors">{{ publication.authors }}</p>
+
+    {% if publication.abstract or publication.bibtex %}
+    <div class="publication-actions-row">
+        {% if publication.abstract %}
+            <details class="abstract-disclosure">
+                <summary>Read abstract</summary>
+                <div class="abstract-content">
+                    <p>{{ publication.abstract|linebreaksbr }}</p>
                 </div>
-            </div>
-        </details>
+            </details>
+        {% endif %}
+        {% if publication.abstract and publication.bibtex %}
+            <span class="actions-sep" aria-hidden="true">|</span>
+        {% endif %}
+        {% if publication.bibtex %}
+            <details class="bibtex-disclosure">
+                <summary class="bibtex-toggle">Cite / BibTeX</summary>
+                <div class="bibtex-container">
+                    <pre class="bibtex-code"><code>{{ publication.bibtex }}</code></pre>
+                    <div class="bibtex-actions">
+                        <button type="button" class="editorial-button editorial-button--compact bibtex-copy-btn" data-bibtex="{{ publication.bibtex|escapejs }}" onclick="navigator.clipboard.writeText(this.dataset.bibtex); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy BibTeX', 2000);">Copy BibTeX</button>
+                        <a href="/publications/{{ publication.pk }}/bibtex/" class="editorial-link" download>Download .bib</a>
+                    </div>
+                </div>
+            </details>
+        {% endif %}
     </div>
+    {% endif %}
 </article>

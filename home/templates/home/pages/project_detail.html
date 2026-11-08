@@ -7,11 +7,6 @@
 <article class="project-detail">
     <header class="editorial-intro project-detail-header">
         <div class="index-line">
-            <nav class="project-breadcrumbs" aria-label="Breadcrumb">
-                <a href="/research/">Research</a>
-                <span aria-hidden="true">/</span>
-                <span>{{ project.area.title|default:"Project Focus" }}</span>
-            </nav>
             <div class="project-badges">
                 {% if project.area %}<span class="small-label">{{ project.area.title }}</span>{% endif %}
                 <span class="project-status-tag project-status-tag--{{ project.status }}">{{ project.get_status_display }}</span>
@@ -116,7 +111,7 @@
         <section class="project-grants-section section-space" aria-labelledby="project-grants-title">
             <div class="section-heading">
                 <h2 id="project-grants-title">Grant Support</h2>
-                <a href="/grants/" class="editorial-link">View all grants{% include "home/includes/link_arrow.html" %}</a>
+                <a href="/grants/" class="editorial-link">View all grants</a>
             </div>
             <div class="grants-grid">
                 {% for grant in grants %}
@@ -130,7 +125,7 @@
         <section class="project-publications-section section-space" aria-labelledby="project-publications-title">
             <div class="section-heading">
                 <h2 id="project-publications-title">Related Publications</h2>
-                <a href="/publications/" class="editorial-link">Publication archive{% include "home/includes/link_arrow.html" %}</a>
+                <a href="/publications/" class="editorial-link">Publication archive</a>
             </div>
             <div class="project-publications-list">
                 {% for publication in publications %}
@@ -144,7 +139,7 @@
         <section class="project-team-section section-space" aria-labelledby="project-team-title">
             <div class="section-heading">
                 <h2 id="project-team-title">Project Investigators & Contributors</h2>
-                <a href="/team/" class="editorial-link">Meet the team{% include "home/includes/link_arrow.html" %}</a>
+                <a href="/team/" class="editorial-link">Meet the team</a>
             </div>
             <div class="member-grid">
                 {% for member in members %}
@@ -158,7 +153,7 @@
         <section class="other-projects-section section-space" aria-labelledby="other-projects-title">
             <div class="section-heading">
                 <h2 id="other-projects-title">Other Research Inquiries</h2>
-                <a href="/research/" class="editorial-link">All research projects{% include "home/includes/link_arrow.html" %}</a>
+                <a href="/research/" class="editorial-link">All research projects</a>
             </div>
             <div class="other-projects-grid">
                 {% for other in other_projects %}
@@ -166,7 +161,7 @@
                     {% if other.area %}<span class="small-label">{{ other.area.title }}</span>{% endif %}
                     <h3><a href="{{ other.get_absolute_url }}">{{ other.title }}</a></h3>
                     <p>{{ other.summary|truncatewords:25 }}</p>
-                    <a href="{{ other.get_absolute_url }}" class="editorial-link">Read project profile{% include "home/includes/link_arrow.html" %}</a>
+                    <a href="{{ other.get_absolute_url }}" class="editorial-link">Read project profile</a>
                 </article>
                 {% endfor %}
             </div>
@@ -175,9 +170,7 @@
     </div>
 
     <div class="project-back-strip">
-        <a href="/research/" class="editorial-button">&larr; Return to Research Portfolio</a>
+        <a href="/research/" class="editorial-button">Return to Research Portfolio</a>
     </div>
 </article>
-
-{% include "home/includes/editorial_cta.html" with cta_title="Interested in collaborative research?" %}
 {% endblock %}

@@ -50,15 +50,23 @@ def section_context(page, request):
             labels = home.configured_research_areas if isinstance(home, HomePage) else []
             areas = [{"title": label, "description": AREA_DESCRIPTIONS.get(label, "")} for label in labels]
         context["areas"] = areas
-        context["projects"] = ResearchProject.objects.filter(is_published=True).select_related("area", "image")
+        active_projects = ResearchProject.objects.filter(
+            is_published=True,
+            status=ResearchProject.Status.ACTIVE
+        ).select_related("area", "image")
+        context["active_projects"] = active_projects
+        context["projects"] = active_projects
         context["related_publications"] = Publication.objects.published().filter(projects__is_published=True).distinct()[:3]
         context["research_grants"] = Grant.objects.filter(is_published=True).select_related("related_project").order_by("sort_order", "-start_date")[:4]
     elif page.slug == "grants":
         records = Grant.objects.filter(is_published=True).select_related("related_project")
         context["has_grants"] = records.exists()
+        active = [g for g in records if g.is_active_grant]
+        previous = [g for g in records if not g.is_active_grant]
+        context["active_grants"] = active
+        context["previous_grants"] = previous
         context["lab_grants"] = [g for g in records if g.category == Grant.Category.LAB]
         context["director_grants"] = [g for g in records if g.category == Grant.Category.DIRECTOR]
-        context["previous_grants"] = [g for g in records if g.category == Grant.Category.PREVIOUS]
         context["collab_grants"] = [g for g in records if g.category == Grant.Category.COLLABORATION]
         context["grants"] = records
     elif page.slug == "team":
@@ -67,7 +75,19 @@ def section_context(page, request):
         context["directors"] = directors
         context["director"] = directors[0] if directors else None
 
-        # Featured members for interactive portrait accordion
+        # Current Research Assistants
+        context["assistants"] = [m for m in members if m.category == "assistant"]
+
+        # Other Contributors: published non-director, non-assistant, non-alumni
+        context["other_contributors"] = [
+            m for m in members
+            if m.category not in ("director", "assistant", "alumni")
+        ]
+
+        # Alumni
+        context["alumni"] = [m for m in members if m.category == "alumni"]
+
+        # Featured members for interactive portrait accordion fallback
         featured = [m for m in members if getattr(m, "is_featured", False)]
         if not featured and len(members) >= 3:
             featured = members[:5]
@@ -110,11 +130,9 @@ def section_context(page, request):
 
         # Categorized members for structured academic directory
         context["scientists"] = [m for m in members if m.category in ("scientist", "researcher")]
-        context["assistants"] = [m for m in members if m.category == "assistant"]
         context["staff"] = [m for m in members if m.category == "staff"]
         context["students"] = [m for m in members if m.category == "student"]
         context["collaborators"] = [m for m in members if m.category == "collaborator"]
-        context["alumni"] = [m for m in members if m.category == "alumni"]
 
         context["member_groups"] = [{"label": label, "members": [member for member in members if member.category == key]} for key, label in TeamMember.Category.choices if key != "director"]
         context["has_members"] = any(member.category != "director" for member in members)

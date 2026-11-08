@@ -56,9 +56,9 @@
             {% endif %}
         {% endwith %}
         <div class="text-links">
-            <a href="{{ project.get_absolute_url }}" class="editorial-link">View case study details{% include "home/includes/link_arrow.html" %}</a>
-            {% if project.external_url %}<a href="{{ project.external_url }}" target="_blank" rel="noopener">External reference{% include "home/includes/link_arrow.html" %}</a>{% endif %}
-            {% if project.monitoring_related %}<a href="/waste-monitoring/">Waste monitoring{% include "home/includes/link_arrow.html" %}</a>{% endif %}
+            <a href="{{ project.get_absolute_url }}" class="editorial-link">View case study details</a>
+            {% if project.external_url %}<a href="{{ project.external_url }}" target="_blank" rel="noopener">External reference</a>{% endif %}
+            {% if project.monitoring_related %}<a href="/waste-monitoring/">Waste monitoring</a>{% endif %}
         </div>
     </div>
 </article>

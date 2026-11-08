@@ -32,7 +32,13 @@ class SecondaryPageTests(TestCase):
         cls.editor = get_user_model().objects.create_superuser("secondary-editor", "editor@example.com", "test-password")
 
     def publication(self, title="Synthetic test publication", **kwargs):
-        return Publication.objects.create(title=title, authors="Test fixture author", year=2026, status="published", **kwargs)
+        payload = {
+            "authors": "Test fixture author",
+            "year": 2026,
+            "status": "published",
+        }
+        payload.update(kwargs)
+        return Publication.objects.create(title=title, **payload)
 
     def project(self, title="Synthetic test project", **kwargs):
         return ResearchProject.objects.create(title=title, summary="Test-only project summary.", **kwargs)
@@ -109,7 +115,7 @@ class SecondaryPageTests(TestCase):
             self.assertContains(response, "Synthetic recovery study")
             self.assertNotContains(response, "Synthetic older study")
             self.assertNotContains(response, "Secret draft")
-        self.assertContains(self.client.get("/publications/"), "Selected work")
+        self.assertContains(self.client.get("/publications/"), "Publication Index")
 
     def test_publications_invalid_year_and_empty_search_do_not_error(self):
         self.publication()
@@ -123,11 +129,12 @@ class SecondaryPageTests(TestCase):
 
     def test_publication_abstract_links_and_pagination(self):
         publication = self.publication(doi="10.0000/test-only", publication_url="https://example.com/test", abstract="Test-only abstract")
+        doi_pub = self.publication("DOI only work", doi="10.0000/doi-only-test")
         response = self.client.get("/publications/")
         self.assertContains(response, "<summary>Read abstract</summary>", html=True)
         self.assertContains(response, f'id="publication-{publication.pk}"')
-        self.assertContains(response, "https://doi.org/10.0000/test-only")
         self.assertContains(response, 'href="https://example.com/test"')
+        self.assertContains(response, 'href="https://doi.org/10.0000/doi-only-test"')
         for index in range(14):
             self.publication(f"Synthetic numbered test {index}")
         response = self.client.get("/publications/", {"q": "Synthetic", "year": "2026", "page": "2"})
@@ -153,7 +160,7 @@ class SecondaryPageTests(TestCase):
         project.publications.add(public, draft)
         project.save()
         response = self.client.get("/research/")
-        for value in ("Published test area", "Published test project", "Linked test publication", "Test project details"):
+        for value in ("Published test area", "Published test project"):
             self.assertContains(response, value)
         for value in ("Secret area", "Secret project", "Secret publication"):
             self.assertNotContains(response, value)
@@ -300,6 +307,7 @@ class SecondaryPageTests(TestCase):
             category=Grant.Category.LAB,
             is_published=True,
             is_verified=True,
+            end_date=date(2027, 12, 31),
         )
         prev_grant = Grant.objects.create(
             title="Synthetic Previous Grant",
@@ -308,6 +316,7 @@ class SecondaryPageTests(TestCase):
             category=Grant.Category.PREVIOUS,
             is_published=True,
             is_verified=True,
+            end_date=date(2022, 9, 30),
         )
         Grant.objects.create(
             title="Secret Draft Grant",
@@ -318,9 +327,9 @@ class SecondaryPageTests(TestCase):
         response = self.client.get("/grants/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Synthetic Lab Grant")
-        self.assertContains(response, "Laboratory Funding")
+        self.assertContains(response, "Active Funding")
         self.assertContains(response, "Synthetic Previous Grant")
-        self.assertContains(response, "Previous Institutional Funding")
+        self.assertContains(response, "Previous Funding")
         self.assertNotContains(response, "Secret Draft Grant")
 
     def test_project_detail_view_and_absolute_url(self):
@@ -371,3 +380,66 @@ class SecondaryPageTests(TestCase):
         call_command("import_verified_academic_data")
         self.assertTrue(Publication.objects.filter(doi="10.1021/acsomega.5c09729").exists())
         self.assertTrue(Grant.objects.filter(category=Grant.Category.LAB).exists())
+
+    def test_global_footer_connect_the_lab_button_and_no_promotional_cta(self):
+        for path in ("/", "/publications/", "/research/", "/grants/", "/team/", "/activity/", "/waste-monitoring/", "/news/", "/contact/"):
+            with self.subTest(path=path):
+                response = self.client.get(path)
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(response, 'href="/contact/" class="site-footer__btn">Connect the lab</a>')
+                self.assertNotContains(response, "Research starts with a conversation.")
+                self.assertNotContains(response, "Ideas travel further together.")
+                self.assertNotContains(response, "Partner with our research.")
+                self.assertNotContains(response, "editorial-breadcrumb")
+
+    def test_publications_live_search_ajax_partial(self):
+        self.publication("Machine learning waste study", year=2026)
+        response = self.client.get("/publications/?q=Machine", HTTP_X_REQUESTED_WITH="XMLHttpRequest")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'id="publication-results"')
+        self.assertContains(response, "Machine learning waste study")
+        self.assertNotContains(response, "<!doctype html>")
+
+    def test_publication_record_streamlined_layout(self):
+        pub = self.publication(
+            "Bioreactor dye removal study",
+            venue="Bioresource Technology",
+            authors="Asef M. Redwan, Jane Doe",
+            doi="10.1016/j.biortech.test",
+            publication_url="https://example.com/biortech-paper",
+            abstract="Study of continuous flow bio-reactors.",
+        )
+        response = self.client.get("/publications/")
+        self.assertContains(response, "Bioresource Technology")
+        self.assertContains(response, 'href="https://example.com/biortech-paper"')
+        self.assertContains(response, "Asef M. Redwan, Jane Doe")
+        self.assertContains(response, "<summary>Read abstract</summary>", html=True)
+        self.assertContains(response, "Cite / BibTeX")
+        self.assertNotContains(response, "pub-type-badge")
+        self.assertNotContains(response, "View publication")
+
+    def test_research_page_only_active_projects_and_no_extra_sections(self):
+        area = ResearchArea.objects.create(title="Resource recovery", is_published=True)
+        active_proj = self.project("Active Biomass Reactor", area=area, status="active", is_published=True)
+        completed_proj = self.project("Completed Older Study", area=area, status="completed", is_published=True)
+        response = self.client.get("/research/")
+        self.assertContains(response, "Our Research Areas")
+        self.assertContains(response, "Research in Focus")
+        self.assertContains(response, "Active Biomass Reactor")
+        self.assertNotContains(response, "Completed Older Study")
+        self.assertNotContains(response, "From questions to understanding")
+        self.assertNotContains(response, "Further reading")
+
+    def test_team_page_structure_and_alumni_toggle(self):
+        TeamMember.objects.create(name="Current Assistant One", role="Research Assistant", category="assistant", is_published=True, scholar_url="https://scholar.google.com/test")
+        TeamMember.objects.create(name="Scientist Contributor", role="Research Scientist", category="scientist", is_published=True)
+        TeamMember.objects.create(name="Former Member Alum", role="Former RA", category="alumni", is_published=True, alumni_current_position="PhD Student, Stanford")
+        response = self.client.get("/team/")
+        self.assertContains(response, "team-photo.png")
+        self.assertContains(response, "Laboratory Leadership")
+        self.assertContains(response, "Research Assistants")
+        self.assertContains(response, "Current Assistant One")
+        self.assertContains(response, "Other Contributors")
+        self.assertContains(response, "Scientist Contributor")
+        self.assertContains(response, "Show Alumni")
+        self.assertContains(response, "Former Member Alum")

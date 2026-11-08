@@ -1,0 +1,31 @@
+<div id="publication-results" class="publication-results" aria-live="polite">
+    {% if publications %}
+        {% regroup publications by year as year_groups %}
+        {% for group in year_groups %}
+            <section class="publication-year" aria-labelledby="year-{{ group.grouper }}">
+                <h2 id="year-{{ group.grouper }}">{{ group.grouper }}</h2>
+                <div class="publication-list">
+                    {% for publication in group.list %}
+                        {% include "home/includes/publication_record.html" %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state empty-state--archive">
+            <span class="empty-mark" aria-hidden="true">[ — ]</span>
+            <div>
+                {% if query or selected_year or selected_type %}
+                    <h3>No matching publications</h3>
+                    <p>Try another keyword, year, or type, or clear the filters to browse the full archive.</p>
+                    <a class="reset-link" href="{{ page.url }}#archive-title">Clear filters</a>
+                {% else %}
+                    <h3>The archive is taking shape.</h3>
+                    <p>No published records are available yet. Verified publications, abstracts and links will appear here as they are added.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% include "home/includes/pagination.html" %}
+</div>

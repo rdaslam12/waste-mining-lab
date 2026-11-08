@@ -30,7 +30,7 @@
         {% if grant.related_project and grant.related_project.is_published %}
             <div class="grant-related-project">
                 <span class="small-label">Supported Project:</span>
-                <a href="{{ grant.related_project.get_absolute_url }}">{{ grant.related_project.title }}{% include "home/includes/link_arrow.html" %}</a>
+                <a href="{{ grant.related_project.get_absolute_url }}">{{ grant.related_project.title }}</a>
             </div>
         {% endif %}
 
@@ -45,7 +45,7 @@
             {% endif %}
             {% if grant.public_source_url %}
                 <a href="{{ grant.public_source_url }}" class="grant-source-link" target="_blank" rel="noopener noreferrer">
-                    Official Reference{% include "home/includes/link_arrow.html" %}
+                    Official Reference
                 </a>
             {% endif %}
         </div>

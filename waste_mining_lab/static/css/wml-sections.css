@@ -3516,6 +3516,543 @@
     }
 }
 
+/* ==========================================================================
+   CLEAN & COMPACT ACADEMIC RESEARCH STYLING (STREAMLINED REFACTOR)
+   ========================================================================== */
+
+/* Compact Academic Page Headers */
+.wml-editorial .compact-section-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--wml-c-forest, #1c5038);
+}
+.wml-editorial .compact-section-header h1 {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+
+/* Publications: Streamlined Live Search & Compact Records */
+.wml-editorial .publication-filters {
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.8rem;
+    gap: 1rem;
+}
+.wml-editorial .publication-search-status {
+    min-height: 1.2rem;
+    font-size: 0.8rem;
+    color: var(--wml-c-forest, #1c5038);
+    margin-bottom: 0.5rem;
+}
+.wml-editorial .publication-results.is-loading {
+    opacity: 0.55;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+}
+.wml-editorial .publication-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.wml-editorial .publication-record {
+    padding: 0.95rem 1.2rem;
+    margin-bottom: 0.65rem;
+    border: 1px solid rgba(28, 80, 56, 0.08);
+    border-radius: 6px;
+    background: #ffffff;
+    transition: background-color 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.wml-editorial .publication-record:hover {
+    background: #fbfdfb;
+    border-color: rgba(28, 80, 56, 0.25);
+    box-shadow: 0 4px 14px rgba(16, 44, 34, 0.05);
+}
+.wml-editorial .publication-record .record-venue {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wml-c-forest, #1c5038);
+    margin-bottom: 0.3rem;
+}
+.wml-editorial .publication-record .publication-title {
+    font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.35rem;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+.wml-editorial .publication-record .publication-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+.wml-editorial .publication-record .publication-title a:hover {
+    color: var(--wml-c-forest, #1c5038);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.wml-editorial .publication-record .publication-authors {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--wml-c-muted, #4a5c53);
+    margin: 0 0 0.45rem;
+}
+.wml-editorial .publication-actions-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+}
+.wml-editorial .publication-actions-row .actions-sep {
+    color: #9cb1a5;
+    user-select: none;
+}
+.wml-editorial .publication-actions-row details summary {
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--wml-font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--wml-c-forest, #1c5038);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 180ms ease;
+}
+.wml-editorial .publication-actions-row details summary::-webkit-details-marker {
+    display: none;
+}
+.wml-editorial .publication-actions-row details summary:hover {
+    color: #0d281a;
+}
+.wml-editorial .publication-actions-row details[open] {
+    width: 100%;
+}
+.wml-editorial .publication-actions-row .abstract-content {
+    width: 100%;
+    margin-top: 0.6rem;
+    padding: 0.85rem 1.15rem;
+    background: #f6f8f6;
+    border-left: 3px solid var(--wml-c-forest, #1c5038);
+    border-radius: 4px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #22322a;
+}
+.wml-editorial .publication-actions-row .bibtex-container {
+    width: 100%;
+    margin-top: 0.6rem;
+    padding: 0.85rem 1.15rem;
+    background: #17241e;
+    border-radius: 6px;
+    color: #e2ece1;
+}
+.wml-editorial .publication-actions-row .bibtex-code {
+    margin: 0 0 0.65rem;
+    white-space: pre-wrap;
+    font-family: var(--wml-font-mono, monospace);
+    font-size: 0.8rem;
+    color: #d1dfd4;
+}
+.wml-editorial .publication-actions-row .bibtex-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+/* Research Page: Hero image, Areas list & Horizontal slider */
+.wml-editorial .research-hero-image {
+    margin: 0 0 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.wml-editorial .research-hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+    object-fit: cover;
+}
+.wml-editorial .research-hero-image figcaption {
+    font-size: 0.82rem;
+    color: var(--wml-c-muted, #55665e);
+    margin-top: 0.4rem;
+    font-style: italic;
+}
+.wml-editorial .research-areas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+}
+.wml-editorial .research-area-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1.75rem;
+    align-items: center;
+    padding: 1.15rem 1.4rem;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line, #e2ece1);
+    border-radius: 8px;
+}
+.wml-editorial .research-area-body h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0.35rem;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+.wml-editorial .research-area-body p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--wml-c-muted, #4a5c53);
+    margin: 0;
+}
+.wml-editorial .research-area-media img {
+    display: block;
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+@media (max-width: 640px) {
+    .wml-editorial .research-area-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .wml-editorial .research-area-media img {
+        width: 100%;
+        height: 180px;
+    }
+}
+.wml-editorial .projects-slider-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.wml-editorial .projects-slider {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.85rem;
+    scrollbar-width: thin;
+}
+.wml-editorial .project-slide-card {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line, #e2ece1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.wml-editorial .project-slide-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(16, 44, 34, 0.08);
+}
+.wml-editorial .project-slide-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+.wml-editorial .project-slide-card__thumb img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.wml-editorial .project-slide-card__body {
+    padding: 0.95rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.wml-editorial .project-slide-card__area {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wml-c-forest, #1c5038);
+    margin-bottom: 0.3rem;
+}
+.wml-editorial .project-slide-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.4rem;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+.wml-editorial .project-slide-card__summary {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--wml-c-muted, #55665e);
+    margin: 0;
+}
+
+/* Grants Page: Compact Two-Section Viewport-Optimized Layout */
+.wml-editorial .grants-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    margin-top: 0.5rem;
+}
+.wml-editorial .grants-compact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+.wml-editorial .grant-compact-item {
+    padding: 0.95rem 1.2rem;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line, #e2ece1);
+    border-radius: 6px;
+    transition: background-color 200ms ease, border-color 200ms ease;
+}
+.wml-editorial .grant-compact-item:hover {
+    border-color: rgba(28, 80, 56, 0.3);
+}
+.wml-editorial .grant-compact-title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.35rem;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+.wml-editorial .grant-compact-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--wml-c-muted, #55665e);
+}
+.wml-editorial .grant-compact-meta .meta-dot {
+    color: #9cb1a5;
+}
+.wml-editorial .grant-compact-associated {
+    margin-top: 0.45rem;
+    padding-top: 0.4rem;
+    border-top: 1px dashed var(--wml-c-line, #e2ece1);
+    font-size: 0.82rem;
+}
+.wml-editorial .grant-compact-associated .associated-label {
+    color: var(--wml-c-muted, #55665e);
+    margin-right: 0.3rem;
+}
+.wml-editorial .grant-compact-associated .associated-link {
+    color: var(--wml-c-forest, #1c5038);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Team Page: Photo, RA section, Other Contributors, Alumni */
+.wml-editorial .team-hero-photo {
+    margin: 0 0 2.2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.wml-editorial .team-hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    object-fit: cover;
+}
+.wml-editorial .team-hero-caption {
+    font-size: 0.82rem;
+    color: var(--wml-c-muted, #55665e);
+    margin-top: 0.4rem;
+    font-style: italic;
+}
+.wml-editorial .ra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1.15rem;
+}
+.wml-editorial .ra-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.8rem 1rem;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line, #e2ece1);
+    border-radius: 6px;
+}
+.wml-editorial .ra-avatar {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--wml-c-sage-light, #eaf1eb);
+}
+.wml-editorial .ra-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.wml-editorial .ra-initials-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--wml-font-sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--wml-c-forest, #1c5038);
+    background: var(--wml-c-sage, #e2ece1);
+}
+.wml-editorial .ra-info .ra-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin: 0 0 0.15rem;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+.wml-editorial .ra-scholar-link {
+    font-size: 0.78rem;
+    color: var(--wml-c-forest, #1c5038);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.wml-editorial .contributors-slider-wrap {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.wml-editorial .contributors-slider {
+    display: flex;
+    gap: 1.15rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.85rem;
+    scrollbar-width: thin;
+}
+.wml-editorial .contributor-card {
+    flex: 0 0 230px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line, #e2ece1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.wml-editorial .contributor-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(16, 44, 34, 0.08);
+}
+.wml-editorial .contributor-media {
+    width: 100%;
+    height: 190px;
+    background: var(--wml-c-sage-light, #eaf1eb);
+    overflow: hidden;
+}
+.wml-editorial .contributor-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.wml-editorial .contributor-media .ra-initials-placeholder {
+    font-size: 1.6rem;
+}
+.wml-editorial .contributor-body {
+    padding: 0.8rem 0.95rem;
+}
+.wml-editorial .contributor-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin: 0 0 0.2rem;
+    color: var(--wml-c-forest-deep, #102c22);
+}
+.wml-editorial .contributor-role {
+    font-size: 0.8rem;
+    color: var(--wml-c-muted, #55665e);
+    margin: 0 0 0.3rem;
+}
+.wml-editorial .contributor-bg {
+    font-size: 0.75rem;
+    color: var(--wml-c-muted, #55665e);
+    margin: 0 0 0.5rem;
+}
+.wml-editorial .alumni-toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+.wml-editorial .alumni-toggle-btn {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.6rem;
+    font-size: 0.88rem;
+}
+.wml-editorial .team-alumni-section {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 300ms ease, max-height 350ms ease;
+}
+.wml-editorial .team-alumni-section.is-expanded {
+    opacity: 1;
+    max-height: 2000px;
+}
+.wml-editorial .alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.15rem;
+}
+.wml-editorial .alumni-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.8rem 1rem;
+    background: #ffffff;
+    border: 1px solid var(--wml-c-line, #e2ece1);
+    border-radius: 6px;
+}
+.wml-editorial .alumni-media {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.wml-editorial .alumni-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.wml-editorial .alumni-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 0 0.15rem;
+}
+.wml-editorial .alumni-role {
+    font-size: 0.78rem;
+    color: var(--wml-c-muted, #55665e);
+    margin: 0;
+}
+.wml-editorial .alumni-dest {
+    font-size: 0.75rem;
+    color: var(--wml-c-forest, #1c5038);
+    margin: 0.15rem 0 0;
+}
+.wml-editorial .alumni-links {
+    display: flex;
+    gap: 0.45rem;
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+}
+.wml-editorial .alumni-links a {
+    color: var(--wml-c-forest, #1c5038);
+    text-decoration: underline;
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
     .template-secondary,

@@ -2,18 +2,11 @@
 {% load static wagtailcore_tags %}
 
 {% block section_content %}
-{# SECTION 1 — COMPACT PAGE HEADER #}
-<header class="editorial-intro monitoring-compact-intro">
-    <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Waste Mining Lab</a>
-        <span class="sep" aria-hidden="true">/</span>
-        <span class="current">Waste Monitoring</span>
-    </nav>
+<header class="compact-section-header">
     <h1>Waste Monitoring</h1>
-    <p class="lead">{{ page.intro|default:"Observational environmental datasets and monitoring infrastructure supporting waste dynamics and resource recovery research." }}</p>
 </header>
 
-{# SECTION 2 — MONITORING DASHBOARD #}
+{# MONITORING DASHBOARD #}
 <section class="monitoring-platform" id="monitoring-platform" aria-labelledby="platform-title">
     <header class="platform-header">
         <div>
@@ -126,10 +119,4 @@
     </div>
     {% endif %}
 </section>
-
-{# SECTION 3 — MINIMAL SUPPORTING NAVIGATION #}
-<nav class="monitoring-supporting-nav" aria-label="Related exploration">
-    <a class="editorial-link" href="/research/">Explore Research Projects{% include "home/includes/link_arrow.html" %}</a>
-    <a class="editorial-link" href="/publications/">Browse Publications{% include "home/includes/link_arrow.html" %}</a>
-</nav>
 {% endblock %}
