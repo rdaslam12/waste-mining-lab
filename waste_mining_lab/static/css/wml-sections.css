@@ -3161,37 +3161,45 @@
     text-decoration: none;
 }
 
+.wml-editorial .project-detail-header {
+    margin-bottom: 1.25rem;
+}
+
 .wml-editorial .project-metadata-strip {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--wml-c-line);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.15rem 1.75rem;
+    margin-top: 1.25rem;
+    padding: 1.15rem 1.4rem;
+    background: var(--wml-c-sage-light, #edf4ec);
+    border: 1px solid rgba(28, 80, 56, 0.14);
+    border-radius: 6px;
 }
 
 .wml-editorial .meta-item {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.25rem;
 }
 
 .wml-editorial .meta-label {
     font-family: var(--wml-font-mono);
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    color: var(--wml-c-muted);
-    letter-spacing: 0.05em;
+    color: var(--wml-c-forest);
+    letter-spacing: 0.06em;
+    font-weight: 600;
 }
 
 .wml-editorial .meta-value {
-    font-size: 0.92rem;
-    color: var(--wml-c-ink);
+    font-size: 1.05rem;
+    color: var(--wml-c-forest-deep);
     font-weight: 500;
+    line-height: 1.45;
 }
 
 .wml-editorial .project-detail-hero {
-    margin: 2rem 0;
+    margin: 1.5rem 0;
 }
 
 .wml-editorial .project-detail-hero img {
@@ -3211,34 +3219,31 @@
     text-align: center;
 }
 
-.wml-editorial .other-projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+.wml-editorial .project-detail-body {
+    margin-top: 1.25rem;
 }
 
-.wml-editorial .other-project-card {
-    background: #ffffff;
-    border: 1px solid var(--wml-c-line);
-    padding: 1.25rem;
-    border-radius: 6px;
-    box-shadow: var(--wml-shadow-subtle);
+.wml-editorial .project-detail-body section {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
 }
 
-.wml-editorial .other-project-card h3 {
-    font-size: 1.15rem;
-    margin: 0.4rem 0;
+.wml-editorial .project-detail h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
     color: var(--wml-c-forest-deep);
 }
 
-.wml-editorial .other-project-card a {
-    text-decoration: none;
-    color: inherit;
+.wml-editorial .project-detail .section-heading {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--wml-c-line);
 }
 
 .wml-editorial .project-back-strip {
-    margin-top: 3rem;
-    padding-top: 2rem;
+    margin-top: 2.25rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--wml-c-line);
 }
 

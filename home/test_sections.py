@@ -165,8 +165,8 @@ class SecondaryPageTests(TestCase):
         for value in ("Secret area", "Secret project", "Secret publication"):
             self.assertNotContains(response, value)
         response = self.client.get("/waste-monitoring/")
-        self.assertContains(response, "Published test project")
-        self.assertContains(response, "Linked test publication")
+        self.assertNotContains(response, "Connected Research Projects")
+        self.assertNotContains(response, "Related Publications")
         self.assertNotContains(response, "Secret publication")
 
     def test_team_fallback_groups_order_and_related_projects(self):
@@ -350,7 +350,8 @@ class SecondaryPageTests(TestCase):
         self.assertContains(response, "Detailed Waste Study")
         self.assertContains(response, "Full project description text.")
         self.assertContains(response, "Detailed experimental protocol.")
-        self.assertContains(response, "Linked Project Publication")
+        self.assertNotContains(response, "Related Publications")
+        self.assertNotContains(response, "Linked Project Publication")
 
         # Unknown slug returns 404
         response_404 = self.client.get("/research/non-existent-project-slug/")

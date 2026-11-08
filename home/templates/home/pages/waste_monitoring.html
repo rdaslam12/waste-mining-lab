@@ -93,30 +93,5 @@
         {{ page.methodology|richtext }}
     </div>
     {% endif %}
-
-    {% if projects or related_publications %}
-    <div class="monitoring-connected-records">
-        {% if projects %}
-        <div class="connected-records-block">
-            <span class="small-label">Connected Research Projects</span>
-            <ul class="connected-records-list">
-                {% for project in projects %}
-                <li><a href="/research/#project-{{ project.pk }}" class="connected-record-link">{{ project.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-        {% if related_publications %}
-        <div class="connected-records-block">
-            <span class="small-label">Related Publications</span>
-            <ul class="connected-records-list">
-                {% for pub in related_publications %}
-                <li><a href="/publications/?q={{ pub.title|urlencode }}#publication-{{ pub.pk }}" class="connected-record-link">{{ pub.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-    </div>
-    {% endif %}
 </section>
 {% endblock %}
