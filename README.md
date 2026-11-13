@@ -1,66 +1,48 @@
-# Waste Mining Lab website
+# Waste Mining Lab — static site
 
-The official website for Waste Mining Lab at North South University, Bangladesh. Django and Wagtail provide the public site and editorial admin. Alongside the established homepage, the site includes Publications, Research, Team, Activity, News, Waste Monitoring, and Contact.
+This branch contains the Eleventy and Pages CMS reconstruction of the Waste Mining Lab website for Cloudflare Pages. The original Django/Wagtail application remains intact on `main` and continues to power the Render production site until a separate deployment decision is made.
 
-## Technology
+## Local development
 
-- Python 3.12
-- Django 6.1
-- Wagtail 8.1
-- SQLite for local development
-
-## Local setup
-
-Activate the existing virtual environment with `source .venv/bin/activate`. For a fresh checkout, create a Python 3.12 environment and install the dependency ranges in `requirements.txt`:
+Use Node.js 20 or newer:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
+npm ci
+npm start
 ```
 
-Prepare the database and start the development server:
+Open `http://localhost:8080/`. Create a production build with `npm run build`; the deployable site is written to `_site/`.
+
+## Validation
 
 ```bash
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
-```
-
-Visit `http://127.0.0.1:8000/` for the public site and `http://127.0.0.1:8000/admin/` for Wagtail. Existing authentication is provided by Django and Wagtail; the project does not implement a separate login system.
-
-## Homepage content
-
-In Wagtail, edit the Home page to manage:
-
-- Hero headline
-- Hero subtitle
-- Hero image
-- Lab introduction
-- Optional verified team member count
-- Research areas, one per line
-
-The homepage retains its established hero rotation, mission animation, research showcase, and director portrait. Add meaningful descriptions to editorial images in Wagtail. The optional team count must be verified; it is not calculated from the new Team directory.
-
-The secondary pages reuse the existing forest, sage, and paper palette with DM Sans and Newsreader. Their CSS is scoped separately; the homepage, header, and footer remain the shared visual reference.
-
-The locally hosted fonts are distributed under the SIL Open Font License, with license files beside the fonts in `waste_mining_lab/static/fonts/`.
-
-## Secondary pages and editing
-
-See [the secondary-page maintainer guide](docs/secondary-pages.md) for CMS editing routes, publication visibility, project and people relationships, activity galleries, news publishing, and implementation details.
-
-Run `python manage.py migrate` to add the editorial models and any missing section pages. Existing pages, content, slugs, and IDs are preserved. No sample publications, projects, people, activities, or news are inserted. Waste Monitoring intentionally shows that no data source is connected; an ingestion backend is not included.
-
-## Checks
-
-```bash
-python manage.py check
-python manage.py makemigrations --check --dry-run
-python manage.py test
+npm run test:all
+npm audit
 git diff --check
 ```
 
-The secondary-page implementation passed these checks, including 38 Django tests, plus responsive browser checks for empty and populated content. [Validation details](docs/secondary-pages.md#validation) distinguish local fixture captures from real editorial content.
+`test:all` validates Pages CMS content, builds the site, checks generated routes and private-data exclusions, scans internal links, and exercises create/edit/publish/delete content fixtures. With `npm start` running in another terminal, `npm run test:browser` covers the public routes at desktop, tablet, and mobile widths.
 
-Production settings live in `waste_mining_lab/settings/production.py`. Configure a production secret key, allowed hosts, database, media storage, and `WAGTAILADMIN_BASE_URL` before deployment.
+## Content editing
+
+Pages CMS reads [`.pages.yml`](.pages.yml) and the structured JSON records under `src/content/`. Editors can manage publications, research projects and areas, grants, team members, news, activities, and general site content. A record is excluded from the public build while its `published` field is `false`.
+
+The local Wagtail export helper is deliberately read-only and exports public editorial records only:
+
+```bash
+python scripts/export_wagtail_content.py --database /absolute/path/to/db.sqlite3
+```
+
+It does not export users, passwords, sessions, tokens, revisions, or admin logs.
+
+## Cloudflare Pages
+
+- Branch for the initial preview: `migration/cloudflare-static`
+- Build command: `npm run build`
+- Output directory: `_site`
+- Root directory: repository root
+- Required runtime services: none
+
+Do not point the production domain at this branch until its Pages preview has been reviewed and approved. Branch switching does not move traffic between Render and Cloudflare.
+
+See [the migration and recovery runbook](docs/cloudflare-migration.md) for content workflows, deployment, comparison, rollback, database/media recovery, and troubleshooting.

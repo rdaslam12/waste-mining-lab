@@ -1,0 +1,450 @@
+/* Homepage-only pinned photographic hero. */
+.wml-pinned-hero {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    isolation: isolate;
+    width: 100%;
+    height: 100svh;
+    min-height: 34rem;
+    max-height: 68rem;
+    overflow: hidden;
+    color: #fff;
+    background: #102c22;
+}
+
+.wml-pinned-hero__media,
+.wml-pinned-hero__media picture,
+.wml-pinned-hero__shade,
+.wml-pinned-hero__slides {
+    position: absolute;
+    inset: 0;
+}
+
+.wml-pinned-hero__media picture {
+    display: block;
+}
+
+.wml-pinned-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.wml-pinned-hero__fallback {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #183f2d;
+}
+
+.wml-pinned-hero__fallback svg {
+    width: 100%;
+    height: 100%;
+    fill: rgba(119, 181, 137, 0.2);
+    stroke: rgba(175, 220, 184, 0.42);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 8;
+}
+
+.wml-pinned-hero__shade {
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(5, 15, 11, 0.76) 0%,
+        rgba(5, 15, 11, 0.5) 48%,
+        rgba(5, 15, 11, 0.14) 100%
+    );
+}
+
+.wml-pinned-hero__slides {
+    z-index: 2;
+}
+
+.wml-pinned-hero__slide {
+    position: absolute;
+    top: 50%;
+    left: clamp(1.5rem, 5vw, 6.125rem);
+    width: min(58rem, 88vw);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(calc(-50% + 1.25rem));
+    transition:
+        opacity 1.25s ease,
+        transform 1.25s ease,
+        visibility 0s linear 1.25s;
+}
+
+.wml-pinned-hero__slide.is-active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-50%);
+    transition:
+        opacity 1.25s ease,
+        transform 1.25s ease,
+        visibility 0s;
+}
+
+.wml-pinned-hero__slide.is-active .wml-pinned-hero__slide-inner {
+    transform-origin: left center;
+    animation: wml-hero-breathe 6.8s ease-in-out infinite;
+}
+
+@keyframes wml-hero-breathe {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-0.25rem) scale(1.012);
+    }
+}
+
+.wml-pinned-hero__headline {
+    max-width: 12ch;
+    margin: 0;
+    color: #fff;
+    font-family: var(--sans, system-ui, sans-serif);
+    font-size: clamp(3rem, 6.2vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+    text-wrap: balance;
+    text-shadow: 0 0.125rem 1.5rem rgba(0, 0, 0, 0.3);
+}
+
+.wml-pinned-hero__headline em {
+    color: #9de6a6;
+    font-style: normal;
+}
+
+.wml-pinned-hero__footer {
+    position: absolute;
+    right: clamp(1.5rem, 5vw, 6.125rem);
+    bottom: clamp(1.5rem, 4vw, 3.125rem);
+    left: clamp(1.5rem, 5vw, 6.125rem);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.wml-pinned-hero__controls {
+    display: none;
+    align-items: center;
+    gap: 0.125rem;
+}
+
+.wml-pinned-hero.has-rotation .wml-pinned-hero__controls {
+    display: flex;
+}
+
+.wml-pinned-hero__dot {
+    position: relative;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    color: transparent;
+    background: transparent;
+    cursor: pointer;
+}
+
+.wml-pinned-hero__dot::before {
+    position: absolute;
+    top: 50%;
+    left: 0.125rem;
+    width: 2.5rem;
+    height: 0.35rem;
+    border-radius: 0.35rem;
+    background: rgba(255, 255, 255, 0.48);
+    content: "";
+    transform: translateY(-50%) scaleX(0.7);
+    transform-origin: left center;
+    transition: transform 250ms ease, background-color 250ms ease;
+}
+
+.wml-pinned-hero__dot span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.wml-pinned-hero__dot.is-active {
+    color: transparent;
+}
+
+.wml-pinned-hero__dot.is-active::before {
+    background: #9de6a6;
+    transform: translateY(-50%) scaleX(1);
+}
+
+.wml-pinned-hero__dot:focus-visible,
+.wml-pinned-hero__toggle:focus-visible,
+.wml-pinned-hero__explore:focus-visible {
+    outline-color: #fff;
+}
+
+.wml-pinned-hero__toggle {
+    min-height: 2.75rem;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.64);
+    border-radius: 1rem;
+    color: #fff;
+    background: rgba(8, 18, 13, 0.48);
+    font: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.wml-pinned-hero__explore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+}
+
+.wml-pinned-hero__explore:hover {
+    color: #d5f0d8;
+}
+
+.wml-pinned-hero__explore svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+}
+
+/* Opaque content surfaces cover the photograph while it remains pinned. */
+#main-content > .mission,
+#main-content > .lab-introduction,
+#main-content > .team {
+    position: relative;
+    z-index: 2;
+}
+
+#main-content > .mission {
+    box-shadow: 0 -1rem 2.25rem rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 42.5rem) {
+    .wml-pinned-hero {
+        height: 88svh;
+        min-height: 29.5rem;
+        max-height: 51rem;
+    }
+
+    .wml-pinned-hero__media img {
+        object-position: center;
+    }
+
+    .wml-pinned-hero__shade {
+        background: linear-gradient(
+            180deg,
+            rgba(4, 14, 10, 0.28) 0%,
+            rgba(4, 14, 10, 0.75) 82%
+        );
+    }
+
+    .wml-pinned-hero__slide {
+        left: 7vw;
+        width: 86vw;
+    }
+
+    .wml-pinned-hero__headline {
+        max-width: 11ch;
+        font-size: clamp(2.5rem, 11vw, 4.25rem);
+        line-height: 1.04;
+    }
+
+    .wml-pinned-hero__footer {
+        right: 7vw;
+        left: 7vw;
+    }
+
+    .wml-pinned-hero__explore {
+        display: none;
+    }
+}
+
+@media (max-height: 38rem) and (orientation: landscape) {
+    .wml-pinned-hero {
+        height: 100svh;
+        min-height: 24rem;
+    }
+
+    .wml-pinned-hero__headline {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+    }
+
+    .wml-pinned-hero__footer {
+        bottom: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wml-pinned-hero__slide,
+    .wml-pinned-hero__dot::before {
+        transition: none;
+    }
+
+    .wml-pinned-hero__slide.is-active .wml-pinned-hero__slide-inner {
+        animation: none;
+    }
+}
+
+/* ==========================================
+   FACULTY QUOTE & PORTRAIT
+   ========================================== */
+
+.wml-faculty-feature {
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(1rem, 2vw, 2.5rem);
+
+    width: min(46%, 680px);
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Quote styling */
+
+.wml-faculty-feature__quote {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    color: #ffffff;
+    text-align: right;
+
+    opacity: 0;
+    animation: wml-faculty-rise 1.2s ease-out 0.3s both;
+}
+
+.wml-faculty-feature__quote p {
+    margin-bottom: 14px;
+    font-family: "Newsreader", Georgia, serif;
+    font-size: clamp(1.2rem, 1.8vw, 2rem);
+    font-style: italic;
+    line-height: 1.3;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.65);
+}
+
+.wml-faculty-feature__quote cite {
+    font-family: "DM Sans", sans-serif;
+    font-size: clamp(0.75rem, 1vw, 1rem);
+    font-style: normal;
+    font-weight: 600;
+    color: #e4efe6;
+}
+
+/* Circular portrait */
+
+.wml-faculty-feature__photo {
+    width: clamp(140px, 15vw, 240px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    object-fit: contain;
+
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+    animation: wml-faculty-rise 1.3s ease-out 0.6s both;
+}
+
+/* Slide-up entrance animation */
+
+@keyframes wml-faculty-rise {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tablet: move faculty feature below headlines */
+
+@media (max-width: 1250px) {
+    .wml-faculty-feature {
+        top: auto;
+        right: 5%;
+        bottom: 2rem;
+        width: min(620px, 90%);
+        transform: none;
+    }
+
+    .wml-pinned-hero__slide {
+        top: 34%;
+    }
+
+    .wml-faculty-feature__photo {
+        width: clamp(110px, 15vw, 170px);
+    }
+}
+
+/* Mobile layout */
+
+@media (max-width: 700px) {
+    .wml-faculty-feature {
+        left: 7%;
+        right: 7%;
+        bottom: 1.5rem;
+        width: 86%;
+        gap: 14px;
+    }
+
+    .wml-faculty-feature__photo {
+        width: 95px;
+    }
+
+    .wml-faculty-feature__quote p {
+        font-size: 1rem;
+        line-height: 1.35;
+    }
+
+    .wml-faculty-feature__quote cite {
+        font-size: 0.7rem;
+    }
+
+    .wml-pinned-hero__slide {
+        top: 30%;
+    }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .wml-faculty-feature__quote,
+    .wml-faculty-feature__photo {
+        animation: none;
+        opacity: 1;
+    }
+}

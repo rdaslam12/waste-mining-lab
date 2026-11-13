@@ -1,0 +1,18 @@
+---
+layout: layouts/section.njk
+title: Grants & Funding
+description: Sponsored research, competitive grants, and institutional funding supporting Waste Mining Lab.
+navKey: grants
+permalink: /grants/index.html
+---
+<header class="visually-hidden"><h1>Grants &amp; Sponsored Research</h1></header>
+<div class="grants-overview">
+  <section class="grants-section active-funding-section" aria-labelledby="active-funding-title">
+    <div class="section-heading"><h2 id="active-funding-title">Active Funding</h2></div>
+    {% if catalog.activeGrants.length %}<div class="grants-compact-list">{% for grant in catalog.activeGrants %}<article class="grant-compact-item" id="grant-{{ grant.legacy_id or grant.slug }}"><div class="grant-compact-main"><h3 class="grant-compact-title">{{ grant.title }}</h3><div class="grant-compact-meta"><span class="grant-compact-org">{{ grant.funding_organization }}</span>{% if grant.amount_display %}<span class="meta-dot" aria-hidden="true">·</span><span class="grant-compact-amount">{{ grant.amount_display }}</span>{% endif %}{% if grant.start_date or grant.end_date %}<span class="meta-dot" aria-hidden="true">·</span><span class="grant-compact-period">{{ grant | periodDisplay }}</span>{% endif %}{% if grant.role %}<span class="meta-dot" aria-hidden="true">·</span><span class="grant-compact-role">{{ grant.role }}</span>{% endif %}</div></div></article>{% endfor %}</div>{% else %}<p class="muted">No currently active grants published.</p>{% endif %}
+  </section>
+  <section class="grants-section previous-funding-section" aria-labelledby="previous-funding-title">
+    <div class="section-heading"><h2 id="previous-funding-title">Previous Funding</h2></div>
+    {% if catalog.previousGrants.length %}<div class="grants-compact-list">{% for grant in catalog.previousGrants %}<article class="grant-compact-item grant-compact-item--past" id="grant-{{ grant.legacy_id or grant.slug }}"><div class="grant-compact-main"><h3 class="grant-compact-title">{{ grant.title }}</h3><div class="grant-compact-meta"><span class="grant-compact-org">{{ grant.funding_organization }}</span>{% if grant.amount_display %}<span class="meta-dot" aria-hidden="true">·</span><span class="grant-compact-amount">{{ grant.amount_display }}</span>{% endif %}{% if grant.start_date or grant.end_date %}<span class="meta-dot" aria-hidden="true">·</span><span class="grant-compact-period">{{ grant | periodDisplay }}</span>{% endif %}{% if grant.role %}<span class="meta-dot" aria-hidden="true">·</span><span class="grant-compact-role">{{ grant.role }}</span>{% endif %}</div>{% if grant.project and grant.project.published %}<div class="grant-compact-associated"><span class="associated-label">Associated research:</span><a href="/research/{{ grant.project.slug }}/" class="associated-link">{{ grant.project.title }}</a></div>{% endif %}</div></article>{% endfor %}</div>{% else %}<p class="muted">No previous funding records listed.</p>{% endif %}
+  </section>
+</div>

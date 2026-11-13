@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "Home" }}{% if title != catalog.site.site_name %} — {{ catalog.site.site_name }}{% endif %}</title>
+  <meta name="description" content="{{ description or catalog.site.default_description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121a17">
+  <link rel="icon" type="image/png" href="/assets/images/wml-icon.png">
+  <link rel="apple-touch-icon" href="/assets/images/wml-icon.png">
+  <meta property="og:site_name" content="Waste Mining Lab — North South University">
+  <meta property="og:title" content="{{ title or "Home" }} — Waste Mining Lab">
+  <meta property="og:description" content="{{ description or catalog.site.default_description }}">
+  <meta property="og:type" content="{% if ogType %}{{ ogType }}{% else %}website{% endif %}">
+  <meta property="og:image" content="{{ site.url }}/assets/images/wml-full-logo.png">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="stylesheet" href="/assets/css/waste_mining_lab.css">
+  <link rel="stylesheet" href="/assets/css/wml-nav.css">
+  {% for stylesheet in extraStyles or [] %}<link rel="stylesheet" href="/assets/css/{{ stylesheet }}">{% endfor %}
+  <link rel="stylesheet" href="/assets/css/wml-static.css">
+</head>
+<body class="{{ bodyClass or "template-secondary" }} wml-site theme-{{ navKey or "home" }}">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  {% include "partials/header.njk" %}
+  <main id="main-content">{{ content | safe }}</main>
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/waste_mining_lab.js"></script>
+  {% for script in extraScripts or [] %}<script src="/assets/js/{{ script }}" defer></script>{% endfor %}
+</body>
+</html>

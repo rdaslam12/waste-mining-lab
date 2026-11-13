@@ -1,0 +1,12 @@
+---
+layout: layouts/section.njk
+title: Activity
+description: Field visits, workshops, seminars, presentations, and laboratory activities from Waste Mining Lab.
+navKey: activity
+permalink: /activity/index.html
+---
+{% set activities = catalog.activities | filterPublished %}
+<header class="compact-section-header"><h1 id="activity-title">Activity</h1></header>
+<section class="journal-section" aria-labelledby="activity-title">
+  {% for activity in activities %}<article class="activity-entry{% if activity.featured %} activity-entry--featured{% endif %}" id="activity-{{ activity.legacy_id or activity.slug }}"><div class="activity-date"><time datetime="{{ activity.date }}"><span>{{ activity.date | day }}</span>{{ activity.date | monthYearShort }}</time></div><div class="activity-story"><p class="small-label">{{ activity.category | activityCategory }}{% if activity.featured %} · In focus{% endif %}</p><h3>{{ activity.title }}</h3>{% if activity.cover_image %}<img class="activity-cover" src="{{ activity.cover_image }}" alt="{{ activity.cover_image_alt or activity.title }}" loading="lazy">{% endif %}<div class="reading-copy">{{ activity.description_html | safe }}</div>{% if activity.gallery.length %}<div class="activity-gallery">{% for photo in activity.gallery %}<figure><a href="{{ photo.image }}" aria-label="View full photograph: {{ photo.caption or photo.image_alt }}"><img src="{{ photo.image }}" alt="{{ photo.image_alt }}" loading="lazy"></a>{% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}</figure>{% endfor %}</div>{% endif %}<div class="text-links">{% if activity.project and activity.project.published %}<a href="/research/{{ activity.project.slug }}/">Related research: {{ activity.project.title }}</a>{% endif %}{% if activity.external_url %}<a href="{{ activity.external_url }}">More about this activity</a>{% endif %}</div></div></article>{% else %}<div class="empty-state"><p class="muted">No activities published yet.</p></div>{% endfor %}
+</section>

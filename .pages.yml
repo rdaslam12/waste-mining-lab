@@ -1,0 +1,348 @@
+media:
+  - name: images
+    label: Images
+    input: src/media/images
+    output: /media/images
+    categories: [image]
+    extensions: [png, jpg, jpeg, webp, gif, svg]
+    rename: safe
+  - name: documents
+    label: Documents
+    input: src/media/documents
+    output: /media/documents
+    categories: [document, spreadsheet, compressed]
+    rename: safe
+
+content:
+  - name: research_content
+    label: Research
+    type: group
+    items:
+      - name: research_projects
+        label: Research Projects
+        type: collection
+        path: src/content/research-projects
+        format: json
+        filename:
+          template: "{slug}.json"
+          field: true
+        view:
+          primary: title
+          fields: [title, status, published]
+          sort: title
+          search: [title, summary, collaborations]
+        fields:
+          - { name: slug, label: URL slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+          - { name: title, label: Title, type: string, required: true }
+          - name: status
+            label: Project status
+            type: select
+            required: true
+            options:
+              values:
+                - { name: active, label: Active research }
+                - { name: completed, label: Completed }
+                - { name: planned, label: Planned inquiry }
+          - { name: summary, label: Summary, type: text, required: true }
+          - name: research_area
+            label: Research area
+            type: reference
+            options: { collection: research_areas, search: "title,description", value: "{fields.slug}", label: "{title}" }
+          - { name: image, label: Project image, type: image, options: { media: images, path: projects } }
+          - { name: image_alt, label: Image description, type: string, description: Describe the image for screen-reader users. }
+          - { name: start_date, label: Start date, type: date, default: "", options: { format: yyyy-MM-dd } }
+          - { name: end_date, label: End date, type: date, default: "", options: { format: yyyy-MM-dd } }
+          - { name: description_html, label: Overview and objectives, type: rich-text, options: { format: html, media: images, path: projects } }
+          - { name: methodology_html, label: Scientific methodology, type: rich-text, options: { format: html, media: images, path: projects } }
+          - { name: collaborations, label: Collaborations, type: text }
+          - { name: funding_notes, label: Funding notes, type: text }
+          - { name: external_url, label: External link, type: string }
+          - name: publications
+            label: Related publications
+            type: reference
+            options: { collection: publications, multiple: true, search: "title,authors,doi", value: "{fields.slug}", label: "{title}" }
+          - { name: monitoring_related, label: Show on Waste Monitoring, type: boolean, default: false }
+          - { name: sort_order, label: Sort order, type: number, default: 0 }
+          - { name: published, label: Published, type: boolean, default: false, description: Draft records are excluded from the public build. }
+
+      - name: research_areas
+        label: Research Areas
+        type: collection
+        path: src/content/research-areas
+        format: json
+        filename: { template: "{slug}.json", field: true }
+        view: { primary: title, fields: [title, published, sort_order], sort: sort_order, order: asc, search: [title, description] }
+        fields:
+          - { name: slug, label: URL slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: description, label: Description, type: text }
+          - { name: image, label: Image, type: image, options: { media: images, path: research-areas } }
+          - { name: image_alt, label: Image description, type: string }
+          - { name: sort_order, label: Sort order, type: number, default: 0 }
+          - { name: published, label: Published, type: boolean, default: false }
+
+  - name: publications
+    label: Publications
+    type: collection
+    path: src/content/publications
+    format: json
+    filename: { template: "{slug}.json", field: true }
+    view: { primary: title, fields: [title, year, publication_type, published], sort: year, order: desc, search: [title, authors, venue, doi] }
+    fields:
+      - { name: slug, label: URL slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+      - { name: title, label: Title, type: string, required: true }
+      - { name: authors, label: Authors in publication order, type: text, required: true }
+      - { name: year, label: Year, type: number, required: true }
+      - { name: venue, label: Journal or conference, type: string }
+      - { name: doi, label: DOI, type: string, description: Enter the DOI only, without https://doi.org/. }
+      - name: publication_type
+        label: Publication type
+        type: select
+        required: true
+        options:
+          values:
+            - { name: journal, label: Journal Article }
+            - { name: conference, label: Conference Paper }
+            - { name: book_chapter, label: Book Chapter }
+            - { name: preprint, label: Preprint / Working Paper }
+            - { name: report, label: Technical Report }
+      - { name: publication_url, label: Publication link, type: string }
+      - { name: abstract, label: Abstract, type: text }
+      - { name: featured, label: Featured, type: boolean, default: false }
+      - { name: published, label: Published, type: boolean, default: false }
+
+  - name: grants
+    label: Grants
+    type: collection
+    path: src/content/grants
+    format: json
+    filename: { template: "{slug}.json", field: true }
+    view: { primary: title, fields: [title, funding_organization, start_date, published], sort: sort_order, order: asc, search: [title, funding_organization, summary] }
+    fields:
+      - { name: slug, label: Record slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+      - { name: title, label: Grant title, type: string, required: true }
+      - { name: funding_organization, label: Funding organization, type: string, required: true }
+      - { name: amount_display, label: Display amount, type: string }
+      - { name: amount, label: Numeric amount, type: number }
+      - { name: currency, label: Currency, type: string }
+      - { name: start_date, label: Start date, type: date, default: "", options: { format: yyyy-MM-dd } }
+      - { name: end_date, label: End date, type: date, default: "", options: { format: yyyy-MM-dd } }
+      - { name: role, label: Investigator role, type: string }
+      - { name: awarded_institution, label: Awarded institution, type: string }
+      - name: category
+        label: Grant category
+        type: select
+        options:
+          values:
+            - { name: lab, label: Laboratory funding }
+            - { name: director_affiliated, label: Director-associated grants }
+            - { name: previous_institutional, label: Previous institutional funding }
+            - { name: collaboration, label: Research collaborations }
+      - name: related_project
+        label: Related project
+        type: reference
+        options: { collection: research_projects, search: "title,summary", value: "{fields.slug}", label: "{title}" }
+      - { name: summary, label: Summary, type: text }
+      - { name: public_source_url, label: Public verification link, type: string }
+      - { name: verified, label: Verified record, type: boolean, default: false }
+      - { name: sort_order, label: Sort order, type: number, default: 0 }
+      - { name: published, label: Published, type: boolean, default: false }
+
+  - name: team
+    label: Team Members
+    type: collection
+    path: src/content/team
+    format: json
+    filename: { template: "{slug}.json", field: true }
+    view: { primary: name, fields: [name, role, category, published], sort: sort_order, order: asc, search: [name, role, affiliation, research_interests] }
+    fields:
+      - { name: slug, label: Profile slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+      - { name: name, label: Name, type: string, required: true }
+      - { name: role, label: Role, type: string, required: true }
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - { name: director, label: Principal Investigator / Lab Director }
+            - { name: scientist, label: Research Scientists & Postdoctoral Researchers }
+            - { name: assistant, label: Research Assistants }
+            - { name: student, label: Graduate & Undergraduate Researchers }
+            - { name: staff, label: Research Officers & Laboratory Staff }
+            - { name: collaborator, label: Collaborators & Co-Researchers }
+            - { name: alumni, label: Alumni / Former Members }
+            - { name: researcher, label: Researchers }
+      - { name: affiliation, label: Affiliation, type: string }
+      - { name: academic_background, label: Academic background, type: string }
+      - { name: biography, label: Biography, type: text }
+      - { name: research_interests, label: Research interests, type: text }
+      - { name: image, label: Portrait, type: image, options: { media: images, path: team } }
+      - { name: image_alt, label: Portrait description, type: string }
+      - { name: featured, label: Featured member, type: boolean, default: false }
+      - { name: email, label: Email, type: string }
+      - { name: profile_url, label: Institutional profile, type: string }
+      - { name: linkedin_url, label: LinkedIn, type: string }
+      - { name: scholar_url, label: Google Scholar, type: string }
+      - { name: alumni_current_position, label: Alumni current position, type: string }
+      - name: projects
+        label: Related projects
+        type: reference
+        options: { collection: research_projects, multiple: true, search: "title,summary", value: "{fields.slug}", label: "{title}" }
+      - { name: sort_order, label: Sort order, type: number, default: 0 }
+      - { name: published, label: Published, type: boolean, default: false }
+
+  - name: news
+    label: News and Announcements
+    type: collection
+    path: src/content/news
+    format: json
+    filename: { template: "{slug}.json", field: true }
+    view: { primary: title, fields: [title, date, category, published], sort: date, order: desc, search: [title, excerpt] }
+    fields:
+      - { name: slug, label: URL slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+      - { name: title, label: Headline, type: string, required: true }
+      - { name: seo_title, label: SEO title, type: string }
+      - { name: search_description, label: SEO description, type: text }
+      - { name: date, label: Publication date, type: date, required: true, options: { format: yyyy-MM-dd } }
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - { name: announcement, label: Announcements }
+            - { name: research, label: Research updates }
+            - { name: lab, label: Lab news }
+      - { name: excerpt, label: Excerpt, type: text, required: true }
+      - { name: cover_image, label: Cover image, type: image, options: { media: images, path: news } }
+      - { name: cover_image_alt, label: Cover image description, type: string }
+      - { name: body_html, label: Article body, type: rich-text, required: true, options: { format: html, media: images, path: news } }
+      - { name: featured, label: Featured story, type: boolean, default: false }
+      - name: related_project
+        label: Related project
+        type: reference
+        options: { collection: research_projects, search: "title,summary", value: "{fields.slug}", label: "{title}" }
+      - name: related_publication
+        label: Related publication
+        type: reference
+        options: { collection: publications, search: "title,authors,doi", value: "{fields.slug}", label: "{title}" }
+      - name: related_activity
+        label: Related activity
+        type: reference
+        options: { collection: activities, search: "title,description_html", value: "{fields.slug}", label: "{title}" }
+      - { name: published, label: Published, type: boolean, default: false }
+
+  - name: activities_group
+    label: Activities and Galleries
+    type: group
+    items:
+      - name: activities
+        label: Activities and Galleries
+        type: collection
+        path: src/content/activities
+        exclude: [".gitkeep"]
+        format: json
+        filename: { template: "{slug}.json", field: true }
+        view: { primary: title, fields: [title, date, category, published], sort: date, order: desc, search: [title, description_html] }
+        fields:
+          - { name: slug, label: Entry slug, type: string, required: true, pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+          - { name: legacy_id, label: Legacy database ID, type: number, readonly: true }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: date, label: Date, type: date, required: true, options: { format: yyyy-MM-dd } }
+          - name: category
+            label: Category
+            type: select
+            options:
+              values:
+                - { name: field, label: Field visits }
+                - { name: laboratory, label: Laboratory activities }
+                - { name: workshop, label: Workshops }
+                - { name: seminar, label: Seminars }
+                - { name: presentation, label: Research presentations }
+                - { name: outreach, label: Outreach & collaborations }
+          - { name: description_html, label: Description, type: rich-text, required: true, options: { format: html, media: images, path: activities } }
+          - { name: cover_image, label: Cover image, type: image, options: { media: images, path: activities } }
+          - { name: cover_image_alt, label: Cover image description, type: string }
+          - { name: external_url, label: External link, type: string }
+          - name: related_project
+            label: Related project
+            type: reference
+            options: { collection: research_projects, search: "title,summary", value: "{fields.slug}", label: "{title}" }
+          - { name: featured, label: Featured, type: boolean, default: false }
+          - name: gallery
+            label: Gallery photographs
+            type: object
+            list:
+              collapsible: { collapsed: true, summary: "{caption} ({index})" }
+            fields:
+              - { name: image, label: Photograph, type: image, required: true, options: { media: images, path: activities } }
+              - { name: image_alt, label: Image description, type: string, required: true }
+              - { name: caption, label: Caption, type: string }
+          - { name: sort_order, label: Sort order, type: number, default: 0 }
+          - { name: published, label: Published, type: boolean, default: false }
+
+  - name: site_content
+    label: Homepage and General Site Content
+    type: group
+    items:
+      - name: site_settings
+        label: Homepage and Site Settings
+        type: file
+        path: src/content/site.json
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        fields:
+          - { name: site_name, label: Site name, type: string, required: true }
+          - { name: institution, label: Institution, type: string }
+          - { name: department, label: Department, type: string }
+          - { name: default_description, label: Default SEO description, type: text }
+          - { name: canonical_url, label: Production site URL, type: string }
+          - { name: email, label: Contact email, type: string }
+          - { name: address_html, label: Footer address, type: rich-text, options: { format: html, media: false } }
+          - { name: hero_headline, label: Hero headline, type: string }
+          - { name: hero_subtitle, label: Mission statement, type: text }
+          - { name: hero_image, label: Desktop hero image, type: image, options: { media: images } }
+          - { name: hero_image_mobile, label: Mobile hero image, type: image, options: { media: images } }
+          - { name: hero_image_large, label: Large-screen hero image, type: image, options: { media: images } }
+          - { name: hero_image_alt, label: Hero image description, type: string }
+          - { name: lab_introduction_html, label: Lab introduction, type: rich-text, options: { format: html, media: false } }
+          - { name: team_member_count, label: Verified team member count, type: number }
+          - { name: director_name, label: Director name, type: string }
+          - { name: director_email, label: Director email, type: string }
+          - { name: director_profile_url, label: Director profile URL, type: string }
+          - { name: director_linkedin_url, label: Director LinkedIn URL, type: string }
+      - name: general_pages
+        label: General Page Content
+        type: collection
+        path: src/content/pages
+        format: json
+        operations: { create: false, rename: false, delete: false }
+        view: { primary: title, fields: [title, slug], sort: title, order: asc, search: [title, intro, body_html] }
+        fields:
+          - { name: slug, label: Page slug, type: string, readonly: true }
+          - { name: title, label: Navigation title, type: string, readonly: true }
+          - { name: heading, label: Display heading, type: string }
+          - { name: intro, label: Introduction, type: text }
+          - { name: body_html, label: Page body, type: rich-text, options: { format: html, media: images, path: pages } }
+          - { name: feature_image, label: Feature image, type: image, options: { media: images, path: pages } }
+          - { name: feature_image_alt, label: Feature image description, type: string }
+          - { name: image_caption, label: Image caption, type: string }
+          - { name: methodology_html, label: Methodology note, type: rich-text, options: { format: html, media: false } }
+          - { name: seo_title, label: SEO title, type: string }
+          - { name: search_description, label: SEO description, type: text }
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "content: create {path} via Pages CMS"
+      update: "content: update {path} via Pages CMS"
+      delete: "content: delete {path} via Pages CMS"
+      rename: "content: rename {oldPath} to {newPath} via Pages CMS"

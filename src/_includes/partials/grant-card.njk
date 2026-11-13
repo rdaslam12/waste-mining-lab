@@ -1,0 +1,22 @@
+<article class="grant-card" id="grant-{{ grant.legacy_id or grant.slug }}">
+  <div class="grant-card__header">
+    <div class="grant-card__meta">
+      <span class="grant-sponsor">{{ grant.funding_organization }}</span>
+      {% if grant.amount_display %}<span class="grant-amount">{{ grant.amount_display }}</span>{% endif %}
+      {% if grant.role %}<span class="grant-role">{{ grant.role }}</span>{% endif %}
+    </div>
+    <h3 class="grant-title">{{ grant.title }}</h3>
+  </div>
+  <div class="grant-card__details">
+    {% if grant.awarded_institution %}<p class="grant-institution"><strong>Institution:</strong> {{ grant.awarded_institution }}</p>{% endif %}
+    {% if grant.start_date or grant.end_date %}<p class="grant-period"><strong>Duration:</strong> {{ grant | periodDisplay }}</p>{% endif %}
+    {% if grant.summary %}<p class="grant-summary">{{ grant.summary }}</p>{% endif %}
+  </div>
+  <div class="grant-card__footer">
+    {% if grant.project and grant.project.published %}<div class="grant-related-project"><span class="small-label">Supported Project:</span><a href="/research/{{ grant.project.slug }}/">{{ grant.project.title }}</a></div>{% endif %}
+    <div class="grant-verification">
+      {% if grant.verified %}<span class="verification-badge" title="Verified from official academic or institutional records"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm3.707 6.707l-4.5 4.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L7 9.586l3.793-3.793a1 1 0 111.414 1.414z"/></svg> Verified Record</span>{% endif %}
+      {% if grant.public_source_url %}<a href="{{ grant.public_source_url }}" class="grant-source-link" target="_blank" rel="noopener noreferrer">Official Reference</a>{% endif %}
+    </div>
+  </div>
+</article>

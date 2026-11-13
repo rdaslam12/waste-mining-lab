@@ -1,0 +1,39 @@
+.wml-faculty { position: relative; z-index: 1; background: #f8faf7; color: #344b40; }
+.wml-faculty__inner { display: grid; grid-template-columns: 1.1fr 1fr; max-width: 100rem; margin-inline: auto; }
+.wml-faculty__copy { padding: clamp(4rem, 7vw, 7rem) 0 clamp(4rem, 6vw, 6rem) clamp(1.5rem, 5vw, 6rem); }
+.wml-faculty__eyebrow { margin-bottom: 1.5rem; color: #52675a; font: 500 0.75rem/1.5 "Mission Geist", var(--sans); letter-spacing: 0.1em; }
+.wml-faculty h2 { margin: 0 0 2rem; color: #102c22; font: 700 clamp(2.75rem, 4.5vw, 5rem)/1.04 var(--sans); letter-spacing: -0.04em; }
+.wml-faculty h2 em { color: #28774f; font-family: "Mission Newsreader", var(--serif); font-weight: 400; }
+.wml-faculty__affiliations { padding-bottom: 1.5rem; margin-bottom: 1.75rem; border-bottom: 1px solid #cddbd0; font: 500 0.8125rem/1.65 "Mission Geist", var(--sans); }
+.wml-faculty__affiliations p { margin-bottom: 0.85rem; }
+.wml-faculty__affiliations p:last-child { margin-bottom: 0; color: #52675a; }
+.wml-faculty__biography { max-width: 65ch; font-size: clamp(1rem, 1.1vw, 1.125rem); line-height: 1.7; }
+.wml-faculty__biography p { margin-bottom: 1.25rem; }
+.wml-faculty__portrait { display: flex; align-items: end; align-self: end; }
+.wml-faculty__portrait img { width: 100%; height: auto; object-fit: contain; object-position: bottom; }
+.wml-faculty__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; margin-top: 2rem; }
+.wml-faculty__actions a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: 0.875rem; font-weight: 600; color: #102c22; }
+.wml-faculty__actions .wml-faculty__primary { gap: 1rem; padding: 0.8rem 1.25rem; border-radius: 0.5rem; color: #fff; background: #19563c; text-decoration: none; }
+.wml-faculty__actions a:hover { color: #28774f; }
+.wml-faculty__actions .wml-faculty__primary:hover { background: #102c22; color: #fff; }
+.wml-faculty__actions svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.wml-faculty a:focus-visible { outline-color: #28774f; }
+/* Content stays visible without JavaScript; observer adds a once-only entrance. */
+@keyframes wml-faculty-enter { from { opacity: 0.25; transform: translateY(1.25rem); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+    .wml-faculty.is-entering .wml-faculty__eyebrow,
+    .wml-faculty.is-entering h2,
+    .wml-faculty.is-entering .wml-faculty__biography,
+    .wml-faculty.is-entering .wml-faculty__portrait { animation: wml-faculty-enter 850ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .wml-faculty.is-entering h2 { animation-delay: 70ms; }
+    .wml-faculty.is-entering .wml-faculty__biography { animation-delay: 140ms; }
+    .wml-faculty.is-entering .wml-faculty__portrait { animation-delay: 200ms; }
+}
+.template-homepage .lab-introduction { border-top: 1px solid #cddbd0; }
+.lab-introduction__link { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: 2rem; color: #19563c; font-weight: 600; }
+@media (max-width: 800px) {
+    .wml-faculty__inner { grid-template-columns: 1fr; }
+    .wml-faculty__copy { padding: 3.5rem 1.5rem 1rem; }
+    .wml-faculty__portrait { width: min(100%, 36rem); justify-self: end; }
+    .wml-faculty h2 { font-size: clamp(2.75rem, 7vw, 4rem); }
+}

@@ -1,0 +1,14 @@
+{
+  "legacy_id": 9,
+  "slug": "from-conventional-sludge-production-models-to-population-integrated-physics-informed-neural-networks-a-technical-note-on-proposed-conceptual-framework",
+  "title": "From Conventional Sludge-Production Models to Population-Integrated Physics-Informed Neural Networks: A Technical Note on Proposed Conceptual Framework",
+  "authors": "Asef Mohammad Redwan, Sakib Hossain Parvez, Puspita Das",
+  "year": 2026,
+  "venue": "SSRN Electronic Journal",
+  "doi": "10.2139/ssrn.7625014",
+  "publication_type": "preprint",
+  "publication_url": "https://doi.org/10.2139/ssrn.7625014",
+  "abstract": "A conceptual technical note presenting a physics-informed neural network (PINN) architecture integrating biological population dynamics with mass-balance constraints to enhance the predictive accuracy and optimization of wastewater sludge digestion and bioprocess control.",
+  "published": true,
+  "featured": false
+}

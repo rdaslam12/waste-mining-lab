@@ -1,0 +1,27 @@
+{
+  "name": "waste-mining-lab-static",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static Eleventy reconstruction of the Waste Mining Lab website for Cloudflare Pages and Pages CMS.",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "clean": "node scripts/clean-output.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:links": "node scripts/check-links.mjs",
+    "test:content": "node scripts/validate-content.mjs",
+    "test:fixtures": "node scripts/content-fixture-test.mjs",
+    "test:browser": "node scripts/browser-qa.mjs",
+    "test:visual": "node scripts/visual-comparison.mjs",
+    "test:all": "npm run test:content && npm run build && npm test && npm run test:links && npm run test:fixtures"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.8",
+    "js-yaml": "4.3.2",
+    "playwright": "1.65.0"
+  }
+}

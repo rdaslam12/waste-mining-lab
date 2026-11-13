@@ -1,0 +1,11 @@
+/search/ /publications/ 301
+/publications/1/bibtex/ /downloads/bibtex/publication-1.bib 301
+/publications/2/bibtex/ /downloads/bibtex/publication-2.bib 301
+/publications/3/bibtex/ /downloads/bibtex/publication-3.bib 301
+/publications/4/bibtex/ /downloads/bibtex/publication-4.bib 301
+/publications/5/bibtex/ /downloads/bibtex/publication-5.bib 301
+/publications/6/bibtex/ /downloads/bibtex/publication-6.bib 301
+/publications/7/bibtex/ /downloads/bibtex/publication-7.bib 301
+/publications/8/bibtex/ /downloads/bibtex/publication-8.bib 301
+/publications/9/bibtex/ /downloads/bibtex/publication-9.bib 301
+/home/* /:splat 301

@@ -1,0 +1,13 @@
+---
+layout: layouts/section.njk
+title: News
+description: News, announcements, and research updates from Waste Mining Lab.
+navKey: news
+permalink: /news/index.html
+---
+{% set news = catalog.news | filterPublished %}
+{% set featured = null %}{% for item in news %}{% if item.featured and not featured %}{% set featured = item %}{% endif %}{% endfor %}
+<header class="compact-section-header"><h1>News</h1></header>
+<details class="news-filter-disclosure"><summary>Filter news</summary><form class="news-filters" data-news-filters aria-label="Filter news"><div class="filter-field"><label for="news-category">Category</label><select id="news-category" name="category"><option value="">All news</option><option value="announcement">Announcements</option><option value="research">Research updates</option><option value="lab">Lab news</option></select></div><button class="editorial-button" type="submit">Apply</button><button class="reset-link" type="button" data-clear-news hidden>Clear filter</button></form></details>
+{% if featured %}<section class="news-feature{% if not featured.cover_image %} news-feature--text{% endif %}" aria-labelledby="featured-story-title" data-featured-news>{% if featured.cover_image %}<img src="{{ featured.cover_image }}" alt="{{ featured.cover_image_alt }}">{% endif %}<div><p class="small-label">Featured · {{ featured.category | newsCategory }}</p><h2 id="featured-story-title"><a href="/news/{{ featured.slug }}/">{{ featured.title }}</a></h2><p>{{ featured.excerpt }}</p><time datetime="{{ featured.date }}">{{ featured.date | dateLong }}</time><a class="editorial-link" href="/news/{{ featured.slug }}/">Read story</a></div></section>{% endif %}
+<section class="news-archive" aria-label="News articles"><div class="news-grid" data-news-grid>{% for article in news %}{% include "partials/news-card.njk" %}{% else %}<div class="news-empty"><p class="muted">No news articles published yet.</p></div>{% endfor %}</div><div class="news-empty" data-news-empty hidden><p class="muted">No news in this category yet.</p></div></section>

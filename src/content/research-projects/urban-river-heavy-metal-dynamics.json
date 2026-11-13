@@ -1,0 +1,24 @@
+{
+  "legacy_id": 5,
+  "slug": "urban-river-heavy-metal-dynamics",
+  "title": "Heavy Metal Pollution Dynamics and Ecological Partitioning in Buriganga River",
+  "status": "completed",
+  "summary": "Multi-compartment spatial and temporal assessment of toxic heavy metal accumulation across sediment, surface water, aquatic plants, and fish species in Dhaka's primary urban river.",
+  "research_area": "environmental-sustainability",
+  "image": "",
+  "image_alt": "",
+  "start_date": "2018-01-01",
+  "end_date": "2021-12-31",
+  "description_html": "<p>Dhaka's Buriganga River represents one of the most chemically stressed urban river corridors in South Asia, receiving unsegregated effluent from tanneries, textile wet processing, and urban runoff. This study quantified spatial metal distributions (Cr, Cd, Pb, Ni, Zn) and biological accumulation factors across multiple ecological compartments.</p>",
+  "methodology_html": "<p>Sampling across Basila Bridge, Hazaribagh, and Babu Bazar. Atomic Absorption Spectrophotometry (AAS) determination of metal concentrations, calculating contamination factors (CF), plant concentration factors (PCF), and biomagnification factors across trophic levels.</p>",
+  "collaborations": "University of Asia Pacific, North South University, Texas Tech University.",
+  "funding_notes": "Academic institutional research project led by regional researchers and Dr. Asef M. Redwan.",
+  "external_url": "https://doi.org/10.1007/s13762-021-03434-8",
+  "publications": [
+    "heavy-metal-contamination-in-environmental-compartments-of-buriganga-river-in-dhaka-city",
+    "how-dynamic-is-the-heavy-metals-pollution-in-the-buriganga-river-of-bangladesh-a-spatiotemporal-assessment-based-on-environmental-indices"
+  ],
+  "monitoring_related": true,
+  "sort_order": 0,
+  "published": true
+}

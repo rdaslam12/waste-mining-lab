@@ -1,0 +1,21 @@
+---
+layout: layouts/section.njk
+title: Waste Monitoring
+description: Waste Mining Lab environmental monitoring portal, prepared for future verified field datasets.
+navKey: waste-monitoring
+permalink: /waste-monitoring/index.html
+---
+{% set pageContent = catalog.pageBySlug['waste-monitoring'] %}
+<header class="compact-section-header"><h1>Waste Monitoring</h1></header>
+<section class="monitoring-platform" id="monitoring-platform" aria-labelledby="platform-title">
+  <header class="platform-header"><div><h2 id="platform-title">Environmental Monitoring Portal</h2><p class="platform-subtitle">Observational Data &amp; Field Station Measurements</p></div><span class="data-status">Data source not connected</span></header>
+  <p class="platform-notice">No verified dataset is currently connected. Measurements, sampling coordinates, and time-series visualizations will appear here as field station data streams are validated.</p>
+  <div class="monitoring-grid">
+    <section class="monitor-panel location-panel" aria-labelledby="locations-title"><div class="panel-heading"><h3 id="locations-title">Monitoring Locations</h3><span class="small-label">Field Stations</span></div><div class="panel-empty"><svg width="44" height="44" viewBox="0 0 72 72" fill="none" aria-hidden="true"><circle cx="36" cy="36" r="32" stroke="#244b38" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="36" cy="36" r="18" stroke="#34d399" stroke-width="1.2" stroke-opacity="0.5"/><circle cx="36" cy="36" r="6" stroke="#34d399" stroke-width="1.5"/><line x1="36" y1="4" x2="36" y2="68" stroke="#244b38" stroke-width="1"/><line x1="4" y1="36" x2="68" y2="36" stroke="#244b38" stroke-width="1"/></svg><h4>No locations published</h4><p>Geographic sampling coordinates and station markers will appear upon dataset connection.</p></div><p class="panel-footnote">Spatial coordinates require institutional validation prior to public release.</p></section>
+    <section class="monitor-panel timeseries-panel" aria-labelledby="series-title"><div class="panel-heading"><h3 id="series-title">Observations Over Time</h3><span class="small-label">Temporal Trends</span></div><div class="panel-empty"><svg width="100%" height="44" viewBox="0 0 400 48" fill="none" aria-hidden="true" style="max-width:18rem;opacity:.6"><line x1="0" y1="24" x2="400" y2="24" stroke="#244b38"/><line x1="0" y1="8" x2="400" y2="8" stroke="#1c3629" stroke-dasharray="2 4"/><line x1="0" y1="40" x2="400" y2="40" stroke="#1c3629" stroke-dasharray="2 4"/><path d="M0 24 H120 Q140 6 160 24 T200 24 H400" stroke="#34d399" stroke-width="1.2" fill="none" opacity=".6"/></svg><h4>Visualization awaiting verified dataset</h4><p>Time-series observations and parameter trends will render when laboratory feeds are connected.</p></div><p class="panel-footnote">Temporal protocols: QA/QC procedures applied before stream publishing.</p></section>
+    <section class="monitor-panel dataset-panel" aria-labelledby="dataset-title"><div class="panel-heading"><h3 id="dataset-title">Dataset Information</h3><span class="small-label">Metadata</span></div><dl class="dataset-details"><div><dt>Source</dt><dd>Not connected</dd></div><div><dt>Last updated</dt><dd>Not available</dd></div><div><dt>Collection status</dt><dd>Inactive</dd></div><div><dt>Access level</dt><dd>Public (upon release)</dd></div></dl></section>
+    <section class="monitor-panel summary-panel" aria-labelledby="summary-title"><div class="panel-heading"><h3 id="summary-title">Data Summary</h3><span class="small-label">Metrics</span></div><p>Summary statistics and aggregate parameter values will populate once observation datasets are published.</p><p class="muted">Units, parameters, and measurement intervals will be documented per study.</p></section>
+    <section class="monitor-panel category-panel" aria-labelledby="category-title"><div class="panel-heading"><h3 id="category-title">Monitoring Categories</h3><span class="small-label">Parameters</span></div><p>Monitored parameters (e.g. heavy metals, water quality, effluent COD/BOD) will be defined by the connected study.</p><p class="muted">No categories currently configured.</p></section>
+  </div>
+  {% if pageContent.methodology_html %}<div class="monitoring-methodology-note">{{ pageContent.methodology_html | safe }}</div>{% endif %}
+</section>

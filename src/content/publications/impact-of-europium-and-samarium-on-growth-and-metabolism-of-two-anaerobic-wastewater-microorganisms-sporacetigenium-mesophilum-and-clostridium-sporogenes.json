@@ -1,0 +1,14 @@
+{
+  "legacy_id": 2,
+  "slug": "impact-of-europium-and-samarium-on-growth-and-metabolism-of-two-anaerobic-wastewater-microorganisms-sporacetigenium-mesophilum-and-clostridium-sporogenes",
+  "title": "Impact of europium and samarium on growth and metabolism of two anaerobic wastewater microorganisms: Sporacetigenium mesophilum and Clostridium sporogenes",
+  "authors": "Asef Mohammad Redwan, David William Reed, Jeffery Dale St. Jeor, Gaurav Das, Andre Anderko, Yoshiko Fujita",
+  "year": 2026,
+  "venue": "Environmental Science and Pollution Research",
+  "doi": "10.1007/s11356-025-37256-9",
+  "publication_type": "journal",
+  "publication_url": "https://doi.org/10.1007/s11356-025-37256-9",
+  "abstract": "Increases in environmental fluxes of rare earth elements (REEs) stemming from increased demand for these technology critical elements may affect microbial ecosystem functions important for pollutant degradation and nutrient cycling. This study investigates the responses of Sporacetigenium mesophilum and Clostridium sporogenes, two anaerobic fermenters, to varying concentrations of two REE, namely europium and samarium. Eu and Sm are adjacent lanthanides but differ significantly in their redox behavior. We tested Eu and Sm concentrations ranging from < 1 to 600 µM. Despite the close phylogenetic relatedness of the two bacteria, we observed species-specific as well as REE-specific and incubation time-dependent sensitivities. S. mesophilum exhibited pronounced inhibition of hydrogen production and growth with exposure to >= 60 µM of Eu, but with 6 µM Eu, a hormetic effect was observed—hydrogen production was enhanced relative to the control. With Sm, the only impact observed on S. mesophilum was inhibition at the highest concentration (600 µM) tested. For C. sporogenes, growth inhibition was observed only at 600 µM Eu or Sm, and no hormesis was observed with either REE. This study offers valuable insights into REE impacts under anaerobic conditions, essential for understanding potential disruptions to organic matter degradation and nutrient cycling.",
+  "published": true,
+  "featured": true
+}

@@ -25,3 +25,10 @@ waste_mining_lab/settings/local.py
 
 # Agent skills local engine binaries
 .agent/**/bin/
+
+# Static-site build and test output
+node_modules/
+_site/
+test-results/
+playwright-report/
+.cache/

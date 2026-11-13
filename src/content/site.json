@@ -1,0 +1,21 @@
+{
+  "site_name": "Waste Mining Lab",
+  "institution": "North South University",
+  "department": "Department of Civil & Environmental Engineering",
+  "default_description": "Official research website of Waste Mining Lab at North South University, exploring environmental engineering, waste valorization, resource recovery, and sustainability.",
+  "canonical_url": "https://waste-mining-lab.onrender.com",
+  "email": "asef.redwan@northsouth.edu",
+  "address_html": "North South University<br>Bashundhara, Dhaka-1229, Bangladesh",
+  "hero_headline": "Waste Mining Lab",
+  "hero_subtitle": "At Waste Mining Lab, we explore how discarded materials, environmental biotechnology, and resource recovery can transform environmental challenges into sustainable solutions. Our research at North South University investigates what waste can teach us about a circular, resilient future.",
+  "hero_image": "/media/images/Hero_Image.2e16d0ba.fill-1600x1000.png",
+  "hero_image_mobile": "/media/images/Hero_Image.2e16d0ba.fill-800x1000.png",
+  "hero_image_large": "/media/images/Hero_Image.2e16d0ba.fill-2400x1400.png",
+  "hero_image_alt": "Waste Mining Lab research",
+  "lab_introduction_html": "<p>Waste Mining Lab is based in the Department of Civil and Environmental Engineering at North South University. Led by Dr. Asef Mohammad Redwan, our group advances environmental sustainability, waste valorization, resource recovery, and industrial wastewater treatment through rigorous academic research and practical technology development.</p>",
+  "team_member_count": null,
+  "director_name": "Dr. Asef M. Redwan",
+  "director_email": "asef.redwan@northsouth.edu",
+  "director_profile_url": "https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html",
+  "director_linkedin_url": "https://www.linkedin.com/in/asef-m-redwan-phd-282a0a64/"
+}

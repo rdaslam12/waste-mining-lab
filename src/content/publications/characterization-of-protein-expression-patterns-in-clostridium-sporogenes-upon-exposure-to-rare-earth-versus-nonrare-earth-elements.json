@@ -1,0 +1,14 @@
+{
+  "legacy_id": 1,
+  "slug": "characterization-of-protein-expression-patterns-in-clostridium-sporogenes-upon-exposure-to-rare-earth-versus-nonrare-earth-elements",
+  "title": "Characterization of Protein Expression Patterns in Clostridium sporogenes upon Exposure to Rare Earth versus Nonrare Earth Elements",
+  "authors": "Jeremy A. Sabo, Gabriella Morales, Michelle R. Walton, Yoshiko Fujita, David W. Reed, Payton J. Walker, Chelsea C. St. Germain, Asef M. Redwan",
+  "year": 2026,
+  "venue": "ACS Omega",
+  "doi": "10.1021/acsomega.5c09729",
+  "publication_type": "journal",
+  "publication_url": "https://doi.org/10.1021/acsomega.5c09729",
+  "abstract": "To better understand the interactions of rare earth elements (REE) with anaerobic microorganisms, we explored the proteome response of a Clostridium strain to europium (Eu) and its adjacent lanthanide, samarium (Sm), comparing them with the well-studied metals iron, calcium, and zinc. Our findings showed that Eu and Sm induced a number of proteomic changes consistent with Fe, Ca, and Zn, but Eu enhanced expression for ATP synthase and electron transfer flavoproteins, while Sm increased expression of proteins associated with butyric acid metabolism. In contrast, Fe reduced ATP synthase protein expression, and Fe and Ca demonstrated a greater expression change for amino acid metabolism, transcription, and ribosome activity. Differences in ABC transporter protein expressions were observed for the REE. Further characterization of proteins that respond to REE can provide sequence and structural insights to support the design of REE binding molecules or bioinspired systems for REE capture. Given the potential environmental benefits of biological enrichment methods, identifying proteins and metabolic pathways interacting with REE offers an important opportunity to advance the sustainability of supply chains for these metals critical to modern technologies.",
+  "published": true,
+  "featured": true
+}

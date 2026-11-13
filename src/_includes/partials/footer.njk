@@ -1,0 +1,13 @@
+<footer class="site-footer" id="contact">
+  <div class="site-footer__inner shell">
+    <div>
+      <h2 class="site-footer__name">{{ catalog.site.site_name }}</h2>
+      <p>{{ catalog.site.address_html | safe }}</p>
+    </div>
+    <div class="site-footer__contact">
+      <a href="/contact/" class="site-footer__btn">Contact the Lab</a>
+      <a href="mailto:{{ catalog.site.email }}">{{ catalog.site.email }}</a>
+      <p>&copy; {{ site.buildYear }} Waste Mining Lab. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

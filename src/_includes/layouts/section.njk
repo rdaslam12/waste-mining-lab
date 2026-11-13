@@ -1,0 +1,11 @@
+---
+layout: layouts/base.njk
+bodyClass: template-secondary
+extraStyles:
+  - wml-sections.css
+extraScripts:
+  - wml-sections-static.js
+---
+<div class="wml-editorial wml-editorial--{{ navKey }}">
+  <div class="editorial-shell">{{ content | safe }}</div>
+</div>

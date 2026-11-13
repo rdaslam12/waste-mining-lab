@@ -1,0 +1,22 @@
+---
+layout: layouts/section.njk
+title: Research
+description: Research areas and active projects at Waste Mining Lab.
+navKey: research
+permalink: /research/index.html
+---
+{% set pageContent = catalog.pageBySlug.research %}
+<header class="visually-hidden"><h1>{{ pageContent.heading or "Research & Lines of Inquiry" }}</h1>{% if pageContent.body_html %}{{ pageContent.body_html | safe }}{% endif %}</header>
+{% if pageContent.feature_image %}<figure class="research-hero-image"><img src="{{ pageContent.feature_image }}" alt="{{ pageContent.feature_image_alt }}" decoding="async"><figcaption>{{ pageContent.image_caption }}</figcaption></figure>{% else %}<figure class="research-hero-image"><img src="/assets/images/lab-header2.webp" width="1920" height="600" alt="Environmental engineering and waste valorization landscape" decoding="async"><figcaption>Waste, resources and the environment — a connected landscape.</figcaption></figure>{% endif %}
+<section class="research-areas-section" aria-labelledby="areas-title">
+  <div class="section-heading"><h2 id="areas-title">Our Research Areas</h2></div>
+  <div class="research-areas-list">
+    {% for area in catalog.researchAreas %}{% if area.published %}<article class="research-area-item"><div class="research-area-body"><h3>{{ area.title }}</h3>{% if area.description %}<p>{{ area.description }}</p>{% endif %}</div>{% if area.image %}<div class="research-area-media"><img src="{{ area.image }}" alt="{{ area.image_alt or area.title }}" loading="lazy"></div>{% endif %}</article>{% endif %}{% else %}<p class="muted">Research areas will be listed as they are published.</p>{% endfor %}
+  </div>
+</section>
+<section class="research-focus-section" aria-labelledby="projects-title">
+  <div class="section-heading"><h2 id="projects-title">Research in Focus</h2></div>
+  <div class="projects-slider-container"><div class="projects-slider" tabindex="0" role="region" aria-label="Active research projects slider">
+    {% for project in catalog.researchProjects %}{% if project.published and project.status == 'active' %}<article class="project-slide-card"><a href="/research/{{ project.slug }}/" class="project-slide-card__link">{% if project.image %}<div class="project-slide-card__thumb"><img src="{{ project.image }}" alt="" loading="lazy"></div>{% endif %}<div class="project-slide-card__body">{% if project.area %}<span class="project-slide-card__area">{{ project.area.title }}</span>{% endif %}<h3 class="project-slide-card__title">{{ project.title }}</h3><p class="project-slide-card__summary">{{ project.summary | truncateWords(22) }}</p></div></a></article>{% endif %}{% endfor %}
+  </div></div>
+</section>

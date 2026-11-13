@@ -1,0 +1,74 @@
+<header class="wml-global-header">
+  <div class="wml-mobile-bar" aria-label="Mobile site header">
+    <a href="/" class="wml-mobile-brand" aria-label="Waste Mining Lab homepage">
+      <img src="/assets/images/wml-icon.png" alt="" class="wml-mobile-brand-icon" width="34" height="34">
+      <span class="wml-mobile-brand-text">
+        <span class="wml-mobile-title">Waste Mining Lab</span>
+        <span class="wml-mobile-sub">North South University</span>
+      </span>
+    </a>
+    <button type="button" class="wml-hamburger-btn" aria-expanded="false" aria-controls="wml-mobile-drawer" aria-label="Toggle navigation menu">
+      <span class="wml-hamburger-icon" aria-hidden="true">
+        <span class="wml-hamburger-bar bar-top"></span>
+        <span class="wml-hamburger-bar bar-mid"></span>
+        <span class="wml-hamburger-bar bar-bot"></span>
+      </span>
+    </button>
+  </div>
+  <div id="wml-mobile-drawer" class="wml-mobile-drawer" aria-hidden="true">
+    <div class="wml-mobile-drawer-backdrop" tabindex="-1"></div>
+    <div class="wml-mobile-drawer-panel">
+      <nav class="wml-mobile-nav-links" aria-label="Mobile navigation">
+        {% for item in [
+          { key: "home", label: "Home", url: "/" },
+          { key: "publications", label: "Publications", url: "/publications/" },
+          { key: "research", label: "Research", url: "/research/" },
+          { key: "grants", label: "Grants", url: "/grants/" },
+          { key: "team", label: "Team", url: "/team/" },
+          { key: "activity", label: "Activity", url: "/activity/" },
+          { key: "waste-monitoring", label: "Waste Monitoring", url: "/waste-monitoring/" },
+          { key: "news", label: "News", url: "/news/" },
+          { key: "contact", label: "Contact", url: "/contact/" }
+        ] %}
+          <a href="{{ item.url }}" class="{% if navKey == item.key %}active{% endif %}{% if item.key == 'contact' %} wml-mobile-contact-link{% endif %}"><span class="wml-nav-item-label">{{ item.label }}</span></a>
+        {% endfor %}
+      </nav>
+      <div class="wml-mobile-drawer-footer">
+        <div class="wml-drawer-partner-logos">
+          <img src="/assets/images/nsu-logo.png" alt="North South University" width="28" height="28">
+          <span>Department of Civil &amp; Environmental Engineering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wml-header-top">
+    <a href="/" class="wml-logo-large" aria-label="Waste Mining Lab homepage">
+      <img src="/assets/images/wml-full-logo.png" alt="Waste Mining Lab — Turning waste into value">
+    </a>
+  </div>
+  <a href="/" class="wml-logo-small" aria-label="Waste Mining Lab homepage"><img src="/assets/images/wml-icon.png" alt=""></a>
+  <div class="wml-partner-logos">
+    <img src="/assets/images/partner-logo-1.png" alt="Associated organization logo">
+    <img src="/assets/images/partner-logo-2.png" alt="Associated organization logo">
+    <img src="/assets/images/nsu-logo.png" alt="North South University">
+  </div>
+  <div class="wml-nav-slot">
+    <div class="wml-navbar">
+      <nav class="wml-nav-links" aria-label="Main navigation">
+        {% for item in [
+          { key: "home", label: "Home", url: "/" },
+          { key: "publications", label: "Publications", url: "/publications/" },
+          { key: "research", label: "Research", url: "/research/" },
+          { key: "grants", label: "Grants", url: "/grants/" },
+          { key: "team", label: "Team", url: "/team/" },
+          { key: "activity", label: "Activity", url: "/activity/" },
+          { key: "waste-monitoring", label: "Waste Monitoring", url: "/waste-monitoring/" },
+          { key: "news", label: "News", url: "/news/" },
+          { key: "contact", label: "Contact", url: "/contact/" }
+        ] %}
+          <a href="{{ item.url }}" class="{% if navKey == item.key %}active{% endif %}{% if item.key == 'contact' %} wml-contact{% endif %}">{% if item.key == 'contact' %}<span>{{ item.label }}</span>{% else %}{{ item.label }}{% endif %}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </div>
+</header>

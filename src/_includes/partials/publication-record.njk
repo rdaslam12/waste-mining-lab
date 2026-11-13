@@ -1,0 +1,23 @@
+<article class="publication-record" id="publication-{{ publication.legacy_id or publication.slug }}" data-publication data-year="{{ publication.year }}" data-type="{{ publication.publication_type }}" data-search="{{ publication.title }} {{ publication.authors }} {{ publication.venue }} {{ publication.abstract }} {{ publication.doi }}">
+  {% if publication.venue %}<div class="record-venue">{{ publication.venue }}</div>{% endif %}
+  <h3 class="publication-title">
+    {% if publication.publication_url %}<a href="{{ publication.publication_url }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a>
+    {% elif publication.doi %}<a href="https://doi.org/{{ publication.doi | urlencode }}" target="_blank" rel="noopener noreferrer">{{ publication.title }}</a>
+    {% else %}<span>{{ publication.title }}</span>{% endif %}
+  </h3>
+  <p class="publication-authors">{{ publication.authors }}</p>
+  <div class="publication-actions-row">
+    {% if publication.abstract %}<details class="abstract-disclosure"><summary>Read abstract</summary><div class="abstract-content"><p>{{ publication.abstract }}</p></div></details>{% endif %}
+    {% if publication.abstract %}<span class="actions-sep" aria-hidden="true">|</span>{% endif %}
+    <details class="bibtex-disclosure">
+      <summary class="bibtex-toggle">Cite / BibTeX</summary>
+      <div class="bibtex-container">
+        <pre class="bibtex-code"><code>{{ publication | bibtex }}</code></pre>
+        <div class="bibtex-actions">
+          <button type="button" class="editorial-button editorial-button--compact bibtex-copy-btn" data-bibtex="{{ publication | bibtex }}">Copy BibTeX</button>
+          <a href="/downloads/bibtex/publication-{{ publication.legacy_id or publication.slug }}.bib" class="editorial-link" download>Download .bib</a>
+        </div>
+      </div>
+    </details>
+  </div>
+</article>

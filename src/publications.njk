@@ -1,0 +1,29 @@
+---
+layout: layouts/section.njk
+title: Publications
+description: Peer-reviewed publications, conference papers, reports, and research outputs from Waste Mining Lab.
+navKey: publications
+permalink: /publications/index.html
+---
+<header class="compact-section-header"><h1 id="archive-title">Publication Index</h1></header>
+<section class="archive-section" aria-labelledby="archive-title" data-publication-archive data-page-size="12">
+  <form class="archive-filters publication-filters" role="search" aria-label="Search publications">
+    <div class="filter-field filter-field--search"><label for="publication-search">Search the archive</label><input id="publication-search" name="q" type="search" placeholder="Title, author, journal or keyword" maxlength="200" autocomplete="off"></div>
+    <div class="filter-field"><label for="publication-year">Year</label><select id="publication-year" name="year"><option value="">All years</option>{% for year in catalog.publicationYears %}<option value="{{ year }}">{{ year }}</option>{% endfor %}</select></div>
+    <div class="filter-field"><label for="publication-type">Type</label><select id="publication-type" name="type"><option value="">All types</option><option value="journal">Journal Article</option><option value="conference">Conference Paper</option><option value="book_chapter">Book Chapter</option><option value="preprint">Preprint / Working Paper</option><option value="report">Technical Report</option></select></div>
+    <button class="editorial-button" type="submit">Filter</button><button class="reset-link" type="button" data-clear-publications hidden>Clear filters</button>
+  </form>
+  <p class="publication-search-status" id="publication-search-status" role="status" aria-live="polite"></p>
+  <div id="publication-results" class="publication-results" aria-live="polite">
+    {% for year in catalog.publicationYears %}
+      <section class="publication-year" aria-labelledby="year-{{ year }}" data-publication-year-group>
+        <h2 id="year-{{ year }}">{{ year }}</h2>
+        <div class="publication-list">
+          {% for publication in catalog.publications %}{% if publication.published and publication.year == year %}{% include "partials/publication-record.njk" %}{% endif %}{% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+    <div class="empty-state empty-state--archive" data-publication-empty hidden><span class="empty-mark" aria-hidden="true">[ — ]</span><div><h3>No matching publications</h3><p>Try another keyword, year, or type, or clear the filters to browse the full archive.</p></div></div>
+    <nav class="archive-pagination" aria-label="Publication archive pages" data-publication-pagination hidden><button type="button" data-page-previous>Previous page</button><span data-page-status></span><button type="button" data-page-next>Next page</button></nav>
+  </div>
+</section>

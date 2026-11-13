@@ -1,0 +1,23 @@
+{
+  "legacy_id": 3,
+  "slug": "climate-smart-sanitation-safety-planning",
+  "title": "Climate-Smart Integrated Water-Sanitation Safety Planning for Coastal Bangladesh",
+  "status": "active",
+  "summary": "Risk-based climate vulnerability framework and resilient technological interventions safeguarding drinking water resources and sanitation infrastructure against storm surges and salinity intrusion in coastal communities.",
+  "research_area": "environmental-sustainability",
+  "image": "",
+  "image_alt": "",
+  "start_date": "2026-02-01",
+  "end_date": "2027-03-31",
+  "description_html": "<p>Coastal districts in southern Bangladesh face intersecting climate hazards including cyclonic inundation, saline water intrusion, and waterlogged ground conditions that compromise pit latrines and shallow tubewells. This contamination drives recurrent waterborne disease outbreaks.</p><p>This initiative formulates climate-smart Water Safety Plans (WSP) and Sanitation Safety Plans (SSP) adapted to coastal delta vulnerabilities. Through field surveys and community monitoring, the study designs flood-resilient fecal sludge containment technologies and safe drinking water barriers.</p>",
+  "methodology_html": "<p><strong>1. Vulnerability Mapping:</strong> Hydrogeological salinity transects, sanitary risk scoring, and spatial mapping of inundation vulnerability in coastal study sites.</p><p><strong>2. Barrier Engineering:</strong> Assessment of sealed elevated pit designs, sand-envelope filters, and microbiological barrier verification using fecal indicator bacteria (E. coli, coliform assays).</p>",
+  "collaborations": "United International University (UIU), ITN-BUET, North South University.",
+  "funding_notes": "Funded by United International University Research Grant (BDT 12 Lakh, Feb 2026 – Mar 2027). Principal Investigator: Dr. Asef M. Redwan.",
+  "external_url": "https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html",
+  "publications": [
+    "characterisation-of-spatio-temporal-trend-in-temperature-extremes-for-environmental-decision-making-in-bangladesh"
+  ],
+  "monitoring_related": false,
+  "sort_order": 0,
+  "published": true
+}

@@ -1,0 +1,14 @@
+{
+  "legacy_id": 5,
+  "slug": "effect-of-copresence-of-zerovalent-iron-and-sulfate-reducing-bacteria-on-reductive-dechlorination-of-trichloroethylene",
+  "title": "Effect of Copresence of Zerovalent Iron and Sulfate Reducing Bacteria on Reductive Dechlorination of Trichloroethylene",
+  "authors": "Syful Islam, Asef Redwan, Kayleigh Millerick, Jan Filip, Lingfei Fan, Weile Yan",
+  "year": 2021,
+  "venue": "Environmental Science & Technology",
+  "doi": "10.1021/acs.est.0c07702",
+  "publication_type": "journal",
+  "publication_url": "https://doi.org/10.1021/acs.est.0c07702",
+  "abstract": "Sulfur amendment of zerovalent iron (ZVI) materials has been shown to improve the reactivity and selectivity of ZVI toward a select group of organohalide contaminants in groundwater, most notably trichloroethene (TCE). In previous studies, chemical or mechanochemical sulfidation methods were used; however, the potential of using sulfate-reducing bacteria (SRB) to enable sulfur amendment has not been closely examined. In this study, lab-synthesized nanoscale ZVI (nZVI) and Peerless iron particles (ZVIPLS) were treated in a sulfate-reducing monoculture (D. desulfuricans) and an enrichment culture derived from freshwater sediments (AMR-1) prior to reactivity assessments with TCE as the model contaminant. ZVI conditioned in both cultures exhibited higher dechlorination efficiencies compared to unamended ZVIs. Product distribution data show that, in the SRB-ZVI system, abiotic dechlorination is the dominant reduction pathway, demonstrating how SRB-ZVI synergy overcomes limitations of standalone biological or abiotic dechlorination.",
+  "published": true,
+  "featured": false
+}

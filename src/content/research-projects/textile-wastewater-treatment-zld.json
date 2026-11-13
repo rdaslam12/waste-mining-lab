@@ -1,0 +1,24 @@
+{
+  "legacy_id": 2,
+  "slug": "textile-wastewater-treatment-zld",
+  "title": "Immobilized Biomass Packed Bed Reactor for Textile Wastewater Treatment and Zero Liquid Discharge",
+  "status": "active",
+  "summary": "Continuous-flow biological reactor system utilizing immobilized microbial consortia for azo dye decolorization, toxic xenobiotic degradation, and process water recycling aiming for Zero Liquid Discharge in textile dyeing.",
+  "research_area": "environmental-engineering",
+  "image": "",
+  "image_alt": "",
+  "start_date": "2025-12-01",
+  "end_date": "2026-09-30",
+  "description_html": "<p>The textile and garment sector is Bangladesh's primary industrial export engine but generates immense volumes of hypersaline, highly colored wastewater loaded with refractory synthetic dyes, surfactants, and heavy metal mordants. Standalone chemical coagulation produces massive toxic sludge volumes, while conventional activated sludge systems struggle with dye toxicity and shock loading.</p><p>This project develops an advanced Immobilized Biomass Packed Bed Reactor (IB-PBR). By encapsulating adapted microbial consortia within high-surface-area porous carriers, the system achieves elevated biomass retention, robust resilience against chemical shock, and sustained enzymatic cleavage of azo bonds, preparing high-quality treated water for in-plant reuse toward Zero Liquid Discharge (ZLD).</p>",
+  "methodology_html": "<p><strong>1. Bioreactor Configuration:</strong> Vertical packed bed column with inert structured packing supporting acclimated biofilm cultures. Continuous hydraulic testing evaluates empty bed contact time (EBCT), hydraulic retention time (HRT), and pollutant loading rates.</p><p><strong>2. Analytical Monitoring:</strong> Spectrophotometric color analysis, TOC/COD removal efficiencies, gas chromatography-mass spectrometry (GC-MS) for dye metabolite pathway elucidation, and residual salinity testing for membrane-polishing compatibility.</p>",
+  "collaborations": "ITN-BUET (International Training Network Centre, BUET), North South University.",
+  "funding_notes": "Funded by ITN-BUET (BDT 14 Lakh, Dec 2025 – Sep 2026). Principal Investigator: Dr. Asef M. Redwan; Co-Investigators: S.R. Shuvo, N.M. Shuman, N. Nahar, S.E. Haque.",
+  "external_url": "https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html",
+  "publications": [
+    "impact-of-europium-and-samarium-on-growth-and-metabolism-of-two-anaerobic-wastewater-microorganisms-sporacetigenium-mesophilum-and-clostridium-sporogenes",
+    "anaerobic-bacterial-responses-to-carbonaceous-materials-and-implications-for-contaminant-transformation-cellular-metabolic-and-community-level-findings"
+  ],
+  "monitoring_related": true,
+  "sort_order": 0,
+  "published": true
+}

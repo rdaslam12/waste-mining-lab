@@ -1,0 +1,15 @@
+---
+layout: layouts/section.njk
+pagination:
+  data: catalog.publishedNews
+  size: 1
+  alias: article
+permalink: "/news/{{ article.slug }}/index.html"
+eleventyComputed:
+  title: "{{ article.title }}"
+  description: "{{ article.search_description or article.excerpt }}"
+ogType: article
+navKey: news
+---
+<article class="news-article"><header class="article-header"><a class="editorial-link" href="/news/">Back to news</a><p class="record-meta"><time datetime="{{ article.date }}">{{ article.date | dateLong }}</time><span>{{ article.category | newsCategory }}</span></p><h1>{{ article.title }}</h1><p class="lead">{{ article.excerpt }}</p></header>{% if article.cover_image %}<figure class="article-cover"><img src="{{ article.cover_image }}" alt="{{ article.cover_image_alt or article.title }}"></figure>{% endif %}<div class="article-body reading-copy">{{ article.body_html | safe }}</div>{% if article.project or article.publication or article.activity %}<aside class="article-related"><h2>Explore the context</h2><div class="text-links">{% if article.project and article.project.published %}<a href="/research/{{ article.project.slug }}/">{{ article.project.title }}</a>{% endif %}{% if article.publication and article.publication.published %}<a href="/publications/?q={{ article.publication.title | urlencode }}#publication-{{ article.publication.legacy_id or article.publication.slug }}">{{ article.publication.title }}</a>{% endif %}{% if article.activity and article.activity.published %}<a href="/activity/#activity-{{ article.activity.legacy_id or article.activity.slug }}">{{ article.activity.title }}</a>{% endif %}</div></aside>{% endif %}</article>
+<section class="section-space" aria-labelledby="more-news"><div class="section-heading"><h2 id="more-news">More from the lab</h2><a href="/news/">All news</a></div><div class="news-grid">{% set shown = 0 %}{% for related in catalog.publishedNews %}{% if related.slug != article.slug and shown < 3 %}{% set article = related %}{% include "partials/news-card.njk" %}{% set shown = shown + 1 %}{% endif %}{% endfor %}</div></section>

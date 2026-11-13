@@ -1,0 +1,575 @@
+/* Waste Mining Lab: stable compact header and navigation */
+
+/* Page themes (kept from the existing site) */
+body.wml-site { min-height: 100vh; color: #f3f5f3; }
+body.theme-home { background-color: #121a17; }
+body.theme-research { background-color: #13231d; }
+body.theme-publications { background-color: #1e1c29; }
+body.theme-team { background-color: #192820; }
+body.theme-activity { background-color: #22271c; }
+body.theme-waste-monitoring { background-color: #172a2a; }
+body.theme-news { background-color: #19242b; }
+body.theme-contact { background-color: #25201e; }
+
+/* The expanded header stays in normal document flow.
+   Only the navbar and side logos become fixed when scrolled.
+   This avoids changing page height during scroll. */
+.wml-global-header {
+    position: relative;
+    z-index: 200;
+    width: 100%;
+    padding: 8px 18px 12px;
+    background: #fcfcfc;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.wml-header-top {
+    height: 126px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wml-logo-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(560px, 58vw);
+    height: 100%;
+    text-decoration: none;
+}
+.wml-logo-large img {
+    display: block;
+    width: 100%;
+    max-height: 250px;
+    height: auto;
+    object-fit: contain;
+}
+
+.wml-logo-small {
+    position: fixed;
+    top: 36px;
+    left: 22px;
+    z-index: 210;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.85);
+    transition: opacity 250ms ease, transform 300ms ease;
+}
+.wml-logo-small img { width: 100%; height: 100%; object-fit: contain; }
+
+.wml-partner-logos {
+    position: absolute;
+    top: 68px;
+    right: 38px;
+    z-index: 210;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    transform: translateY(-50%);
+}
+.wml-partner-logos img {
+    display: block;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* Slot remains in flow when navbar becomes position:fixed */
+.wml-nav-slot {
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wml-navbar {
+    position: relative;
+    z-index: 215;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: min(100%, 1180px);
+    min-height: 60px;
+    margin: 0 auto;
+    padding: 7px 20px;
+    background: #f0f3f2;
+    border: 1px solid #444c48;
+    border-radius: 21px;
+    box-shadow: 0 8px 23px rgba(0,0,0,0.12);
+    transition:
+    width 320ms ease,
+    min-height 320ms ease,
+    padding 320ms ease,
+    border-radius 320ms ease,
+    opacity 350ms ease;
+}
+.wml-nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 22px;
+    transition: gap 320ms ease;
+}
+.wml-nav-links > a:not(.wml-contact) {
+    color: #172820;
+    font-size: 13.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 180ms ease, font-size 320ms ease;
+}
+.wml-nav-links > a:not(.wml-contact):hover,
+.wml-nav-links > a:not(.wml-contact).active {
+    color: #165337;
+    font-weight: 600;
+}
+
+.wml-nav-links .wml-contact {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 50px;
+    text-decoration: none;
+    background: linear-gradient(110deg,#35d6c5,#6875ff,#eb4ca7,#ffbb64);
+}
+.wml-contact span {
+    display: block;
+    padding: 8px 15px;
+    border-radius: 48px;
+    background: #171a1b;
+    color: #fff;
+    font-size: 13.5px;
+    transition: padding 320ms ease, font-size 320ms ease;
+}
+.wml-contact:hover span { background: #252a28; color: #fff; }
+
+/* Compact state: no expanded-header height changes, so the scrolling page remains stable. */
+.wml-global-header.is-scrolled .wml-navbar {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100vw - 220px), 950px);
+    min-height: 52px;
+    padding: 6px 14px;
+    border-radius: 18px;
+}
+.wml-global-header.is-scrolled .wml-nav-links { gap: 17px; }
+.wml-global-header.is-scrolled .wml-nav-links > a:not(.wml-contact) { font-size: 12.5px; }
+.wml-global-header.is-scrolled .wml-contact span { padding: 6px 12px; font-size: 12.5px; }
+.wml-global-header.is-scrolled .wml-logo-small {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+}
+
+/* Hide the full logo when the header is collapsed */
+/* Hide the entire large logo area after scrolling */
+
+.wml-header-top {
+    transition: opacity 250ms ease, visibility 250ms ease;
+}
+
+.wml-global-header.is-scrolled .wml-header-top {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.wml-global-header.is-scrolled .wml-logo-large {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* Keep only the small atom icon visible */
+
+.wml-global-header.is-scrolled .wml-logo-small {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1);
+}
+/* Keep partner logos visible after scrolling */
+.wml-global-header.is-scrolled .wml-partner-logos {
+    position: fixed;
+    top: 36px;
+    right: 22px;
+    z-index: 220;
+    transform: translateY(-50%);
+}
+
+/* Hover/focus expands only the compact bar, not the whole header. */
+@media (hover:hover) and (min-width:1121px) {
+    .wml-global-header.is-scrolled .wml-navbar:hover,
+    .wml-global-header.is-scrolled .wml-navbar:focus-within {
+        width: min(calc(100vw - 220px), 1080px);
+        min-height: 60px;
+        padding: 8px 18px;
+    }
+    .wml-global-header.is-scrolled .wml-navbar:hover .wml-nav-links,
+    .wml-global-header.is-scrolled .wml-navbar:focus-within .wml-nav-links { gap: 22px; }
+    .wml-global-header.is-scrolled .wml-navbar:hover .wml-nav-links > a:not(.wml-contact),
+    .wml-global-header.is-scrolled .wml-navbar:focus-within .wml-nav-links > a:not(.wml-contact) { font-size: 13.5px; }
+    .wml-global-header.is-scrolled .wml-navbar:hover .wml-contact span,
+    .wml-global-header.is-scrolled .wml-navbar:focus-within .wml-contact span { padding: 8px 15px; font-size: 13.5px; }
+}
+
+/* Other Wagtail section pages */
+.wml-section-page { min-height: 65vh; padding: 100px 8% 140px; }
+.wml-section-content { max-width: 1000px; margin: 0 auto; }
+.wml-section-content h1 { margin: 20px 0 30px; font-size: clamp(48px,7vw,96px); font-weight: 400; letter-spacing: -.05em; line-height: 1.1; }
+.wml-section-content > p:not(.wml-eyebrow) { max-width: 670px; font-size: 20px; line-height: 1.7; }
+.wml-eyebrow { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+
+/* Modern Responsive Mobile Header & Navigation Drawer (Phase 7) */
+.wml-mobile-bar {
+    display: none;
+}
+.wml-mobile-drawer {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    /* Hide desktop elements on tablet & mobile */
+    .wml-header-top,
+    .wml-logo-small,
+    .wml-partner-logos,
+    .wml-nav-slot {
+        display: none !important;
+    }
+
+    .wml-global-header {
+        position: sticky;
+        top: 0;
+        z-index: 500;
+        padding: 0;
+        background: #ffffff;
+        border-bottom: 1px solid #e2ece1;
+        box-shadow: 0 2px 12px rgba(16, 44, 34, 0.05);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+    }
+
+    /* Clean compact mobile bar: 66px tall, logo left, hamburger right */
+    .wml-mobile-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 66px;
+        padding: 0 clamp(1rem, 4vw, 1.75rem);
+        box-sizing: border-box;
+    }
+
+    .wml-mobile-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #102c22;
+    }
+
+    .wml-mobile-brand-icon {
+        display: block;
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+    .wml-mobile-brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+    }
+
+    .wml-mobile-title {
+        font-family: var(--wml-font-sans, "DM Sans"), -apple-system, sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        color: #102c22;
+    }
+
+    .wml-mobile-sub {
+        font-family: var(--wml-font-serif, "Newsreader"), Georgia, serif;
+        font-style: italic;
+        font-size: 0.76rem;
+        color: #52635a;
+        margin-top: 1px;
+    }
+
+    /* Hamburger Toggle Button (min 44x44px accessible touch target) */
+    .wml-hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 1px solid #d8e5da;
+        border-radius: 10px;
+        background: #fbfcf9;
+        cursor: pointer;
+        color: #102c22;
+        transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .wml-hamburger-btn:hover {
+        background: #edf4ec;
+        border-color: #1c5038;
+    }
+
+    .wml-hamburger-btn:focus-visible {
+        outline: 2px solid #1c5038;
+        outline-offset: 3px;
+    }
+
+    /* 3-horizontal-line icon */
+    .wml-hamburger-icon {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 20px;
+        height: 14px;
+        pointer-events: none;
+    }
+
+    .wml-hamburger-bar {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #102c22;
+        border-radius: 2px;
+        transform-origin: center;
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.2s ease,
+                    background-color 0.2s ease;
+    }
+
+    /* Animated hamburger-to-X transition when open */
+    .wml-hamburger-btn[aria-expanded="true"] .bar-top {
+        transform: translateY(6px) rotate(45deg);
+        background-color: #1c5038;
+    }
+
+    .wml-hamburger-btn[aria-expanded="true"] .bar-mid {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .wml-hamburger-btn[aria-expanded="true"] .bar-bot {
+        transform: translateY(-6px) rotate(-45deg);
+        background-color: #1c5038;
+    }
+
+    /* Mobile Drawer */
+    .wml-mobile-drawer {
+        display: block;
+        position: fixed;
+        top: 66px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 490;
+        visibility: hidden;
+        pointer-events: none;
+        transition: visibility 0.3s ease;
+    }
+
+    .wml-mobile-drawer.is-open {
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .wml-mobile-drawer-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(16, 44, 34, 0.45);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .wml-mobile-drawer.is-open .wml-mobile-drawer-backdrop {
+        opacity: 1;
+    }
+
+    .wml-mobile-drawer-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        max-height: calc(100dvh - 66px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        background: #fbfcf9;
+        border-bottom: 2px solid #1c5038;
+        box-shadow: 0 20px 40px -10px rgba(16, 44, 34, 0.2);
+        padding: 1.25rem clamp(1rem, 4vw, 1.75rem) 2.25rem;
+        transform: translateY(-12px);
+        opacity: 0;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.26s ease;
+    }
+
+    .wml-mobile-drawer.is-open .wml-mobile-drawer-panel {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .wml-mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .wml-mobile-nav-links a {
+        display: flex;
+        align-items: center;
+        padding: 10px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        background: transparent;
+        border: 1px solid transparent;
+        transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .wml-mobile-nav-links a:hover,
+    .wml-mobile-nav-links a:focus-visible {
+        background: #edf4ec;
+        border-color: #cddbd0;
+    }
+
+    .wml-mobile-nav-links a.active {
+        background: #e2ece1;
+        border-color: #b8cfbd;
+    }
+
+    .wml-nav-item-label {
+        font-family: var(--wml-font-sans, "DM Sans"), -apple-system, sans-serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #102c22;
+        letter-spacing: -0.015em;
+    }
+
+    .wml-mobile-nav-links a.active .wml-nav-item-label {
+        color: #1c5038;
+        font-weight: 700;
+    }
+
+    .wml-nav-item-sub {
+        font-family: var(--wml-font-sans, "DM Sans"), -apple-system, sans-serif;
+        font-size: 0.78rem;
+        color: #52635a;
+        margin-top: 2px;
+    }
+
+    .wml-mobile-nav-links a.active .wml-nav-item-sub {
+        color: #1c5038;
+    }
+
+    .wml-mobile-contact-link {
+        margin-top: 6px;
+        background: #102c22 !important;
+        border: 1px solid #102c22 !important;
+    }
+
+    .wml-mobile-contact-link .wml-nav-item-label {
+        color: #ffffff !important;
+    }
+
+    .wml-mobile-contact-link .wml-nav-item-sub {
+        color: #9de6a6 !important;
+    }
+
+    .wml-mobile-contact-link:hover {
+        background: #1c5038 !important;
+    }
+
+    .wml-mobile-drawer-footer {
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid #cddbd0;
+    }
+
+    .wml-drawer-partner-logos {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #52635a;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .wml-drawer-partner-logos img {
+        display: block;
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+    }
+
+    /* Scroll hide on mobile when scrolling down past mission, except when drawer is open */
+    .wml-global-header.is-scrolled.nav-hidden:not(.menu-open) {
+        transform: translateY(-100%);
+    }
+
+    .wml-section-page {
+        padding: 50px 5% 90px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .wml-navbar, .wml-nav-links, .wml-nav-links > a, .wml-contact span, .wml-logo-small { transition: none; }
+}
+
+/* Hide compact navigation after Mission */
+
+.wml-global-header.is-scrolled.nav-hidden .wml-navbar {
+    transform: translate(-50%, calc(-100% - 20px));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wml-global-header.is-scrolled.nav-hidden .wml-logo-small,
+.wml-global-header.is-scrolled.nav-hidden .wml-partner-logos {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.wml-logo-small,
+.wml-partner-logos {
+    transition: opacity 350ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wml-global-header.is-scrolled .wml-navbar,
+    .wml-logo-small,
+    .wml-partner-logos {
+        transition: none;
+    }
+}
+
+/* Only animate vertical movement after navbar is compact */
+.wml-global-header.is-scrolled .wml-navbar {
+    transition:
+        width 320ms ease,
+        min-height 320ms ease,
+        padding 320ms ease,
+        border-radius 320ms ease,
+        opacity 350ms ease,
+        top 450ms ease;
+}
+
+.wml-global-header.is-scrolled.nav-hidden .wml-navbar {
+    top: -80px;
+    transform: translateX(-50%);
+}

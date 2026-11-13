@@ -1,0 +1,24 @@
+{
+  "legacy_id": 4,
+  "slug": "rare-earth-element-biorecovery",
+  "title": "Proteomic Insights and Biorecovery of Critical Materials & Rare Earth Elements",
+  "status": "completed",
+  "summary": "Elucidating microbial stress response pathways and cellular interactions between anaerobic fermenters and technology-critical lanthanides to design bio-enrichment and recovery technologies.",
+  "research_area": "resource-recovery",
+  "image": "",
+  "image_alt": "",
+  "start_date": "2022-10-01",
+  "end_date": "2024-09-30",
+  "description_html": "<p>Rare earth elements (REEs) are indispensable components of wind turbines, electric vehicle motors, and modern electronic systems, yet conventional chemical extraction is environmentally intensive and geographically constrained. Biological enrichment through microbial biosorption and biomineralization presents an environmentally friendly alternative.</p><p>Directed as Principal Investigator at Idaho National Laboratory, this project investigated anaerobic fermenting microorganisms (Clostridium sporogenes and Sporacetigenium mesophilum) to uncover the biochemical mechanisms mediating lanthanide binding, transport, and tolerance, establishing fundamental scientific foundations for biomining.</p>",
+  "methodology_html": "<p><strong>1. Anaerobic Fermentation:</strong> Strict anaerobic culturing under europium and samarium exposure gradients (sub-micromolar to 600 µM).</p><p><strong>2. Omics Characterization:</strong> High-resolution LC-MS/MS proteomic profiling comparing REE exposure against essential divalent metals (Fe, Ca, Zn), identifying ATP synthase modulation, electron transfer flavoproteins, and peptide candidates for engineered capture molecules.</p>",
+  "collaborations": "Idaho National Laboratory (INL), Idaho State University, Texas Tech University.",
+  "funding_notes": "Supported by U.S. Department of Energy (DOE) / Idaho National Laboratory LDRD Program (USD 898,265, 2022–2024). Principal Investigator: Dr. Asef M. Redwan.",
+  "external_url": "https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html",
+  "publications": [
+    "characterization-of-protein-expression-patterns-in-clostridium-sporogenes-upon-exposure-to-rare-earth-versus-nonrare-earth-elements",
+    "impact-of-europium-and-samarium-on-growth-and-metabolism-of-two-anaerobic-wastewater-microorganisms-sporacetigenium-mesophilum-and-clostridium-sporogenes"
+  ],
+  "monitoring_related": false,
+  "sort_order": 0,
+  "published": true
+}

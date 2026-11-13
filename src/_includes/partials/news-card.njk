@@ -1,0 +1,13 @@
+<article class="news-card" data-news-card data-category="{{ article.category }}">
+  <div class="news-card-media">
+    <a href="/news/{{ article.slug }}/" tabindex="-1" aria-hidden="true"{% if not article.cover_image %} class="news-card-placeholder-link"{% endif %}>
+      <img src="{{ article.cover_image or '/assets/images/photography/analytical-chemistry-lab.webp' }}" width="800" height="520" alt="{% if article.cover_image %}{{ article.cover_image_alt }}{% else %}Laboratory research update{% endif %}" loading="lazy"{% if not article.cover_image %} class="sample-news-photo"{% endif %}>
+    </a>
+  </div>
+  <div class="news-card-body">
+    <p class="record-meta"><time datetime="{{ article.date }}">{{ article.date | dateShort }}</time><span class="news-cat-badge">{{ article.category | newsCategory }}</span></p>
+    <h3><a href="/news/{{ article.slug }}/">{{ article.title }}</a></h3>
+    <p class="news-excerpt">{{ article.excerpt }}</p>
+    <a class="editorial-link" href="/news/{{ article.slug }}/" aria-label="Read story: {{ article.title }}">Read story</a>
+  </div>
+</article>

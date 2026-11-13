@@ -1,0 +1,49 @@
+.theme-publications .wml-section-page {
+    color: #102c22;
+    background: #f8faf7;
+}
+
+.theme-publications .wml-section-content {
+    width: min(100%, 64rem);
+    margin-inline: auto;
+}
+
+.wml-publications {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid #cddbd0;
+}
+
+.wml-publication {
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+    border-bottom: 1px solid #cddbd0;
+}
+
+.wml-publication__year {
+    margin-bottom: 0.65rem;
+    color: #52635a;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.wml-publication h2 {
+    max-width: 24ch;
+    margin-bottom: 0.75rem;
+    color: #102c22;
+    font: 600 clamp(1.5rem, 3vw, 2.4rem)/1.2 var(--sans);
+    letter-spacing: -0.025em;
+}
+
+.wml-publication__authors,
+.wml-publication__venue,
+.wml-publication__abstract {
+    max-width: 68ch;
+    margin-bottom: 0.5rem;
+}
+
+.wml-publication__venue { color: #52635a; font-style: italic; }
+.wml-publication__abstract { margin-top: 1.25rem; }
+.wml-publication__links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.25rem; }
+.wml-publication__links a { color: #1c5038; font-weight: 700; }
+.wml-publications__empty { padding-block: 3rem; color: #52635a; }

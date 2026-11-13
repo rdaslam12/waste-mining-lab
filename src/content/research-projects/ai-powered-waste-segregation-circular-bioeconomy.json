@@ -1,0 +1,24 @@
+{
+  "legacy_id": 1,
+  "slug": "ai-powered-waste-segregation-circular-bioeconomy",
+  "title": "AI-Powered Waste Segregation and Circular Bioeconomy for NSU Green Campus",
+  "status": "active",
+  "summary": "An intelligent waste classification and circular resource recovery initiative deploying computer-vision smart sorting bins and bioconversion of campus cafeteria organic waste into sustainable bio-fertilizer.",
+  "research_area": "waste-valorization",
+  "image": "",
+  "image_alt": "",
+  "start_date": "2026-01-01",
+  "end_date": "2026-12-31",
+  "description_html": "<p>Rapid urbanization and institutional campus operations produce complex solid waste streams with low baseline recycling rates. This research develops and field-tests an automated multi-stream segregation infrastructure powered by edge computer-vision models. Smart dustbin prototypes identify, classify, and sort compostable organic materials, recyclable plastics, and municipal refuse at the point of disposal.</p><p>Diverted organic fractions from campus cafeterias are subjected to controlled thermophilic composting and anaerobic fermentation, evaluating process kinetics, pathogen inactivation, and nutrient recovery to formulate clean bio-fertilizers supporting sustainable campus landscape ecology.</p>",
+  "methodology_html": "<p><strong>1. Computer Vision Sorting:</strong> Embedded deep learning classifiers (convolutional neural networks optimized via TensorRT) run on edge microcontrollers paired with high-resolution optical and infrared sensors inside disposal chambers. Automated baffles mechanically route waste into compartmentalized bins.</p><p><strong>2. Bioeconomy Assay:</strong> Food waste is characterized for volatile solids (VS), chemical oxygen demand (COD), and C:N stoichiometry. Bioreactor trials evaluate decomposition rates, volatile fatty acid generation, and humification indexes under varying aeration regimens.</p>",
+  "collaborations": "North South University Department of Civil and Environmental Engineering, NSU Campus Operations.",
+  "funding_notes": "Funded by North South University (NSU Research Grant, BDT 7 Lakh, 2026). Principal Investigator: Dr. Asef M. Redwan.",
+  "external_url": "https://www.northsouth.edu/faculty-members/seps/cee/dr.-asef-mohammad-redwan.html",
+  "publications": [
+    "characterization-of-protein-expression-patterns-in-clostridium-sporogenes-upon-exposure-to-rare-earth-versus-nonrare-earth-elements",
+    "from-conventional-sludge-production-models-to-population-integrated-physics-informed-neural-networks-a-technical-note-on-proposed-conceptual-framework"
+  ],
+  "monitoring_related": true,
+  "sort_order": 0,
+  "published": true
+}
